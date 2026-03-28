@@ -91,6 +91,8 @@ a { color: inherit; text-decoration: none; }
   background: transparent;
 }
 .btn-outline:hover { border-color: var(--green); color: var(--green); }
+.btn-ghost { background: transparent; color: var(--text-dim); border: none; }
+.btn-ghost:hover { color: var(--text-primary); }
 
 /* ===== Badge ===== */
 .badge {
