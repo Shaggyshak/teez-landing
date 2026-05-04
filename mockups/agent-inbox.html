@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teez — Inbox + Comp Detail Schematic</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+  :root {
+    --bg: #0c1117;
+    --bg-card: #141b23;
+    --bg-section-alt: #0f161d;
+    --bg-deeper: #080c11;
+    --bg-hover: #1a232d;
+    --green: #4ade80;
+    --green-dim: #22c55e;
+    --green-glow: rgba(74, 222, 128, 0.18);
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    --border: #1e293b;
+    --cyan: #22d3ee;
+    --pink: #f472b6;
+    --gold: #fbbf24;
+    --violet: #a78bfa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--text);
+  }
+
+  .frame {
+    width: 100%;
+    max-width: 1080px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-card);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px var(--green-glow);
+  }
+
+  /* ── Window chrome ── */
+  .chrome {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-deeper);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #2a3340; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .chrome-title { margin-left: 14px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
+  .chrome-spacer { flex: 1; }
+  .chrome-badge {
+    font-size: 10px;
+    color: var(--green);
+    background: var(--green-glow);
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    padding: 3px 9px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .chrome-badge::before {
+    content: "";
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: ping 2s infinite;
+  }
+  @keyframes ping {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); }
+    70% { box-shadow: 0 0 0 6px transparent; }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+
+  /* ── Inbox header ── */
+  .inbox-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-section-alt);
+  }
+  .inbox-title {
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .inbox-title h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .unread-pill {
+    font-size: 11px;
+    color: var(--green);
+    background: var(--green-glow);
+    padding: 2px 9px;
+    border-radius: 100px;
+    border: 1px solid rgba(74, 222, 128, 0.25);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .unread-pill .num { font-weight: 700; }
+  .inbox-meta {
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+  .inbox-meta .accent { color: var(--green); }
+
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    padding: 10px 22px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-deeper);
+  }
+  .chip {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .chip:hover { color: var(--text); border-color: var(--text-muted); }
+  .chip.active {
+    color: var(--green);
+    background: var(--green-glow);
+    border-color: rgba(74, 222, 128, 0.3);
+  }
+
+  /* ── List container (relative for overlay) ── */
+  .list-container {
+    position: relative;
+    overflow: hidden;
+    min-height: 540px;
+  }
+
+  /* ── Inbox list ── */
+  .list {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    animation: listDim 18s infinite;
+  }
+  @keyframes listDim {
+    0%, 30% { opacity: 1; filter: none; }
+    35%, 80% { opacity: 0.30; filter: blur(0.5px); }
+    85%, 100% { opacity: 1; filter: none; }
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 28px 200px 1fr 70px;
+    gap: 14px;
+    align-items: center;
+    padding: 12px 22px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+  }
+  .row:hover { background: var(--bg-hover); }
+  .row.unread {
+    background: linear-gradient(90deg, rgba(74, 222, 128, 0.03) 0%, transparent 50%);
+  }
+  .row.unread::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent, var(--green));
+  }
+
+  /* New row slides in at top of the inbox (early in the loop, before click) */
+  .row.slidein {
+    overflow: hidden;
+    animation: rowSlideIn 18s infinite;
+  }
+  @keyframes rowSlideIn {
+    /* hidden / collapsed */
+    0%, 2% {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom-width: 0;
+    }
+    /* expand vertically first */
+    4% {
+      max-height: 64px;
+      opacity: 0;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      border-bottom-width: 1px;
+    }
+    /* fade in with violet "just arrived" glow */
+    8%, 18% {
+      max-height: 64px;
+      opacity: 1;
+      background: rgba(167, 139, 250, 0.18);
+      box-shadow: 0 0 24px rgba(167, 139, 250, 0.18);
+    }
+    /* settle into soft violet-tinted unread state */
+    22%, 100% {
+      max-height: 64px;
+      opacity: 1;
+      background: linear-gradient(90deg, rgba(167, 139, 250, 0.05) 0%, transparent 50%);
+      box-shadow: none;
+    }
+  }
+
+  /* Unread counter pulses violet briefly when the new row arrives */
+  .unread-pill .num {
+    animation: numFlash 18s infinite;
+  }
+  @keyframes numFlash {
+    0%, 6% { color: var(--green); transform: scale(1); }
+    8% { color: var(--violet); transform: scale(1.15); }
+    12%, 100% { color: var(--green); transform: scale(1); }
+  }
+
+  /* "Clicked" target row — pulses cyan right before overlay slides in */
+  .row.click-target {
+    animation: rowClickPulse 18s infinite;
+  }
+  @keyframes rowClickPulse {
+    0%, 26% {
+      background: linear-gradient(90deg, rgba(34, 211, 238, 0.04) 0%, transparent 50%);
+      box-shadow: inset 3px 0 0 var(--cyan);
+    }
+    28% {
+      background: rgba(34, 211, 238, 0.22);
+      box-shadow: inset 3px 0 0 var(--cyan), 0 0 24px rgba(34, 211, 238, 0.25);
+    }
+    32%, 80% {
+      background: rgba(34, 211, 238, 0.10);
+      box-shadow: inset 3px 0 0 var(--cyan);
+    }
+    85%, 100% {
+      background: linear-gradient(90deg, rgba(34, 211, 238, 0.04) 0%, transparent 50%);
+      box-shadow: inset 3px 0 0 var(--cyan);
+    }
+  }
+
+  /* Status indicator (left col) */
+  .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 22px;
+    position: relative;
+  }
+  .status .dotlight {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent, var(--green));
+    box-shadow: 0 0 8px var(--accent, var(--green));
+  }
+  .status .check {
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .status .flag-mark {
+    color: var(--pink);
+    font-size: 13px;
+    text-shadow: 0 0 8px var(--pink);
+  }
+  .status .star {
+    color: var(--gold);
+    font-size: 13px;
+    text-shadow: 0 0 8px var(--gold);
+  }
+
+  /* Sender column */
+  .sender {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+  }
+  .sender-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.005em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .row.read .sender-name { color: var(--text-dim); font-weight: 500; }
+  .sender-tag {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+
+  /* Subject (preview) */
+  .subj {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  .row.unread .subj-lead { color: var(--text); font-weight: 500; }
+  .subj-lead { color: var(--text); font-weight: 500; }
+  .subj-action { color: var(--green); }
+  .subj-warn { color: var(--pink); }
+
+  /* Time */
+  .time {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* Per-row accent colors */
+  .row.uw   { --accent: var(--green); }
+  .row.flag { --accent: var(--pink); }
+  .row.ic   { --accent: var(--gold); }
+  .row.new  { --accent: var(--violet); }
+  .row.mkt  { --accent: var(--cyan); }
+
+  /* ── Detail overlay (slides in from right on "click") ── */
+  .detail {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-card);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    opacity: 0;
+    animation: detailCycle 18s infinite;
+    z-index: 5;
+  }
+  @keyframes detailCycle {
+    0%, 30% { transform: translateX(100%); opacity: 0; }
+    32% { transform: translateX(50%); opacity: 0.3; }
+    35%, 80% { transform: translateX(0); opacity: 1; }
+    83% { transform: translateX(20%); opacity: 0.5; }
+    85%, 100% { transform: translateX(100%); opacity: 0; }
+  }
+
+  /* Detail header */
+  .detail-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-section-alt);
+  }
+  .detail-head-left {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .detail-back {
+    color: var(--text-muted);
+    font-size: 14px;
+    cursor: pointer;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    width: 24px; height: 24px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .detail-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .detail-title-tag {
+    font-size: 10.5px;
+    color: var(--cyan);
+    background: rgba(34, 211, 238, 0.10);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-left: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .detail-actions {
+    display: flex; gap: 8px;
+  }
+  .detail-actions .ghost {
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* ── Map ── */
+  .detail-map {
+    position: relative;
+    height: 260px;
+    background: var(--bg-deeper);
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  #comp-map {
+    position: absolute;
+    inset: 0;
+    background: var(--bg-deeper);
+  }
+  /* Hide Leaflet attribution + zoom (we strip it via JS too, this is belt+braces) */
+  .leaflet-control-attribution { display: none !important; }
+  /* Subject pin styling */
+  .leaflet-subject {
+    position: relative;
+    overflow: visible !important;
+  }
+  .leaflet-subject .pin-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--green);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.20), 0 0 16px var(--green);
+    position: absolute; left: 0; top: 0;
+  }
+  .leaflet-subject .pin-label {
+    position: absolute;
+    top: 20px;
+    left: 7px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--green);
+    font-weight: 600;
+    background: var(--bg-deeper);
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid rgba(74, 222, 128, 0.35);
+    white-space: nowrap;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  /* Comp pin styling */
+  .leaflet-compdot {
+    overflow: visible !important;
+  }
+  .leaflet-compdot .compdot-inner {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--cyan);
+    border: 1.5px solid var(--bg-deeper);
+    box-shadow: 0 0 8px var(--cyan);
+    position: absolute; left: 0; top: 0;
+  }
+
+  /* Faux road lines */
+  .map-road {
+    position: absolute;
+    background: rgba(148, 163, 184, 0.06);
+  }
+  .map-road.r1 { top: 30%; left: -10%; right: -10%; height: 1px; transform: rotate(-3deg); }
+  .map-road.r2 { top: 70%; left: -10%; right: -10%; height: 1px; transform: rotate(2deg); }
+  .map-road.r3 { left: 35%; top: -10%; bottom: -10%; width: 1px; transform: rotate(8deg); }
+  .map-road.r4 { left: 70%; top: -10%; bottom: -10%; width: 1px; transform: rotate(-5deg); }
+
+  /* Distance rings */
+  .ring {
+    position: absolute;
+    border: 1px dashed rgba(148, 163, 184, 0.14);
+    border-radius: 50%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    animation: ringIn 18s infinite;
+  }
+  .ring.r-near { width: 130px; height: 130px; animation-delay: 6.0s; }
+  .ring.r-far  { width: 230px; height: 230px; animation-delay: 6.2s; }
+  @keyframes ringIn {
+    0%, 32% { opacity: 0; }
+    35%, 80% { opacity: 1; }
+    85%, 100% { opacity: 0; }
+  }
+  .ring-label {
+    position: absolute;
+    font-size: 9px;
+    color: var(--text-muted);
+    background: var(--bg-deeper);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    opacity: 0;
+    animation: ringIn 18s infinite;
+  }
+  .ring-label.l-near { top: calc(50% - 65px); left: 50%; transform: translateX(-50%); animation-delay: 6.4s; }
+  .ring-label.l-far  { top: calc(50% - 115px); left: 50%; transform: translateX(-50%); animation-delay: 6.6s; }
+
+  /* Subject pin */
+  .subject-pin {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  .subject-pin .pin {
+    width: 14px; height: 14px;
+    background: var(--green);
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.20), 0 0 16px var(--green);
+    opacity: 0;
+    animation: pinIn 18s infinite;
+    animation-delay: 6.0s;
+  }
+  .subject-pin .pin-label {
+    position: absolute;
+    bottom: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--green);
+    white-space: nowrap;
+    font-weight: 600;
+    background: var(--bg-deeper);
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid rgba(74, 222, 128, 0.30);
+    opacity: 0;
+    animation: pinIn 18s infinite;
+    animation-delay: 6.2s;
+  }
+
+  @keyframes pinIn {
+    0%, 32% { opacity: 0; transform: scale(0.5); }
+    35% { opacity: 1; transform: scale(1.25); }
+    37%, 95% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+
+  /* Comp pins (positioned around subject) */
+  .comp-pin {
+    position: absolute;
+    width: 9px; height: 9px;
+    background: var(--cyan);
+    border: 1.5px solid var(--bg-deeper);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--cyan);
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    animation: compIn 18s infinite;
+  }
+  .comp-pin.c1 { top: 38%; left: 42%; animation-delay: 6.5s; }
+  .comp-pin.c2 { top: 36%; left: 58%; animation-delay: 6.7s; }
+  .comp-pin.c3 { top: 56%; left: 38%; animation-delay: 6.9s; }
+  .comp-pin.c4 { top: 60%; left: 60%; animation-delay: 7.1s; }
+  .comp-pin.c5 { top: 30%; left: 50%; animation-delay: 7.3s; }
+  .comp-pin.c6 { top: 65%; left: 50%; animation-delay: 7.5s; }
+  .comp-pin.c7 { top: 50%; left: 30%; animation-delay: 7.7s; }
+  @keyframes compIn {
+    0%, 35% { opacity: 0; }
+    37% { opacity: 1; }
+    39%, 95% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Map labels (corners) */
+  .map-corner {
+    position: absolute;
+    font-size: 9px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: rgba(8, 12, 17, 0.85);
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .map-corner.tl { top: 12px; left: 14px; }
+  .map-corner.tr { top: 12px; right: 14px; color: var(--cyan); }
+  .map-corner.br {
+    bottom: 12px; right: 14px;
+    display: flex; gap: 6px; align-items: center;
+  }
+  .map-corner.br .swatch {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 4px var(--green);
+  }
+  .map-corner.br .swatch.cyan {
+    background: var(--cyan);
+    box-shadow: 0 0 4px var(--cyan);
+  }
+  .map-corner.bl { bottom: 12px; left: 14px; color: var(--text-dim); }
+
+  /* ── Metrics strip ── */
+  .detail-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    animation: detailContent 18s infinite;
+    animation-delay: 8s;
+  }
+  @keyframes detailContent {
+    0%, 44% { opacity: 0; transform: translateY(4px); }
+    47%, 95% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; }
+  }
+
+  .dm {
+    background: var(--bg-card);
+    padding: 12px 16px;
+  }
+  .dm-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .dm-value {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+  .dm-delta {
+    font-size: 10.5px;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .dm-delta.warn { color: var(--pink); }
+  .dm-delta.up { color: var(--green); }
+  .dm-delta.muted { color: var(--text-muted); }
+
+  /* ── Comps list ── */
+  .detail-comps {
+    flex: 1;
+    padding: 12px 22px 12px;
+    overflow: hidden;
+    opacity: 0;
+    animation: detailContent 18s infinite;
+    animation-delay: 9.2s;
+  }
+  .detail-comps-head {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .detail-comps-head .right {
+    color: var(--cyan);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .comp-row {
+    display: grid;
+    grid-template-columns: 1fr 70px 90px 80px 80px;
+    gap: 14px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    align-items: center;
+  }
+  .comp-row:last-child { border-bottom: none; }
+  .comp-row .addr { color: var(--text); font-weight: 500; }
+  .comp-row .meta { color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  .comp-row .price { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .comp-row .cap { color: var(--cyan); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .comp-row .date { color: var(--text-muted); font-size: 11px; text-align: right; }
+
+  /* ── Detail CTA ── */
+  .detail-cta {
+    padding: 12px 22px;
+    background: var(--bg-section-alt);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    animation: detailContent 18s infinite;
+    animation-delay: 10.4s;
+  }
+  .detail-cta .text {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .detail-cta .text strong { color: var(--text); font-weight: 500; }
+  .detail-cta .text .pink { color: var(--pink); font-weight: 500; }
+  .detail-cta .actions { display: flex; gap: 8px; }
+  .detail-cta button {
+    background: var(--green);
+    color: #0c1117;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 7px 13px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .detail-cta button:hover { box-shadow: 0 0 16px var(--green-glow); }
+  .detail-cta button.ghost {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  /* ── Footer ── */
+  .footer-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 22px;
+    background: var(--bg-deeper);
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+  .footer-strip .stats { display: flex; gap: 16px; }
+  .footer-strip .stats span strong { color: var(--text); font-weight: 600; }
+  .footer-strip .always-on {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--green);
+  }
+  .footer-strip .always-on::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: ping 2s infinite;
+  }
+
+  /* Caption */
+  .caption {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .caption strong { color: var(--green); font-weight: 500; }
+
+  @media (max-width: 760px) {
+    .row { grid-template-columns: 22px 1fr 60px; gap: 10px; padding: 10px 14px; }
+    .subj { display: none; }
+    .inbox-head, .filter-bar, .footer-strip { padding-left: 14px; padding-right: 14px; }
+    .detail-head, .detail-comps, .detail-cta { padding-left: 14px; padding-right: 14px; }
+    .detail-metrics { grid-template-columns: repeat(2, 1fr); }
+    .comp-row { grid-template-columns: 1fr 70px 70px; }
+    .comp-row .price, .comp-row .date { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div style="width: 100%; max-width: 1080px;">
+
+<div class="frame">
+
+  <!-- Window chrome -->
+  <div class="chrome">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <div class="chrome-title">Teez · Acquisitions Inbox</div>
+    <div class="chrome-spacer"></div>
+    <div class="chrome-badge">Always on</div>
+  </div>
+
+  <!-- Inbox header -->
+  <div class="inbox-head">
+    <div class="inbox-title">
+      <h1>Acquisitions Inbox</h1>
+      <span class="unread-pill"><span class="num">5</span> need your call</span>
+    </div>
+    <div class="inbox-meta">12 active deals · <span class="accent">agent did 23 things this week</span></div>
+  </div>
+
+  <!-- Filter chips -->
+  <div class="filter-bar">
+    <div class="chip active">All</div>
+    <div class="chip">Needs review</div>
+    <div class="chip">IC ready</div>
+    <div class="chip">Sourced</div>
+    <div class="chip">Market intel</div>
+    <div class="chip">Done</div>
+  </div>
+
+  <!-- List + Detail container -->
+  <div class="list-container">
+
+    <div class="list">
+
+      <!-- NEW row (off-market sourced, slides in at top early in the loop with violet glow) -->
+      <div class="row unread new slidein">
+        <div class="status"><span class="star">★</span></div>
+        <div class="sender">
+          <div class="sender-name">Tampa MF · 88u (off-market)</div>
+          <div class="sender-tag">Sourced for you</div>
+        </div>
+        <div class="subj"><span class="subj-lead">Matches your Phoenix thesis.</span> $19M · DSCR ~1.3 likely · pre-listing. Open to underwrite?</div>
+        <div class="time">just now</div>
+      </div>
+
+      <!-- Phoenix MF — pro forma ready -->
+      <div class="row unread uw">
+        <div class="status"><span class="dotlight"></span></div>
+        <div class="sender">
+          <div class="sender-name">Phoenix MF · 96u</div>
+          <div class="sender-tag">Pro forma ready</div>
+        </div>
+        <div class="subj"><span class="subj-lead">IRR 18.4% · 2.1x EM · 8.6% CoC.</span> QA passed. <span class="subj-action">Send to IC?</span></div>
+        <div class="time">3m</div>
+      </div>
+
+      <!-- Atlanta Retail — DSCR flag -->
+      <div class="row unread flag">
+        <div class="status"><span class="flag-mark">⚑</span></div>
+        <div class="sender">
+          <div class="sender-name">Atlanta Retail · power-center</div>
+          <div class="sender-tag">Needs your call</div>
+        </div>
+        <div class="subj"><span class="subj-warn">DSCR 1.18 below firm threshold (1.25).</span> Want me to rerun with conservative rent + exit cap?</div>
+        <div class="time">12m</div>
+      </div>
+
+      <!-- Atlanta Retail — comp set expanded -->
+      <div class="row read mkt">
+        <div class="status"><span class="check">✓</span></div>
+        <div class="sender">
+          <div class="sender-name">Atlanta Retail · comp set expanded</div>
+          <div class="sender-tag">Comp set updated</div>
+        </div>
+        <div class="subj">Radius 2→5mi · 7 fresh comps. Your ask cap (6.8%) sits at market median. IC memo updated.</div>
+        <div class="time">25m</div>
+      </div>
+
+      <!-- Dallas Industrial — IC memo ready -->
+      <div class="row unread ic">
+        <div class="status"><span class="dotlight"></span></div>
+        <div class="sender">
+          <div class="sender-name">Dallas Industrial · 410K SF</div>
+          <div class="sender-tag">IC memo drafted</div>
+        </div>
+        <div class="subj"><span class="subj-lead">12 pages · exec summary · key risks · sensitivity table.</span> Ready for your review.</div>
+        <div class="time">28m</div>
+      </div>
+
+      <!-- ★ Phoenix MSA comp insight — THE CLICK TARGET (cyan pulse, then overlay) -->
+      <div class="row unread mkt click-target">
+        <div class="status"><span class="dotlight"></span></div>
+        <div class="sender">
+          <div class="sender-name">Phoenix MSA · 4 fresh comps</div>
+          <div class="sender-tag">Comp insight</div>
+        </div>
+        <div class="subj"><span class="subj-lead">Your in-place cap 5.25% is 30bps tight vs market median.</span> Re-ran Phoenix MF — IRR drops to 17.6% at 5.55% exit. <span class="subj-action">View comps?</span></div>
+        <div class="time">1h</div>
+      </div>
+
+      <!-- Chicago Office — submarket flag -->
+      <div class="row unread flag">
+        <div class="status"><span class="flag-mark">⚑</span></div>
+        <div class="sender">
+          <div class="sender-name">Chicago Office · class A</div>
+          <div class="sender-tag">Worth a look</div>
+        </div>
+        <div class="subj"><span class="subj-warn">Submarket absorption declining 4 quarters.</span> Pulled fresh comps. View context?</div>
+        <div class="time">2h</div>
+      </div>
+
+      <!-- Denver MF — IC memo ready -->
+      <div class="row unread ic">
+        <div class="status"><span class="dotlight"></span></div>
+        <div class="sender">
+          <div class="sender-name">Denver MF · 220u</div>
+          <div class="sender-tag">IC memo drafted</div>
+        </div>
+        <div class="subj"><span class="subj-lead">9 pages.</span> Ready for IC Thursday.</div>
+        <div class="time">3h</div>
+      </div>
+
+      <!-- Boise Industrial — sourced -->
+      <div class="row read new">
+        <div class="status"><span class="star">★</span></div>
+        <div class="sender">
+          <div class="sender-name">Boise Industrial · 280K SF</div>
+          <div class="sender-tag">Sourced for you</div>
+        </div>
+        <div class="subj">$48M · pre-listing · 6.2% in-place cap. Want me to underwrite?</div>
+        <div class="time">5h</div>
+      </div>
+
+      <!-- Houston Industrial — closed -->
+      <div class="row read uw">
+        <div class="status"><span class="check">✓</span></div>
+        <div class="sender">
+          <div class="sender-name">Houston Industrial · closed</div>
+          <div class="sender-tag">Post-close update</div>
+        </div>
+        <div class="subj">Final IRR 17.8% (vs 16.9% underwritten). Performance tracker updated.</div>
+        <div class="time">yesterday</div>
+      </div>
+
+    </div>
+
+    <!-- ─── DETAIL OVERLAY (slides in when click-target row "is clicked") ─── -->
+    <div class="detail">
+
+      <div class="detail-head">
+        <div class="detail-head-left">
+          <div class="detail-back">‹</div>
+          <div class="detail-title">Phoenix MSA · Comp Set<span class="detail-title-tag">7 sold · 5mi · last 12mo</span></div>
+        </div>
+        <div class="detail-actions">
+          <div class="ghost">Filter</div>
+          <div class="ghost">Export</div>
+        </div>
+      </div>
+
+      <!-- Map (real Leaflet + CartoDB Dark, centered on Phoenix) -->
+      <div class="detail-map">
+        <div id="comp-map"></div>
+
+        <div class="map-corner tl" style="z-index:500">Camelback Corridor · Phoenix, AZ</div>
+        <div class="map-corner tr" style="z-index:500">7 comps · 5mi radius</div>
+        <div class="map-corner br" style="z-index:500">
+          <span class="swatch"></span>subject
+          <span class="swatch cyan" style="margin-left:8px"></span>comp
+        </div>
+        <div class="map-corner bl" style="z-index:500">last 12 months</div>
+      </div>
+
+      <!-- Metrics strip -->
+      <div class="detail-metrics">
+        <div class="dm">
+          <div class="dm-label">Comps</div>
+          <div class="dm-value">7</div>
+          <div class="dm-delta muted">5mi · last 12mo</div>
+        </div>
+        <div class="dm">
+          <div class="dm-label">Median Cap</div>
+          <div class="dm-value">5.55%</div>
+          <div class="dm-delta warn">your ask: 5.25% · 30bps tight</div>
+        </div>
+        <div class="dm">
+          <div class="dm-label">Median $/Unit</div>
+          <div class="dm-value">$283K</div>
+          <div class="dm-delta up">your ask: $278K · in range</div>
+        </div>
+        <div class="dm">
+          <div class="dm-label">Most Recent</div>
+          <div class="dm-value">47d</div>
+          <div class="dm-delta muted">range: 47d – 11mo</div>
+        </div>
+      </div>
+
+      <!-- Top comps list -->
+      <div class="detail-comps">
+        <div class="detail-comps-head">
+          <span>Top 3 closest comps</span>
+          <span class="right">+ 4 more &middot; sorted by recency</span>
+        </div>
+
+        <div class="comp-row">
+          <div class="addr">2400 E Camelback Rd</div>
+          <div class="meta">84u</div>
+          <div class="price">$24.0M</div>
+          <div class="cap">5.45%</div>
+          <div class="date">Mar 2026</div>
+        </div>
+        <div class="comp-row">
+          <div class="addr">5680 N Indian School</div>
+          <div class="meta">92u</div>
+          <div class="price">$26.1M</div>
+          <div class="cap">5.60%</div>
+          <div class="date">Jan 2026</div>
+        </div>
+        <div class="comp-row">
+          <div class="addr">9012 N Scottsdale Rd</div>
+          <div class="meta">78u</div>
+          <div class="price">$21.0M</div>
+          <div class="cap">5.50%</div>
+          <div class="date">Dec 2025</div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="detail-cta">
+        <div class="text">At <strong>5.55% exit</strong>, Phoenix MF IRR drops <span class="pink">17.6%</span> (from 18.4%). Apply to underwriting?</div>
+        <div class="actions">
+          <button class="ghost">Dismiss</button>
+          <button>Apply to Phoenix MF →</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-strip">
+    <div class="stats">
+      <span><strong>12</strong> active deals</span>
+      <span><strong>$487M</strong> pipeline</span>
+      <span><strong>16.8%</strong> wtd IRR</span>
+    </div>
+    <div class="always-on">Underwriting agent · always on</div>
+  </div>
+
+</div>
+
+<div class="caption">
+  <strong>Schematic.</strong> 18-second loop. Click a row → comps on a real map → apply to underwriting.
+</div>
+
+</div>
+
+<script>
+  // Initialize Leaflet map of Phoenix once DOM is ready.
+  // Map renders even while the detail panel is off-screen — Leaflet only needs
+  // the container to have non-zero dimensions, and translateX doesn't change those.
+  document.addEventListener('DOMContentLoaded', () => {
+    const subject = [33.5092, -112.0299]; // ~ 2400 E Camelback Rd, Phoenix
+    const comps = [
+      [33.4940, -112.0936], // Indian School Rd west
+      [33.5350, -111.9261], // Scottsdale Rd
+      [33.5183, -112.0746], // central Phoenix
+      [33.4901, -112.0540], // south of subject
+      [33.5447, -112.0184], // north of subject
+      [33.5012, -112.1102], // further west
+      [33.5256, -111.9540], // east toward Scottsdale
+    ];
+
+    const map = L.map('comp-map', {
+      center: subject,
+      zoom: 12,
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      touchZoom: false,
+      doubleClickZoom: false,
+      scrollWheelZoom: false,
+      boxZoom: false,
+      keyboard: false,
+      tap: false,
+    });
+
+    // CartoDB Dark Matter — free, dark theme that matches the schematic
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      maxZoom: 19,
+      subdomains: 'abcd',
+    }).addTo(map);
+
+    // Subject pin (the deal)
+    L.marker(subject, {
+      icon: L.divIcon({
+        className: 'leaflet-subject',
+        html: '<div class="pin-dot"></div><div class="pin-label">Phoenix MF · subject</div>',
+        iconSize: [14, 14],
+        iconAnchor: [7, 7],
+      }),
+      interactive: false,
+    }).addTo(map);
+
+    // Comp pins (cyan dots)
+    comps.forEach(([lat, lng]) => {
+      L.marker([lat, lng], {
+        icon: L.divIcon({
+          className: 'leaflet-compdot',
+          html: '<div class="compdot-inner"></div>',
+          iconSize: [10, 10],
+          iconAnchor: [5, 5],
+        }),
+        interactive: false,
+      }).addTo(map);
+    });
+
+    // Distance rings — 1mi (1609m) and 3mi (4828m)
+    L.circle(subject, {
+      radius: 1609,
+      fill: false,
+      color: 'rgba(148,163,184,0.45)',
+      weight: 1,
+      dashArray: '4 4',
+      interactive: false,
+    }).addTo(map);
+    L.circle(subject, {
+      radius: 4828,
+      fill: false,
+      color: 'rgba(148,163,184,0.35)',
+      weight: 1,
+      dashArray: '4 4',
+      interactive: false,
+    }).addTo(map);
+  });
+</script>
+</body>
+</html>
