@@ -180,12 +180,12 @@ a { color: inherit; text-decoration: none; }
 }
 .demo-frame iframe {
   width: 100%;
-  height: 760px;
+  height: 820px;
   border: 0;
   display: block;
 }
 @media (max-width: 860px) {
-  .demo-frame iframe { height: 1000px; }
+  .demo-frame iframe { height: 1100px; }
 }
 .section-header { text-align: center; margin-bottom: 64px; }
 .section-header h2 {
