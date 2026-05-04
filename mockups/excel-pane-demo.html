@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teez — Product Schematic</title>
+<style>
+  :root {
+    --bg: #0c1117;
+    --bg-card: #141b23;
+    --bg-section-alt: #0f161d;
+    --bg-deeper: #080c11;
+    --green: #4ade80;
+    --green-dim: #22c55e;
+    --green-glow: rgba(74, 222, 128, 0.18);
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    --border: #1e293b;
+    --cyan: #22d3ee;
+    --pink: #f472b6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: var(--text);
+  }
+
+  .frame {
+    width: 100%;
+    max-width: 1140px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-card);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px var(--green-glow);
+    position: relative;
+  }
+
+  /* ── Window chrome ── */
+  .chrome {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 14px;
+    background: var(--bg-deeper);
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #2a3340; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .chrome-title { margin-left: 14px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
+
+  /* ── Body ── */
+  .body {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    min-height: 540px;
+  }
+
+  /* ── Spreadsheet (left) ── */
+  .sheet {
+    background: var(--bg-section-alt);
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+
+  .sheet-tabs {
+    display: flex; gap: 2px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    font-size: 11px; color: var(--text-muted);
+    padding: 6px 14px; border-radius: 6px 6px 0 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+  }
+  .tab.active {
+    color: var(--green); background: var(--bg-card);
+    border-bottom-color: var(--green);
+  }
+
+  .formula-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    min-height: 28px;
+  }
+  .formula-bar .fx { color: var(--text-muted); font-style: italic; }
+  .formula-bar .formula-text {
+    color: var(--green);
+    opacity: 0;
+    animation: fbReveal 12s infinite;
+  }
+  @keyframes fbReveal {
+    0%, 50% { opacity: 0; }
+    55%, 95% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* Subtle scan sweeps — read as "looking at your sheet" rather than engineering */
+  .scan-overlay, .qa-overlay {
+    position: absolute;
+    top: 90px; left: 16px; right: 16px; bottom: 16px;
+    pointer-events: none;
+    background-size: 100% 50px;
+    background-repeat: no-repeat;
+    background-position: 0 -100%;
+    border-radius: 6px;
+  }
+  .scan-overlay {
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(74, 222, 128, 0.08) 48%,
+      rgba(74, 222, 128, 0.22) 50%,
+      rgba(74, 222, 128, 0.08) 52%,
+      transparent 100%);
+    animation: scanSweep 12s infinite;
+  }
+  @keyframes scanSweep {
+    0%, 8% { background-position: 0 -10%; opacity: 0; }
+    10% { opacity: 1; }
+    18% { background-position: 0 110%; opacity: 1; }
+    22%, 100% { opacity: 0; }
+  }
+
+  .qa-overlay {
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(244, 114, 182, 0.08) 48%,
+      rgba(244, 114, 182, 0.20) 50%,
+      rgba(244, 114, 182, 0.08) 52%,
+      transparent 100%);
+    animation: qaSweep 12s infinite;
+  }
+  @keyframes qaSweep {
+    0%, 70% { background-position: 0 -10%; opacity: 0; }
+    72% { opacity: 1; }
+    80% { background-position: 0 110%; opacity: 1; }
+    84%, 100% { opacity: 0; }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 32px repeat(7, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    flex: 1;
+  }
+  .cell {
+    background: var(--bg-section-alt);
+    padding: 7px 8px;
+    font-size: 10.5px;
+    color: var(--text-dim);
+    min-height: 28px;
+    display: flex; align-items: center;
+  }
+  .cell.col-header, .cell.row-header {
+    background: var(--bg-card);
+    color: var(--text-muted);
+    font-weight: 600;
+    justify-content: center;
+    font-size: 10px;
+  }
+  .cell.label { background: var(--bg-card); color: var(--text); font-weight: 500; }
+
+  /* Pre-existing template formulas — left intact */
+  .cell.locked {
+    background: var(--bg-section-alt);
+    color: var(--green);
+    opacity: 0.55;
+    position: relative;
+  }
+  .cell.locked::after {
+    content: "ƒ";
+    position: absolute;
+    right: 4px; top: 2px;
+    font-size: 8px;
+    color: var(--green);
+    opacity: 0.6;
+  }
+
+  /* Filled-in inputs */
+  .cell.value {
+    color: var(--text);
+    opacity: 0;
+    animation: fillCell 12s infinite;
+  }
+  .cell.value.formula { color: var(--green); }
+  .cell.value.market { animation: fillCellMarket 12s infinite; }
+
+  @keyframes fillCell {
+    0%, 50% { opacity: 0; background: var(--bg-section-alt); }
+    52% { opacity: 1; background: var(--green-glow); }
+    60%, 100% { opacity: 1; background: var(--bg-section-alt); }
+  }
+  @keyframes fillCellMarket {
+    0%, 42% { opacity: 0; background: var(--bg-section-alt); }
+    44% { opacity: 1; background: rgba(34, 211, 238, 0.25); }
+    52%, 100% { opacity: 1; background: rgba(34, 211, 238, 0.06); color: var(--cyan); }
+  }
+
+  /* Stagger fill across rows */
+  .row-1 .value { animation-delay: 0.0s; }
+  .row-2 .value { animation-delay: 0.15s; }
+  .row-3 .value { animation-delay: 0.3s; }
+  .row-4 .value { animation-delay: 0.45s; }
+  .row-5 .value { animation-delay: 0.6s; }
+  .row-6 .value { animation-delay: 0.75s; }
+  .row-7 .value { animation-delay: 0.9s; }
+
+  /* QA flag dot — appears during verification phase */
+  .cell .flag {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--pink);
+    box-shadow: 0 0 8px var(--pink);
+    margin-left: 6px;
+    opacity: 0;
+    animation: flagOn 12s infinite;
+  }
+  @keyframes flagOn {
+    0%, 76% { opacity: 0; transform: scale(0.5); }
+    80%, 100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── Chat (right) ── */
+  .chat {
+    background: var(--bg-card);
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .avatar {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-dim), var(--green));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #0c1117;
+    box-shadow: 0 0 16px var(--green-glow);
+  }
+  .header-name {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .header-sub {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 10.5px;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .header-sub .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: ping 2s infinite;
+  }
+  @keyframes ping {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  }
+
+  .messages {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .msg {
+    padding: 10px 13px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 92%;
+    opacity: 0;
+    animation: msgIn 12s infinite;
+  }
+  @keyframes msgIn {
+    0%, 4% { opacity: 0; transform: translateY(6px); }
+    6%, 96% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; }
+  }
+
+  .msg.user {
+    background: var(--green);
+    color: #0c1117;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+    font-weight: 500;
+    animation-delay: 0.4s;
+  }
+
+  .msg.agent {
+    background: var(--bg-section-alt);
+    color: var(--text);
+    align-self: flex-start;
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+  }
+
+  /* Thinking pill — single rotating status line */
+  .thinking {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--bg-section-alt);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    border-bottom-left-radius: 4px;
+    font-size: 12px;
+    color: var(--text-dim);
+    opacity: 0;
+    overflow: hidden;
+    animation: thinkVisible 12s infinite;
+    width: 260px;
+    max-width: 100%;
+  }
+  @keyframes thinkVisible {
+    0%, 8% { opacity: 0; transform: translateY(6px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+    10% { opacity: 0; max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+    12%, 73% { opacity: 1; transform: translateY(0); max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+    76% { opacity: 0; transform: translateY(-4px); max-height: 40px; }
+    80%, 100% { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+  }
+
+  .typing {
+    display: inline-flex; gap: 3px;
+    flex-shrink: 0;
+  }
+  .typing span {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: typingDot 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.15s; }
+  .typing span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typingDot {
+    0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-2px); }
+  }
+
+  .status-stack {
+    position: relative;
+    flex: 1;
+    height: 18px;
+    overflow: hidden;
+  }
+  .status-stack span {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    animation: statusCycle 12s infinite;
+  }
+  @keyframes statusCycle {
+    0%, 100% { opacity: 0; }
+    /* Each status gets a window — defined per nth-child via delays */
+  }
+  .status-stack span:nth-child(1) { animation-name: s1; }
+  .status-stack span:nth-child(2) { animation-name: s2; }
+  .status-stack span:nth-child(3) { animation-name: s3; }
+  .status-stack span:nth-child(4) { animation-name: s4; }
+  .status-stack span:nth-child(5) { animation-name: s5; }
+
+  @keyframes s1 { 0%, 9% { opacity: 0; } 11%, 22% { opacity: 1; } 24%, 100% { opacity: 0; } }
+  @keyframes s2 { 0%, 23% { opacity: 0; } 25%, 38% { opacity: 1; } 40%, 100% { opacity: 0; } }
+  @keyframes s3 { 0%, 39% { opacity: 0; } 41%, 52% { opacity: 1; } 54%, 100% { opacity: 0; } }
+  @keyframes s4 { 0%, 53% { opacity: 0; } 55%, 66% { opacity: 1; } 68%, 100% { opacity: 0; } }
+  @keyframes s5 { 0%, 67% { opacity: 0; } 69%, 74% { opacity: 1; } 76%, 100% { opacity: 0; } }
+
+  /* Agent response */
+  .msg.agent.response { animation-delay: 9.0s; }
+  .response-greeting { color: var(--text); margin-bottom: 8px; }
+  .response-flag {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+  .response-flag .pink {
+    color: var(--pink);
+    font-weight: 500;
+  }
+
+  .metric-row {
+    display: flex; gap: 8px;
+    margin-top: 4px;
+  }
+  .metric-pill {
+    flex: 1;
+    padding: 8px 6px;
+    background: var(--bg-deeper);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .metric-pill .v { display: block; color: var(--green); font-weight: 700; font-size: 15px; line-height: 1.1; }
+  .metric-pill .l { display: block; color: var(--text-muted); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 3px; }
+
+  /* Follow-up suggestion chip */
+  .suggestion {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: transparent;
+    border: 1px solid color-mix(in srgb, var(--green) 35%, transparent);
+    border-radius: 100px;
+    font-size: 11.5px;
+    color: var(--green);
+    cursor: pointer;
+    opacity: 0;
+    animation: suggestIn 12s infinite;
+    animation-delay: 10.0s;
+    transition: all 0.2s;
+  }
+  .suggestion:hover {
+    background: var(--green-glow);
+    border-color: var(--green);
+  }
+  .suggestion .arrow { font-size: 13px; }
+  @keyframes suggestIn {
+    0%, 4% { opacity: 0; transform: translateY(4px); }
+    6%, 96% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; }
+  }
+
+  /* Caption */
+  .caption {
+    text-align: center;
+    margin-top: 24px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+  .caption strong { color: var(--green); font-weight: 500; }
+
+  @media (max-width: 860px) {
+    .body { grid-template-columns: 1fr; }
+    .chat { border-left: none; border-top: 1px solid var(--border); }
+    .grid { grid-template-columns: 28px repeat(4, 1fr); font-size: 9.5px; }
+    .grid .col-5, .grid .col-6, .grid .col-7 { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div style="width: 100%; max-width: 1140px;">
+
+<div class="frame">
+
+  <!-- Window chrome -->
+  <div class="chrome">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <div class="chrome-title">Phoenix MF Acquisition — Firm Template.xlsx</div>
+  </div>
+
+  <div class="body">
+
+    <!-- ── Spreadsheet ── -->
+    <div class="sheet">
+      <div class="scan-overlay"></div>
+      <div class="qa-overlay"></div>
+
+      <div class="sheet-tabs">
+        <div class="tab">Unit Mix</div>
+        <div class="tab">Assumptions</div>
+        <div class="tab active">Pro Forma</div>
+        <div class="tab">Returns</div>
+        <div class="tab">Sensitivity</div>
+      </div>
+
+      <div class="formula-bar">
+        <span class="fx">fx</span>
+        <span class="formula-text">='Unit Mix'!E22 * 12 * (1 - 'Assumptions'!C8)</span>
+      </div>
+
+      <div class="grid">
+        <!-- column headers -->
+        <div class="cell col-header"></div>
+        <div class="cell col-header">A</div>
+        <div class="cell col-header">B</div>
+        <div class="cell col-header">C</div>
+        <div class="cell col-header">D</div>
+        <div class="cell col-header">E</div>
+        <div class="cell col-header">F</div>
+        <div class="cell col-header">G</div>
+
+        <!-- row 1 -->
+        <div class="cell row-header">1</div>
+        <div class="cell label">Year</div>
+        <div class="cell label">Y1</div>
+        <div class="cell label">Y2</div>
+        <div class="cell label">Y3</div>
+        <div class="cell label">Y4</div>
+        <div class="cell label">Y5</div>
+        <div class="cell label">Exit</div>
+
+        <!-- GPR -->
+        <div class="cell row-header">2</div>
+        <div class="cell label">GPR</div>
+        <div class="cell value row-1">$2.4M</div>
+        <div class="cell locked">$2.5M</div>
+        <div class="cell locked">$2.6M</div>
+        <div class="cell locked">$2.7M</div>
+        <div class="cell locked">$2.8M</div>
+        <div class="cell locked">$2.9M</div>
+
+        <!-- Vacancy (cyan = market sourced) -->
+        <div class="cell row-header">3</div>
+        <div class="cell label">Vacancy</div>
+        <div class="cell value market row-2">7.0%</div>
+        <div class="cell locked">($122K)</div>
+        <div class="cell locked">($129K)</div>
+        <div class="cell locked">($135K)</div>
+        <div class="cell locked">($142K)</div>
+        <div class="cell locked">($146K)</div>
+
+        <!-- NOI -->
+        <div class="cell row-header">4</div>
+        <div class="cell label">NOI</div>
+        <div class="cell locked">$1.42M</div>
+        <div class="cell locked">$1.52M</div>
+        <div class="cell locked">$1.61M</div>
+        <div class="cell locked">$1.69M</div>
+        <div class="cell locked">$1.78M</div>
+        <div class="cell locked">$1.84M</div>
+
+        <!-- Cap Rate (cyan = market sourced) -->
+        <div class="cell row-header">5</div>
+        <div class="cell label">Cap Rate</div>
+        <div class="cell value market row-4">5.25%</div>
+        <div class="cell value row-4">—</div>
+        <div class="cell value row-4">—</div>
+        <div class="cell value row-4">—</div>
+        <div class="cell value row-4">—</div>
+        <div class="cell value market row-4">5.50%</div>
+
+        <!-- Lev. CF -->
+        <div class="cell row-header">6</div>
+        <div class="cell label">Lev. CF</div>
+        <div class="cell locked">$420K</div>
+        <div class="cell locked">$510K</div>
+        <div class="cell locked">$595K</div>
+        <div class="cell locked">$675K</div>
+        <div class="cell locked">$760K</div>
+        <div class="cell locked">$33.4M</div>
+
+        <!-- Units (with QA flag dot) -->
+        <div class="cell row-header">7</div>
+        <div class="cell label">Units</div>
+        <div class="cell value row-6">95<span class="flag" title="OM says 96, rent roll has 95"></span></div>
+        <div class="cell value row-6">95</div>
+        <div class="cell value row-6">95</div>
+        <div class="cell value row-6">95</div>
+        <div class="cell value row-6">95</div>
+        <div class="cell value row-6">95</div>
+
+        <!-- IRR row -->
+        <div class="cell row-header">8</div>
+        <div class="cell label">IRR</div>
+        <div class="cell value formula row-7" style="grid-column: span 6; color: var(--green); font-weight: 700;">
+          18.4%   |   2.1x EM   |   8.6% avg CoC
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Chat ── -->
+    <div class="chat">
+
+      <div class="chat-header">
+        <div class="avatar">T</div>
+        <div>
+          <div class="header-name">Teez</div>
+          <div class="header-sub"><span class="live-dot"></span> Underwriting agent</div>
+        </div>
+      </div>
+
+      <div class="messages">
+
+        <!-- User -->
+        <div class="msg user">
+          Build a pro forma for the Phoenix deal — 5-year hold, 65% LTV.
+        </div>
+
+        <!-- Thinking with rotating status -->
+        <div class="thinking">
+          <div class="typing"><span></span><span></span><span></span></div>
+          <div class="status-stack">
+            <span>Looking at your template…</span>
+            <span>Reading the rent roll, T-12, and OM…</span>
+            <span>Checking the Phoenix submarket…</span>
+            <span>Building the model…</span>
+            <span>Double-checking the numbers…</span>
+          </div>
+        </div>
+
+        <!-- Agent response -->
+        <div class="msg agent response">
+          <div class="response-greeting">Done — pro forma's live in your sheet.</div>
+          <div class="metric-row">
+            <div class="metric-pill"><span class="v">18.4%</span><span class="l">IRR</span></div>
+            <div class="metric-pill"><span class="v">2.1x</span><span class="l">EM</span></div>
+            <div class="metric-pill"><span class="v">8.6%</span><span class="l">CoC</span></div>
+          </div>
+          <div class="response-flag">
+            <span class="pink">⚑</span> Heads-up — your OM lists <strong>96 units</strong>, the rent roll shows <strong>95</strong>. Worth confirming before IC.
+          </div>
+        </div>
+
+        <!-- Follow-up suggestion -->
+        <div class="suggestion">
+          Run a sensitivity on exit cap <span class="arrow">→</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="caption">
+  <strong>Schematic.</strong> 12-second loop.
+</div>
+
+</div>
+</body>
+</html>

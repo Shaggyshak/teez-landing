@@ -18,14 +18,16 @@
         <span class="nav-brand-name">Teez</span>
       </a>
       <div class="nav-links">
+        <a href="#demo">Demo</a>
         <a href="#problem">Problem</a>
         <a href="#solution">Solution</a>
         <a href="#horizons">Vision</a>
         <a href="#market">Market</a>
+        <a href="#advantage">Why We Win</a>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <a href="https://app.teez.live/login" class="btn btn-ghost btn-sm">Log in</a>
-        <a href="#cta" class="btn btn-primary btn-sm">Get Early Access</a>
+      <div class="nav-cta">
+        <a href="https://app.teez.live/login" class="btn btn-ghost btn-sm nav-login">Log in</a>
+        <a href="#cta" class="btn btn-primary btn-sm nav-primary">Get Early Access</a>
       </div>
       <button class="mobile-toggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -37,28 +39,43 @@
   <section class="hero" id="hero">
     <div class="hero-glow"></div>
     <div class="container hero-content">
-      <div class="badge">AI-Powered Underwriting</div>
-      <h1>From Spreadsheets to<br><span class="text-green">Instant Intelligence</span></h1>
-      <p class="hero-sub">AI underwriting inside Excel today. The AI-native acquisitions service that replaces an in-house team tomorrow. Built for sub-scale sponsors, family offices, and emerging GPs.</p>
-      <div class="hero-actions">
+      <div class="badge hero-anim" style="--d: 0s">For sub-scale CRE sponsors</div>
+      <h1 class="hero-anim" style="--d: 0.1s">From Spreadsheets to<br><span class="text-green">Instant Intelligence</span></h1>
+      <p class="hero-sub hero-anim" style="--d: 0.2s">AI underwriting inside Excel today. The AI-native acquisitions service that replaces an in-house team tomorrow. Built for sub-scale sponsors, family offices, and emerging GPs.</p>
+      <p class="hero-sub-concrete hero-anim" style="--d: 0.3s">Drop in a rent roll. Get a full pro forma in your existing Excel sheet&mdash;<span class="text-green">minutes, not hours.</span></p>
+      <div class="hero-actions hero-anim" style="--d: 0.4s">
         <a href="#cta" class="btn btn-primary">Get Early Access</a>
-        <a href="#solution" class="btn btn-outline">See How It Works</a>
+        <a href="#demo" class="btn btn-outline">See How It Works</a>
       </div>
-      <div class="hero-stats">
+      <div class="hero-stats hero-anim" style="--d: 0.5s">
         <div class="hero-stat">
-          <span class="hero-stat-value">90%</span>
-          <span class="hero-stat-label">Faster Underwriting</span>
+          <span class="hero-stat-value">Excel-native</span>
+          <span class="hero-stat-label">Inside the sheet you already use</span>
         </div>
         <div class="hero-stat-divider"></div>
         <div class="hero-stat">
-          <span class="hero-stat-value">&lt;5%</span>
-          <span class="hero-stat-label">Cost vs. Full-Time Analyst</span>
+          <span class="hero-stat-value">Multi-asset</span>
+          <span class="hero-stat-label">MF, industrial, retail, mixed-use</span>
         </div>
         <div class="hero-stat-divider"></div>
         <div class="hero-stat">
-          <span class="hero-stat-value">Excel-Native</span>
-          <span class="hero-stat-label">Works Where You Work</span>
+          <span class="hero-stat-value">Live formulas</span>
+          <span class="hero-stat-label">Change an input&mdash;returns recalc</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo -->
+  <section class="section section-demo" id="demo">
+    <div class="container">
+      <div class="section-header">
+        <div class="badge">See It Work</div>
+        <h2>One prompt. Done in your sheet.</h2>
+        <p class="section-sub">An agent that scans your firm's template, parses your documents, checks the market, builds the model, and double-checks the numbers&mdash;without leaving Excel.</p>
+      </div>
+      <div class="demo-frame">
+        <iframe src="mockups/excel-pane-demo.html" title="Teez agent demo" loading="lazy"></iframe>
       </div>
     </div>
   </section>
@@ -108,25 +125,25 @@
   <section class="section section-dark" id="solution">
     <div class="container">
       <div class="section-header">
-        <div class="badge">The Solution</div>
-        <h2>AI Where You Work</h2>
-        <p class="section-sub">We embed an AI underwriting agent directly into Excel and Google Sheets&mdash;automating data entry, analysis, and modeling within the tools investors already use. No new software to learn, zero learning curve.</p>
+        <div class="badge">How It Works</div>
+        <h2>Where you already work</h2>
+        <p class="section-sub">An underwriting agent that lives inside Excel and Google Sheets&mdash;parsing your documents, building the model, and double-checking the math, all without leaving the sheet. No new software to learn.</p>
       </div>
       <div class="steps">
         <div class="step">
           <div class="step-number">01</div>
-          <h3>Automate Data Entry</h3>
-          <p>AI pulls real-time market data and standardizes rent rolls, T12s, and PCAs automatically.</p>
+          <h3>Parse Your Documents</h3>
+          <p>Drop in a rent roll, T-12, or offering memo. The agent reads them in parallel and pulls live market context from public data.</p>
         </div>
         <div class="step">
           <div class="step-number">02</div>
-          <h3>Accelerate Analysis</h3>
-          <p>Get instant pro-forma projections and risk flags&mdash;cutting underwriting time by 90%.</p>
+          <h3>Fill Your Template</h3>
+          <p>Bring your firm's existing Excel model. The agent scans it, fills the right input cells, and never overwrites your formulas.</p>
         </div>
         <div class="step">
           <div class="step-number">03</div>
-          <h3>Maintain Control</h3>
-          <p>Bring your own Excel sheets for financial modeling. Excel-native design preserves flexibility and transparency that pros demand.</p>
+          <h3>Verified Output</h3>
+          <p>A separate verifier checks cap rate, DSCR, and cross-doc consistency&mdash;then flags anything worth a second look before IC.</p>
         </div>
       </div>
 
@@ -141,16 +158,16 @@
 
       <div class="metrics-row">
         <div class="metric">
-          <div class="metric-value">80%</div>
-          <div class="metric-label">Reduction in underwriting time from early pilots</div>
+          <div class="metric-value">Multi-doc</div>
+          <div class="metric-label">Rent roll, T-12, and OM parsed in parallel</div>
         </div>
         <div class="metric">
           <div class="metric-value">BYOS + BYOD</div>
           <div class="metric-label">Keep your templates and your data&mdash;no migration, no tenant changes</div>
         </div>
         <div class="metric">
-          <div class="metric-value">&lt;5%</div>
-          <div class="metric-label">Labor cost vs. a full-time analyst</div>
+          <div class="metric-value">Verified</div>
+          <div class="metric-label">Cross-doc reconciliation flags discrepancies before IC</div>
         </div>
       </div>
     </div>
@@ -270,13 +287,12 @@
 
   <!-- CTA -->
   <section class="section section-cta" id="cta">
-    <div class="cta-glow"></div>
     <div class="container">
       <div class="cta-content">
         <h2>The Moment is Now</h2>
-        <p>Real estate is at an AI inflection point. Early adopters are already underwriting 10x faster. We have a once-in-a-generation opportunity to become the platform everyone in real estate finance relies on.</p>
+        <p>Real estate is at an inflection point. Early adopters are already underwriting 10x faster. We have a once-in-a-generation opportunity to become the platform everyone in real estate finance relies on.</p>
         <p class="cta-bold">We're not just building a tool&mdash;we're building the future of real estate investment workflow.</p>
-        <a href="mailto:hello@teez.live" class="btn btn-primary btn-lg">Get in Touch</a>
+        <a href="mailto:shay@teez.live" class="btn btn-primary btn-lg">Get in Touch</a>
       </div>
     </div>
   </section>
@@ -287,14 +303,14 @@
       <div class="footer-brand">
         <img src="images/teez-icon.png" alt="Teez" class="footer-logo" />
         <span class="footer-brand-name">Teez</span>
-        <p>AI-Powered Real Estate Underwriting</p>
+        <p>The underwriting agent for Excel.</p>
       </div>
       <div class="footer-copy">&copy; 2026 Teez. All rights reserved.</div>
     </div>
   </footer>
 
   <script>
-    // Mobile nav toggle
+    // ── Mobile nav toggle ──
     const toggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
     toggle.addEventListener('click', () => {
@@ -302,7 +318,7 @@
       toggle.classList.toggle('active');
     });
 
-    // Smooth scroll
+    // ── Smooth scroll ──
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         e.preventDefault();
@@ -315,24 +331,43 @@
       });
     });
 
-    // Nav background on scroll
+    // ── Nav background on scroll ──
     const nav = document.querySelector('.nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
+    }, { passive: true });
 
-    // Fade-in on scroll
+    // ── Fade-in on scroll, with sibling stagger ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.card, .step, .timeline-item, .market-card, .metric').forEach(el => {
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.card, .step, .timeline-item, .market-card, .metric, .demo-frame').forEach((el) => {
       el.classList.add('fade-in');
+      const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('fade-in') || c === el);
+      const i = siblings.indexOf(el);
+      if (i > -1) el.style.setProperty('--stagger', `${i * 0.08}s`);
       observer.observe(el);
     });
+
+    // ── Mouse parallax on hero glow (subtle) ──
+    const heroGlow = document.querySelector('.hero-glow');
+    const hero = document.querySelector('.hero');
+    if (heroGlow && hero && window.matchMedia('(hover: hover)').matches) {
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        heroGlow.style.transform = `translate(calc(-50% + ${x * 40}px), ${y * 30}px)`;
+      });
+      hero.addEventListener('mouseleave', () => {
+        heroGlow.style.transform = '';
+      });
+    }
   </script>
 </body>
 </html>
