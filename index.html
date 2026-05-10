@@ -316,7 +316,24 @@
         <h2>The Moment is Now</h2>
         <p>Real estate is at an inflection point. Early adopters are already underwriting 10x faster. We have a once-in-a-generation opportunity to become the platform everyone in real estate finance relies on.</p>
         <p class="cta-bold">We're not just building a tool&mdash;we're building the future of real estate investment workflow.</p>
-        <a href="mailto:hello@teez.live" class="btn btn-primary btn-lg">Get in Touch</a>
+
+        <form id="waitlist-form" class="waitlist-form" novalidate>
+          <input
+            type="email"
+            id="waitlist-email"
+            name="email"
+            placeholder="you@company.com"
+            required
+            autocomplete="email"
+          />
+          <button type="submit" class="btn btn-primary btn-lg" id="waitlist-submit">
+            Get Early Access
+          </button>
+        </form>
+        <p class="waitlist-status" id="waitlist-status" role="status" aria-live="polite"></p>
+        <p class="waitlist-fallback">
+          Prefer email? Reach us at <a href="mailto:hello@teez.live">hello@teez.live</a>
+        </p>
       </div>
     </div>
   </section>
@@ -377,6 +394,55 @@
       if (i > -1) el.style.setProperty('--stagger', `${i * 0.08}s`);
       observer.observe(el);
     });
+
+    // ── Waitlist form ──
+    const waitlistForm = document.getElementById('waitlist-form');
+    const waitlistEmail = document.getElementById('waitlist-email');
+    const waitlistSubmit = document.getElementById('waitlist-submit');
+    const waitlistStatus = document.getElementById('waitlist-status');
+
+    if (waitlistForm) {
+      waitlistForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = waitlistEmail.value.trim();
+        if (!email || !waitlistEmail.checkValidity()) {
+          waitlistStatus.textContent = 'Please enter a valid email.';
+          waitlistStatus.className = 'waitlist-status error';
+          return;
+        }
+
+        waitlistSubmit.disabled = true;
+        waitlistSubmit.textContent = 'Submitting…';
+        waitlistStatus.textContent = '';
+        waitlistStatus.className = 'waitlist-status';
+
+        try {
+          const res = await fetch('https://app.teez.live/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+          const data = await res.json().catch(() => ({}));
+          if (res.ok) {
+            waitlistStatus.textContent = data.message || "You're on the list — check your inbox.";
+            waitlistStatus.className = 'waitlist-status success';
+            waitlistForm.reset();
+            waitlistSubmit.textContent = 'Get Early Access';
+            waitlistSubmit.disabled = false;
+          } else {
+            waitlistStatus.textContent = data.error || 'Something went wrong. Try again or email hello@teez.live.';
+            waitlistStatus.className = 'waitlist-status error';
+            waitlistSubmit.textContent = 'Get Early Access';
+            waitlistSubmit.disabled = false;
+          }
+        } catch (err) {
+          waitlistStatus.textContent = 'Network issue. Try again or email hello@teez.live.';
+          waitlistStatus.className = 'waitlist-status error';
+          waitlistSubmit.textContent = 'Get Early Access';
+          waitlistSubmit.disabled = false;
+        }
+      });
+    }
 
     // ── Mouse parallax on hero glow (subtle) ──
     const heroGlow = document.querySelector('.hero-glow');
