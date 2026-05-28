@@ -145,9 +145,14 @@
         <div class="pilot-terms">
           <p><strong>20 minutes.</strong> We'll run the agent on one of your live deals in front of you. You leave with the model, regardless. No commitment, no slide deck.</p>
         </div>
-        <div class="persuade-cta">
-          <a href="mailto:hello@teez.live?subject=Book%2020%20minutes" class="btn btn-primary btn-lg">Book 20 minutes &rarr;</a>
-        </div>
+        <form id="book-form" class="book-form" novalidate>
+          <input type="email" name="email" id="book-email" placeholder="your@email.com" required autocomplete="email" />
+          <input type="text" name="name" id="book-name" placeholder="Name (optional)" autocomplete="name" />
+          <input type="text" name="message" id="book-message" placeholder="What are you underwriting? (optional)" maxlength="200" />
+          <button type="submit" class="btn btn-primary btn-lg" id="book-submit">Book 20 minutes &rarr;</button>
+        </form>
+        <p class="book-status" id="book-status" role="status" aria-live="polite"></p>
+        <p class="book-fallback">Or email <a href="mailto:hello@teez.live?subject=Book%2020%20minutes">hello@teez.live</a></p>
       </div>
     </div>
   </section>
@@ -230,6 +235,71 @@
       });
       hero.addEventListener('mouseleave', () => {
         heroGlow.style.transform = '';
+      });
+    }
+
+    // ── Book-a-call form (submits to Supabase landing_leads via REST) ──
+    const bookForm = document.getElementById('book-form');
+    if (bookForm) {
+      const SUPABASE_URL = 'https://gclrtcheaojuoyvvhuuq.supabase.co';
+      const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjbHJ0Y2hlYW9qdW95dnZodXVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjU0MDIsImV4cCI6MjA4OTM0MTQwMn0.Jgk_91tCcCLoLQhUYCG4lWFmpbbn__HoH2W5TC-RXAg';
+
+      const bookEmail = document.getElementById('book-email');
+      const bookName = document.getElementById('book-name');
+      const bookMessage = document.getElementById('book-message');
+      const bookSubmit = document.getElementById('book-submit');
+      const bookStatus = document.getElementById('book-status');
+      const originalLabel = bookSubmit.innerHTML;
+
+      bookForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = bookEmail.value.trim();
+        const name = bookName.value.trim();
+        const message = bookMessage.value.trim();
+
+        if (!email || !bookEmail.checkValidity()) {
+          bookStatus.textContent = 'Please enter a valid email.';
+          bookStatus.className = 'book-status error';
+          return;
+        }
+
+        bookSubmit.disabled = true;
+        bookSubmit.textContent = 'Submitting…';
+        bookStatus.textContent = '';
+        bookStatus.className = 'book-status';
+
+        try {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/landing_leads`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_ANON,
+              'Authorization': `Bearer ${SUPABASE_ANON}`,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({
+              email,
+              name: name || null,
+              message: message || null,
+              source: 'landing-cta'
+            })
+          });
+          if (res.ok) {
+            bookStatus.textContent = "Got it — we'll be in touch within a day.";
+            bookStatus.className = 'book-status success';
+            bookForm.reset();
+          } else {
+            const data = await res.json().catch(() => ({}));
+            bookStatus.textContent = (data && data.message) || 'Something went wrong. Email hello@teez.live instead.';
+            bookStatus.className = 'book-status error';
+          }
+        } catch (err) {
+          bookStatus.textContent = 'Network issue. Email hello@teez.live instead.';
+          bookStatus.className = 'book-status error';
+        } finally {
+          bookSubmit.innerHTML = originalLabel;
+          bookSubmit.disabled = false;
+        }
       });
     }
   </script>
