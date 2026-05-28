@@ -28,18 +28,12 @@
       </a>
       <div class="nav-links">
         <a href="#demo">Demo</a>
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="#pipeline">Pipeline</a>
-        <a href="#horizons">Vision</a>
-        <a href="#market">Market</a>
-        <a href="#advantage">Why We Win</a>
       </div>
       <div class="nav-cta">
         <a href="https://app.teez.live/login" class="btn btn-ghost btn-sm nav-login">Log in</a>
-        <a href="#cta" class="btn btn-primary btn-sm nav-primary">Get Early Access</a>
+        <a href="#book-a-call" class="btn btn-primary btn-sm nav-primary">Book a call</a>
       </div>
-      <button class="mobile-toggle" aria-label="Toggle menu">
+      <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -357,6 +351,7 @@
     toggle.addEventListener('click', () => {
       navLinks.classList.toggle('open');
       toggle.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', navLinks.classList.contains('open').toString());
     });
 
     // ── Smooth scroll ──

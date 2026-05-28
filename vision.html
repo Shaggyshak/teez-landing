@@ -31,7 +31,7 @@
       <div class="nav-cta">
         <a href="https://app.teez.live/login" class="btn btn-ghost btn-sm nav-login">Log in</a>
       </div>
-      <button class="mobile-toggle" aria-label="Toggle menu">
+      <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -194,6 +194,7 @@
       toggle.addEventListener('click', () => {
         navLinks.classList.toggle('open');
         toggle.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', navLinks.classList.contains('open').toString());
       });
     }
 
