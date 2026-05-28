@@ -363,6 +363,7 @@
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           navLinks.classList.remove('open');
           toggle.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
         }
       });
     });
