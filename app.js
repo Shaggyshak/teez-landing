@@ -2,6 +2,18 @@
 (function () {
   'use strict';
 
+  // ---- mobile nav toggle (hamburger reveals the top menu) ----
+  var nt = document.querySelector('.navtoggle'), an = document.querySelector('.app-nav');
+  if (nt && an) {
+    nt.addEventListener('click', function () {
+      var open = an.classList.toggle('open');
+      nt.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    [].slice.call(an.querySelectorAll('a')).forEach(function (a) {
+      a.addEventListener('click', function () { an.classList.remove('open'); nt.setAttribute('aria-expanded', 'false'); });
+    });
+  }
+
   // ---- row-number gutter: fills to sheet height, 30px rows ----
   var gutter = document.getElementById('gutter');
   var sheet = document.querySelector('.sheet');

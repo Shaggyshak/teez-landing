@@ -32,6 +32,8 @@ img{max-width:100%}
 .app-right .login{font-size:14px;color:#B9BEC4}.app-right .login:hover{color:#fff}
 .book{background:var(--green);color:#fff;font-family:var(--sans);font-weight:700;font-size:14px;padding:8px 16px;border-radius:4px;border:none;cursor:pointer;transition:.15s;text-decoration:none;display:inline-block}
 .book:hover{background:#1a9551}
+.navtoggle{display:none;background:none;border:none;color:#C7CCD2;font-size:21px;line-height:1;cursor:pointer;padding:2px 6px;font-family:var(--sans)}
+.navtoggle:hover{color:#fff}
 .fxbar{display:flex;align-items:stretch;height:44px;border-top:1px solid var(--chrome-line);background:var(--chrome-2)}
 .fx-name{flex:none;width:108px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:#9AA0A6;border-right:1px solid var(--chrome-line);gap:7px}
 .fx-name .nb{color:#E8EAED}
@@ -258,7 +260,11 @@ h3{font-size:18px;font-weight:700}
 @media(max-width:880px){
   .colhead,.gutter,.colguides{display:none}
   .sheet{padding-top:calc(var(--appH) + 6px)}
-  .app-nav{display:none}
+  .navtoggle{display:block}
+  .app-nav{display:none;position:absolute;top:52px;left:0;right:0;margin:0;flex-direction:column;gap:0;background:var(--chrome-2);border-bottom:1px solid var(--chrome-line);padding:4px 0;z-index:70;box-shadow:0 16px 30px -16px rgba(0,0,0,.5)}
+  .app-nav.open{display:flex}
+  .app-nav a{padding:13px 18px;font-size:15px;border-bottom:1px solid var(--chrome-line)}
+  .app-nav a:last-child{border-bottom:none}
   .hero-top,.two-grid,.pricing-grid,.cols3{grid-template-columns:1fr;gap:34px}
   .cols3{gap:16px}
   .walk{grid-template-columns:1fr;gap:14px;padding:28px 24px}
