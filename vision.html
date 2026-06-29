@@ -14,222 +14,190 @@
   <title>Teez &mdash; Vision &amp; Roadmap</title>
   <meta name="description" content="Where Teez is headed: AI-native underwriting today, an outsourced acquisitions service tomorrow, an AI-native CRE acquisitions stack long term." />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="images/teez-icon.png" alt="Teez" class="nav-logo" />
-        <span class="nav-brand-name">Teez</span>
-      </a>
-      <div class="nav-links">
-        <a href="/">Product</a>
-        <a href="/vision.html" aria-current="page">Vision</a>
-        <a href="/brokers.html">For Brokers</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://app.teez.live/login" class="btn btn-ghost btn-sm nav-login">Log in</a>
-        <a href="/#book-a-call" class="btn btn-primary btn-sm nav-primary">Book a call</a>
-      </div>
-      <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<!-- app chrome -->
+<div class="app">
+  <div class="app-top">
+    <div class="app-id">
+      <img src="images/teez-icon.png" alt="Teez">
+      <span class="nm">Teez</span>
+      <span class="file">teez — roadmap.xlsx</span>
     </div>
-  </nav>
+    <nav class="app-nav">
+      <a href="/">For Investors</a>
+      <a href="/brokers.html">For Brokers</a>
+      <a href="/vision.html" class="act">Vision</a>
+      <a href="/pricing.html">Pricing</a>
+    </nav>
+    <div class="app-right">
+      <a href="https://app.teez.live/login" class="login">Log in</a>
+      <a href="/#book" class="book">Book a call</a>
+    </div>
+  </div>
+  <div class="fxbar">
+    <div class="fx-name"><span class="nb">B2</span><span>fx</span></div>
+    <div class="fx-val"><span id="fx" data-formula='=ROADMAP(horizon_1:horizon_3)'></span><span class="caret" id="caret"></span></div>
+  </div>
+</div>
 
-  <!-- Horizons -->
-  <section class="section" id="horizons" style="padding-top: 160px;">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge">The Vision</div>
-        <h2>From Spreadsheet to Skyline</h2>
-        <p class="section-sub">We're democratizing real estate underwriting&mdash;making professional-grade investment analysis instant and accessible for everyone.</p>
+<!-- column header -->
+<div class="colhead">
+  <div class="corner"><i></i></div>
+  <div class="cols"><span>A</span><span class="act">B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
+</div>
+
+<div class="sheet">
+  <div class="gutter" id="gutter" data-act="2"></div>
+  <div class="canvas">
+    <div class="colguides" aria-hidden="true"><div class="inner"><span></span><span class="act"></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+    <!-- HERO -->
+    <header class="hero solo">
+      <div class="wrap hero-top">
+        <div>
+          <div class="range"><span class="tab">A1</span><span class="nm">The vision</span></div>
+          <h1>From spreadsheet<br>to <span class="g">skyline.</span></h1>
+          <p class="hero-sub" style="max-width:46ch">We're democratizing real estate underwriting — making professional-grade investment analysis instant and accessible. Software is the wedge. An AI-native acquisitions service is the destination.</p>
+          <div class="hero-cta">
+            <a href="#roadmap" class="btn-fill">Read the roadmap</a>
+            <a href="/#book" class="btn-cell">Talk to us</a>
+          </div>
+        </div>
       </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker">1</div>
-          <div class="timeline-content">
-            <div class="timeline-period">Year 0&ndash;1</div>
+    </header>
+
+    <!-- ROADMAP -->
+    <section class="sec" id="roadmap">
+      <div class="wrap">
+        <div class="range"><span class="tab">B4</span><span class="nm">Three horizons</span></div>
+        <h2>The path, in three moves.</h2>
+        <div class="cols3" style="margin-top:30px">
+          <div class="card3">
+            <span class="period">Year 0–1</span>
             <h3>AI Underwriting in Excel</h3>
-            <p>The wedge. Excel-native AI for the sub-scale sponsors and family offices already living in spreadsheets. Solve the underwriting bottleneck where the work actually happens.</p>
+            <p>The wedge. Excel-native AI for sub-scale sponsors and family offices already living in spreadsheets. Solve the underwriting bottleneck where the work actually happens.</p>
           </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker">2</div>
-          <div class="timeline-content">
-            <div class="timeline-period">Year 1&ndash;3</div>
+          <div class="card3 feat">
+            <span class="period">Year 1–3</span>
             <h3>Acquisitions-as-a-Service</h3>
-            <p>Sponsors who don't want to operate the software outsource the team entirely. Same engine; we run the underwriting and screening. AI-native economics&mdash;a team of four producing the throughput of thirty traditional analysts.</p>
+            <p>Sponsors who don't want to operate the software outsource the team entirely. Same engine; we run the underwriting and screening. A team of four producing the throughput of thirty analysts.</p>
           </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker">3</div>
-          <div class="timeline-content">
-            <div class="timeline-period">Year 3+</div>
+          <div class="card3">
+            <span class="period">Year 3+</span>
             <h3>The AI-Native CRE Acquisitions Stack</h3>
             <p>One engine powering underwriting, sourcing, captive investment-sales brokerage, and syndication. The Pipe Dreams archetype, applied to commercial real estate.</p>
           </div>
         </div>
-      </div>
 
-      <!-- Long Arc panel -->
-      <div style="margin: 48px 0 32px; padding: 28px 32px; background: var(--bg-card); border: 1px solid var(--green); border-radius: var(--radius); box-shadow: 0 0 30px var(--green-glow);">
-        <div style="font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 12px;">The Long Arc</div>
-        <div style="font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; line-height: 1.4;">
-          <span class="text-green">From every deal to every investor.</span>
+        <div class="arc">
+          <div class="ey">The long arc</div>
+          <div class="big"><span class="g">From every deal to every investor.</span></div>
+          <p>Once institutional-grade underwriting is fast and cheap, every property investor in America gets it — from boutique funds to individual rental owners. TurboTax for property investing. The world we're building toward.</p>
         </div>
-        <p style="color: var(--text-dim); font-size: 1rem; line-height: 1.6;">Once institutional-grade underwriting is fast and cheap, every property investor in America gets it&mdash;from boutique funds to individual rental owners. TurboTax for property investing. The world we're building toward.</p>
+        <p class="footnote">// Software is the wedge. The AI-native acquisitions service is the destination.</p>
       </div>
+    </section>
 
-      <p class="timeline-footnote">Software is the wedge. The AI-native acquisitions service is the destination.</p>
-    </div>
-  </section>
+    <!-- BEYOND ONE DEAL -->
+    <section class="sec" id="pipeline">
+      <div class="wrap">
+        <div class="range"><span class="tab">B12</span><span class="nm">Beyond one deal</span></div>
+        <h2>One inbox. Every deal. <span class="g">We do the work.</span></h2>
+        <p class="lead" style="margin-top:18px;max-width:64ch">Sourcing, underwriting, IC prep, and live market intel — surfaced as a single inbox you actually have time to read. Agents watch the inbox, pre-fill the dashboard, and triage; the sponsor keeps the call. The wedge becomes the workflow.</p>
+      </div>
+    </section>
 
-  <!-- Beyond One Deal (relocated from index.html) -->
-  <section class="section section-demo" id="pipeline">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge">Beyond One Deal</div>
-        <h2>One inbox. Every deal. The agent does the work.</h2>
-        <p class="section-sub">Sourcing, underwriting, IC prep, and live market intel&mdash;surfaced as a single inbox you actually have time to read. Click a row to see the comps, memos, or sensitivity behind any item. The agent triages; you keep the call.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Market -->
-  <section class="section section-dark" id="market">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge">Who We Serve</div>
-        <h2>One Platform. Every Investor.</h2>
-        <p class="section-sub">We start by replacing the in-house underwriting team at sub-scale sponsors. We grow into captive brokerage and syndication. The endgame: an AI-native acquisitions stack across CRE.</p>
-      </div>
-      <div class="grid-3">
-        <div class="market-card">
-          <div class="market-horizon">Horizon 1</div>
-          <h3>Sub-Scale Sponsors</h3>
-          <div class="market-stat">~10K</div>
-          <p class="market-detail">family offices, emerging GPs, and boutique funds still underwriting manually</p>
-        </div>
-        <div class="market-card market-card-featured">
-          <div class="market-horizon">Horizon 2</div>
-          <h3>Outsourced Acquisitions</h3>
-          <div class="market-stat">$3B+</div>
-          <p class="market-detail">addressable spend on outsourced underwriting and acquisitions services</p>
-        </div>
-        <div class="market-card">
-          <div class="market-horizon">Horizon 3</div>
-          <h3>CRE Acquisitions Stack</h3>
-          <div class="market-stat">$390B+</div>
-          <p class="market-detail">annual CRE transaction volume reachable by an AI-native operator</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Why We Win -->
-  <section class="section" id="advantage">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge">Competitive Advantage</div>
-        <h2>Why We Win</h2>
-      </div>
-      <div class="grid-3">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+    <!-- MARKET -->
+    <section class="sec" id="market">
+      <div class="wrap">
+        <div class="range"><span class="tab">B18</span><span class="nm">Who we serve</span></div>
+        <h2>One platform. Every investor.</h2>
+        <p class="lead" style="margin:14px 0 0;max-width:60ch">We start by replacing the in-house underwriting team at sub-scale sponsors. We grow into captive brokerage and syndication. The endgame: an AI-native acquisitions stack across CRE.</p>
+        <div class="cols3" style="margin-top:30px">
+          <div class="card3">
+            <span class="ey">Horizon 1</span>
+            <div class="bignum">~10K</div>
+            <h3>Sub-Scale Sponsors</h3>
+            <p>family offices, emerging GPs, and boutique funds still underwriting manually</p>
           </div>
-          <h3>Workflow-Native Wedge</h3>
-          <p>We meet sponsors inside Excel, where they already work. No rip and replace, no migration, no training curve. The wedge that converts to a service.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <div class="card3 feat">
+            <span class="ey">Horizon 2</span>
+            <div class="bignum">$3B+</div>
+            <h3>Outsourced Acquisitions</h3>
+            <p>addressable spend on outsourced underwriting and acquisitions services</p>
           </div>
-          <h3>Service Economics, Software Margins</h3>
-          <p>AI-native pricing scales with deal outcomes, not seat count. A team of four producing the throughput of thirty&mdash;and the gross margins of software.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <div class="card3">
+            <span class="ey">Horizon 3</span>
+            <div class="bignum">$390B+</div>
+            <h3>CRE Acquisitions Stack</h3>
+            <p>annual CRE transaction volume reachable by an AI-native operator</p>
           </div>
-          <h3>We Outgrow the Tool Category</h3>
-          <p>At the model layer, AI commoditizes&mdash;fast. Service relationships don't. teez starts as a wedge inside Excel and graduates into the acquisitions team sponsors rely on. We win by exiting the LLM-tool race, not by pretending to be ahead in it.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Manifesto closer (no CTA on /vision) -->
-  <section class="section section-cta">
-    <div class="container">
-      <div class="cta-content">
-        <h2>The Moment is Now</h2>
-        <p>Real estate is at an inflection point. Early adopters are already underwriting 10x faster. We have a once-in-a-generation opportunity to become the platform everyone in real estate finance relies on.</p>
-        <p class="cta-bold">We're not just building a tool&mdash;we're building the future of real estate investment workflow.</p>
-        <p style="margin-top: 32px; text-align: center;">
-          <a href="/">&larr; Back to product</a>
-        </p>
+    <!-- WHY WE WIN -->
+    <section class="sec" id="advantage">
+      <div class="wrap">
+        <div class="range"><span class="tab">B26</span><span class="nm">Competitive advantage</span></div>
+        <h2>Why we win.</h2>
+        <div class="cols3" style="margin-top:30px">
+          <div class="card3">
+            <div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="18" height="13" rx="2"/><line x1="7" y1="20" x2="15" y2="20"/><line x1="11" y1="16" x2="11" y2="20"/></svg></div>
+            <h3>Workflow-Native Wedge</h3>
+            <p>We meet sponsors inside Excel, where they already work. No rip-and-replace, no migration, no training curve. The wedge that converts to a service.</p>
+          </div>
+          <div class="card3">
+            <div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="M2 11h18"/><path d="M11 2a14 14 0 0 1 4 9 14 14 0 0 1-4 9 14 14 0 0 1-4-9 14 14 0 0 1 4-9z"/></svg></div>
+            <h3>Service Economics, Software Margins</h3>
+            <p>AI-native pricing scales with deal outcomes, not seat count. A team of four with the throughput of thirty — and the gross margins of software.</p>
+          </div>
+          <div class="card3">
+            <div class="ic"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2L2 6.5l9 4.5 9-4.5L11 2z"/><path d="M2 15.5l9 4.5 9-4.5"/><path d="M2 11l9 4.5 9-4.5"/></svg></div>
+            <h3>We Outgrow the Tool Category</h3>
+            <p>At the model layer, AI commoditizes fast. Service relationships don't. teez starts as a wedge inside Excel and graduates into the acquisitions team sponsors rely on.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="images/teez-icon.png" alt="Teez" class="footer-logo" />
-        <span class="footer-brand-name">Teez</span>
-        <p>The underwriting agent for Excel.</p>
+    <!-- MANIFESTO -->
+    <section class="sec" id="moment">
+      <div class="wrap">
+        <div class="range"><span class="tab">B34</span><span class="nm">The moment</span></div>
+        <div class="manifesto">
+          <h2>The moment is now.</h2>
+          <p>Real estate is at an inflection point. Early adopters are already underwriting 10× faster. There's a once-in-a-generation opening to become the platform everyone in real estate finance relies on.</p>
+          <p class="big">We're not just building a tool — we're building the future of the real estate investment workflow.</p>
+          <p class="back"><a href="/">← Back to product</a></p>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:hello@teez.live">hello@teez.live</a>
-        <span class="footer-divider" aria-hidden="true">&middot;</span>
-        <span>Vision &amp; roadmap</span>
-        <span class="footer-divider" aria-hidden="true">&middot;</span>
-        <a href="https://app.teez.live/login">Log in</a>
-      </div>
-      <div class="footer-copy">&copy; 2026 Teez. All rights reserved.</div>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    // ── Mobile nav toggle ──
-    const toggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (toggle && navLinks) {
-      toggle.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
-        toggle.classList.toggle('active');
-        toggle.setAttribute('aria-expanded', navLinks.classList.contains('open').toString());
-      });
-    }
+  </div><!-- /canvas -->
+</div><!-- /sheet -->
 
-    // ── Nav background on scroll ──
-    const nav = document.querySelector('.nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+<!-- footer = sheet tabs (page nav) + status bar -->
+<div class="tabsbar">
+  <a class="tb" href="/">For Investors</a>
+  <a class="tb act" href="/vision.html">Vision</a>
+  <a class="tb" href="/brokers.html">For Brokers</a>
+  <a class="tb" href="/pricing.html">Pricing</a>
+  <a class="tb" href="https://app.teez.live/login">Log in</a>
+  <a class="tb" href="mailto:hello@teez.live">hello@teez.live</a>
+  <span class="tb add">+</span>
+</div>
+<div class="statusbar">
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — software is the wedge, the service is the destination</span></div>
+  <div class="l"><span>© 2026 Teez</span><span>100%</span></div>
+</div>
 
-    // ── Fade-in on scroll ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.card, .step, .timeline-item, .market-card, .metric').forEach((el) => {
-      el.classList.add('fade-in');
-      const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('fade-in') || c === el);
-      const i = siblings.indexOf(el);
-      if (i > -1) el.style.setProperty('--stagger', `${i * 0.08}s`);
-      observer.observe(el);
-    });
-  </script>
+<script src="app.js"></script>
 </body>
 </html>

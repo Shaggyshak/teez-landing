@@ -8,22 +8,22 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <style>
   :root {
-    --bg: #0c1117;
-    --bg-card: #141b23;
-    --bg-section-alt: #0f161d;
-    --bg-deeper: #080c11;
-    --bg-hover: #1a232d;
-    --green: #4ade80;
-    --green-dim: #22c55e;
-    --green-glow: rgba(74, 222, 128, 0.18);
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --text-muted: #64748b;
-    --border: #1e293b;
-    --cyan: #22d3ee;
-    --pink: #f472b6;
-    --gold: #fbbf24;
-    --violet: #a78bfa;
+    --bg: #ffffff;
+    --bg-card: #ffffff;
+    --bg-section-alt: #F6F7F8;
+    --bg-deeper: #F1F3F5;
+    --bg-hover: #F2F7F3;
+    --green: #107C41;
+    --green-dim: #0E6B38;
+    --green-glow: rgba(16, 124, 65, 0.12);
+    --text: #1F2329;
+    --text-dim: #5B6168;
+    --text-muted: #8A8F96;
+    --border: #E1E4E8;
+    --cyan: #0E7490;
+    --pink: #BE185D;
+    --gold: #B7791F;
+    --violet: #6D28D9;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -35,7 +35,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 12px;
     color: var(--text);
   }
 
@@ -46,7 +46,7 @@
     border-radius: 14px;
     overflow: hidden;
     background: var(--bg-card);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px var(--green-glow);
+    box-shadow: 0 24px 60px -22px rgba(31, 35, 41, 0.20), 0 0 0 1px var(--border);
   }
 
   /* ── Window chrome ── */
@@ -56,7 +56,7 @@
     background: var(--bg-deeper);
     border-bottom: 1px solid var(--border);
   }
-  .dot { width: 11px; height: 11px; border-radius: 50%; background: #2a3340; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #D3D6DA; }
   .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
   .chrome-title { margin-left: 14px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
   .chrome-spacer { flex: 1; }
@@ -64,7 +64,7 @@
     font-size: 10px;
     color: var(--green);
     background: var(--green-glow);
-    border: 1px solid rgba(74, 222, 128, 0.25);
+    border: 1px solid rgba(16, 124, 65, 0.25);
     padding: 3px 9px;
     border-radius: 100px;
     letter-spacing: 0.04em;
@@ -78,7 +78,7 @@
     animation: ping 2s infinite;
   }
   @keyframes ping {
-    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6); }
+    0% { box-shadow: 0 0 0 0 rgba(16, 124, 65, 0.6); }
     70% { box-shadow: 0 0 0 6px transparent; }
     100% { box-shadow: 0 0 0 0 transparent; }
   }
@@ -107,7 +107,7 @@
     background: var(--green-glow);
     padding: 2px 9px;
     border-radius: 100px;
-    border: 1px solid rgba(74, 222, 128, 0.25);
+    border: 1px solid rgba(16, 124, 65, 0.25);
     font-weight: 600;
     font-variant-numeric: tabular-nums;
   }
@@ -139,7 +139,7 @@
   .chip.active {
     color: var(--green);
     background: var(--green-glow);
-    border-color: rgba(74, 222, 128, 0.3);
+    border-color: rgba(16, 124, 65, 0.3);
   }
 
   /* ── List container (relative for overlay) ── */
@@ -175,7 +175,7 @@
   }
   .row:hover { background: var(--bg-hover); }
   .row.unread {
-    background: linear-gradient(90deg, rgba(74, 222, 128, 0.03) 0%, transparent 50%);
+    background: linear-gradient(90deg, rgba(16, 124, 65, 0.03) 0%, transparent 50%);
   }
   .row.unread::before {
     content: "";
@@ -437,7 +437,7 @@
     width: 14px; height: 14px; border-radius: 50%;
     background: var(--green);
     border: 2px solid var(--bg);
-    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.20), 0 0 16px var(--green);
+    box-shadow: 0 0 0 4px rgba(16, 124, 65, 0.20), 0 0 16px var(--green);
     position: absolute; left: 0; top: 0;
   }
   .leaflet-subject .pin-label {
@@ -451,7 +451,7 @@
     background: var(--bg-deeper);
     padding: 2px 7px;
     border-radius: 3px;
-    border: 1px solid rgba(74, 222, 128, 0.35);
+    border: 1px solid rgba(16, 124, 65, 0.35);
     white-space: nowrap;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
@@ -521,7 +521,7 @@
     background: var(--green);
     border: 2px solid var(--bg);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.20), 0 0 16px var(--green);
+    box-shadow: 0 0 0 4px rgba(16, 124, 65, 0.20), 0 0 16px var(--green);
     opacity: 0;
     animation: pinIn 18s infinite;
     animation-delay: 6.0s;
@@ -538,7 +538,7 @@
     background: var(--bg-deeper);
     padding: 2px 7px;
     border-radius: 3px;
-    border: 1px solid rgba(74, 222, 128, 0.30);
+    border: 1px solid rgba(16, 124, 65, 0.30);
     opacity: 0;
     animation: pinIn 18s infinite;
     animation-delay: 6.2s;
@@ -616,12 +616,12 @@
     border-bottom: 1px solid var(--border);
     opacity: 0;
     animation: detailContent 18s infinite;
-    animation-delay: 8s;
+    animation-delay: 0s;
   }
   @keyframes detailContent {
-    0%, 44% { opacity: 0; transform: translateY(4px); }
-    47%, 95% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; }
+    0%, 36% { opacity: 0; transform: translateY(4px); }
+    41%, 82% { opacity: 1; transform: translateY(0); }
+    85%, 100% { opacity: 0; }
   }
 
   .dm {
@@ -659,7 +659,7 @@
     overflow: hidden;
     opacity: 0;
     animation: detailContent 18s infinite;
-    animation-delay: 9.2s;
+    animation-delay: 0.3s;
   }
   .detail-comps-head {
     font-size: 10px;
@@ -703,7 +703,7 @@
     justify-content: space-between;
     opacity: 0;
     animation: detailContent 18s infinite;
-    animation-delay: 10.4s;
+    animation-delay: 0.6s;
   }
   .detail-cta .text {
     font-size: 12px;
@@ -714,7 +714,7 @@
   .detail-cta .actions { display: flex; gap: 8px; }
   .detail-cta button {
     background: var(--green);
-    color: #0c1117;
+    color: #ffffff;
     font-size: 11.5px;
     font-weight: 600;
     padding: 7px 13px;
@@ -774,7 +774,7 @@
   <!-- Window chrome -->
   <div class="chrome">
     <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-    <div class="chrome-title">Teez · Acquisitions Inbox</div>
+    <div class="chrome-title">Teez · Deals</div>
     <div class="chrome-spacer"></div>
     <div class="chrome-badge">Always on</div>
   </div>
@@ -782,20 +782,20 @@
   <!-- Inbox header -->
   <div class="inbox-head">
     <div class="inbox-title">
-      <h1>Acquisitions Inbox</h1>
-      <span class="unread-pill"><span class="num">5</span> need your call</span>
+      <h1>Deals</h1>
+      <span class="unread-pill"><span class="num">5</span> need your action</span>
     </div>
-    <div class="inbox-meta">12 active deals · <span class="accent">agent did 23 things this week</span></div>
+    <div class="inbox-meta">12 active · <span class="accent">4 detected from your inbox this week</span></div>
   </div>
 
   <!-- Filter chips -->
   <div class="filter-bar">
-    <div class="chip active">All</div>
-    <div class="chip">Needs review</div>
-    <div class="chip">IC ready</div>
-    <div class="chip">Sourced</div>
-    <div class="chip">Market intel</div>
-    <div class="chip">Done</div>
+    <div class="chip active">All deals</div>
+    <div class="chip">Needs my action</div>
+    <div class="chip">At risk</div>
+    <div class="chip">Re-underwriting</div>
+    <div class="chip">Detected from inbox</div>
+    <div class="chip">Delivered</div>
   </div>
 
   <!-- List + Detail container -->
@@ -808,7 +808,7 @@
         <div class="status"><span class="star">★</span></div>
         <div class="sender">
           <div class="sender-name">Tampa MF · 88u (off-market)</div>
-          <div class="sender-tag">Sourced for you</div>
+          <div class="sender-tag">✉ Detected in your inbox</div>
         </div>
         <div class="subj"><span class="subj-lead">Matches your Phoenix thesis.</span> $19M · DSCR ~1.3 likely · pre-listing. Open to underwrite?</div>
         <div class="time">just now</div>
@@ -819,7 +819,7 @@
         <div class="status"><span class="dotlight"></span></div>
         <div class="sender">
           <div class="sender-name">Phoenix MF · 96u</div>
-          <div class="sender-tag">Pro forma ready</div>
+          <div class="sender-tag">Initial UW done</div>
         </div>
         <div class="subj"><span class="subj-lead">IRR 18.4% · 2.1x EM · 8.6% CoC.</span> QA passed. <span class="subj-action">Send to IC?</span></div>
         <div class="time">3m</div>
@@ -830,7 +830,7 @@
         <div class="status"><span class="flag-mark">⚑</span></div>
         <div class="sender">
           <div class="sender-name">Atlanta Retail · power-center</div>
-          <div class="sender-tag">Needs your call</div>
+          <div class="sender-tag">Waiting on you</div>
         </div>
         <div class="subj"><span class="subj-warn">DSCR 1.18 below firm threshold (1.25).</span> Want me to rerun with conservative rent + exit cap?</div>
         <div class="time">12m</div>
@@ -841,7 +841,7 @@
         <div class="status"><span class="check">✓</span></div>
         <div class="sender">
           <div class="sender-name">Atlanta Retail · comp set expanded</div>
-          <div class="sender-tag">Comp set updated</div>
+          <div class="sender-tag">Collecting real numbers · 3 of 5</div>
         </div>
         <div class="subj">Radius 2→5mi · 7 fresh comps. Your ask cap (6.8%) sits at market median. IC memo updated.</div>
         <div class="time">25m</div>
@@ -852,7 +852,7 @@
         <div class="status"><span class="dotlight"></span></div>
         <div class="sender">
           <div class="sender-name">Dallas Industrial · 410K SF</div>
-          <div class="sender-tag">IC memo drafted</div>
+          <div class="sender-tag">Delivered</div>
         </div>
         <div class="subj"><span class="subj-lead">12 pages · exec summary · key risks · sensitivity table.</span> Ready for your review.</div>
         <div class="time">28m</div>
@@ -863,7 +863,7 @@
         <div class="status"><span class="dotlight"></span></div>
         <div class="sender">
           <div class="sender-name">Phoenix MSA · 4 fresh comps</div>
-          <div class="sender-tag">Comp insight</div>
+          <div class="sender-tag">Re-underwriting · 4 of 5</div>
         </div>
         <div class="subj"><span class="subj-lead">Your in-place cap 5.25% is 30bps tight vs market median.</span> Re-ran Phoenix MF — IRR drops to 17.6% at 5.55% exit. <span class="subj-action">View comps?</span></div>
         <div class="time">1h</div>
@@ -874,7 +874,7 @@
         <div class="status"><span class="flag-mark">⚑</span></div>
         <div class="sender">
           <div class="sender-name">Chicago Office · class A</div>
-          <div class="sender-tag">Worth a look</div>
+          <div class="sender-tag">Waiting on you</div>
         </div>
         <div class="subj"><span class="subj-warn">Submarket absorption declining 4 quarters.</span> Pulled fresh comps. View context?</div>
         <div class="time">2h</div>
@@ -885,7 +885,7 @@
         <div class="status"><span class="dotlight"></span></div>
         <div class="sender">
           <div class="sender-name">Denver MF · 220u</div>
-          <div class="sender-tag">IC memo drafted</div>
+          <div class="sender-tag">Delivered</div>
         </div>
         <div class="subj"><span class="subj-lead">9 pages.</span> Ready for IC Thursday.</div>
         <div class="time">3h</div>
@@ -896,7 +896,7 @@
         <div class="status"><span class="star">★</span></div>
         <div class="sender">
           <div class="sender-name">Boise Industrial · 280K SF</div>
-          <div class="sender-tag">Sourced for you</div>
+          <div class="sender-tag">✉ Detected in your inbox</div>
         </div>
         <div class="subj">$48M · pre-listing · 6.2% in-place cap. Want me to underwrite?</div>
         <div class="time">5h</div>
@@ -907,7 +907,7 @@
         <div class="status"><span class="check">✓</span></div>
         <div class="sender">
           <div class="sender-name">Houston Industrial · closed</div>
-          <div class="sender-tag">Post-close update</div>
+          <div class="sender-tag">Delivered</div>
         </div>
         <div class="subj">Final IRR 17.8% (vs 16.9% underwritten). Performance tracker updated.</div>
         <div class="time">yesterday</div>
@@ -1013,10 +1013,10 @@
   <div class="footer-strip">
     <div class="stats">
       <span><strong>12</strong> active deals</span>
-      <span><strong>$487M</strong> pipeline</span>
-      <span><strong>16.8%</strong> wtd IRR</span>
+      <span><strong>5</strong> need your action</span>
+      <span><strong>4</strong> from your inbox</span>
     </div>
-    <div class="always-on">Underwriting agent · always on</div>
+    <div class="always-on">teez · watching your inbox</div>
   </div>
 
 </div>
@@ -1054,7 +1054,7 @@
     });
 
     // CartoDB Dark Matter — free, dark theme that matches the schematic
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       subdomains: 'abcd',
     }).addTo(map);

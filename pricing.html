@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1ENM84PQE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F1ENM84PQE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teez &mdash; Pricing</title>
+  <meta name="description" content="Start in your Excel with the self-serve add-in. Add Deep Underwriting — done-for-you, priced per deal — on the deals that matter." />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- app chrome -->
+<div class="app">
+  <div class="app-top">
+    <div class="app-id">
+      <img src="images/teez-icon.png" alt="Teez">
+      <span class="nm">Teez</span>
+      <span class="file">teez — pricing.xlsx</span>
+    </div>
+    <nav class="app-nav">
+      <a href="/">For Investors</a>
+      <a href="/brokers.html">For Brokers</a>
+      <a href="/vision.html">Vision</a>
+      <a href="/pricing.html" class="act">Pricing</a>
+    </nav>
+    <div class="app-right">
+      <a href="https://app.teez.live/login" class="login">Log in</a>
+      <a href="#book" class="book">Book a call</a>
+    </div>
+  </div>
+  <div class="fxbar">
+    <div class="fx-name"><span class="nb">B2</span><span>fx</span></div>
+    <div class="fx-val"><span id="fx" data-formula='=PRICING(self_serve, deep_uw)'></span><span class="caret" id="caret"></span></div>
+  </div>
+</div>
+
+<!-- column header -->
+<div class="colhead">
+  <div class="corner"><i></i></div>
+  <div class="cols"><span>A</span><span class="act">B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
+</div>
+
+<div class="sheet">
+  <div class="gutter" id="gutter" data-act="2"></div>
+  <div class="canvas">
+    <div class="colguides" aria-hidden="true"><div class="inner"><span></span><span class="act"></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+    <!-- PRICING -->
+    <section class="sec" id="pricing">
+      <div class="wrap">
+        <div class="range"><span class="tab">A1</span><span class="nm">Pricing</span></div>
+        <h2>Start in your Excel.<br>Add the team when you need it.</h2>
+        <p class="lead" style="margin:14px 0 4px;max-width:56ch">The add-in is the product. Deep Underwriting is the add-on you reach for on the deals that matter.</p>
+        <div class="pricing-grid">
+          <div class="ptrack">
+            <span class="ptag">The product · self-serve</span>
+            <h3>teez in your Excel</h3>
+            <p class="psub">Run the underwriting agent yourself, inside your own template.</p>
+            <p class="pp"><b>Start free</b></p>
+            <p class="ph">plans scale with your team</p>
+            <ul class="plist">
+              <li>The teez add-in in your Excel</li>
+              <li>Fills your template, keeps your formulas</li>
+              <li>Every number sourced &amp; verified</li>
+              <li>As many deals as you can run</li>
+            </ul>
+            <a href="https://app.teez.live/login" class="pbtn">Start free</a>
+          </div>
+          <div class="ptrack feat">
+            <span class="ptag">Deep Underwriting · add-on</span>
+            <h3>We finish the deal</h3>
+            <p class="psub">On the deals worth it, we collect the real numbers and re-underwrite — done for you.</p>
+            <p class="pp">Per deal · <b>talk to us</b></p>
+            <p class="ph">priced to the deal, not a seat</p>
+            <ul class="plist">
+              <li>Real numbers from broker, PM, lender, insurance &amp; tax</li>
+              <li>Re-underwritten against your return hurdle</li>
+              <li>Before / after vs your first pass</li>
+              <li>A model — or a full IC memo</li>
+            </ul>
+            <a href="#book" class="pbtn fill">Talk to us →</a>
+          </div>
+        </div>
+        <p class="pnote">// Self-serve plans scale with your team. Deep Underwriting is priced per deal — let's talk.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sec cta" id="book">
+      <div class="wrap">
+        <div class="range"><span class="tab">B10</span><span class="nm">Talk to us</span></div>
+        <h2>Not sure which you need?<br>Bring a deal — we'll <span class="g">show you.</span></h2>
+        <p class="lede">We'll run the agent on one of your real deals, in front of you, in 20 minutes.</p>
+        <p class="terms"><b>20 minutes.</b> No slide deck, no commitment. You keep the model regardless.</p>
+        <div class="entry">
+          <div class="entry-head"><span>A1</span><span style="flex:1">enter your details, press ⏎</span></div>
+          <form class="bookform" id="book-form" data-source="pricing-cta" novalidate>
+            <div class="row"><span class="k">email *</span><input type="email" id="book-email" name="email" placeholder="your@email.com" required autocomplete="email"></div>
+            <div class="row"><span class="k">name</span><input type="text" id="book-name" name="name" placeholder="optional" autocomplete="name"></div>
+            <div class="row"><span class="k">deal</span><input type="text" id="book-message" name="message" placeholder="what are you underwriting? (optional)" maxlength="200"></div>
+            <div class="submit-row"><button type="submit" id="book-submit">Book 20 minutes <span class="ent">⏎ Enter</span></button></div>
+          </form>
+        </div>
+        <p class="status" id="book-status" role="status" aria-live="polite"></p>
+        <p class="fallback">Or email <a href="mailto:hello@teez.live">hello@teez.live</a></p>
+      </div>
+    </section>
+
+  </div><!-- /canvas -->
+</div><!-- /sheet -->
+
+<!-- footer = sheet tabs (page nav) + status bar -->
+<div class="tabsbar">
+  <a class="tb" href="/">For Investors</a>
+  <a class="tb" href="/#service">Service</a>
+  <a class="tb" href="/vision.html">Vision</a>
+  <a class="tb" href="/brokers.html">For Brokers</a>
+  <a class="tb act" href="/pricing.html">Pricing</a>
+  <a class="tb" href="https://app.teez.live/login">Log in</a>
+  <a class="tb" href="mailto:hello@teez.live">hello@teez.live</a>
+  <span class="tb add">+</span>
+</div>
+<div class="statusbar">
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — start free, add the team per deal</span></div>
+  <div class="l"><span>© 2026 Teez</span><span>100%</span></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

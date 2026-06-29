@@ -6,19 +6,19 @@
 <title>Teez — Product Schematic</title>
 <style>
   :root {
-    --bg: #0c1117;
-    --bg-card: #141b23;
-    --bg-section-alt: #0f161d;
-    --bg-deeper: #080c11;
-    --green: #4ade80;
-    --green-dim: #22c55e;
-    --green-glow: rgba(74, 222, 128, 0.18);
-    --text: #e2e8f0;
-    --text-dim: #94a3b8;
-    --text-muted: #64748b;
-    --border: #1e293b;
-    --cyan: #22d3ee;
-    --pink: #f472b6;
+    --bg: #ffffff;
+    --bg-card: #ffffff;
+    --bg-section-alt: #F6F7F8;
+    --bg-deeper: #F1F3F5;
+    --green: #107C41;
+    --green-dim: #0E6B38;
+    --green-glow: rgba(16, 124, 65, 0.12);
+    --text: #1F2329;
+    --text-dim: #5B6168;
+    --text-muted: #8A8F96;
+    --border: #E1E4E8;
+    --cyan: #0E7490;
+    --pink: #BE185D;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,7 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 12px;
     color: var(--text);
   }
 
@@ -41,7 +41,7 @@
     border-radius: 14px;
     overflow: hidden;
     background: var(--bg-card);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px var(--green-glow);
+    box-shadow: 0 24px 60px -22px rgba(31, 35, 41, 0.20), 0 0 0 1px var(--border);
     position: relative;
   }
 
@@ -52,7 +52,7 @@
     background: var(--bg-deeper);
     border-bottom: 1px solid var(--border);
   }
-  .dot { width: 11px; height: 11px; border-radius: 50%; background: #2a3340; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #D3D6DA; }
   .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
   .chrome-title { margin-left: 14px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
 
@@ -124,9 +124,9 @@
   .scan-overlay {
     background: linear-gradient(180deg,
       transparent 0%,
-      rgba(74, 222, 128, 0.08) 48%,
-      rgba(74, 222, 128, 0.22) 50%,
-      rgba(74, 222, 128, 0.08) 52%,
+      rgba(16, 124, 65, 0.08) 48%,
+      rgba(16, 124, 65, 0.22) 50%,
+      rgba(16, 124, 65, 0.08) 52%,
       transparent 100%);
     animation: scanSweep 12s infinite;
   }
@@ -258,7 +258,7 @@
     width: 26px; height: 26px; border-radius: 50%;
     background: linear-gradient(135deg, var(--green-dim), var(--green));
     display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700; color: #0c1117;
+    font-size: 12px; font-weight: 700; color: #ffffff;
     box-shadow: 0 0 16px var(--green-glow);
   }
   .header-name {
@@ -278,9 +278,9 @@
     animation: ping 2s infinite;
   }
   @keyframes ping {
-    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-    70% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(16, 124, 65, 0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(16, 124, 65, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 124, 65, 0); }
   }
 
   .messages {
@@ -309,7 +309,7 @@
 
   .msg.user {
     background: var(--green);
-    color: #0c1117;
+    color: #ffffff;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
     font-weight: 500;

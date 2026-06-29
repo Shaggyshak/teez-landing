@@ -7,302 +7,243 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-F1ENM84PQE');
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teez &mdash; AI-Native Underwriting for Real Estate Sponsors</title>
-  <meta name="description" content="An AI underwriting agent that lives inside your Excel. Built for sub-scale sponsors, family offices, and emerging GPs." />
+  <title>Teez &mdash; Acquisitions-as-a-Service for sub-scale CRE sponsors</title>
+  <meta name="description" content="Hand us a live deal. We underwrite it in your own Excel template — every number sourced, checked, ready for IC. Done-for-you underwriting for sub-scale sponsors, family offices, and emerging GPs." />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="nav-brand">
-        <img src="images/teez-icon.png" alt="Teez" class="nav-logo" />
-        <span class="nav-brand-name">Teez</span>
-      </a>
-      <div class="nav-links">
-        <a href="/" aria-current="page">Product</a>
-        <a href="/vision.html">Vision</a>
-        <a href="/brokers.html">For Brokers</a>
-      </div>
-      <div class="nav-cta">
-        <a href="https://app.teez.live/login" class="btn btn-ghost btn-sm nav-login">Log in</a>
-        <a href="#book-a-call" class="btn btn-primary btn-sm nav-primary">Book a call</a>
-      </div>
-      <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+<!-- app chrome -->
+<div class="app">
+  <div class="app-top">
+    <div class="app-id">
+      <img src="images/teez-icon.png" alt="Teez">
+      <span class="nm">Teez</span>
+      <span class="file">Maple Court — 84 units.xlsx</span>
     </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero-glow"></div>
-    <div class="container hero-content">
-      <div class="badge hero-anim" style="--d: 0s">For sub-scale CRE sponsors</div>
-      <h1 class="hero-anim" style="--d: 0.1s">From Spreadsheets to<br><span class="text-green">Instant Intelligence</span></h1>
-      <p class="hero-sub hero-anim" style="--d: 0.2s">An AI underwriting agent that lives inside your Excel. Built for sub-scale sponsors, family offices, and emerging GPs.</p>
-      <p class="hero-sub-concrete hero-anim" style="--d: 0.3s">Drop in your deal docs. Get a full pro forma in your existing template&mdash;<span class="text-green">minutes, not hours.</span></p>
-      <div class="hero-actions hero-anim" style="--d: 0.4s">
-        <a href="#book-a-call" class="btn btn-primary">Book a call</a>
-        <a href="#how-it-works" class="btn btn-outline">See how it works</a>
-      </div>
-      <div class="hero-stats hero-anim" style="--d: 0.5s">
-        <div class="hero-stat">
-          <span class="hero-stat-value">Excel-native</span>
-          <span class="hero-stat-label">Inside the sheet you already use</span>
-        </div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">Multi-asset</span>
-          <span class="hero-stat-label">MF, industrial, retail, mixed-use</span>
-        </div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat">
-          <span class="hero-stat-value">Live formulas</span>
-          <span class="hero-stat-label">Change an input&mdash;returns recalc</span>
-        </div>
-      </div>
+    <nav class="app-nav">
+      <a href="/" class="act">For Investors</a>
+      <a href="/brokers.html">For Brokers</a>
+      <a href="/vision.html">Vision</a>
+      <a href="/pricing.html">Pricing</a>
+    </nav>
+    <div class="app-right">
+      <a href="https://app.teez.live/login" class="login">Log in</a>
+      <a href="#book" class="book">Book a call</a>
     </div>
-  </section>
+  </div>
+  <div class="fxbar">
+    <div class="fx-name"><span class="nb">B4</span><span>fx</span></div>
+    <div class="fx-val"><span id="fx" data-formula='=UNDERWRITE("Maple Court.pdf")'></span><span class="caret" id="caret"></span></div>
+  </div>
+</div>
 
-  <!-- Connect -->
-  <section class="section" id="connect">
-    <div class="container">
-      <div class="connect-inner">
-        <h2>IC is Monday and the model isn't done.</h2>
-        <p class="connect-body">
-          Three OMs landed in your inbox over the weekend. The template from last quarter still has broken links from when you patched the rent-roll tab. A broker called Wednesday wanting a number you didn't have. The deal you passed on last month is the one your competitor just closed. Excel didn't get you here. Hand-rolling models won't get you out.
-        </p>
-      </div>
-    </div>
-  </section>
+<!-- column header -->
+<div class="colhead">
+  <div class="corner"><i></i></div>
+  <div class="cols"><span>A</span><span class="act">B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
+</div>
 
-  <!-- Inspire -->
-  <section class="section section-dark" id="demo">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge">Your week with teez</div>
-        <h2>Monday, 9:01 AM.</h2>
-        <p class="section-sub">
-          Three new OMs came in over the weekend. The agent's already triaged them, drafted models in your template for the two worth a real look, pulled comps, and flagged a rent-roll inconsistency on the third. You're on the phone with the broker by 10. By Friday you've underwritten more deals than you used to look at in a month.
-        </p>
-      </div>
-      <div class="demo-frame">
-        <iframe src="mockups/agent-inbox.html" title="Teez acquisitions inbox demo" loading="lazy"></iframe>
-      </div>
-      <p class="inspire-closer">Same templates. Same data. Same you. <span class="text-green">Different week.</span></p>
-    </div>
-  </section>
+<div class="sheet">
+  <div class="gutter" id="gutter" data-act="4,5,6,7,8"></div>
+  <div class="canvas">
+    <div class="colguides" aria-hidden="true"><div class="inner"><span></span><span class="act"></span><span></span><span></span><span></span><span></span><span></span></div></div>
 
-  <!-- Guide -->
-  <section class="section" id="how-it-works">
-    <div class="container">
-      <div class="section-header">
-        <div class="badge">How it actually works</div>
-        <h2>Lives in your Excel. Never overwrites your formulas.</h2>
-        <p class="section-sub">Keep your templates <span class="text-green">(BYOS)</span>. Keep your data in your tenant <span class="text-green">(BYOD)</span>. The agent lives inside Excel and Google Sheets&mdash;no migration, no new software, no tenant changes.</p>
-      </div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">01</div>
-          <h3>Parse your documents</h3>
-          <p>Drop in your deal docs. The agent reads them in parallel and pulls live market context from public data.</p>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="wrap hero-top">
+        <div>
+          <div class="range"><span class="tab">A1</span><span class="nm">For sub-scale CRE sponsors, family offices &amp; emerging GPs</span></div>
+          <h1>From your first pass to the <span class="g">final number.</span></h1>
+          <p class="hero-sub">Underwrite it yourself in Excel in minutes — sourced, in your own template. Then, on the deals worth it, hand it to us: we collect the <em>real</em> numbers from broker, PM, lender, insurance &amp; tax and re-underwrite against your hurdle.</p>
+          <div class="hero-cta">
+            <a href="https://app.teez.live/login" class="btn-fill">Start underwriting</a>
+            <a href="#service" class="btn-cell">See the service</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hstat"><b>Excel-native</b><span>your sheet, your tenant</span></div>
+            <div class="hstat"><b>Multi-asset</b><span>MF · industrial · retail</span></div>
+            <div class="hstat"><b>Sourced</b><span>every number cites its doc</span></div>
+          </div>
         </div>
-        <div class="step">
-          <div class="step-number">02</div>
-          <h3>Fill your template</h3>
-          <p>Bring your firm's existing Excel model. The agent scans it, fills the right input cells, and never overwrites your formulas.</p>
-        </div>
-        <div class="step">
-          <div class="step-number">03</div>
-          <h3>Verified output</h3>
-          <p>A separate verifier checks cap rate, DSCR, and cross-doc consistency&mdash;then flags anything worth a second look before IC.</p>
+
+        <div class="mini" id="mini" aria-label="Live worksheet">
+          <div class="mini-bar"><span>Summary · B2:D8</span><span>auto-calc on</span></div>
+          <div class="mini-grid">
+            <div class="mc ch"></div><div class="mc ch">Line</div><div class="mc ch">T-12</div><div class="mc ch">Year 1</div>
+            <div class="mc rh">4</div><div class="mc lbl">Gross rent</div><div class="mc num">1,242,000</div><div class="mc num empty" data-v="1,311,300">—</div>
+            <div class="mc rh">5</div><div class="mc lbl">Vacancy</div><div class="mc num neg">(62,100)</div><div class="mc num neg empty" data-v="(59,008)">—</div>
+            <div class="mc rh">6</div><div class="mc lbl">Other income</div><div class="mc num">48,400</div><div class="mc num empty" data-v="52,900">—</div>
+            <div class="mc rh">7</div><div class="mc lbl">Operating exp.</div><div class="mc num neg">(431,500)</div><div class="mc num neg empty" data-v="(444,445)">—</div>
+            <div class="mc rh">8</div><div class="mc lbl sum">NOI</div><div class="mc num sum">796,800</div><div class="mc num sum sel empty" id="noi" data-v="860,747">—</div>
+          </div>
+          <div class="mini-foot"><span>Cap 6.20% · DSCR 1.41×</span><span class="live">teez filling…</span></div>
         </div>
       </div>
+      <div class="wrap"><p class="hero-note">↑ your first pass — filled in your own template, every number sourced.</p></div>
+    </header>
 
-      <div class="demo-frame">
-        <iframe src="mockups/excel-pane-demo.html" title="Teez agent at work in Excel" loading="lazy"></iframe>
+    <!-- PROBLEM -->
+    <section class="sec prose" id="problem">
+      <div class="wrap">
+        <div class="range"><span class="tab">B11</span><span class="nm">The Monday problem</span></div>
+        <h2>IC is Monday and the<br>model isn't done.</h2>
+        <p>Three OMs landed in your inbox over the weekend. Last quarter's template still has broken links from when you patched the rent-roll tab. A broker called Wednesday wanting a number you didn't have. The deal you passed on last month is the one your competitor just closed. <b>Excel didn't get you here. Hand-rolling models won't get you out.</b></p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Persuade -->
-  <section class="section section-cta" id="book-a-call">
-    <div class="container">
-      <div class="persuade-content">
-        <div class="badge">See it on your deal</div>
-        <h2>What a Friday IC looks like with the agent in the loop.</h2>
-        <p class="persuade-walkthrough">
-          An underwriter at a sub-scale sponsor has three OMs to clear before Friday's IC. She drops them into the agent. By the end of the morning, two have models drafted in her template, the agent has flagged a unit-mix discrepancy on the third, and she's on a call with the broker. The deal she'd have triaged last is the one she actually pursues.
-        </p>
-        <div class="pilot-terms">
-          <p><strong>20 minutes.</strong> We'll run the agent on one of your live deals in front of you. You leave with the model, regardless. No commitment, no slide deck.</p>
+    <!-- INSPIRE -->
+    <section class="sec" id="demo">
+      <div class="wrap">
+        <div class="range"><span class="tab">B14</span><span class="nm">Your week with teez</span></div>
+        <h2 style="margin-bottom:16px">Monday, 9:01 AM.</h2>
+        <p class="lead" style="max-width:70ch">Three new OMs came in over the weekend. By 9 we've triaged them, drafted models in your template for the two worth a real look, pulled comps, and flagged a rent-roll inconsistency on the third. You're on the phone with the broker by 10. By Friday you've underwritten more deals than you used to look at in a month.</p>
+        <p class="closer">Same templates. Same data. Same you. <span class="g">Different week.</span></p>
+        <iframe class="demo-embed" src="mockups/agent-inbox.html" title="Teez acquisitions inbox — live demo" height="520" loading="lazy"></iframe>
+        <div class="win demo-fallback" aria-label="Acquisitions inbox">
+          <div class="win-bar"><i></i><i></i><i></i><span class="t">Acquisitions — weekend inbox</span></div>
+          <div class="inbox">
+            <div class="ibrow"><div class="av">MC</div><div class="meta"><b>Maple Court — 84 units</b><span>OM · rent roll · T-12</span></div><span class="pill ok">model drafted ✓</span></div>
+            <div class="ibrow"><div class="av">RF</div><div class="meta"><b>Riverside Flats — 120 units</b><span>OM · rent roll · T-12</span></div><span class="pill ok">model drafted ✓</span></div>
+            <div class="ibrow"><div class="av">OT</div><div class="meta"><b>Oak Terrace — 60 units</b><span>rent-roll mismatch on unit mix</span></div><span class="pill flag">flagged !</span></div>
+          </div>
+          <div class="win-foot"><span>3 deals · 1 needs you</span><span class="done">triaged 9:01 AM</span></div>
         </div>
-        <form id="book-form" class="book-form" novalidate>
-          <input type="email" name="email" id="book-email" placeholder="your@email.com" required autocomplete="email" />
-          <input type="text" name="name" id="book-name" placeholder="Name (optional)" autocomplete="name" />
-          <input type="text" name="message" id="book-message" placeholder="What are you underwriting? (optional)" maxlength="200" />
-          <button type="submit" class="btn btn-primary btn-lg" id="book-submit">Book 20 minutes &rarr;</button>
-        </form>
-        <p class="book-status" id="book-status" role="status" aria-live="polite"></p>
-        <p class="book-fallback">Or email <a href="mailto:hello@teez.live?subject=Book%2020%20minutes">hello@teez.live</a></p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="images/teez-icon.png" alt="Teez" class="footer-logo" />
-        <span class="footer-brand-name">Teez</span>
-        <p>The underwriting agent for Excel.</p>
+    <!-- HOW -->
+    <section class="sec" id="how">
+      <div class="wrap">
+        <div class="range"><span class="tab">B18</span><span class="nm">The product · self-serve</span></div>
+        <h2>Underwrite it yourself,<br>right in your <span class="g">Excel.</span></h2>
+        <p class="lead" style="margin:14px 0 0;max-width:60ch">The teez add-in lives in your firm's existing model — <span class="g">never</span> overwriting a formula you wrote. Drop in the docs; it fills your template and sources every number. Your sheet, your data, your tenant.</p>
+        <div class="byo">
+          <span class="chip">BYOS · your spreadsheet</span>
+          <span class="chip">BYOD · your data, your tenant</span>
+          <span class="chip">No migration</span>
+        </div>
+        <iframe class="demo-embed" src="mockups/excel-pane-demo.html" title="Teez agent building a pro forma in your Excel — live demo" height="640" loading="lazy"></iframe>
+        <div class="win demo-fallback" id="feedwin" aria-label="Agent at work">
+          <div class="win-bar"><i></i><i></i><i></i><span class="t">teez · task pane — Maple Court</span></div>
+          <div class="feed" id="feed">
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">Parsed <b>OM</b>, rent roll, T-12</span><span class="rt">3 docs</span></div>
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">Pulled <b>market comps</b></span><span class="rt">live</span></div>
+            <div class="fl"><span class="ic work">→</span><span class="tx">Filling <b>your template</b></span><span class="rt">142 cells</span></div>
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">NOI verified vs T-12</span><span class="rt">$796,800</span></div>
+            <div class="fl"><span class="ic flag">!</span><span class="tx">Flagged <b>unit-mix mismatch</b></span><span class="rt">review</span></div>
+          </div>
+          <div class="win-foot"><span>Cap 6.20% · DSCR 1.41×</span><span class="done">model ready · 4m 12s</span></div>
+        </div>
+        <div class="cols3" style="margin-top:30px">
+          <div class="card3"><span class="ey">step · =B19</span><div class="formula"><span class="fn">=PARSE</span>(om, rent_roll, t12)</div><h3>Drop in the docs</h3><p>Drop the OM, rent roll, and T-12 into the pane. The agent reads them in parallel and pulls live market context from public data.</p></div>
+          <div class="card3"><span class="ey">step · =C19</span><div class="formula"><span class="fn">=FILL</span>(your_template)</div><h3>It fills your template</h3><p>The agent scans your model, writes values into the right input cells, and never touches a formula you wrote.</p></div>
+          <div class="card3"><span class="ey">step · =D19</span><div class="formula"><span class="fn">=VERIFY</span>(cap, dscr)</div><h3>It verifies, then flags</h3><p>A separate pass checks cap rate, DSCR, and cross-doc consistency — then flags anything worth a second look.</p></div>
+        </div>
       </div>
-      <div class="footer-links">
-        <a href="mailto:hello@teez.live">hello@teez.live</a>
-        <span class="footer-divider" aria-hidden="true">&middot;</span>
-        <a href="/vision.html">Vision &amp; roadmap</a>
-        <span class="footer-divider" aria-hidden="true">&middot;</span>
-        <a href="https://app.teez.live/login">Log in</a>
+    </section>
+
+    <!-- DEEP UNDERWRITING — the done-for-you add-on -->
+    <section class="sec" id="service">
+      <div class="wrap">
+        <div class="range"><span class="tab">B24</span><span class="nm">Deep Underwriting · the done-for-you add-on</span></div>
+        <h2>Your first pass runs on assumptions.<br>We finish it with the <span class="g">real numbers.</span></h2>
+        <p class="lead" style="margin:14px 0 0;max-width:66ch">When a deal clears your first pass, hand it to us. We collect the real numbers from the five people who actually have them, then re-underwrite against your return hurdle and send back a before/after — <span class="g">in your own template.</span></p>
+        <div class="two-grid top" style="margin-top:30px">
+          <div class="win" aria-label="Deep underwriting tracker">
+            <div class="win-bar"><i></i><i></i><i></i><span class="t">Deep Underwriting · Maple Court</span></div>
+            <div class="inbox">
+              <div class="ibrow"><div class="av">BR</div><div class="meta"><b>Broker / seller</b><span>actual rents, concessions, capex</span></div><span class="pill ok">received ✓</span></div>
+              <div class="ibrow"><div class="av">PM</div><div class="meta"><b>Property manager</b><span>real T-12, payroll, turnover</span></div><span class="pill ok">received ✓</span></div>
+              <div class="ibrow"><div class="av">LN</div><div class="meta"><b>Lender</b><span>quoted rate, terms, DSCR test</span></div><span class="pill ok">received ✓</span></div>
+              <div class="ibrow"><div class="av">IN</div><div class="meta"><b>Insurance broker</b><span>bound premium on this asset</span></div><span class="pill flag">collecting…</span></div>
+              <div class="ibrow"><div class="av">TX</div><div class="meta"><b>Tax assessor</b><span>reassessment at the sale price</span></div><span class="pill ok">received ✓</span></div>
+            </div>
+            <div class="win-foot"><span>4 of 5 inputs in</span><span class="done">re-underwriting</span></div>
+          </div>
+          <div>
+            <div class="stages">
+              <span class="stg done">Requested</span><span class="stg done">Collecting</span><span class="stg now">Re-underwriting</span><span class="stg">Delivered</span>
+            </div>
+            <div class="mini" style="margin-top:18px" aria-label="Before and after">
+              <div class="mini-bar"><span>Before / after · your hurdle 15% IRR</span><span>real vs assumed</span></div>
+              <div class="mini-grid" style="grid-template-columns:1.5fr 1fr 1fr">
+                <div class="mc ch">Line</div><div class="mc ch">Assumed</div><div class="mc ch">Real</div>
+                <div class="mc lbl">Insurance</div><div class="mc num">(52,000)</div><div class="mc num neg">(71,500)</div>
+                <div class="mc lbl">Taxes (reassessed)</div><div class="mc num">(96,000)</div><div class="mc num neg">(118,400)</div>
+                <div class="mc lbl">NOI</div><div class="mc num">796,800</div><div class="mc num">754,900</div>
+                <div class="mc lbl sum">Year-1 IRR</div><div class="mc num sum">16.2%</div><div class="mc num sum neg">13.6%</div>
+              </div>
+              <div class="mini-foot"><span>real numbers moved IRR −2.6 pts</span><span class="live">before you close</span></div>
+            </div>
+            <p class="footnote" style="margin-top:16px">Delivered as a re-underwritten model — or a full IC memo. You warm-intro your broker &amp; PM; we handle lender, insurance &amp; tax.</p>
+          </div>
+        </div>
       </div>
-      <div class="footer-copy">&copy; 2026 Teez. All rights reserved.</div>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    // ── Mobile nav toggle ──
-    const toggle = document.querySelector('.mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    toggle.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      toggle.classList.toggle('active');
-      toggle.setAttribute('aria-expanded', navLinks.classList.contains('open').toString());
-    });
+    <!-- WALKTHROUGH -->
+    <section class="sec" id="walk">
+      <div class="wrap">
+        <div class="range"><span class="tab">B24</span><span class="nm">A Friday IC, with the agent in the loop</span></div>
+        <div class="walk">
+          <span class="q">“</span>
+          <div>
+            <p>An underwriter at a sub-scale sponsor has three OMs to clear before Friday's IC. She sends them over. By the end of the morning, two have models drafted in her template, we've flagged a unit-mix discrepancy on the third, and she's on a call with the broker. The deal she'd have triaged last is the one she actually pursues.</p>
+            <p class="by">— what a week looks like once underwriting isn't the bottleneck</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    // ── Smooth scroll ──
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          navLinks.classList.remove('open');
-          toggle.classList.remove('active');
-          toggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    });
+    <!-- CTA -->
+    <section class="sec cta" id="book">
+      <div class="wrap">
+        <div class="range"><span class="tab">B36</span><span class="nm">See it on your deal</span></div>
+        <h2>Bring a live deal.<br>Leave with the <span class="g">model.</span></h2>
+        <p class="lede">We'll run the agent on one of your real deals, in front of you, in 20 minutes.</p>
+        <p class="terms"><b>20 minutes.</b> No slide deck, no commitment. You keep the model regardless.</p>
+        <div class="entry">
+          <div class="entry-head"><span>A1</span><span style="flex:1">enter your details, press ⏎</span></div>
+          <form class="bookform" id="book-form" data-source="landing-sheet" novalidate>
+            <div class="row"><span class="k">email *</span><input type="email" id="book-email" name="email" placeholder="your@email.com" required autocomplete="email"></div>
+            <div class="row"><span class="k">name</span><input type="text" id="book-name" name="name" placeholder="optional" autocomplete="name"></div>
+            <div class="row"><span class="k">deal</span><input type="text" id="book-message" name="message" placeholder="what are you underwriting? (optional)" maxlength="200"></div>
+            <div class="submit-row"><button type="submit" id="book-submit">Book 20 minutes <span class="ent">⏎ Enter</span></button></div>
+          </form>
+        </div>
+        <p class="status" id="book-status" role="status" aria-live="polite"></p>
+        <p class="fallback">Or email <a href="mailto:hello@teez.live">hello@teez.live</a></p>
+      </div>
+    </section>
 
-    // ── Nav background on scroll ──
-    const nav = document.querySelector('.nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+  </div><!-- /canvas -->
+</div><!-- /sheet -->
 
-    // ── Fade-in on scroll, with sibling stagger ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.card, .step, .timeline-item, .market-card, .metric, .demo-frame').forEach((el) => {
-      el.classList.add('fade-in');
-      const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('fade-in') || c === el);
-      const i = siblings.indexOf(el);
-      if (i > -1) el.style.setProperty('--stagger', `${i * 0.08}s`);
-      observer.observe(el);
-    });
+<!-- footer = sheet tabs (page nav) + status bar -->
+<div class="tabsbar">
+  <a class="tb act" href="/">For Investors</a>
+  <a class="tb" href="#service">Service</a>
+  <a class="tb" href="/vision.html">Vision</a>
+  <a class="tb" href="/brokers.html">For Brokers</a>
+  <a class="tb" href="/pricing.html">Pricing</a>
+  <a class="tb" href="https://app.teez.live/login">Log in</a>
+  <a class="tb" href="mailto:hello@teez.live">hello@teez.live</a>
+  <span class="tb add">+</span>
+</div>
+<div class="statusbar">
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — done-for-you underwriting for Excel</span></div>
+  <div class="l"><span>© 2026 Teez</span><span>100%</span></div>
+</div>
 
-    // ── Mouse parallax on hero glow (subtle) ──
-    const heroGlow = document.querySelector('.hero-glow');
-    const hero = document.querySelector('.hero');
-    if (heroGlow && hero && window.matchMedia('(hover: hover)').matches) {
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        heroGlow.style.transform = `translate(calc(-50% + ${x * 40}px), ${y * 30}px)`;
-      });
-      hero.addEventListener('mouseleave', () => {
-        heroGlow.style.transform = '';
-      });
-    }
-
-    // ── Book-a-call form (submits to Supabase landing_leads via REST) ──
-    const bookForm = document.getElementById('book-form');
-    if (bookForm) {
-      const SUPABASE_URL = 'https://gclrtcheaojuoyvvhuuq.supabase.co';
-      const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjbHJ0Y2hlYW9qdW95dnZodXVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM3NjU0MDIsImV4cCI6MjA4OTM0MTQwMn0.Jgk_91tCcCLoLQhUYCG4lWFmpbbn__HoH2W5TC-RXAg';
-
-      const bookEmail = document.getElementById('book-email');
-      const bookName = document.getElementById('book-name');
-      const bookMessage = document.getElementById('book-message');
-      const bookSubmit = document.getElementById('book-submit');
-      const bookStatus = document.getElementById('book-status');
-      const originalLabel = bookSubmit.innerHTML;
-
-      bookForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = bookEmail.value.trim();
-        const name = bookName.value.trim();
-        const message = bookMessage.value.trim();
-
-        if (!email || !bookEmail.checkValidity()) {
-          bookStatus.textContent = 'Please enter a valid email.';
-          bookStatus.className = 'book-status error';
-          return;
-        }
-
-        bookSubmit.disabled = true;
-        bookSubmit.textContent = 'Submitting…';
-        bookStatus.textContent = '';
-        bookStatus.className = 'book-status';
-
-        try {
-          const res = await fetch(`${SUPABASE_URL}/rest/v1/landing_leads`, {
-            method: 'POST',
-            headers: {
-              'apikey': SUPABASE_ANON,
-              'Authorization': `Bearer ${SUPABASE_ANON}`,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=minimal'
-            },
-            body: JSON.stringify({
-              email,
-              name: name || null,
-              message: message || null,
-              source: 'landing-cta'
-            })
-          });
-          if (res.ok) {
-            bookStatus.textContent = "Got it — we'll be in touch within a day.";
-            bookStatus.className = 'book-status success';
-            bookForm.reset();
-          } else {
-            const data = await res.json().catch(() => ({}));
-            bookStatus.textContent = (data && data.message) || 'Something went wrong. Email hello@teez.live instead.';
-            bookStatus.className = 'book-status error';
-          }
-        } catch (err) {
-          bookStatus.textContent = 'Network issue. Email hello@teez.live instead.';
-          bookStatus.className = 'book-status error';
-        } finally {
-          bookSubmit.innerHTML = originalLabel;
-          bookSubmit.disabled = false;
-        }
-      });
-    }
-  </script>
+<script src="app.js"></script>
 </body>
 </html>
