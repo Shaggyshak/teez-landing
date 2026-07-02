@@ -63,8 +63,9 @@
     47%,96% { border-color: color-mix(in srgb, var(--sc) 40%, var(--border)); }
     100%    { border-color: var(--border); }
   }
-  .srcCoStar { left: 35.1%; top: 12.5%; --sc: var(--violet); }
-  .srcReal   { left: 64.9%; top: 12.5%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
+  .srcCoStar { left: 33.5%; top: 14.0%; --sc: var(--violet); }
+  .srcPublic { left: 50%;   top: 6.2%;  --sc: var(--violet); animation-delay: .1s; }
+  .srcReal   { left: 66.5%; top: 14.0%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
   .srcCounty { left: 66.3%; top: 90.0%; --sc: var(--gold); }
 
   .inbox { left: 3.4%; top: 50.9%; transform: translate(0,-50%); width: 56px; z-index: 2; opacity: .85; }
@@ -137,8 +138,9 @@
       <!-- Verifier loop on the right of Excel -->
       <path class="flow" d="M 640 268 C 705 250, 735 262, 725 285 C 735 308, 705 320, 640 302" />
       <!-- sources -->
-      <line class="flow" x1="470" y1="100" x2="400" y2="72" />
-      <line class="flow" x1="570" y1="100" x2="650" y2="72" />
+      <line class="flow" x1="478" y1="95" x2="378" y2="82" />
+      <line class="flow" x1="520" y1="92" x2="520" y2="46" />
+      <line class="flow" x1="562" y1="95" x2="632" y2="82" />
       <line class="flow" x1="560" y1="465" x2="660" y2="500" />
 
       <!-- batons -->
@@ -161,6 +163,7 @@
 
     <!-- ── data sources ── -->
     <div class="src srcCoStar"><img class="lg" src="logos/costar.svg" alt="CoStar" /><span class="div"></span><span class="sd">sales</span></div>
+    <div class="src srcPublic"><span class="badge">WEB</span> public research</div>
     <div class="src srcReal"><img class="lg" src="logos/realpage.svg" alt="RealPage" /><span class="div"></span><span class="sd">rents</span></div>
     <div class="src srcCounty"><span class="badge">PUBLIC</span> County records</div>
 
@@ -185,8 +188,8 @@
 
 <style>
   @keyframes bIntake { 0%,3%{transform:translate(60px,285px);opacity:0;} 5%{transform:translate(95px,285px);opacity:1;} 8%{transform:translate(95px,285px);opacity:1;} 14%{transform:translate(285px,285px);opacity:1;} 17%{transform:translate(285px,285px);opacity:1;} 22%{transform:translate(455px,285px);opacity:1;} 24%,100%{transform:translate(455px,285px);opacity:0;} }
-  @keyframes bCompsPull { 0%,29%{transform:translate(520px,100px);opacity:0;} 31%{opacity:1;} 34%{transform:translate(400px,72px);opacity:1;} 38%{transform:translate(650px,72px);opacity:1;} 41%{transform:translate(520px,100px);opacity:1;} 43%,100%{opacity:0;} }
-  @keyframes bCompsIn { 0%,43%{transform:translate(520px,100px);opacity:0;} 45%{opacity:1;} 50%{transform:translate(520px,215px);opacity:1;} 52%,100%{opacity:0;} }
+  @keyframes bCompsPull { 0%,28%{transform:translate(520px,100px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(360px,80px);opacity:1;} 36%{transform:translate(520px,42px);opacity:1;} 39%{transform:translate(640px,80px);opacity:1;} 42%{transform:translate(520px,100px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bCompsIn { 0%,44%{transform:translate(520px,100px);opacity:0;} 46%{opacity:1;} 51%{transform:translate(520px,215px);opacity:1;} 53%,100%{opacity:0;} }
   @keyframes bTaxPull { 0%,30%{transform:translate(520px,465px);opacity:0;} 32%{opacity:1;} 37%{transform:translate(660px,500px);opacity:1;} 42%{transform:translate(520px,465px);opacity:1;} 44%,100%{opacity:0;} }
   @keyframes bTaxIn { 0%,45%{transform:translate(520px,465px);opacity:0;} 47%{opacity:1;} 52%{transform:translate(520px,358px);opacity:1;} 54%,100%{opacity:0;} }
   @keyframes bVer { 0%,60%{transform:translate(645px,285px);opacity:0;} 62%{opacity:1;} 67%{transform:translate(725px,285px);opacity:1;} 73%{transform:translate(645px,285px);opacity:1;} 75%,100%{opacity:0;} }
