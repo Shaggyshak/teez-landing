@@ -13,7 +13,7 @@
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 12px; color: var(--text); }
-  .frame { width: 100%; max-width: 1080px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -22px rgba(31,35,41,0.20), 0 0 0 1px var(--border); }
+  .frame { width: 100%; max-width: 940px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -22px rgba(31,35,41,0.20), 0 0 0 1px var(--border); }
   .chrome { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg-deeper); border-bottom: 1px solid var(--border); }
   .dot { width: 11px; height: 11px; border-radius: 50%; background: #D3D6DA; }
   .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
@@ -23,7 +23,7 @@
   .chrome-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: ping 2s infinite; }
   @keyframes ping { 0%{box-shadow:0 0 0 0 rgba(16,124,65,0.5);} 70%{box-shadow:0 0 0 6px rgba(16,124,65,0);} 100%{box-shadow:0 0 0 0 rgba(16,124,65,0);} }
 
-  .stage { position: relative; width: 100%; aspect-ratio: 1040 / 560; background: radial-gradient(120% 100% at 50% 51%, #FBFDFC 0%, #F6F8F7 58%, #F1F3F5 100%); }
+  .stage { position: relative; width: 100%; aspect-ratio: 940 / 440; background: radial-gradient(105% 105% at 50% 50%, #FBFDFC 0%, #F6F8F7 62%, #F1F3F5 100%); }
   .wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
   .wires line, .wires path { stroke: var(--border); stroke-width: 1.4; fill: none; }
   .wires .flow { stroke-dasharray: 3 7; stroke-linecap: round; animation: march 1.1s linear infinite; }
@@ -33,7 +33,7 @@
   .node, .src, .inbox { position: absolute; z-index: 3; transform: translate(-50%, -50%); }
 
   /* compact specialist chips */
-  .node { width: 132px; padding: 8px 10px; background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); animation: wake 18s linear infinite; }
+  .node { width: 128px; padding: 8px 10px; background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); animation: wake 18s linear infinite; }
   @keyframes wake {
     0%   { border-color: var(--border); box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); }
     6%   { border-color: var(--c); box-shadow: 0 9px 22px -8px color-mix(in srgb, var(--c) 45%, transparent), 0 0 0 4px color-mix(in srgb, var(--c) 13%, transparent); }
@@ -45,17 +45,18 @@
   .node .nm { font-size: 11.5px; font-weight: 680; letter-spacing: -0.01em; }
   .node .rl { font-size: 9.5px; color: var(--text-dim); margin-top: 3px; line-height: 1.25; }
 
-  .nScout { left: 9.1%;  top: 50.9%; --c: var(--blue);   animation-delay: -17.64s; }
-  .nRead  { left: 27.4%; top: 50.9%; --c: var(--cyan);   animation-delay: -16.2s;  }
-  .nComp  { left: 50%;   top: 17.9%; --c: var(--violet); animation-delay: -13.68s; }
-  .nTax   { left: 50%;   top: 83.0%; --c: var(--gold);   animation-delay: -13.68s; }
-  .nVer   { left: 69.7%; top: 50.9%; --c: var(--pink);   animation-delay: -7.92s;  }
+  /* corners around the sheet */
+  .nScout { left: 17%;  top: 20%; --c: var(--blue);   animation-delay: -17.64s; }
+  .nComp  { left: 83%;  top: 20%; --c: var(--violet); animation-delay: -13.68s; }
+  .nRead  { left: 15%;  top: 62%; --c: var(--cyan);   animation-delay: -16.2s;  }
+  .nVer   { left: 85%;  top: 62%; --c: var(--pink);   animation-delay: -7.92s;  }
+  .nTax   { left: 50%;  top: 90%; --c: var(--gold);   animation-delay: -13.68s; }
 
   /* data-source chips */
-  .src { display: flex; align-items: center; gap: 6px; padding: 5px 9px; background: #fff; border: 1px solid var(--border); border-radius: 9px; font-size: 10.5px; color: var(--text-dim); white-space: nowrap; box-shadow: 0 4px 12px -8px rgba(31,35,41,0.22); animation: srcFlash 18s linear infinite; }
+  .src { display: flex; align-items: center; gap: 6px; padding: 5px 8px; background: #fff; border: 1px solid var(--border); border-radius: 9px; font-size: 10px; color: var(--text-dim); white-space: nowrap; box-shadow: 0 4px 12px -8px rgba(31,35,41,0.22); animation: srcFlash 18s linear infinite; }
   .src .badge { font-size: 8.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 5px; border-radius: 5px; color: #fff; background: var(--sc); }
-  .src .lg { height: 13px; width: auto; display: block; }
-  .src .sd { color: var(--text-muted); font-size: 10px; }
+  .src .lg { height: 12px; width: auto; display: block; }
+  .src .sd { color: var(--text-muted); font-size: 9.5px; }
   .src .div { width: 1px; height: 11px; background: var(--border); }
   @keyframes srcFlash {
     0%,29%  { border-color: var(--border); box-shadow: 0 4px 12px -8px rgba(31,35,41,0.22); }
@@ -63,28 +64,28 @@
     47%,96% { border-color: color-mix(in srgb, var(--sc) 40%, var(--border)); }
     100%    { border-color: var(--border); }
   }
-  .srcCoStar { left: 33.5%; top: 14.0%; --sc: var(--violet); }
-  .srcPublic { left: 50%;   top: 6.2%;  --sc: var(--violet); animation-delay: .1s; }
-  .srcReal   { left: 66.5%; top: 14.0%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
-  .srcCounty { left: 66.3%; top: 90.0%; --sc: var(--gold); }
+  .srcCoStar { left: 64%; top: 8%;  --sc: var(--violet); transform: translate(-100%,-50%); }
+  .srcPublic { left: 83%; top: 5%;  --sc: var(--violet); animation-delay: .1s; }
+  .srcReal   { left: 99%; top: 9%;  --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
+  .srcCounty { left: 68%; top: 90%; --sc: var(--gold); }
 
-  .inbox { left: 3.4%; top: 50.9%; transform: translate(0,-50%); width: 56px; z-index: 2; opacity: .85; }
-  .inbox .ir { height: 8px; border-radius: 3px; background: var(--bg-deeper); margin-bottom: 5px; }
+  .inbox { left: 4%; top: 20%; transform: translate(0,-50%); width: 48px; z-index: 2; opacity: .85; }
+  .inbox .ir { height: 7px; border-radius: 3px; background: var(--bg-deeper); margin-bottom: 4px; }
   .inbox .ir.hot { background: color-mix(in srgb, var(--blue) 35%, var(--bg-deeper)); animation: inHot 18s linear infinite; }
   @keyframes inHot { 0%,2%{background:var(--bg-deeper);} 5%{background:color-mix(in srgb,var(--blue) 50%,#fff);} 14%{background:var(--bg-deeper);} 100%{background:var(--bg-deeper);} }
 
   /* ── the Excel model at the center — this IS the underwriter ── */
-  .xl { position: absolute; left: 50%; top: 50.9%; transform: translate(-50%,-50%); z-index: 4; width: 252px; background: #fff; border: 1px solid #CBD5D1; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 44px -16px rgba(33,115,70,0.42), 0 0 0 6px rgba(33,115,70,0.08); animation: xlPulse 3s ease-in-out infinite; }
+  .xl { position: absolute; left: 50%; top: 49%; transform: translate(-50%,-50%); z-index: 4; width: 300px; background: #fff; border: 1px solid #CBD5D1; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 44px -16px rgba(33,115,70,0.42), 0 0 0 6px rgba(33,115,70,0.08); animation: xlPulse 3s ease-in-out infinite; }
   @keyframes xlPulse { 0%,100%{box-shadow:0 18px 44px -18px rgba(33,115,70,0.38),0 0 0 5px rgba(33,115,70,0.07);} 50%{box-shadow:0 20px 48px -16px rgba(33,115,70,0.5),0 0 0 9px rgba(33,115,70,0.13);} }
-  .xl-bar { display: flex; align-items: center; gap: 7px; padding: 7px 10px; background: var(--xl-green); color: #fff; }
+  .xl-bar { display: flex; align-items: center; gap: 7px; padding: 7px 11px; background: var(--xl-green); color: #fff; }
   .xl-bar img { height: 14px; filter: brightness(0) invert(1); }
   .xl-bar .fn { font-size: 11px; font-weight: 650; }
   .xl-bar .live { margin-left: auto; font-size: 9px; opacity: .9; display: flex; align-items: center; gap: 4px; }
   .xl-bar .live::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: ping 1.6s infinite; }
-  .xl-grid { display: grid; grid-template-columns: 20px 1fr 58px 58px; font-size: 9.5px; font-variant-numeric: tabular-nums; }
-  .xl-grid > div { padding: 3px 6px; border-bottom: 1px solid #EDEFF1; border-right: 1px solid #EDEFF1; }
-  .xl-grid .ch { background: #F6F8F7; color: var(--text-muted); font-weight: 600; font-size: 8.5px; text-align: right; }
-  .xl-grid .rh { background: #F6F8F7; color: var(--text-muted); text-align: center; font-size: 8.5px; }
+  .xl-grid { display: grid; grid-template-columns: 20px 1fr 62px 62px; font-size: 10px; font-variant-numeric: tabular-nums; }
+  .xl-grid > div { padding: 4px 7px; border-bottom: 1px solid #EDEFF1; border-right: 1px solid #EDEFF1; }
+  .xl-grid .ch { background: #F6F8F7; color: var(--text-muted); font-weight: 600; font-size: 9px; text-align: right; }
+  .xl-grid .rh { background: #F6F8F7; color: var(--text-muted); text-align: center; font-size: 9px; }
   .xl-grid .lbl { color: var(--text-dim); }
   .xl-grid .num { text-align: right; color: var(--text); }
   .xl-grid .num.neg { color: var(--pink); }
@@ -98,20 +99,26 @@
   .xl-grid .lit-t { animation: litT 18s linear infinite; }
   @keyframes litC { 0%,40%{background:inherit;} 45%{background: color-mix(in srgb,var(--violet) 15%,#fff);} 53%{background:inherit;} 100%{background:inherit;} }
   @keyframes litT { 0%,42%{background:inherit;} 47%{background: color-mix(in srgb,var(--gold) 15%,#fff);} 55%{background:inherit;} 100%{background:inherit;} }
-  .xl-foot { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: #F6F8F7; font-size: 9.5px; color: var(--text-dim); }
+  .xl-foot { display: flex; align-items: center; gap: 8px; padding: 7px 11px; background: #F6F8F7; font-size: 10px; color: var(--text-dim); }
   .xl-foot .kpi { opacity: 0; animation: cellFL 18s linear infinite; font-weight: 600; color: var(--text); }
-  .xl-foot .stamp { margin-left: auto; opacity: 0; font-size: 8.5px; font-weight: 700; color: #fff; background: var(--green); padding: 2px 6px; border-radius: 5px; animation: stampIn 18s linear infinite; }
+  .xl-foot .stamp { margin-left: auto; opacity: 0; font-size: 9px; font-weight: 700; color: #fff; background: var(--green); padding: 2px 7px; border-radius: 5px; animation: stampIn 18s linear infinite; }
   @keyframes stampIn { 0%,72%{opacity:0;transform:scale(.7);} 77%{opacity:1;transform:scale(1);} 99%{opacity:1;} 100%{opacity:0;} }
-  /* small tag under the workbook naming its role */
-  .xl-tag { position: absolute; left: 50%; top: 74.5%; transform: translate(-50%,0); z-index: 4; font-size: 9.5px; color: var(--text-muted); letter-spacing: .03em; }
+  .xl-tag { position: absolute; left: 50%; top: 82%; transform: translate(-50%,0); z-index: 4; font-size: 9.5px; color: var(--text-muted); letter-spacing: .03em; white-space: nowrap; }
   .xl-tag b { color: var(--green); font-weight: 650; }
 
-  .caption { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); font-size: 10.5px; color: var(--text-muted); z-index: 6; letter-spacing: .02em; background: rgba(255,255,255,.7); padding: 2px 10px; border-radius: 100px; text-align: center; }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    .pkt { opacity: 0; }
+    .xl-grid .v, .xl-foot .kpi, .xl-foot .stamp { opacity: 1 !important; }
+    .src { opacity: 1 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) and (min-width: 641px) {
+    .srcCoStar, .srcReal { transform: translate(-100%,-50%); }
+  }
 
-  /* comps sources are a group (invisible wrapper on desktop; a row on mobile) */
   .gComp { display: contents; }
 
-  /* ── mobile: reflow the hub into a clean vertical flow ── */
+  /* ── mobile: reflow into a clean vertical flow ── */
   @media (max-width: 640px) {
     html, body { overflow-x: hidden; }
     body { display: block; padding: 10px; }
@@ -122,8 +129,7 @@
       gap: 9px; padding: 16px 12px 18px; background: #fff;
     }
     .wires, .inbox { display: none; }
-    /* every stacked item is a centered column, capped so it never touches the edge */
-    .node, .src, .xl, .xl-tag, .caption, .gComp {
+    .node, .src, .xl, .xl-tag, .gComp {
       position: static; transform: none; left: auto; top: auto; bottom: auto;
       margin: 0; min-width: 0; width: 100%; max-width: 340px;
     }
@@ -131,7 +137,6 @@
     .node .nm { font-size: 13.5px; }
     .node .rl { font-size: 11.5px; margin-top: 3px; }
     .node .ic { width: 19px; height: 19px; font-size: 10px; }
-
     .nScout { order: 1; } .nRead { order: 2; } .nComp { order: 3; }
     .gComp { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; order: 4; }
     .gComp .src { width: auto; max-width: none; transform: none; flex: 0 1 auto; font-size: 10px; padding: 5px 8px; }
@@ -139,28 +144,13 @@
     .nTax { order: 5; }
     .srcCounty { order: 6; width: auto; }
     .xl { order: 7; max-width: 300px; margin: 4px 0 2px; }
-    .xl-grid { grid-template-columns: 18px 1fr 54px 54px; }
-    .xl-grid > div { padding: 3px 6px; }
     .nVer { order: 8; }
     .xl-tag { order: 9; text-align: center; font-size: 11px; }
-    .caption { order: 10; text-align: center; background: transparent; font-size: 11px; padding: 4px 6px 0; }
-
-    /* a soft flow connector down the intake steps */
-    .nScout, .nRead, .nComp, .nTax, .nVer { position: relative; }
     .nScout::after, .nRead::after, .nComp::after, .nTax::after, .xl::after {
       content: "↓"; position: absolute; left: 50%; bottom: -12px; transform: translateX(-50%);
       color: var(--text-muted); font-size: 11px; line-height: 1; z-index: 5;
     }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; }
-    .pkt { opacity: 0; }
-    .xl-grid .v, .xl-foot .kpi, .xl-foot .stamp { opacity: 1 !important; }
-    .src { opacity: 1 !important; }
-  }
-  @media (prefers-reduced-motion: reduce) and (min-width: 641px) {
-    .srcReal { transform: translate(-100%,-50%); }
+    .nScout, .nRead, .nComp, .nTax, .xl { position: relative; }
   }
 </style>
 </head>
@@ -174,21 +164,22 @@
   </div>
 
   <div class="stage">
-    <svg class="wires" viewBox="0 0 1040 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-      <!-- intake chain: Scout -> Reader -> Excel -->
-      <line class="flow" x1="95"  y1="285" x2="285" y2="285" />
-      <line class="flow" x1="285" y1="285" x2="405" y2="285" />
-      <!-- Comps -> Excel (top) -->
-      <line class="flow" x1="520" y1="130" x2="520" y2="212" />
-      <!-- Tax -> Excel (bottom) -->
-      <line class="flow" x1="520" y1="430" x2="520" y2="358" />
-      <!-- Verifier loop on the right of Excel -->
-      <path class="flow" d="M 640 268 C 705 250, 735 262, 725 285 C 735 308, 705 320, 640 302" />
-      <!-- sources -->
-      <line class="flow" x1="478" y1="95" x2="378" y2="82" />
-      <line class="flow" x1="520" y1="92" x2="520" y2="46" />
-      <line class="flow" x1="562" y1="95" x2="632" y2="82" />
-      <line class="flow" x1="560" y1="465" x2="660" y2="500" />
+    <svg class="wires" viewBox="0 0 940 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- intake: Scout -> Reader -> Excel -->
+      <line class="flow" x1="160" y1="88"  x2="141" y2="273" />
+      <line class="flow" x1="141" y1="273" x2="320" y2="230" />
+      <!-- Comps -> Excel -->
+      <line class="flow" x1="780" y1="88"  x2="600" y2="180" />
+      <!-- Tax -> Excel -->
+      <line class="flow" x1="470" y1="396" x2="470" y2="300" />
+      <!-- Verifier loop -->
+      <path class="flow" d="M 620 212 C 720 196, 812 214, 799 273 C 792 300, 720 300, 620 262" />
+      <!-- sources into comps -->
+      <line class="flow" x1="760" y1="82" x2="612" y2="40" />
+      <line class="flow" x1="783" y1="80" x2="780" y2="30" />
+      <line class="flow" x1="800" y1="82" x2="905" y2="42" />
+      <!-- tax -> county -->
+      <line class="flow" x1="510" y1="396" x2="620" y2="396" />
 
       <!-- batons -->
       <circle class="pkt" fill="#1D4ED8" style="animation: bIntake 18s linear infinite;" />
@@ -201,12 +192,12 @@
 
     <div class="inbox"><div class="ir hot"></div><div class="ir"></div><div class="ir"></div></div>
 
-    <!-- ── the small team ── -->
+    <!-- ── the small team, in the corners ── -->
     <div class="node nScout"><div class="top"><span class="ic">◎</span><span class="nm">The Scout</span></div><div class="rl">catches it in your inbox</div></div>
     <div class="node nRead"><div class="top"><span class="ic">▤</span><span class="nm">The Reader</span></div><div class="rl">reads OM · RR · T-12</div></div>
     <div class="node nComp"><div class="top"><span class="ic">⌾</span><span class="nm">The Comps hand</span></div><div class="rl">sales &amp; rent comps</div></div>
-    <div class="node nTax"><div class="top"><span class="ic">§</span><span class="nm">The Tax hand</span></div><div class="rl">assessed value · taxes</div></div>
     <div class="node nVer"><div class="top"><span class="ic">✓</span><span class="nm">The Verifier</span></div><div class="rl">re-checks · sources it</div></div>
+    <div class="node nTax"><div class="top"><span class="ic">§</span><span class="nm">The Tax hand</span></div><div class="rl">assessed value · taxes</div></div>
 
     <!-- ── data sources ── -->
     <div class="gComp">
@@ -216,7 +207,7 @@
     </div>
     <div class="src srcCounty"><span class="badge">PUBLIC</span> County records</div>
 
-    <!-- ── the Excel model at the center ── -->
+    <!-- ── the Excel model ── -->
     <div class="xl">
       <div class="xl-bar"><img src="logos/excel.svg" alt="Excel" /><span class="fn">MapleCourt.xlsx</span><span class="live">underwriting</span></div>
       <div class="xl-grid">
@@ -230,18 +221,16 @@
       <div class="xl-foot"><span class="kpi">Cap 6.20% · DSCR 1.41×</span><span class="stamp">sourced ✓</span></div>
     </div>
     <div class="xl-tag"><b>the underwriter</b> — your live model</div>
-
-    <div class="caption">A small team fills your Excel model — reads the deal, pulls comps &amp; taxes, and double-checks every number.</div>
   </div>
 </div>
 
 <style>
-  @keyframes bIntake { 0%,3%{transform:translate(60px,285px);opacity:0;} 5%{transform:translate(95px,285px);opacity:1;} 8%{transform:translate(95px,285px);opacity:1;} 14%{transform:translate(285px,285px);opacity:1;} 17%{transform:translate(285px,285px);opacity:1;} 22%{transform:translate(455px,285px);opacity:1;} 24%,100%{transform:translate(455px,285px);opacity:0;} }
-  @keyframes bCompsPull { 0%,28%{transform:translate(520px,100px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(360px,80px);opacity:1;} 36%{transform:translate(520px,42px);opacity:1;} 39%{transform:translate(640px,80px);opacity:1;} 42%{transform:translate(520px,100px);opacity:1;} 44%,100%{opacity:0;} }
-  @keyframes bCompsIn { 0%,44%{transform:translate(520px,100px);opacity:0;} 46%{opacity:1;} 51%{transform:translate(520px,215px);opacity:1;} 53%,100%{opacity:0;} }
-  @keyframes bTaxPull { 0%,30%{transform:translate(520px,465px);opacity:0;} 32%{opacity:1;} 37%{transform:translate(660px,500px);opacity:1;} 42%{transform:translate(520px,465px);opacity:1;} 44%,100%{opacity:0;} }
-  @keyframes bTaxIn { 0%,45%{transform:translate(520px,465px);opacity:0;} 47%{opacity:1;} 52%{transform:translate(520px,358px);opacity:1;} 54%,100%{opacity:0;} }
-  @keyframes bVer { 0%,60%{transform:translate(645px,285px);opacity:0;} 62%{opacity:1;} 67%{transform:translate(725px,285px);opacity:1;} 73%{transform:translate(645px,285px);opacity:1;} 75%,100%{opacity:0;} }
+  @keyframes bIntake { 0%,3%{transform:translate(60px,88px);opacity:0;} 5%{transform:translate(160px,88px);opacity:1;} 9%{transform:translate(160px,88px);opacity:1;} 14%{transform:translate(141px,273px);opacity:1;} 17%{transform:translate(141px,273px);opacity:1;} 22%{transform:translate(430px,230px);opacity:1;} 24%,100%{opacity:0;} }
+  @keyframes bCompsPull { 0%,28%{transform:translate(780px,88px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(612px,40px);opacity:1;} 36%{transform:translate(780px,30px);opacity:1;} 39%{transform:translate(905px,42px);opacity:1;} 42%{transform:translate(780px,88px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bCompsIn { 0%,44%{transform:translate(780px,88px);opacity:0;} 46%{opacity:1;} 51%{transform:translate(600px,180px);opacity:1;} 53%,100%{opacity:0;} }
+  @keyframes bTaxPull { 0%,30%{transform:translate(470px,396px);opacity:0;} 32%{opacity:1;} 37%{transform:translate(620px,396px);opacity:1;} 42%{transform:translate(470px,396px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bTaxIn { 0%,45%{transform:translate(470px,396px);opacity:0;} 47%{opacity:1;} 52%{transform:translate(470px,300px);opacity:1;} 54%,100%{opacity:0;} }
+  @keyframes bVer { 0%,60%{transform:translate(620px,240px);opacity:0;} 62%{opacity:1;} 67%{transform:translate(799px,273px);opacity:1;} 73%{transform:translate(620px,240px);opacity:1;} 75%,100%{opacity:0;} }
 </style>
 </body>
 </html>
