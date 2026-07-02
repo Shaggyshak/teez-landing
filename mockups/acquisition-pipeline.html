@@ -163,7 +163,7 @@
   @keyframes scan { 0%{transform:translateX(-110%);} 100%{transform:translateX(320%);} }
 
   /* agent placement + colors */
-  .a1 { left: 43.75%; top: 23.2%; --c: var(--green); }
+  .a1 { left: 34%; top: 50.9%; --c: var(--green); }
   .a2 { left: 74.0%;  top: 21.4%; --c: var(--cyan); }
   .a3 { left: 84.6%;  top: 51.8%; --c: var(--gold); }
   .a4 { left: 74.0%;  top: 81.3%; --c: var(--violet); }
@@ -213,8 +213,8 @@
   @keyframes dealFlow {
     0%, 2%   { left: 14.4%; opacity: 0; transform: translate(-50%,-50%) scale(.92); }
     7%       { left: 14.4%; opacity: 1; transform: translate(-50%,-50%) scale(1); }
-    16%      { left: 40%;   opacity: 1; transform: translate(-50%,-50%) scale(1); }
-    20%      { left: 52%;   opacity: 0; transform: translate(-50%,-50%) scale(.96); }
+    15%      { left: 27%;   opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    19%      { left: 33%;   opacity: 0; transform: translate(-50%,-50%) scale(.96); }
     100%     { left: 14.4%; opacity: 0; transform: translate(-50%,-50%) scale(.92); }
   }
 
@@ -227,7 +227,7 @@
     box-shadow: 0 4px 12px -8px rgba(31,35,41,0.25);
   }
   .result::before { content: "✓ "; opacity: .8; }
-  .r1 { left: 43.75%; top: 34.5%; --rc: var(--green);  animation: pop 18s linear infinite; animation-delay: 0s; }
+  .r1 { left: 34%; top: 63%; --rc: var(--green);  animation: pop 18s linear infinite; animation-delay: 0s; }
   .r2 { left: 74.0%;  top: 33.0%; --rc: var(--cyan);   animation: pop 18s linear infinite; animation-delay: .5s; }
   .r3 { left: 84.6%;  top: 63.5%; --rc: var(--gold);   animation: pop 18s linear infinite; animation-delay: 1s; }
   .r4 { left: 74.0%;  top: 69.5%; --rc: var(--violet); animation: pop2 18s linear infinite; }
@@ -318,7 +318,6 @@
     <!-- ── connector wires + packets ── -->
     <svg class="wires" viewBox="0 0 1040 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
       <!-- orchestrator <-> agents -->
-      <line class="flow" x1="600" y1="285" x2="455" y2="130" />
       <line class="flow" x1="600" y1="285" x2="770" y2="120" />
       <line class="flow" x1="600" y1="285" x2="880" y2="290" />
       <line class="flow" x1="600" y1="285" x2="770" y2="455" />
@@ -409,20 +408,18 @@
 
 <!-- packet motion keyframes (SVG user coords via CSS transform) -->
 <style>
-  @keyframes pIntake {
+  @keyframes pIntake { /* inbox -> scanner -> reads (raw docs to the reader) */
     0%,1%   { transform: translate(90px,235px);  opacity: 0; }
     3%      { transform: translate(150px,285px);  opacity: 1; }
-    10%     { transform: translate(150px,285px);  opacity: 1; }
-    17%     { transform: translate(600px,285px);  opacity: 1; }
-    19%,100%{ transform: translate(600px,285px);  opacity: 0; }
+    9%      { transform: translate(150px,285px);  opacity: 1; }
+    15%     { transform: translate(354px,285px);  opacity: 1; }
+    17%,100%{ transform: translate(354px,285px);  opacity: 0; }
   }
-  @keyframes p1 { /* doc-parse: O -> A1 -> O (parses the docs the scanner delivered) */
-    0%,17%  { transform: translate(600px,285px); opacity: 0; }
-    19%     { transform: translate(600px,285px); opacity: 1; }
-    27%     { transform: translate(455px,130px); opacity: 1; }
-    34%     { transform: translate(455px,130px); opacity: 1; }
-    43%     { transform: translate(600px,285px); opacity: 1; }
-    45%,100%{ transform: translate(600px,285px); opacity: 0; }
+  @keyframes p1 { /* reads -> teez (parsed financials handed to teez) */
+    0%,20%  { transform: translate(354px,285px); opacity: 0; }
+    23%     { transform: translate(354px,285px); opacity: 1; }
+    31%     { transform: translate(600px,285px); opacity: 1; }
+    33%,100%{ transform: translate(600px,285px); opacity: 0; }
   }
   @keyframes p2 { /* market: O -> A2 -> CoStar/Yardi -> O */
     0%,14%  { transform: translate(600px,285px); opacity: 0; }
