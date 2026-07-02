@@ -183,6 +183,10 @@
     font-size: 9px; font-weight: 700; letter-spacing: .04em;
     padding: 2px 6px; border-radius: 5px; color: #fff; background: var(--sc);
   }
+  .src .lg { height: 14px; width: auto; display: block; }
+  .src .lg.xl { height: 16px; }
+  .src .sd { color: var(--text-muted); font-size: 10.5px; }
+  .src .div { width: 1px; height: 12px; background: var(--border); }
   @keyframes srcFlash {
     0%, 20%  { border-color: var(--border); box-shadow: 0 4px 12px -8px rgba(31,35,41,0.25); }
     26%      { border-color: var(--sc); box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--sc) 45%, transparent), 0 0 0 4px color-mix(in srgb, var(--sc) 12%, transparent); }
@@ -190,11 +194,11 @@
     100%     { border-color: var(--border); box-shadow: 0 4px 12px -8px rgba(31,35,41,0.25); }
   }
   .d1 { left: 28.8%; top: 10.5%; --sc: var(--green); }
-  .d2 { left: 90.9%; top: 15.6%; --sc: var(--cyan); }
+  .d2 { left: 98%; top: 15.6%; --sc: var(--cyan); transform: translate(-100%, -50%); }
   .d3 { left: 96%; top: 37%; --sc: var(--gold); transform: translate(-100%, -50%); }
-  .d4 { left: 89.4%; top: 92.0%; --sc: var(--violet); }
+  .d4 { left: 96%; top: 92.0%; --sc: var(--violet); transform: translate(-100%, -50%); }
   /* market pulls two sources — stack a second chip */
-  .d2b { left: 92.5%; top: 27.0%; --sc: var(--cyan); animation-delay: .25s; }
+  .d2b { left: 98%; top: 27.0%; --sc: var(--cyan); transform: translate(-100%, -50%); animation-delay: .25s; }
 
   /* deal card gliding scanner -> orchestrator */
   .dealcard {
@@ -296,8 +300,8 @@
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; }
     .dealcard, .pkt { opacity: 0; }
-    .result, .output, .src { opacity: 1 !important; transform: translate(-50%,-50%) !important; }
-    .d3 { transform: translate(-100%,-50%) !important; }
+    .result, .output { opacity: 1 !important; transform: translate(-50%,-50%) !important; }
+    .src { opacity: 1 !important; }
   }
 </style>
 </head>
@@ -379,10 +383,10 @@
 
     <!-- ── data sources ── -->
     <div class="src d1"><span class="badge">DOCS</span> OM · rent roll · T-12</div>
-    <div class="src d2"><span class="badge">CoStar</span> sales comps</div>
-    <div class="src d2b"><span class="badge">Yardi</span> rent comps</div>
-    <div class="src d3">County records <span class="badge">PUBLIC</span></div>
-    <div class="src d4"><span class="badge">YOUR</span> Excel template</div>
+    <div class="src d2"><img class="lg" src="logos/costar.svg" alt="CoStar" /><span class="div"></span><span class="sd">sales comps</span></div>
+    <div class="src d2b"><img class="lg" src="logos/realpage.svg" alt="RealPage" /><span class="div"></span><span class="sd">rent comps</span></div>
+    <div class="src d3"><span class="badge">PUBLIC</span> County records</div>
+    <div class="src d4"><img class="lg xl" src="logos/excel.svg" alt="Microsoft Excel" /><span class="div"></span><span class="sd">your template</span></div>
 
     <!-- ── deal card in motion ── -->
     <div class="dealcard"><b>Maple Court</b> · 84 units</div>
