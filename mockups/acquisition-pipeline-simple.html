@@ -33,7 +33,7 @@
   .node, .src, .inbox { position: absolute; z-index: 3; transform: translate(-50%, -50%); }
 
   /* compact specialist chips */
-  .node { width: 128px; padding: 8px 10px; background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); animation: wake 18s linear infinite; }
+  .node { width: 150px; padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 11px; box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); animation: wake 18s linear infinite; }
   @keyframes wake {
     0%   { border-color: var(--border); box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); }
     6%   { border-color: var(--c); box-shadow: 0 9px 22px -8px color-mix(in srgb, var(--c) 45%, transparent), 0 0 0 4px color-mix(in srgb, var(--c) 13%, transparent); }
@@ -41,9 +41,9 @@
     100% { border-color: var(--border); box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); }
   }
   .node .top { display: flex; align-items: center; gap: 6px; }
-  .node .ic { width: 17px; height: 17px; border-radius: 5px; flex: none; background: color-mix(in srgb, var(--c) 15%, #fff); border: 1px solid color-mix(in srgb, var(--c) 45%, #fff); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--c); font-weight: 700; }
-  .node .nm { font-size: 11.5px; font-weight: 680; letter-spacing: -0.01em; }
-  .node .rl { font-size: 9.5px; color: var(--text-dim); margin-top: 3px; line-height: 1.25; }
+  .node .ic { width: 19px; height: 19px; border-radius: 5px; flex: none; background: color-mix(in srgb, var(--c) 15%, #fff); border: 1px solid color-mix(in srgb, var(--c) 45%, #fff); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--c); font-weight: 700; }
+  .node .nm { font-size: 13px; font-weight: 680; letter-spacing: -0.01em; }
+  .node .rl { font-size: 10.5px; color: var(--text-dim); margin-top: 4px; line-height: 1.3; }
 
   /* corners around the sheet */
   .nScout { left: 17%;  top: 20%; --c: var(--blue);   animation-delay: -17.64s; }
@@ -64,9 +64,9 @@
     47%,96% { border-color: color-mix(in srgb, var(--sc) 40%, var(--border)); }
     100%    { border-color: var(--border); }
   }
-  .srcCoStar { left: 64%; top: 8%;  --sc: var(--violet); transform: translate(-100%,-50%); }
-  .srcPublic { left: 83%; top: 5%;  --sc: var(--violet); animation-delay: .1s; }
-  .srcReal   { left: 99%; top: 9%;  --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
+  .srcCoStar { left: 52%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); }
+  .srcPublic { left: 72%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); animation-delay: .1s; }
+  .srcReal   { left: 96%; top: 9%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
   .srcCounty { left: 68%; top: 90%; --sc: var(--gold); }
 
   .inbox { left: 4%; top: 20%; transform: translate(0,-50%); width: 48px; z-index: 2; opacity: .85; }
@@ -75,15 +75,15 @@
   @keyframes inHot { 0%,2%{background:var(--bg-deeper);} 5%{background:color-mix(in srgb,var(--blue) 50%,#fff);} 14%{background:var(--bg-deeper);} 100%{background:var(--bg-deeper);} }
 
   /* ── the Excel model at the center — this IS the underwriter ── */
-  .xl { position: absolute; left: 50%; top: 49%; transform: translate(-50%,-50%); z-index: 4; width: 300px; background: #fff; border: 1px solid #CBD5D1; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 44px -16px rgba(33,115,70,0.42), 0 0 0 6px rgba(33,115,70,0.08); animation: xlPulse 3s ease-in-out infinite; }
+  .xl { position: absolute; left: 50%; top: 49%; transform: translate(-50%,-50%); z-index: 4; width: 256px; background: #fff; border: 1px solid #CBD5D1; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 44px -16px rgba(33,115,70,0.42), 0 0 0 6px rgba(33,115,70,0.08); animation: xlPulse 3s ease-in-out infinite; }
   @keyframes xlPulse { 0%,100%{box-shadow:0 18px 44px -18px rgba(33,115,70,0.38),0 0 0 5px rgba(33,115,70,0.07);} 50%{box-shadow:0 20px 48px -16px rgba(33,115,70,0.5),0 0 0 9px rgba(33,115,70,0.13);} }
   .xl-bar { display: flex; align-items: center; gap: 7px; padding: 7px 11px; background: var(--xl-green); color: #fff; }
   .xl-bar img { height: 14px; filter: brightness(0) invert(1); }
   .xl-bar .fn { font-size: 11px; font-weight: 650; }
   .xl-bar .live { margin-left: auto; font-size: 9px; opacity: .9; display: flex; align-items: center; gap: 4px; }
   .xl-bar .live::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: ping 1.6s infinite; }
-  .xl-grid { display: grid; grid-template-columns: 20px 1fr 62px 62px; font-size: 10px; font-variant-numeric: tabular-nums; }
-  .xl-grid > div { padding: 4px 7px; border-bottom: 1px solid #EDEFF1; border-right: 1px solid #EDEFF1; }
+  .xl-grid { display: grid; grid-template-columns: 18px 1fr 54px 54px; font-size: 9.5px; font-variant-numeric: tabular-nums; }
+  .xl-grid > div { padding: 3px 6px; border-bottom: 1px solid #EDEFF1; border-right: 1px solid #EDEFF1; }
   .xl-grid .ch { background: #F6F8F7; color: var(--text-muted); font-weight: 600; font-size: 9px; text-align: right; }
   .xl-grid .rh { background: #F6F8F7; color: var(--text-muted); text-align: center; font-size: 9px; }
   .xl-grid .lbl { color: var(--text-dim); }
@@ -113,7 +113,7 @@
     .src { opacity: 1 !important; }
   }
   @media (prefers-reduced-motion: reduce) and (min-width: 641px) {
-    .srcCoStar, .srcReal { transform: translate(-100%,-50%); }
+    .srcReal { transform: translate(-100%,-50%); }
   }
 
   .gComp { display: contents; }
@@ -175,9 +175,9 @@
       <!-- Verifier loop -->
       <path class="flow" d="M 620 212 C 720 196, 812 214, 799 273 C 792 300, 720 300, 620 262" />
       <!-- sources into comps -->
-      <line class="flow" x1="760" y1="82" x2="612" y2="40" />
-      <line class="flow" x1="783" y1="80" x2="780" y2="30" />
-      <line class="flow" x1="800" y1="82" x2="905" y2="42" />
+      <line class="flow" x1="765" y1="80" x2="512" y2="44" />
+      <line class="flow" x1="775" y1="76" x2="677" y2="48" />
+      <line class="flow" x1="802" y1="80" x2="872" y2="44" />
       <!-- tax -> county -->
       <line class="flow" x1="510" y1="396" x2="620" y2="396" />
 
@@ -226,7 +226,7 @@
 
 <style>
   @keyframes bIntake { 0%,3%{transform:translate(60px,88px);opacity:0;} 5%{transform:translate(160px,88px);opacity:1;} 9%{transform:translate(160px,88px);opacity:1;} 14%{transform:translate(141px,273px);opacity:1;} 17%{transform:translate(141px,273px);opacity:1;} 22%{transform:translate(430px,230px);opacity:1;} 24%,100%{opacity:0;} }
-  @keyframes bCompsPull { 0%,28%{transform:translate(780px,88px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(612px,40px);opacity:1;} 36%{transform:translate(780px,30px);opacity:1;} 39%{transform:translate(905px,42px);opacity:1;} 42%{transform:translate(780px,88px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bCompsPull { 0%,28%{transform:translate(780px,88px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(489px,40px);opacity:1;} 36%{transform:translate(677px,40px);opacity:1;} 39%{transform:translate(860px,40px);opacity:1;} 42%{transform:translate(780px,88px);opacity:1;} 44%,100%{opacity:0;} }
   @keyframes bCompsIn { 0%,44%{transform:translate(780px,88px);opacity:0;} 46%{opacity:1;} 51%{transform:translate(600px,180px);opacity:1;} 53%,100%{opacity:0;} }
   @keyframes bTaxPull { 0%,30%{transform:translate(470px,396px);opacity:0;} 32%{opacity:1;} 37%{transform:translate(620px,396px);opacity:1;} 42%{transform:translate(470px,396px);opacity:1;} 44%,100%{opacity:0;} }
   @keyframes bTaxIn { 0%,45%{transform:translate(470px,396px);opacity:0;} 47%{opacity:1;} 52%{transform:translate(470px,300px);opacity:1;} 54%,100%{opacity:0;} }
