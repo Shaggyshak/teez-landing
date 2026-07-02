@@ -193,7 +193,6 @@
     40%, 96% { border-color: color-mix(in srgb, var(--sc) 40%, var(--border)); box-shadow: 0 4px 12px -8px rgba(31,35,41,0.20); }
     100%     { border-color: var(--border); box-shadow: 0 4px 12px -8px rgba(31,35,41,0.25); }
   }
-  .d1 { left: 28.8%; top: 10.5%; --sc: var(--green); }
   .d2 { left: 98%; top: 15.6%; --sc: var(--cyan); transform: translate(-100%, -50%); }
   .d3 { left: 96%; top: 37%; --sc: var(--gold); transform: translate(-100%, -50%); }
   .d4 { left: 96%; top: 92.0%; --sc: var(--violet); transform: translate(-100%, -50%); }
@@ -210,6 +209,7 @@
     animation: dealFlow 18s ease-in-out infinite;
   }
   .dealcard b { color: var(--green); }
+  .dealcard .dcx { color: var(--text-muted); border-left: 1px solid var(--border); margin-left: 7px; padding-left: 7px; }
   @keyframes dealFlow {
     0%, 2%   { left: 14.4%; opacity: 0; transform: translate(-50%,-50%) scale(.92); }
     7%       { left: 14.4%; opacity: 1; transform: translate(-50%,-50%) scale(1); }
@@ -326,7 +326,6 @@
       <!-- intake: scanner -> orchestrator -->
       <line class="flow" x1="150" y1="285" x2="600" y2="285" />
       <!-- agent -> data source -->
-      <line class="flow" x1="455" y1="130" x2="300" y2="80" />
       <line class="flow" x1="770" y1="120" x2="930" y2="100" />
       <line class="flow" x1="890" y1="262" x2="908" y2="222" />
       <line class="flow" x1="770" y1="455" x2="915" y2="505" />
@@ -349,7 +348,7 @@
     <!-- ── email scanner (intake) ── -->
     <div class="node scanner">
       <div class="top"><span class="ic">@</span><span class="nm">Email scanner</span></div>
-      <div class="rl">watches your inbox · detects the deal</div>
+      <div class="rl">detects the deal · pulls OM · rent roll · T-12</div>
       <div class="scanline"></div>
     </div>
 
@@ -382,14 +381,13 @@
     </div>
 
     <!-- ── data sources ── -->
-    <div class="src d1"><span class="badge">DOCS</span> OM · rent roll · T-12</div>
     <div class="src d2"><img class="lg" src="logos/costar.svg" alt="CoStar" /><span class="div"></span><span class="sd">sales comps</span></div>
     <div class="src d2b"><img class="lg" src="logos/realpage.svg" alt="RealPage" /><span class="div"></span><span class="sd">rent comps</span></div>
     <div class="src d3"><span class="badge">PUBLIC</span> County records</div>
     <div class="src d4"><img class="lg xl" src="logos/excel.svg" alt="Microsoft Excel" /><span class="div"></span><span class="sd">your template</span></div>
 
     <!-- ── deal card in motion ── -->
-    <div class="dealcard"><b>Maple Court</b> · 84 units</div>
+    <div class="dealcard"><b>Maple Court</b> · 84 units<span class="dcx">OM · rent roll · T-12</span></div>
 
     <!-- ── agent result chips ── -->
     <div class="result r1">84 units · NOI $796,800</div>
@@ -418,15 +416,13 @@
     17%     { transform: translate(600px,285px);  opacity: 1; }
     19%,100%{ transform: translate(600px,285px);  opacity: 0; }
   }
-  @keyframes p1 { /* doc-parse: O -> A1 -> DOCS -> O */
-    0%,13%  { transform: translate(600px,285px); opacity: 0; }
-    15%     { transform: translate(600px,285px); opacity: 1; }
-    21%     { transform: translate(455px,130px); opacity: 1; }
-    27%     { transform: translate(300px,80px);  opacity: 1; }
-    33%     { transform: translate(300px,80px);  opacity: 1; }
-    40%     { transform: translate(455px,130px); opacity: 1; }
-    47%     { transform: translate(600px,285px); opacity: 1; }
-    49%,100%{ transform: translate(600px,285px); opacity: 0; }
+  @keyframes p1 { /* doc-parse: O -> A1 -> O (parses the docs the scanner delivered) */
+    0%,17%  { transform: translate(600px,285px); opacity: 0; }
+    19%     { transform: translate(600px,285px); opacity: 1; }
+    27%     { transform: translate(455px,130px); opacity: 1; }
+    34%     { transform: translate(455px,130px); opacity: 1; }
+    43%     { transform: translate(600px,285px); opacity: 1; }
+    45%,100%{ transform: translate(600px,285px); opacity: 0; }
   }
   @keyframes p2 { /* market: O -> A2 -> CoStar/Yardi -> O */
     0%,14%  { transform: translate(600px,285px); opacity: 0; }
