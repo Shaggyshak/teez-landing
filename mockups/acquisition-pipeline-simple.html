@@ -64,9 +64,10 @@
     47%,96% { border-color: color-mix(in srgb, var(--sc) 40%, var(--border)); }
     100%    { border-color: var(--border); }
   }
-  .srcCoStar { left: 52%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); }
-  .srcPublic { left: 72%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); animation-delay: .1s; }
-  .srcReal   { left: 96%; top: 9%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
+  .srcCoStar { left: 47%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); }
+  .srcYardi  { left: 60%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); animation-delay: .1s; }
+  .srcPublic { left: 92%; top: 9%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
+  .src .wm { font-weight: 800; color: var(--text); font-size: 11px; letter-spacing: -.02em; }
   .srcCounty { left: 68%; top: 90%; --sc: var(--gold); }
 
   .inbox { left: 4%; top: 20%; transform: translate(0,-50%); width: 48px; z-index: 2; opacity: .85; }
@@ -103,7 +104,7 @@
   .xl-foot .kpi { opacity: 0; animation: cellFL 18s linear infinite; font-weight: 600; color: var(--text); }
   .xl-foot .stamp { margin-left: auto; opacity: 0; font-size: 9px; font-weight: 700; color: #fff; background: var(--green); padding: 2px 7px; border-radius: 5px; animation: stampIn 18s linear infinite; }
   @keyframes stampIn { 0%,72%{opacity:0;transform:scale(.7);} 77%{opacity:1;transform:scale(1);} 99%{opacity:1;} 100%{opacity:0;} }
-  .xl-tag { position: absolute; left: 50%; top: 82%; transform: translate(-50%,0); z-index: 4; font-size: 9.5px; color: var(--text-muted); letter-spacing: .03em; white-space: nowrap; }
+  .xl-tag { position: absolute; left: 50%; top: 75.5%; transform: translate(-50%,0); z-index: 4; font-size: 9.5px; color: var(--text-muted); letter-spacing: .03em; white-space: nowrap; }
   .xl-tag b { color: var(--green); font-weight: 650; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -113,7 +114,7 @@
     .src { opacity: 1 !important; }
   }
   @media (prefers-reduced-motion: reduce) and (min-width: 641px) {
-    .srcReal { transform: translate(-100%,-50%); }
+    .srcPublic { transform: translate(-100%,-50%); }
   }
 
   .gComp { display: contents; }
@@ -175,9 +176,9 @@
       <!-- Verifier loop -->
       <path class="flow" d="M 620 212 C 720 196, 812 214, 799 273 C 792 300, 720 300, 620 262" />
       <!-- sources into comps -->
-      <line class="flow" x1="765" y1="80" x2="512" y2="44" />
-      <line class="flow" x1="775" y1="76" x2="677" y2="48" />
-      <line class="flow" x1="802" y1="80" x2="872" y2="44" />
+      <line class="flow" x1="760" y1="80" x2="465" y2="44" />
+      <line class="flow" x1="772" y1="78" x2="588" y2="44" />
+      <line class="flow" x1="798" y1="78" x2="808" y2="46" />
       <!-- tax -> county -->
       <line class="flow" x1="510" y1="396" x2="620" y2="396" />
 
@@ -202,8 +203,8 @@
     <!-- ── data sources ── -->
     <div class="gComp">
       <div class="src srcCoStar"><img class="lg" src="logos/costar.svg" alt="CoStar" /><span class="div"></span><span class="sd">sales</span></div>
+      <div class="src srcYardi"><b class="wm">Yardi</b><span class="div"></span><span class="sd">rents</span></div>
       <div class="src srcPublic"><span class="badge">WEB</span> public research</div>
-      <div class="src srcReal"><img class="lg" src="logos/realpage.svg" alt="RealPage" /><span class="div"></span><span class="sd">rents</span></div>
     </div>
     <div class="src srcCounty"><span class="badge">PUBLIC</span> County records</div>
 
@@ -226,7 +227,7 @@
 
 <style>
   @keyframes bIntake { 0%,3%{transform:translate(60px,88px);opacity:0;} 5%{transform:translate(160px,88px);opacity:1;} 9%{transform:translate(160px,88px);opacity:1;} 14%{transform:translate(141px,273px);opacity:1;} 17%{transform:translate(141px,273px);opacity:1;} 22%{transform:translate(430px,230px);opacity:1;} 24%,100%{opacity:0;} }
-  @keyframes bCompsPull { 0%,28%{transform:translate(780px,88px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(489px,40px);opacity:1;} 36%{transform:translate(677px,40px);opacity:1;} 39%{transform:translate(860px,40px);opacity:1;} 42%{transform:translate(780px,88px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bCompsPull { 0%,28%{transform:translate(780px,88px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(442px,40px);opacity:1;} 36%{transform:translate(564px,40px);opacity:1;} 39%{transform:translate(805px,40px);opacity:1;} 42%{transform:translate(780px,88px);opacity:1;} 44%,100%{opacity:0;} }
   @keyframes bCompsIn { 0%,44%{transform:translate(780px,88px);opacity:0;} 46%{opacity:1;} 51%{transform:translate(600px,180px);opacity:1;} 53%,100%{opacity:0;} }
   @keyframes bTaxPull { 0%,30%{transform:translate(470px,396px);opacity:0;} 32%{opacity:1;} 37%{transform:translate(620px,396px);opacity:1;} 42%{transform:translate(470px,396px);opacity:1;} 44%,100%{opacity:0;} }
   @keyframes bTaxIn { 0%,45%{transform:translate(470px,396px);opacity:0;} 47%{opacity:1;} 52%{transform:translate(470px,300px);opacity:1;} 54%,100%{opacity:0;} }
