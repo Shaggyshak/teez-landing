@@ -99,10 +99,11 @@
       var em = document.getElementById('book-email');
       if (!em.value.trim() || !em.checkValidity()) { st.textContent = '#ERROR — enter a valid email.'; st.className = 'status error'; return; }
       sub.disabled = true; sub.innerHTML = 'Submitting…'; st.textContent = ''; st.className = 'status';
-      fetch(SB + '/rest/v1/landing_leads', {
+      fetch(SB + '/rest/v1/leads', {
         method: 'POST',
         headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
         body: JSON.stringify({
+          kind: 'book_call',
           email: em.value.trim(),
           name: (document.getElementById('book-name').value || '').trim() || null,
           message: (document.getElementById('book-message').value || '').trim() || null,
