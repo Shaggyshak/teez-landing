@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Teez — your Excel model, built by a small team</title>
+<style>
+  :root {
+    --bg: #ffffff; --bg-deeper: #F1F3F5;
+    --green: #107C41; --green-glow: rgba(16,124,65,0.12); --xl-green: #217346;
+    --text: #1F2329; --text-dim: #5B6168; --text-muted: #8A8F96; --border: #E1E4E8;
+    --cyan: #0E7490; --pink: #BE185D; --gold: #B7791F; --violet: #6D28D9; --blue: #1D4ED8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 12px; color: var(--text); }
+  .frame { width: 100%; max-width: 940px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: #fff; box-shadow: 0 24px 60px -22px rgba(31,35,41,0.20), 0 0 0 1px var(--border); }
+  .chrome { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg-deeper); border-bottom: 1px solid var(--border); }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #D3D6DA; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .chrome-title { margin-left: 14px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
+  .chrome-spacer { flex: 1; }
+  .chrome-badge { font-size: 10px; color: var(--green); background: var(--green-glow); border: 1px solid rgba(16,124,65,0.25); padding: 3px 9px; border-radius: 100px; letter-spacing: 0.04em; display: flex; align-items: center; gap: 5px; }
+  .chrome-badge::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: ping 2s infinite; }
+  @keyframes ping { 0%{box-shadow:0 0 0 0 rgba(16,124,65,0.5);} 70%{box-shadow:0 0 0 6px rgba(16,124,65,0);} 100%{box-shadow:0 0 0 0 rgba(16,124,65,0);} }
+
+  .stage { position: relative; width: 100%; aspect-ratio: 940 / 440; background: radial-gradient(105% 105% at 50% 50%, #FBFDFC 0%, #F6F8F7 62%, #F1F3F5 100%); }
+  .wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .wires line, .wires path { stroke: var(--border); stroke-width: 1.4; fill: none; }
+  .wires .flow { stroke-dasharray: 3 7; stroke-linecap: round; animation: march 1.1s linear infinite; }
+  @keyframes march { to { stroke-dashoffset: -20; } }
+  .pkt { r: 5; will-change: transform, opacity; }
+
+  .node, .src, .inbox { position: absolute; z-index: 3; transform: translate(-50%, -50%); }
+
+  /* compact specialist chips */
+  .node { width: 150px; padding: 10px 12px; background: #fff; border: 1px solid var(--border); border-radius: 11px; box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); animation: wake 18s linear infinite; }
+  @keyframes wake {
+    0%   { border-color: var(--border); box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); }
+    6%   { border-color: var(--c); box-shadow: 0 9px 22px -8px color-mix(in srgb, var(--c) 45%, transparent), 0 0 0 4px color-mix(in srgb, var(--c) 13%, transparent); }
+    90%  { border-color: color-mix(in srgb, var(--c) 55%, var(--border)); box-shadow: 0 7px 18px -10px color-mix(in srgb, var(--c) 28%, transparent); }
+    100% { border-color: var(--border); box-shadow: 0 6px 16px -10px rgba(31,35,41,0.30); }
+  }
+  .node .top { display: flex; align-items: center; gap: 6px; }
+  .node .ic { width: 19px; height: 19px; border-radius: 5px; flex: none; background: color-mix(in srgb, var(--c) 15%, #fff); border: 1px solid color-mix(in srgb, var(--c) 45%, #fff); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--c); font-weight: 700; }
+  .node .nm { font-size: 13px; font-weight: 680; letter-spacing: -0.01em; }
+  .node .rl { font-size: 10.5px; color: var(--text-dim); margin-top: 4px; line-height: 1.3; }
+
+  /* corners around the sheet */
+  .nScout { left: 17%;  top: 20%; --c: var(--blue);   animation-delay: -17.64s; }
+  .nComp  { left: 83%;  top: 20%; --c: var(--violet); animation-delay: -13.68s; }
+  .nRead  { left: 15%;  top: 62%; --c: var(--cyan);   animation-delay: -16.2s;  }
+  .nVer   { left: 85%;  top: 62%; --c: var(--pink);   animation-delay: -7.92s;  }
+  .nTax   { left: 50%;  top: 90%; --c: var(--gold);   animation-delay: -13.68s; }
+
+  /* data-source chips */
+  .src { display: flex; align-items: center; gap: 6px; padding: 5px 8px; background: #fff; border: 1px solid var(--border); border-radius: 9px; font-size: 10px; color: var(--text-dim); white-space: nowrap; box-shadow: 0 4px 12px -8px rgba(31,35,41,0.22); animation: srcFlash 18s linear infinite; }
+  .src .badge { font-size: 8.5px; font-weight: 700; letter-spacing: .04em; padding: 2px 5px; border-radius: 5px; color: #fff; background: var(--sc); }
+  .src .lg { height: 12px; width: auto; display: block; }
+  .src .sd { color: var(--text-muted); font-size: 9.5px; }
+  .src .div { width: 1px; height: 11px; background: var(--border); }
+  @keyframes srcFlash {
+    0%,29%  { border-color: var(--border); box-shadow: 0 4px 12px -8px rgba(31,35,41,0.22); }
+    35%     { border-color: var(--sc); box-shadow: 0 6px 16px -6px color-mix(in srgb, var(--sc) 45%, transparent), 0 0 0 4px color-mix(in srgb, var(--sc) 12%, transparent); }
+    47%,96% { border-color: color-mix(in srgb, var(--sc) 40%, var(--border)); }
+    100%    { border-color: var(--border); }
+  }
+  .srcCoStar { left: 47%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); }
+  .srcYardi  { left: 60%; top: 9%; --sc: var(--violet); transform: translate(-50%,-50%); animation-delay: .1s; }
+  .srcPublic { left: 92%; top: 9%; --sc: var(--violet); transform: translate(-100%,-50%); animation-delay: .2s; }
+  .src .wm { font-weight: 800; color: var(--text); font-size: 11px; letter-spacing: -.02em; }
+  .srcCounty { left: 68%; top: 90%; --sc: var(--gold); }
+
+  .inbox { left: 4%; top: 20%; transform: translate(0,-50%); width: 48px; z-index: 2; opacity: .85; }
+  .inbox .ir { height: 7px; border-radius: 3px; background: var(--bg-deeper); margin-bottom: 4px; }
+  .inbox .ir.hot { background: color-mix(in srgb, var(--blue) 35%, var(--bg-deeper)); animation: inHot 18s linear infinite; }
+  @keyframes inHot { 0%,2%{background:var(--bg-deeper);} 5%{background:color-mix(in srgb,var(--blue) 50%,#fff);} 14%{background:var(--bg-deeper);} 100%{background:var(--bg-deeper);} }
+
+  /* ── the Excel model at the center — this IS the underwriter ── */
+  .xl { position: absolute; left: 50%; top: 49%; transform: translate(-50%,-50%); z-index: 4; width: 256px; background: #fff; border: 1px solid #CBD5D1; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 44px -16px rgba(33,115,70,0.42), 0 0 0 6px rgba(33,115,70,0.08); animation: xlPulse 3s ease-in-out infinite; }
+  @keyframes xlPulse { 0%,100%{box-shadow:0 18px 44px -18px rgba(33,115,70,0.38),0 0 0 5px rgba(33,115,70,0.07);} 50%{box-shadow:0 20px 48px -16px rgba(33,115,70,0.5),0 0 0 9px rgba(33,115,70,0.13);} }
+  .xl-bar { display: flex; align-items: center; gap: 7px; padding: 7px 11px; background: var(--xl-green); color: #fff; }
+  .xl-bar img { height: 14px; filter: brightness(0) invert(1); }
+  .xl-bar .fn { font-size: 11px; font-weight: 650; }
+  .xl-bar .live { margin-left: auto; font-size: 9px; opacity: .9; display: flex; align-items: center; gap: 4px; }
+  .xl-bar .live::before { content:""; width: 5px; height: 5px; border-radius: 50%; background: #fff; animation: ping 1.6s infinite; }
+  .xl-grid { display: grid; grid-template-columns: 18px 1fr 54px 54px; font-size: 9.5px; font-variant-numeric: tabular-nums; }
+  .xl-grid > div { padding: 3px 6px; border-bottom: 1px solid #EDEFF1; border-right: 1px solid #EDEFF1; }
+  .xl-grid .ch { background: #F6F8F7; color: var(--text-muted); font-weight: 600; font-size: 9px; text-align: right; }
+  .xl-grid .rh { background: #F6F8F7; color: var(--text-muted); text-align: center; font-size: 9px; }
+  .xl-grid .lbl { color: var(--text-dim); }
+  .xl-grid .num { text-align: right; color: var(--text); }
+  .xl-grid .num.neg { color: var(--pink); }
+  .xl-grid .sum { font-weight: 700; background: #F2F7F3; }
+  .xl-grid .v { opacity: 0; }
+  .xl-grid .v.fe { animation: cellFE 18s linear infinite; }
+  .xl-grid .v.fl { animation: cellFL 18s linear infinite; }
+  @keyframes cellFE { 0%,17%{opacity:0;} 22%{opacity:1;} 99%{opacity:1;} 100%{opacity:0;} }
+  @keyframes cellFL { 0%,50%{opacity:0;} 56%{opacity:1;} 99%{opacity:1;} 100%{opacity:0;} }
+  .xl-grid .lit-c { animation: litC 18s linear infinite; }
+  .xl-grid .lit-t { animation: litT 18s linear infinite; }
+  @keyframes litC { 0%,40%{background:inherit;} 45%{background: color-mix(in srgb,var(--violet) 15%,#fff);} 53%{background:inherit;} 100%{background:inherit;} }
+  @keyframes litT { 0%,42%{background:inherit;} 47%{background: color-mix(in srgb,var(--gold) 15%,#fff);} 55%{background:inherit;} 100%{background:inherit;} }
+  .xl-foot { display: flex; align-items: center; gap: 8px; padding: 7px 11px; background: #F6F8F7; font-size: 10px; color: var(--text-dim); }
+  .xl-foot .kpi { opacity: 0; animation: cellFL 18s linear infinite; font-weight: 600; color: var(--text); }
+  .xl-foot .stamp { margin-left: auto; opacity: 0; font-size: 9px; font-weight: 700; color: #fff; background: var(--green); padding: 2px 7px; border-radius: 5px; animation: stampIn 18s linear infinite; }
+  @keyframes stampIn { 0%,72%{opacity:0;transform:scale(.7);} 77%{opacity:1;transform:scale(1);} 99%{opacity:1;} 100%{opacity:0;} }
+  .xl-tag { position: absolute; left: 50%; top: 75.5%; transform: translate(-50%,0); z-index: 4; font-size: 9.5px; color: var(--text-muted); letter-spacing: .03em; white-space: nowrap; }
+  .xl-tag b { color: var(--green); font-weight: 650; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    .pkt { opacity: 0; }
+    .xl-grid .v, .xl-foot .kpi, .xl-foot .stamp { opacity: 1 !important; }
+    .src { opacity: 1 !important; }
+  }
+  @media (prefers-reduced-motion: reduce) and (min-width: 641px) {
+    .srcPublic { transform: translate(-100%,-50%); }
+  }
+
+  .gComp { display: contents; }
+
+  /* ── mobile: reflow into a clean vertical flow ── */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    body { display: block; padding: 10px; }
+    .frame { width: 100%; max-width: 100%; }
+    .stage {
+      aspect-ratio: auto; height: auto; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 9px; padding: 16px 12px 18px; background: #fff;
+    }
+    .wires, .inbox { display: none; }
+    .node, .src, .xl, .xl-tag, .gComp {
+      position: static; transform: none; left: auto; top: auto; bottom: auto;
+      margin: 0; min-width: 0; width: 100%; max-width: 340px;
+    }
+    .node { padding: 11px 13px; }
+    .node .nm { font-size: 13.5px; }
+    .node .rl { font-size: 11.5px; margin-top: 3px; }
+    .node .ic { width: 19px; height: 19px; font-size: 10px; }
+    .nScout { order: 1; } .nRead { order: 2; } .nComp { order: 3; }
+    .gComp { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; order: 4; }
+    .gComp .src { width: auto; max-width: none; transform: none; flex: 0 1 auto; font-size: 10px; padding: 5px 8px; }
+    .gComp .src .lg { height: 12px; }
+    .nTax { order: 5; }
+    .srcCounty { order: 6; width: auto; }
+    .xl { order: 7; max-width: 300px; margin: 4px 0 2px; }
+    .nVer { order: 8; }
+    .xl-tag { order: 9; text-align: center; font-size: 11px; }
+    .nScout::after, .nRead::after, .nComp::after, .nTax::after, .xl::after {
+      content: "↓"; position: absolute; left: 50%; bottom: -12px; transform: translateX(-50%);
+      color: var(--text-muted); font-size: 11px; line-height: 1; z-index: 5;
+    }
+    .nScout, .nRead, .nComp, .nTax, .xl { position: relative; }
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="chrome">
+    <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+    <div class="chrome-title">Teez · MapleCourt.xlsx — your model</div>
+    <div class="chrome-spacer"></div>
+    <div class="chrome-badge">Always on</div>
+  </div>
+
+  <div class="stage">
+    <svg class="wires" viewBox="0 0 940 440" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- intake: Scout -> Reader -> Excel -->
+      <line class="flow" x1="160" y1="88"  x2="141" y2="273" />
+      <line class="flow" x1="141" y1="273" x2="320" y2="230" />
+      <!-- Comps -> Excel -->
+      <line class="flow" x1="780" y1="88"  x2="600" y2="180" />
+      <!-- Tax -> Excel -->
+      <line class="flow" x1="470" y1="396" x2="470" y2="300" />
+      <!-- Verifier loop -->
+      <path class="flow" d="M 620 212 C 720 196, 812 214, 799 273 C 792 300, 720 300, 620 262" />
+      <!-- sources into comps -->
+      <line class="flow" x1="760" y1="80" x2="465" y2="44" />
+      <line class="flow" x1="772" y1="78" x2="588" y2="44" />
+      <line class="flow" x1="798" y1="78" x2="808" y2="46" />
+      <!-- tax -> county -->
+      <line class="flow" x1="510" y1="396" x2="620" y2="396" />
+
+      <!-- batons -->
+      <circle class="pkt" fill="#1D4ED8" style="animation: bIntake 18s linear infinite;" />
+      <circle class="pkt" fill="#6D28D9" style="animation: bCompsPull 18s linear infinite;" />
+      <circle class="pkt" fill="#6D28D9" style="animation: bCompsIn 18s linear infinite;" />
+      <circle class="pkt" fill="#B7791F" style="animation: bTaxPull 18s linear infinite;" />
+      <circle class="pkt" fill="#B7791F" style="animation: bTaxIn 18s linear infinite;" />
+      <circle class="pkt" fill="#BE185D" style="animation: bVer 18s linear infinite;" />
+    </svg>
+
+    <div class="inbox"><div class="ir hot"></div><div class="ir"></div><div class="ir"></div></div>
+
+    <!-- ── the small team, in the corners ── -->
+    <div class="node nScout"><div class="top"><span class="ic">◎</span><span class="nm">The Scout</span></div><div class="rl">catches it in your inbox</div></div>
+    <div class="node nRead"><div class="top"><span class="ic">▤</span><span class="nm">The Reader</span></div><div class="rl">reads OM · RR · T-12</div></div>
+    <div class="node nComp"><div class="top"><span class="ic">⌾</span><span class="nm">The Comps hand</span></div><div class="rl">sales &amp; rent comps</div></div>
+    <div class="node nVer"><div class="top"><span class="ic">✓</span><span class="nm">The Verifier</span></div><div class="rl">re-checks · sources it</div></div>
+    <div class="node nTax"><div class="top"><span class="ic">§</span><span class="nm">The Tax hand</span></div><div class="rl">assessed value · taxes</div></div>
+
+    <!-- ── data sources ── -->
+    <div class="gComp">
+      <div class="src srcCoStar"><img class="lg" src="logos/costar.svg" alt="CoStar" /><span class="div"></span><span class="sd">sales</span></div>
+      <div class="src srcYardi"><b class="wm">Yardi</b><span class="div"></span><span class="sd">rents</span></div>
+      <div class="src srcPublic"><span class="badge">WEB</span> public research</div>
+    </div>
+    <div class="src srcCounty"><span class="badge">PUBLIC</span> County records</div>
+
+    <!-- ── the Excel model ── -->
+    <div class="xl">
+      <div class="xl-bar"><img src="logos/excel.svg" alt="Excel" /><span class="fn">MapleCourt.xlsx</span><span class="live">underwriting</span></div>
+      <div class="xl-grid">
+        <div class="ch"></div><div class="ch" style="text-align:left">Line</div><div class="ch">T-12</div><div class="ch">Year 1</div>
+        <div class="rh">4</div><div class="lbl lit-c">Gross rent</div><div class="num"><span class="v fe">1,242,000</span></div><div class="num lit-c"><span class="v fl">1,311,300</span></div>
+        <div class="rh">5</div><div class="lbl">Vacancy</div><div class="num neg"><span class="v fe">(62,100)</span></div><div class="num neg"><span class="v fl">(59,008)</span></div>
+        <div class="rh">6</div><div class="lbl">Other income</div><div class="num"><span class="v fe">48,400</span></div><div class="num"><span class="v fl">52,900</span></div>
+        <div class="rh">7</div><div class="lbl lit-t">Operating exp.</div><div class="num neg"><span class="v fe">(431,500)</span></div><div class="num neg lit-t"><span class="v fl">(444,445)</span></div>
+        <div class="rh">8</div><div class="lbl sum">NOI</div><div class="num sum"><span class="v fe">796,800</span></div><div class="num sum"><span class="v fl">860,747</span></div>
+      </div>
+      <div class="xl-foot"><span class="kpi">Cap 6.20% · DSCR 1.41×</span><span class="stamp">sourced ✓</span></div>
+    </div>
+    <div class="xl-tag"><b>the underwriter</b> — your live model</div>
+  </div>
+</div>
+
+<style>
+  @keyframes bIntake { 0%,3%{transform:translate(60px,88px);opacity:0;} 5%{transform:translate(160px,88px);opacity:1;} 9%{transform:translate(160px,88px);opacity:1;} 14%{transform:translate(141px,273px);opacity:1;} 17%{transform:translate(141px,273px);opacity:1;} 22%{transform:translate(430px,230px);opacity:1;} 24%,100%{opacity:0;} }
+  @keyframes bCompsPull { 0%,28%{transform:translate(780px,88px);opacity:0;} 30%{opacity:1;} 33%{transform:translate(442px,40px);opacity:1;} 36%{transform:translate(564px,40px);opacity:1;} 39%{transform:translate(805px,40px);opacity:1;} 42%{transform:translate(780px,88px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bCompsIn { 0%,44%{transform:translate(780px,88px);opacity:0;} 46%{opacity:1;} 51%{transform:translate(600px,180px);opacity:1;} 53%,100%{opacity:0;} }
+  @keyframes bTaxPull { 0%,30%{transform:translate(470px,396px);opacity:0;} 32%{opacity:1;} 37%{transform:translate(620px,396px);opacity:1;} 42%{transform:translate(470px,396px);opacity:1;} 44%,100%{opacity:0;} }
+  @keyframes bTaxIn { 0%,45%{transform:translate(470px,396px);opacity:0;} 47%{opacity:1;} 52%{transform:translate(470px,300px);opacity:1;} 54%,100%{opacity:0;} }
+  @keyframes bVer { 0%,60%{transform:translate(620px,240px);opacity:0;} 62%{opacity:1;} 67%{transform:translate(799px,273px);opacity:1;} 73%{transform:translate(620px,240px);opacity:1;} 75%,100%{opacity:0;} }
+</style>
+</body>
+</html>
