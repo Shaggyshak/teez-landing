@@ -270,9 +270,6 @@ h3{font-size:18px;font-weight:700}
   .walk{grid-template-columns:1fr;gap:14px;padding:28px 24px}
   .demo-embed{display:none}
   .demo-fallback{display:block;margin-top:24px}
-  /* pipeline mock is CSS-only + reflows: keep it live on mobile, drop its static fallback */
-  #pipeline-demo{display:block;height:660px}
-  .pipeline-fallback{display:none}
   .app-id .file,.statusbar .deskonly{display:none}
   .wrap{padding:0 22px}
   .sec{padding:52px 0}
