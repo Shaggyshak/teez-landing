@@ -1,0 +1,48 @@
+/* ===================================================================
+   Teez — legal & support pages
+   Prose layout for privacy.html / terms.html / support.html. Loaded on
+   top of style.css, which supplies the app chrome and design tokens.
+   =================================================================== */
+
+.legal{max-width:78ch;padding:64px 36px 88px}
+.legal .doc-head{border-bottom:1px solid var(--grid-2);padding-bottom:26px;margin-bottom:38px}
+.legal h1{font-size:38px;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+.legal .meta{font-family:var(--mono);font-size:12.5px;color:var(--hdr-tx);display:flex;flex-wrap:wrap;gap:6px 20px}
+.legal .meta b{color:var(--ink-2);font-weight:500}
+
+.legal h2{font-size:21px;letter-spacing:-.01em;margin:44px 0 12px;padding-top:4px}
+.legal h2:first-of-type{margin-top:0}
+.legal h3{font-size:16.5px;margin:26px 0 8px;color:var(--ink)}
+.legal p{margin-bottom:14px;color:var(--ink-2)}
+.legal p strong,.legal li strong{color:var(--ink);font-weight:600}
+.legal ul{margin:0 0 16px 22px;color:var(--ink-2)}
+.legal li{margin-bottom:8px}
+.legal a{color:var(--green);text-decoration:underline;text-underline-offset:2px}
+.legal a:hover{color:var(--green-2)}
+
+/* defined-term and inline code */
+.legal code{font-family:var(--mono);font-size:.88em;background:var(--gutter);border:1px solid var(--gutter-line);border-radius:3px;padding:1px 5px;color:var(--ink)}
+
+/* data table used in the privacy policy */
+.legal .tbl-scroll{overflow-x:auto;margin:0 0 22px}
+.legal table{border-collapse:collapse;width:100%;min-width:520px;font-size:15px}
+.legal th,.legal td{text-align:left;vertical-align:top;padding:10px 14px;border:1px solid var(--grid-2)}
+.legal th{background:var(--gutter);font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--hdr-tx);font-weight:600;white-space:nowrap}
+.legal td{color:var(--ink-2)}
+
+/* callout */
+.legal .note{border-left:3px solid var(--green);background:var(--green-soft);padding:14px 18px;margin:0 0 22px;border-radius:0 4px 4px 0}
+.legal .note p:last-child{margin-bottom:0}
+
+/* support page contact cards */
+.legal .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:16px;margin:0 0 30px}
+.legal .card{border:1px solid var(--grid-2);border-radius:5px;padding:20px 22px;background:#fff}
+.legal .card .k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--hdr-tx);display:block;margin-bottom:8px}
+.legal .card .v{font-size:19px;font-weight:600;letter-spacing:-.01em;display:block;margin-bottom:6px}
+.legal .card p{font-size:14.5px;margin-bottom:0}
+
+@media(max-width:720px){
+  .legal{padding:44px 20px 64px}
+  .legal h1{font-size:29px}
+  .legal h2{font-size:19px;margin-top:36px}
+}
