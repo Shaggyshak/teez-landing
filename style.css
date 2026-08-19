@@ -252,7 +252,7 @@ h3{font-size:18px;font-weight:700}
 .tabsbar .tb{font-size:13px;color:var(--ink-2);padding:8px 16px;border-right:1px solid var(--gutter-line);white-space:nowrap}
 .tabsbar .tb.act{background:#fff;color:var(--green);font-weight:700;border-top:2px solid var(--green);margin-top:-1px}
 .tabsbar .tb.add{color:var(--ink-3);padding:8px 12px}
-.statusbar{display:flex;align-items:center;justify-content:space-between;height:30px;padding:0 16px;background:var(--chrome);color:#9AA0A6;font-family:var(--mono);font-size:11px}
+.statusbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;height:auto;min-height:30px;padding:0 16px;background:var(--chrome);color:#9AA0A6;font-family:var(--mono);font-size:11px}
 .statusbar .l{display:flex;gap:18px;align-items:center}
 .statusbar .ready{color:#5BD18B}
 .statusbar a{color:inherit;text-decoration:none}
@@ -286,7 +286,7 @@ h3{font-size:18px;font-weight:700}
   .walk .q{font-size:34px}
 }
 @media(max-width:640px){
-  .statusbar{height:auto;min-height:30px;flex-wrap:wrap;padding:6px 14px;gap:2px 14px}
+  .statusbar{padding:6px 14px;gap:2px 14px}
   .statusbar .l{flex-wrap:wrap;gap:10px}
   .statusbar .contact{white-space:normal}
 }
