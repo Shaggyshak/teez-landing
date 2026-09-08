@@ -11,39 +11,36 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teez &mdash; Acquisitions-as-a-Service for sub-scale CRE sponsors</title>
-  <meta name="description" content="Hand us a live deal. We underwrite it in your own Excel template — every number sourced, checked, ready for IC. Done-for-you underwriting for sub-scale sponsors, family offices, and emerging GPs." />
+  <title>Teez &mdash; The AI Back Office for Every CRE Shop</title>
+  <meta name="description" content="Teez builds a super intelligence layer on top of your existing Excel templates and past deals — and works inside your texts and emails. For CRE sponsors &amp; GPs, brokers, and analysts." />
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260629b" />
+  <link rel="stylesheet" href="style.css?v=20260908a" />
 </head>
 <body>
 
 <!-- app chrome -->
 <div class="app">
   <div class="app-top">
-    <div class="app-id">
+    <a href="/" class="app-id">
       <img src="images/teez-icon.png" alt="Teez">
       <span class="nm">Teez</span>
-      <span class="file">Maple Court — 84 units.xlsx</span>
-    </div>
+    </a>
     <nav class="app-nav">
-      <a href="/" class="act">For Investors</a>
-      <a href="/brokers.html">For Brokers</a>
-      <a href="/vision.html">Vision</a>
+      <a href="/sponsors.html">Sponsors &amp; GPs</a>
+      <a href="/brokers.html">Brokers</a>
+      <a href="/analysts.html">Analysts</a>
       <a href="/pricing.html">Pricing</a>
     </nav>
     <div class="app-right">
       <button class="navtoggle" aria-label="Open menu" aria-expanded="false">☰</button>
       <a href="https://app.teez.live/login" class="login">Log in</a>
-      <a href="#book" class="book">Book a call</a>
     </div>
   </div>
   <div class="fxbar">
-    <div class="fx-name"><span class="nb">B4</span><span>fx</span></div>
-    <div class="fx-val"><span id="fx" data-formula='=UNDERWRITE("Maple Court.pdf")'></span><span class="caret" id="caret"></span></div>
+    <div class="fx-val"><span id="fx" data-formula='=TEEZ("your templates", "your deals")'></span><span class="caret" id="caret"></span></div>
   </div>
 </div>
 
@@ -54,160 +51,41 @@
 </div>
 
 <div class="sheet">
-  <div class="gutter" id="gutter" data-act="4,5,6,7,8"></div>
+  <div class="gutter" id="gutter" data-act="4,5,6"></div>
   <div class="canvas">
     <div class="colguides" aria-hidden="true"><div class="inner"><span></span><span class="act"></span><span></span><span></span><span></span><span></span><span></span></div></div>
 
     <!-- HERO -->
-    <header class="hero">
+    <header class="hero solo">
       <div class="wrap hero-top">
         <div>
-          <div class="range"><span class="tab">A1</span><span class="nm">For sub-scale CRE sponsors, family offices &amp; emerging GPs</span></div>
-          <h1>From your first pass to the <span class="g">final number.</span></h1>
-          <p class="hero-sub">Underwrite it yourself in Excel in minutes — sourced, in your own template. Then, on the deals worth it, hand it to us: we collect the <em>real</em> numbers from broker, PM, lender, insurance &amp; tax and re-underwrite against your hurdle.</p>
-          <div class="hero-cta">
-            <a href="#book" class="btn-fill">Start underwriting</a>
-          </div>
-          <div class="hero-stats">
-            <div class="hstat"><b>Excel-native</b><span>your sheet, your tenant</span></div>
-            <div class="hstat"><b>Multi-asset</b><span>MF · industrial · retail</span></div>
-            <div class="hstat"><b>Sourced</b><span>every number cites its doc</span></div>
-          </div>
-        </div>
-
-        <div class="mini" id="mini" aria-label="Live worksheet">
-          <div class="mini-bar"><span>Summary · B2:D8</span><span>auto-calc on</span></div>
-          <div class="mini-grid">
-            <div class="mc ch"></div><div class="mc ch">Line</div><div class="mc ch">T-12</div><div class="mc ch">Year 1</div>
-            <div class="mc rh">4</div><div class="mc lbl">Gross rent</div><div class="mc num">1,242,000</div><div class="mc num empty" data-v="1,311,300">—</div>
-            <div class="mc rh">5</div><div class="mc lbl">Vacancy</div><div class="mc num neg">(62,100)</div><div class="mc num neg empty" data-v="(59,008)">—</div>
-            <div class="mc rh">6</div><div class="mc lbl">Other income</div><div class="mc num">48,400</div><div class="mc num empty" data-v="52,900">—</div>
-            <div class="mc rh">7</div><div class="mc lbl">Operating exp.</div><div class="mc num neg">(431,500)</div><div class="mc num neg empty" data-v="(444,445)">—</div>
-            <div class="mc rh">8</div><div class="mc lbl sum">NOI</div><div class="mc num sum">796,800</div><div class="mc num sum sel empty" id="noi" data-v="860,747">—</div>
-          </div>
-          <div class="mini-foot"><span>Cap 6.20% · DSCR 1.41×</span><span class="live">teez filling…</span></div>
+          <h1>The AI back office<br>for every <span class="g">CRE shop.</span></h1>
+          <p class="hero-sub" style="max-width:52ch">teez underwrites on top of the Excel templates and past deals you already have — and works inside your texts and emails — getting smarter with every deal you run. No new platform to migrate to, no dashboard required. Spend that time on the relationships that grow your business, not another screen.</p>
         </div>
       </div>
-      <div class="wrap"><p class="hero-note">↑ your first pass — filled in your own template, every number sourced.</p></div>
     </header>
 
-    <!-- PROBLEM -->
-    <section class="sec prose" id="problem">
+    <!-- ROUTER -->
+    <section class="sec" id="router">
       <div class="wrap">
-        <div class="range"><span class="tab">B11</span><span class="nm">The Monday problem</span></div>
-        <h2>IC is Monday and the<br>model isn't done.</h2>
-        <p>Three OMs landed in your inbox over the weekend. Last quarter's template still has broken links from when you patched the rent-roll tab. A broker called Wednesday wanting a number you didn't have. The deal you passed on last month is the one your competitor just closed. <b>Excel didn't get you here. Hand-rolling models won't get you out.</b></p>
-      </div>
-    </section>
-
-    <!-- INSPIRE -->
-    <section class="sec" id="demo">
-      <div class="wrap">
-        <div class="range"><span class="tab">B14</span><span class="nm">Your week with teez</span></div>
-        <h2 style="margin-bottom:16px">Monday, 9:01 AM.</h2>
-        <p class="lead" style="max-width:70ch">Three new OMs came in over the weekend. By 9 we've triaged them, drafted models in your template for the two worth a real look, pulled comps, and flagged a rent-roll inconsistency on the third. You're on the phone with the broker by 10. By Friday you've underwritten more deals than you used to look at in a month.</p>
-        <p class="closer">Same templates. Same data. Same you. <span class="g">Different week.</span></p>
-        <iframe class="demo-embed" id="pipeline-demo" src="mockups/acquisition-pipeline-simple.html" title="Teez — a small team fills your Excel model, every number sourced" height="500" loading="lazy"></iframe>
-        <div class="win demo-fallback pipeline-fallback" aria-label="Acquisitions inbox">
-          <div class="win-bar"><i></i><i></i><i></i><span class="t">Acquisitions — weekend inbox</span></div>
-          <div class="inbox">
-            <div class="ibrow"><div class="av">MC</div><div class="meta"><b>Maple Court — 84 units</b><span>OM · rent roll · T-12</span></div><span class="pill ok">model drafted ✓</span></div>
-            <div class="ibrow"><div class="av">RF</div><div class="meta"><b>Riverside Flats — 120 units</b><span>OM · rent roll · T-12</span></div><span class="pill ok">model drafted ✓</span></div>
-            <div class="ibrow"><div class="av">OT</div><div class="meta"><b>Oak Terrace — 60 units</b><span>rent-roll mismatch on unit mix</span></div><span class="pill flag">flagged !</span></div>
-          </div>
-          <div class="win-foot"><span>3 deals · 1 needs you</span><span class="done">triaged 9:01 AM</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- HOW -->
-    <section class="sec" id="how">
-      <div class="wrap">
-        <div class="range"><span class="tab">B18</span><span class="nm">The product · self-serve</span></div>
-        <h2>Underwrite it yourself,<br>right in your <span class="g">Excel.</span></h2>
-        <p class="lead" style="margin:14px 0 0;max-width:60ch">The teez add-in lives in your firm's existing model — <span class="g">never</span> overwriting a formula you wrote. Drop in the docs; it fills your template and sources every number. Your sheet, your data, your tenant.</p>
-        <div class="byo">
-          <span class="chip">BYOS · your spreadsheet</span>
-          <span class="chip">BYOD · your data, your tenant</span>
-          <span class="chip">No migration</span>
-        </div>
-        <iframe class="demo-embed" src="mockups/excel-pane-demo.html" title="Teez agent building a pro forma in your Excel — live demo" height="640" loading="lazy"></iframe>
-        <div class="win demo-fallback" id="feedwin" aria-label="Agent at work">
-          <div class="win-bar"><i></i><i></i><i></i><span class="t">teez · task pane — Maple Court</span></div>
-          <div class="feed" id="feed">
-            <div class="fl"><span class="ic ok">✓</span><span class="tx">Parsed <b>OM</b>, rent roll, T-12</span><span class="rt">3 docs</span></div>
-            <div class="fl"><span class="ic ok">✓</span><span class="tx">Pulled <b>market comps</b></span><span class="rt">live</span></div>
-            <div class="fl"><span class="ic work">→</span><span class="tx">Filling <b>your template</b></span><span class="rt">142 cells</span></div>
-            <div class="fl"><span class="ic ok">✓</span><span class="tx">NOI verified vs T-12</span><span class="rt">$796,800</span></div>
-            <div class="fl"><span class="ic flag">!</span><span class="tx">Flagged <b>unit-mix mismatch</b></span><span class="rt">review</span></div>
-          </div>
-          <div class="win-foot"><span>Cap 6.20% · DSCR 1.41×</span><span class="done">model ready · 4m 12s</span></div>
-        </div>
+        <h2>Same engine. Built different<br>for <span class="g">how you work.</span></h2>
         <div class="cols3" style="margin-top:30px">
-          <div class="card3"><span class="ey">step · =B19</span><div class="formula"><span class="fn">=PARSE</span>(om, rent_roll, t12)</div><h3>Drop in the docs</h3><p>Drop the OM, rent roll, and T-12 into the pane. The agent reads them in parallel and pulls live market context from public data.</p></div>
-          <div class="card3"><span class="ey">step · =C19</span><div class="formula"><span class="fn">=FILL</span>(your_template)</div><h3>It fills your template</h3><p>The agent scans your model, writes values into the right input cells, and never touches a formula you wrote.</p></div>
-          <div class="card3"><span class="ey">step · =D19</span><div class="formula"><span class="fn">=VERIFY</span>(cap, dscr)</div><h3>It verifies, then flags</h3><p>A separate pass checks cap rate, DSCR, and cross-doc consistency — then flags anything worth a second look.</p></div>
+          <a class="card3 link" href="/sponsors.html">
+            <span class="ey">Sponsors &amp; GPs</span>
+            <h3>Teez runs your back office</h3>
+            <p>Let teez run an operating system on the tech stack you already built — underwrite deals from your inbox in minutes, get the IRR back by text.</p>
+          </a>
+          <a class="card3 link" href="/brokers.html">
+            <span class="ey">Brokers</span>
+            <h3>Your back office, in your pocket</h3>
+            <p>Never leave your phone — forward your clients the BOV in minutes, via text.</p>
+          </a>
+          <a class="card3 link" href="/analysts.html">
+            <span class="ey">Analysts</span>
+            <h3>Scale your business</h3>
+            <p>AI working with the exact template your clients asked you to use.</p>
+          </a>
         </div>
-      </div>
-    </section>
-
-    <!-- DEEP UNDERWRITING — the done-for-you add-on -->
-    <section class="sec" id="service">
-      <div class="wrap">
-        <div class="range"><span class="tab">B24</span><span class="nm">Deep Underwriting · the done-for-you add-on</span></div>
-        <h2>Your first pass runs on assumptions.<br>We finish it with the <span class="g">real numbers.</span></h2>
-        <p class="lead" style="margin:14px 0 0;max-width:66ch">When a deal clears your first pass, hand it to us. We collect the real numbers from the five people who actually have them, then re-underwrite against your return hurdle and send back a before/after — <span class="g">in your own template.</span></p>
-        <div class="two-grid top" style="margin-top:30px">
-          <div class="win" aria-label="Deep underwriting tracker">
-            <div class="win-bar"><i></i><i></i><i></i><span class="t">Deep Underwriting · Maple Court</span></div>
-            <div class="inbox">
-              <div class="ibrow"><div class="av">BR</div><div class="meta"><b>Broker / seller</b><span>actual rents, concessions, capex</span></div><span class="pill ok">received ✓</span></div>
-              <div class="ibrow"><div class="av">PM</div><div class="meta"><b>Property manager</b><span>real T-12, payroll, turnover</span></div><span class="pill ok">received ✓</span></div>
-              <div class="ibrow"><div class="av">LN</div><div class="meta"><b>Lender</b><span>quoted rate, terms, DSCR test</span></div><span class="pill ok">received ✓</span></div>
-              <div class="ibrow"><div class="av">IN</div><div class="meta"><b>Insurance broker</b><span>bound premium on this asset</span></div><span class="pill flag">collecting…</span></div>
-              <div class="ibrow"><div class="av">TX</div><div class="meta"><b>Tax assessor</b><span>reassessment at the sale price</span></div><span class="pill ok">received ✓</span></div>
-            </div>
-            <div class="win-foot"><span>4 of 5 inputs in</span><span class="done">re-underwriting</span></div>
-          </div>
-          <div>
-            <div class="stages">
-              <span class="stg done">Requested</span><span class="stg done">Collecting</span><span class="stg now">Re-underwriting</span><span class="stg">Delivered</span>
-            </div>
-            <div class="mini" style="margin-top:18px" aria-label="Before and after">
-              <div class="mini-bar"><span>Before / after · your hurdle 15% IRR</span><span>real vs assumed</span></div>
-              <div class="mini-grid" style="grid-template-columns:1.5fr 1fr 1fr">
-                <div class="mc ch">Line</div><div class="mc ch">Assumed</div><div class="mc ch">Real</div>
-                <div class="mc lbl">Insurance</div><div class="mc num">(52,000)</div><div class="mc num neg">(71,500)</div>
-                <div class="mc lbl">Taxes (reassessed)</div><div class="mc num">(96,000)</div><div class="mc num neg">(118,400)</div>
-                <div class="mc lbl">NOI</div><div class="mc num">796,800</div><div class="mc num">754,900</div>
-                <div class="mc lbl sum">Year-1 IRR</div><div class="mc num sum">16.2%</div><div class="mc num sum neg">13.6%</div>
-              </div>
-              <div class="mini-foot"><span>real numbers moved IRR −2.6 pts</span><span class="live">before you close</span></div>
-            </div>
-            <p class="footnote" style="margin-top:16px">Delivered as a re-underwritten model — or a full IC memo. You warm-intro your broker &amp; PM; we handle lender, insurance &amp; tax.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="sec cta" id="book">
-      <div class="wrap">
-        <div class="range"><span class="tab">B36</span><span class="nm">See it on your deal</span></div>
-        <h2>Bring a live deal.<br>Leave with the <span class="g">model.</span></h2>
-        <p class="lede">We'll run the agent on one of your real deals, in front of you, in 20 minutes.</p>
-        <p class="terms"><b>20 minutes.</b> No slide deck, no commitment. You keep the model regardless.</p>
-        <div class="entry">
-          <div class="entry-head"><span>A1</span><span style="flex:1">enter your details, press ⏎</span></div>
-          <form class="bookform" id="book-form" data-source="landing-sheet" novalidate>
-            <div class="row"><span class="k">email *</span><input type="email" id="book-email" name="email" placeholder="your@email.com" required autocomplete="email"></div>
-            <div class="row"><span class="k">name</span><input type="text" id="book-name" name="name" placeholder="optional" autocomplete="name"></div>
-            <div class="row"><span class="k">deal</span><input type="text" id="book-message" name="message" placeholder="what are you underwriting? (optional)" maxlength="200"></div>
-            <div class="submit-row"><button type="submit" id="book-submit">Book 20 minutes <span class="ent">⏎ Enter</span></button></div>
-          </form>
-        </div>
-        <p class="status" id="book-status" role="status" aria-live="polite"></p>
-        <p class="fallback">Or email <a href="mailto:hello@teez.live">hello@teez.live</a></p>
       </div>
     </section>
 
@@ -216,20 +94,19 @@
 
 <!-- footer = sheet tabs (page nav) + status bar -->
 <div class="tabsbar">
-  <a class="tb act" href="/">For Investors</a>
-  <a class="tb" href="/brokers.html">For Brokers</a>
-  <a class="tb" href="/vision.html">Vision</a>
+  <a class="tb act" href="/">Home</a>
+  <a class="tb" href="/sponsors.html">Sponsors &amp; GPs</a>
+  <a class="tb" href="/brokers.html">Brokers</a>
+  <a class="tb" href="/analysts.html">Analysts</a>
   <a class="tb" href="/pricing.html">Pricing</a>
   <a class="tb" href="/support.html">Support</a>
   <a class="tb" href="/privacy.html">Privacy</a>
   <a class="tb" href="/terms.html">Terms</a>
   <a class="tb" href="https://app.teez.live/login">Log in</a>
-  <a class="tb" href="mailto:hello@teez.live">hello@teez.live</a>
-  <a class="tb" href="tel:+16464848207">(646) 484-8207</a>
   <span class="tb add">+</span>
 </div>
 <div class="statusbar">
-  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — done-for-you underwriting for Excel</span></div>
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — the AI back office for every CRE shop</span></div>
   <div class="l"><span class="contact">1178 Broadway, 3rd Floor #1464, New York, NY 10001</span><a class="contact" href="tel:+16464848207">(646) 484-8207</a><span>© 2026 Teez, Inc.</span><span class="deskonly">100%</span></div>
 </div>
 
