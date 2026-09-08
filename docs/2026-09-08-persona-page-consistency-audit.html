@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Persona Page Consistency Audit</title>
+<style>
+  :root{
+    --ink:#1F2329; --ink-2:#5B6168; --ink-3:#9AA0A6;
+    --grid:#E7E9EC; --grid-2:#D8DBDF; --bg:#FBFBFC;
+    --green:#107C41; --green-soft:rgba(16,124,65,.08);
+    --amber-soft:rgba(183,121,31,.08); --amber:#B7791F;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --mono:'SF Mono',ui-monospace,'Cascadia Mono',Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;
+    max-width:880px;margin:0 auto;padding:48px 28px 90px}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:-.01em}
+  .intro{color:var(--ink-2);font-size:15px;max-width:66ch;margin:0 0 6px}
+  .stamp{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin:0 0 34px}
+  h2{font-size:15px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.03em;
+    color:var(--ink-2);border-bottom:1px solid var(--grid-2);padding-bottom:8px;
+    margin:44px 0 18px}
+  h2.sec-a{color:var(--green)} h2.sec-b{color:var(--amber)}
+  ol{padding-left:0;list-style:none;margin:0}
+  li.finding{position:relative;padding:14px 16px 14px 52px;margin-bottom:10px;
+    border:1px solid var(--grid-2);border-radius:8px;background:#fff;font-size:15px}
+  .sec-a li.finding{border-left:3px solid var(--green)}
+  .sec-b li.finding{border-left:3px solid var(--amber)}
+  .sec-c li.finding{border-left:3px solid var(--ink-3)}
+  .num{position:absolute;left:16px;top:14px;font-family:var(--mono);font-size:13px;
+    color:var(--ink-3);font-weight:600}
+  .cite{display:block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+  code{font-family:var(--mono);font-size:.92em;background:var(--grid);padding:1px 5px;
+    border-radius:4px;color:var(--ink)}
+  b{color:var(--ink)}
+  .order{background:#fff;border:1px solid var(--grid-2);border-radius:8px;padding:18px 20px;
+    font-size:15px;color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<h1>Persona page consistency audit</h1>
+<p class="intro">Sponsors &amp; GPs / Brokers / Analysts — compiled from three parallel review
+passes (layout/structure, copy/voice, component/CSS). Findings below are things that read as
+unintentional drift, not deliberate persona-specific choices (e.g. Brokers' text-thread vs.
+Excel-grid hero is intentional and excluded).</p>
+<p class="stamp">Line numbers as of 2026-09-08 — will drift as the pages are edited.</p>
+
+<h2 class="sec-a">A · High-confidence oversights (fix first)</h2>
+<ol class="sec-a">
+<li class="finding"><span class="num">1</span><b>sponsors.html's hero is missing three elements every other persona page has</b>: no <code>.hero-cta</code>/<code>.btn-fill</code> button, no <code>.hero-stats</code> block, and no <code>.hero-note</code> caption under the <code>.mini</code> widget. Brokers and Analysts both have all three. Sponsors and Analysts share the <i>identical</i> <code>.mini</code> widget markup, so Analysts explaining it with a hero-note while Sponsors leaves it uncaptioned looks like a dropped element, not a choice.<span class="cite">sponsors.html:60-78 vs. brokers.html:63-84, analysts.html:64-87</span></li>
+<li class="finding"><span class="num">2</span><b>The "Step 1/2/3" eyebrow uses two different CSS classes for the same visual job</b>: <code>.ey</code> (Sponsors, Analysts) vs. <code>.ref</code> (Brokers) — styled by two separate near-duplicate CSS rules (<code>.card3 .ey</code> is uppercase + letter-spaced; <code>.pcell .ref</code> is not), so identical copy renders with different typography depending on the page.<span class="cite">sponsors.html:131, analysts.html:121, brokers.html:107; style.css:169 vs. :185</span></li>
+<li class="finding"><span class="num">3</span><b>Brokers' "HOW" section is a full component-family swap, not a content swap</b>: Sponsors and Analysts both build their 3-step explainer as <code>.cols3</code> &gt; <code>.card3</code>, backed by an iframe demo + <code>.win</code>/<code>.feed</code> fallback. Brokers uses <code>.pipe</code> &gt; <code>.pcell</code> instead, with no iframe and no <code>.win</code>/<code>.feed</code> anywhere on the page — meaning the feed-line-reveal <code>IntersectionObserver</code> in app.js silently never fires on Brokers. Worth a deliberate design gate-check even if the underlying choice (text thread instead of a grid) is right.<span class="cite">brokers.html:105-124 vs. sponsors.html:118-134, analysts.html:108-124; app.js:76-87</span></li>
+<li class="finding"><span class="num">4</span><b>analysts.html has no equivalent to Sponsors' #demo section</b>, despite the two pages' <code>#how</code> sections otherwise being near-identical copy-paste. Sponsors' "Monday, 9:01 AM" narrative + inbox-triage demo has no counterpart on Analysts — reads like a section that didn't get ported over.<span class="cite">sponsors.html:91-108 has no analysts.html match</span></li>
+<li class="finding"><span class="num">5</span><b>sponsors.html's mailto fallback is missing the <code>?subject=</code> param</b> that both other pages have (<code>?subject=Teez%20for%20brokers</code> / <code>...analysts</code>) — bare <code>mailto:hello@teez.live</code>.<span class="cite">sponsors.html:162 vs. brokers.html:142, analysts.html:152</span></li>
+<li class="finding"><span class="num">6</span><b>A one-off widget exists only on sponsors.html</b>: <code>.inbox</code>/<code>.ibrow</code>/<code>.pill</code> (the "acquisitions inbox" UI inside the #demo fallback) is defined in the shared style.css but rendered nowhere else. Tied to finding A4 — likely leftover from Sponsors' own draft history rather than an adopted shared pattern.<span class="cite">sponsors.html:96-104; style.css:128-137</span></li>
+</ol>
+
+<h2 class="sec-b">B · Terminology / voice drift</h2>
+<ol class="sec-b">
+<li class="finding"><span class="num">7</span><b>"template" vs. "model" used interchangeably for the same object — including within a single page.</b> Worst on analysts.html: its own H1 says "your client's own <b>template</b>," the hero-sub two lines later says "fills your client's exact <b>model</b>," and the meta description says "<b>template</b>" again — three word choices for one concept in ~50 words. Same drift across pages: Sponsors mostly says "template," Brokers uses "template," "model," "BOV template," and "BOV/OM model" — four nouns for one artifact.<span class="cite">analysts.html:15/62/63; brokers.html:67/84/101/108</span></li>
+<li class="finding"><span class="num">8</span><b>The BYOS chip (identical UI element on all three pages) names three different nouns</b> for what the acronym stands for: "your <b>spreadsheet</b>" (Sponsors), "any client's <b>spreadsheet</b>" (Analysts), "your branded <b>models</b>" (Brokers — drops "spreadsheet" entirely).<span class="cite">sponsors.html:114, analysts.html:104, brokers.html:101</span></li>
+<li class="finding"><span class="num">9</span><b>"sourced" — the core trust word on Sponsors and Analysts — never appears on Brokers.</b> Brokers substitutes "checking out," "cross-checking," "Verified" instead. Given "your own template, sourced" is the trust claim this whole redesign is built on, its absence from one of three pages is a real gap, not a style choice.<span class="cite">sponsors.html:15/63/112, analysts.html:15/63/70/87/102 vs. brokers.html — no hits</span></li>
+<li class="finding"><span class="num">10</span><b>The product itself is named differently in the identical topic sentence</b>: "<b>the teez add-in</b> lives in..." (Sponsors, Analysts) vs. "<b>the agent</b> lives inside..." (Brokers).<span class="cite">sponsors.html:112, analysts.html:102, brokers.html:99</span></li>
+<li class="finding"><span class="num">11</span><b>Step-1 and Step-2 headings break an otherwise-shared pattern for no reason</b>: "Drop in the docs" (Sponsors, Analysts, verbatim) vs. "Drop <b>the deal</b> docs" (Brokers). "It fills <b>your/their</b> template" (Sponsors, Analysts) vs. "Fills your firm's <b>BOV/OM model</b>" (Brokers) — breaks the "It fills X template" parallel.<span class="cite">sponsors.html:131-132, analysts.html:121-122, brokers.html:107-108</span></li>
+<li class="finding"><span class="num">12</span><b>Brokers' own hero-stat contradicts itself</b>: bold label "<b>Your templates</b>" paired with the description "your branded BOV / OM <b>models</b>" — template/model drift inside one stat card.<span class="cite">brokers.html:67</span></li>
+<li class="finding"><span class="num">13</span><b>CTA headline pattern breaks on Brokers</b>: Sponsors and Analysts both follow "Bring a [thing]. Leave with the model." — Brokers uses an unrelated shape ("One pitch, in front of you, in 20 minutes.").<span class="cite">sponsors.html:149, analysts.html:139 vs. brokers.html:129</span></li>
+<li class="finding"><span class="num">14</span><b>The "you keep it regardless" reassurance is worded differently for no reason</b>: "You keep the <b>model regardless</b>" (Sponsors, Analysts) vs. "you keep <b>it either way</b>" (Brokers).<span class="cite">sponsors.html:151, analysts.html:141, brokers.html:131</span></li>
+<li class="finding"><span class="num">15</span><b>Green-span (.g) emphasis placement differs</b>: Sponsors and Analysts both highlight only the trailing phrase of one flowing H1 sentence; Brokers highlights the <i>entire second sentence</i> of a two-sentence H1 — a different emphasis rule for the same slot.<span class="cite">sponsors.html:62, analysts.html:62 vs. brokers.html:61</span></li>
+<li class="finding"><span class="num">16</span><b>Formula-bar argument count is inconsistent</b>: <code>=UNDERWRITE("file.pdf")</code> (Sponsors, Analysts — one arg) vs. <code>=PITCH("rent roll.xlsx", "text")</code> (Brokers — two args). The verb swap is arguably deliberate (pitch vs. underwrite); the extra argument reads arbitrary rather than designed.<span class="cite">sponsors.html:43, analysts.html:43, brokers.html:42</span></li>
+<li class="finding"><span class="num">17</span><b>Sponsors is the most verbose page, Brokers the most rhythmically inconsistent.</b> Sponsors runs 5 major sections and a 6-sentence problem paragraph vs. Analysts' 4 and Brokers' 3. Brokers' hero-sub closes tersely ("You never open the file.") but its problem-section punchline is 17 words vs. Analysts' 3-word and Sponsors' 6-word equivalents in the identical "It isn't X. It's Y." slot.<span class="cite">sponsors.html generally; brokers.html:62/91 vs. analysts.html:94, sponsors.html:85</span></li>
+</ol>
+
+<h2 class="sec-c">C · Component / dead-code cleanup</h2>
+<ol class="sec-c">
+<li class="finding"><span class="num">18</span><b>.book (filled-green nav button class) is defined in style.css but unused by all three pages</b> — all three use <code>.login</code> for "Log in" instead. Dead relative to this page set (may still be used on index.html/pricing.html/vision.html — worth checking before removing).</li>
+<li class="finding"><span class="num">19</span><b>.fx-name and its responsive override are dead weight</b> — no page in this set renders a <code>.fx-name</code> element anymore (removed earlier this session); only <code>.fx-val</code> is used. Same for the generic <code>.eyebrow</code> class — unused by any of the three, superseded by the <code>.ey</code>/<code>.ref</code> split in finding B2.</li>
+<li class="finding"><span class="num">20</span><b>Orphaned id="noi"</b> on the NOI cell in both Sponsors' and Analysts' <code>.mini</code> widget — app.js never references it. Consistent across both pages that have it, but dead.</li>
+<li class="finding"><span class="num">21</span><b>The same inline style="..." values are copy-pasted verbatim across all three pages</b> instead of being a class — e.g. <code>style="flex:1"</code> on the entry-head span, <code>style="margin:14px 0 0;max-width:60ch"</code> on the HOW section's lead paragraph, and <code>style="margin-top:30px"</code> on <code>.cols3</code>. Low risk today, but a class edited on one page won't propagate to the others since the override lives inline in three separate places.</li>
+</ol>
+
+<h2>Suggested order of attack</h2>
+<div class="order">Fix A1–A6 first (they're unambiguous gaps, not judgment calls). B7–B17 are a copy pass —
+worth doing in one sweep since fixing "template vs. model" properly means picking one word and
+applying it everywhere, not patching each instance in isolation. C18–C21 are cheap cleanup, safe
+to batch with either pass.</div>
+
+</body>
+</html>

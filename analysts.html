@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1ENM84PQE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F1ENM84PQE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teez &mdash; The Excel Add-in for CRE Analysts</title>
+  <meta name="description" content="The Excel add-in for independent CRE analysis and modeling shops. Drop in the deal docs — it fills your client's exact template, every number sourced. Standalone subscription, no platform." />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260908a" />
+</head>
+<body>
+
+<!-- app chrome -->
+<div class="app">
+  <div class="app-top">
+    <a href="/" class="app-id">
+      <img src="images/teez-icon.png" alt="Teez">
+      <span class="nm">Teez</span>
+    </a>
+    <nav class="app-nav">
+      <a href="/sponsors.html">Sponsors &amp; GPs</a>
+      <a href="/brokers.html">Brokers</a>
+      <a href="/analysts.html" class="act">Analysts</a>
+      <a href="/pricing.html">Pricing</a>
+    </nav>
+    <div class="app-right">
+      <button class="navtoggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <a href="https://app.teez.live/login" class="login">Log in</a>
+    </div>
+  </div>
+  <div class="fxbar">
+    <div class="fx-val"><span id="fx" data-formula='=UNDERWRITE("client OM.pdf")'></span><span class="caret" id="caret"></span></div>
+  </div>
+</div>
+
+<!-- column header -->
+<div class="colhead">
+  <div class="corner"><i></i></div>
+  <div class="cols"><span>A</span><span class="act">B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
+</div>
+
+<div class="sheet">
+  <div class="gutter" id="gutter" data-act="4,5,6,7,8"></div>
+  <div class="canvas">
+    <div class="colguides" aria-hidden="true"><div class="inner"><span></span><span class="act"></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="wrap hero-top">
+        <div>
+          <h1>Models and decks, done in<br><span class="g">your client's own template.</span></h1>
+          <p class="hero-sub">Drop in the OM, rent roll, and T-12 — the add-in fills your client's exact template, every number sourced, so what you hand back looks like it always did. No platform, no login your clients will ever see.</p>
+          <div class="hero-cta">
+            <a href="#book" class="btn-fill">Try it on a real file</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hstat"><b>Excel-native</b><span>any client's template</span></div>
+            <div class="hstat"><b>Multi-asset</b><span>MF · industrial · retail</span></div>
+            <div class="hstat"><b>Sourced</b><span>every number cites its doc</span></div>
+          </div>
+        </div>
+
+        <div class="mini" id="mini" aria-label="Live worksheet">
+          <div class="mini-bar"><span>Summary · B2:D8</span><span>auto-calc on</span></div>
+          <div class="mini-grid">
+            <div class="mc ch"></div><div class="mc ch">Line</div><div class="mc ch">T-12</div><div class="mc ch">Year 1</div>
+            <div class="mc rh">4</div><div class="mc lbl">Gross rent</div><div class="mc num">1,242,000</div><div class="mc num empty" data-v="1,311,300">—</div>
+            <div class="mc rh">5</div><div class="mc lbl">Vacancy</div><div class="mc num neg">(62,100)</div><div class="mc num neg empty" data-v="(59,008)">—</div>
+            <div class="mc rh">6</div><div class="mc lbl">Other income</div><div class="mc num">48,400</div><div class="mc num empty" data-v="52,900">—</div>
+            <div class="mc rh">7</div><div class="mc lbl">Operating exp.</div><div class="mc num neg">(431,500)</div><div class="mc num neg empty" data-v="(444,445)">—</div>
+            <div class="mc rh">8</div><div class="mc lbl sum">NOI</div><div class="mc num sum">796,800</div><div class="mc num sum sel empty" id="noi" data-v="860,747">—</div>
+          </div>
+          <div class="mini-foot"><span>Cap 6.20% · DSCR 1.41×</span><span class="live">teez filling…</span></div>
+        </div>
+      </div>
+      <div class="wrap"><p class="hero-note">↑ filled in your client's template, every number sourced — ships as their deliverable, not ours.</p></div>
+    </header>
+
+    <!-- PROBLEM -->
+    <section class="sec prose" id="problem">
+      <div class="wrap">
+        <h2>Five clients, five templates,<br>one Friday deadline.</h2>
+        <p>Every client has their own model, their own tab order, their own house style — and none of them want to see anyone else's format on their deal. So the same modeling work gets rebuilt by hand, client by client, deadline by deadline. <b>The work isn't the analysis. It's the retyping.</b></p>
+      </div>
+    </section>
+
+    <!-- HOW -->
+    <section class="sec" id="how">
+      <div class="wrap">
+        <h2>Drop in the docs,<br>right in <span class="g">their Excel.</span></h2>
+        <p class="lead" style="margin:14px 0 0;max-width:60ch">The teez add-in lives inside whichever client model you open — <span class="g">never</span> overwriting a formula they wrote. Drop in the docs; it fills their template and sources every number.</p>
+        <div class="byo">
+          <span class="chip">BYOS · any client's spreadsheet</span>
+          <span class="chip">BYOD · your data, your tenant</span>
+          <span class="chip">No migration</span>
+        </div>
+        <iframe class="demo-embed" src="mockups/excel-pane-demo.html" title="Teez agent building a pro forma in a client's Excel — live demo" height="640" loading="lazy"></iframe>
+        <div class="win demo-fallback" id="feedwin" aria-label="Agent at work">
+          <div class="win-bar"><i></i><i></i><i></i><span class="t">teez · task pane — Client Deliverable</span></div>
+          <div class="feed" id="feed">
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">Parsed <b>OM</b>, rent roll, T-12</span><span class="rt">3 docs</span></div>
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">Pulled <b>market comps</b></span><span class="rt">live</span></div>
+            <div class="fl"><span class="ic work">→</span><span class="tx">Filling <b>client's template</b></span><span class="rt">142 cells</span></div>
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">NOI verified vs T-12</span><span class="rt">$796,800</span></div>
+            <div class="fl"><span class="ic ok">✓</span><span class="tx">Deliverable ready to send</span><span class="rt">unchanged format</span></div>
+          </div>
+          <div class="win-foot"><span>Cap 6.20% · DSCR 1.41×</span><span class="done">model ready · 4m 12s</span></div>
+        </div>
+        <div class="cols3" style="margin-top:30px">
+          <div class="card3"><span class="ey">Step 1</span><div class="formula"><span class="fn">=PARSE</span>(om, rent_roll, t12)</div><h3>Drop in the docs</h3><p>Drop the OM, rent roll, and T-12 into the pane. The agent reads them in parallel and pulls live market context from public data.</p></div>
+          <div class="card3"><span class="ey">Step 2</span><div class="formula"><span class="fn">=FILL</span>(client_template)</div><h3>It fills their template</h3><p>Open whichever client's model you're working from. The agent writes values into the right input cells and never touches a formula.</p></div>
+          <div class="card3"><span class="ey">Step 3</span><div class="formula"><span class="fn">=VERIFY</span>(cap, dscr)</div><h3>It verifies, then flags</h3><p>A separate pass checks cap rate, DSCR, and cross-doc consistency — so what you send back holds up.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIT — why the standalone add-in, not a platform -->
+    <section class="sec prose" id="fit">
+      <div class="wrap">
+        <h2>You're not buying a platform.<br>You're buying <span class="g">back your Fridays.</span></h2>
+        <p>No dashboard, no client-facing login, nothing to explain to the people you deliver to. teez lives in the file you already send them. It's a subscription for the add-in — not a service contract, not a data relationship, not a new system of record. <b>Cancel it and you're back to exactly where you started, minus nothing.</b></p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sec cta" id="book">
+      <div class="wrap">
+        <h2>Bring a client deliverable.<br>Leave with the <span class="g">model.</span></h2>
+        <p class="lede">We'll run the agent on a real client file, in front of you, in 20 minutes — in whatever template that client already expects.</p>
+        <p class="terms"><b>20 minutes.</b> No slide deck, no commitment. You keep the model regardless.</p>
+        <div class="entry">
+          <div class="entry-head"><span style="flex:1">enter your details, press ⏎</span></div>
+          <form class="bookform" id="book-form" data-source="analysts-cta" novalidate>
+            <div class="row"><span class="k">email *</span><input type="email" id="book-email" name="email" placeholder="your@email.com" required autocomplete="email"></div>
+            <div class="row"><span class="k">name</span><input type="text" id="book-name" name="name" placeholder="optional" autocomplete="name"></div>
+            <div class="row"><span class="k">deal</span><input type="text" id="book-message" name="message" placeholder="what are you modeling? (optional)" maxlength="200"></div>
+            <div class="submit-row"><button type="submit" id="book-submit">Book 20 minutes <span class="ent">⏎ Enter</span></button></div>
+          </form>
+        </div>
+        <p class="status" id="book-status" role="status" aria-live="polite"></p>
+        <p class="fallback">Or email <a href="mailto:hello@teez.live?subject=Teez%20for%20analysts">hello@teez.live</a></p>
+      </div>
+    </section>
+
+  </div><!-- /canvas -->
+</div><!-- /sheet -->
+
+<!-- footer = sheet tabs (page nav) + status bar -->
+<div class="tabsbar">
+  <a class="tb" href="/">Home</a>
+  <a class="tb" href="/sponsors.html">Sponsors &amp; GPs</a>
+  <a class="tb" href="/brokers.html">Brokers</a>
+  <a class="tb act" href="/analysts.html">Analysts</a>
+  <a class="tb" href="/pricing.html">Pricing</a>
+  <a class="tb" href="/support.html">Support</a>
+  <a class="tb" href="/privacy.html">Privacy</a>
+  <a class="tb" href="/terms.html">Terms</a>
+  <a class="tb" href="https://app.teez.live/login">Log in</a>
+  <span class="tb add">+</span>
+</div>
+<div class="statusbar">
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — the Excel add-in for CRE analysts</span></div>
+  <div class="l"><span class="contact">1178 Broadway, 3rd Floor #1464, New York, NY 10001</span><a class="contact" href="tel:+16464848207">(646) 484-8207</a><span>© 2026 Teez, Inc.</span><span class="deskonly">100%</span></div>
+</div>
+
+<script src="app.js?v=20260820a"></script>
+</body>
+</html>

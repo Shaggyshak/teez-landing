@@ -17,32 +17,29 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260629b" />
+  <link rel="stylesheet" href="style.css?v=20260908a" />
 </head>
 <body>
 
 <!-- app chrome -->
 <div class="app">
   <div class="app-top">
-    <div class="app-id">
+    <a href="/" class="app-id">
       <img src="images/teez-icon.png" alt="Teez">
       <span class="nm">Teez</span>
-      <span class="file">Riverview — BOV.xlsx</span>
-    </div>
+    </a>
     <nav class="app-nav">
-      <a href="/">For Investors</a>
-      <a href="/brokers.html" class="act">For Brokers</a>
-      <a href="/vision.html">Vision</a>
+      <a href="/sponsors.html">Sponsors &amp; GPs</a>
+      <a href="/brokers.html" class="act">Brokers</a>
+      <a href="/analysts.html">Analysts</a>
       <a href="/pricing.html">Pricing</a>
     </nav>
     <div class="app-right">
       <button class="navtoggle" aria-label="Open menu" aria-expanded="false">☰</button> <a href="https://app.teez.live/login" class="login">Log in</a>
-      <a href="#book" class="book">Book a call</a>
     </div>
   </div>
   <div class="fxbar">
-    <div class="fx-name"><span class="nb">B4</span><span>fx</span></div>
-    <div class="fx-val"><span id="fx" data-formula='=PITCH("rent roll.xlsx")'></span><span class="caret" id="caret"></span></div>
+    <div class="fx-val"><span id="fx" data-formula='=PITCH("rent roll.xlsx", "text")'></span><span class="caret" id="caret"></span></div>
   </div>
 </div>
 
@@ -61,71 +58,66 @@
     <header class="hero">
       <div class="wrap hero-top">
         <div>
-          <div class="range"><span class="tab">A1</span><span class="nm">For investment-sales brokers</span></div>
           <h1>Win the listing.<br><span class="g">Skip the all-nighter.</span></h1>
-          <p class="hero-sub">Teez turns a rent roll and T-12 into a pitch-ready BOV or OM in minutes — inside the Excel and templates your team already pitches from. Docs in, broker package out.</p>
+          <p class="hero-sub">Text Teez a rent roll and T-12, get a pitch-ready BOV back in minutes — built in the Excel your back office already pitches from. You never open the file.</p>
           <div class="hero-cta">
             <a href="#book" class="btn-fill">Bring a listing</a>
           </div>
           <div class="hero-stats">
-            <div class="hstat"><b>Your templates</b><span>your branded BOV / OM models</span></div>
+            <div class="hstat"><b>Your templates</b><span>your branded BOV / OM templates</span></div>
             <div class="hstat"><b>Minutes, not days</b><span>more pitches, same bench</span></div>
             <div class="hstat"><b>Never breaks it</b><span>fills inputs, not your formulas</span></div>
           </div>
         </div>
 
-        <div class="mini" id="mini" aria-label="Live BOV">
-          <div class="mini-bar"><span>BOV · B2:D8</span><span>auto-calc on</span></div>
-          <div class="mini-grid">
-            <div class="mc ch"></div><div class="mc ch">Line</div><div class="mc ch">In-place</div><div class="mc ch">Pro forma</div>
-            <div class="mc rh">4</div><div class="mc lbl">Gross rent</div><div class="mc num">1,180,000</div><div class="mc num empty" data-v="1,295,000">—</div>
-            <div class="mc rh">5</div><div class="mc lbl">Vacancy</div><div class="mc num neg">(59,000)</div><div class="mc num neg empty" data-v="(51,800)">—</div>
-            <div class="mc rh">6</div><div class="mc lbl">Other income</div><div class="mc num">41,200</div><div class="mc num empty" data-v="47,500">—</div>
-            <div class="mc rh">7</div><div class="mc lbl">Operating exp.</div><div class="mc num neg">(404,000)</div><div class="mc num neg empty" data-v="(418,900)">—</div>
-            <div class="mc rh">8</div><div class="mc lbl sum">NOI</div><div class="mc num sum">758,200</div><div class="mc num sum sel empty" id="noi" data-v="871,800">—</div>
+        <div class="imsg" aria-label="Live text thread with Teez">
+          <div class="imsg-head"><div class="av">T</div><div class="nm">Teez</div><div class="sub">Text Message · (917) 555-0142</div></div>
+          <div class="imsg-body">
+            <div class="bub out">rent roll + T-12 for Riverview, need a BOV for the seller call at 2</div>
+            <div class="bub in">on it — pulling comps now</div>
+            <div class="bub out">any read on cap rate yet?</div>
+            <div class="bub in">BOV ready — 6.00% cap, $14.5M ask, deck attached</div>
+            <div class="imsg-meta">Delivered</div>
           </div>
-          <div class="mini-foot"><span>Asking 6.00% · est. value $14.5M</span><span class="live">teez filling…</span></div>
         </div>
       </div>
-      <div class="wrap"><p class="hero-note">↑ the pitch math, in your own BOV template — same engine as our sponsor product, run in reverse.</p></div>
+      <div class="wrap"><p class="hero-note">↑ the pitch, texted to you — same engine that fills your firm's BOV template in Excel, run in reverse.</p></div>
     </header>
 
     <!-- CONNECT -->
     <section class="sec prose" id="connect">
       <div class="wrap">
-        <div class="range"><span class="tab">B11</span><span class="nm">The pitch problem</span></div>
         <h2>You pitch far more<br>than you win.</h2>
-        <p>Fifty to two hundred BOVs and OMs a year, built by hand in Excel and PowerPoint — and most never win the listing. Your analysts grind through the night on a pitch that may never close, while the next opportunity is already sitting in the inbox. <b>The bottleneck isn't your market read. It's the hours it takes to turn a rent roll into a package you can put in front of an owner.</b></p>
+        <p>Fifty to two hundred BOVs and OMs a year, built by hand in Excel and PowerPoint — and most never win the listing. Your analysts grind through the night on a pitch that may never close, while the next opportunity is already sitting in the inbox. <b>The bottleneck isn't your market read. It's the hours.</b></p>
       </div>
     </section>
 
     <!-- HOW -->
     <section class="sec" id="how">
       <div class="wrap">
-        <div class="range"><span class="tab">B16</span><span class="nm">How it actually works</span></div>
         <h2>Rent roll in.<br>Pitch-ready package <span class="g">out.</span></h2>
-        <p class="lead" style="margin:14px 0 0;max-width:60ch">Keep your branded models and decks. The agent lives inside the Excel your team already pitches from — <span class="g">never</span> overwriting your formulas.</p>
+        <p class="lead" style="margin:14px 0 0;max-width:60ch">Keep your branded templates and decks. The agent lives inside the Excel your team already pitches from, every number sourced — <span class="g">never</span> overwriting your formulas.</p>
         <div class="byo">
-          <span class="chip">BYOS · your branded models</span>
+          <span class="chip">BYOS · your branded spreadsheet</span>
           <span class="chip">BYOD · your data, your tenant</span>
           <span class="chip">No migration</span>
         </div>
         <div class="two-grid top">
           <div class="pipe">
-            <div class="pcell"><span class="ref">step · =B17</span><div class="formula"><span class="fn">=PARSE</span>(rent_roll, t12, prior_om)</div><h3>Drop the deal docs</h3><p>Rent roll, T-12, prior OM. The agent reads them in parallel and pulls live market context from public data.</p></div>
-            <div class="pcell"><span class="ref">step · =C17</span><div class="formula"><span class="fn">=FILL</span>(your_bov_model)</div><h3>Fill your BOV / OM model</h3><p>Bring your firm's existing pitch model. The agent scans it, fills the right input cells, and never overwrites your formulas.</p></div>
-            <div class="pcell"><span class="ref">step · =D17</span><div class="formula"><span class="fn">=VERIFY</span>(cap, dscr)</div><h3>Verified, ready to pitch</h3><p>A separate pass checks cap rate, DSCR, and cross-doc consistency — so the numbers hold up in front of the owner.</p></div>
+            <div class="pcell"><span class="ref">Step 1</span><div class="formula"><span class="fn">=PARSE</span>(rent_roll, t12, prior_om)</div><h3>Drop in the docs</h3><p>Rent roll, T-12, prior OM. The agent reads them in parallel and pulls live market context from public data.</p></div>
+            <div class="pcell"><span class="ref">Step 2</span><div class="formula"><span class="fn">=FILL</span>(your_bov_template)</div><h3>Fills your firm's BOV / OM template</h3><p>Same template your back office already pitches from. The agent fills the input cells there — you just get the answer, texted.</p></div>
+            <div class="pcell"><span class="ref">Step 3</span><div class="formula"><span class="fn">=VERIFY</span>(cap, dscr)</div><h3>It verifies, then flags</h3><p>A separate pass checks cap rate, DSCR, and cross-doc consistency — so the numbers hold up in front of the owner.</p></div>
           </div>
-          <div class="win" id="feedwin" aria-label="Building a BOV package">
-            <div class="win-bar"><i></i><i></i><i></i><span class="t">teez · task pane — Riverview BOV</span></div>
-            <div class="feed" id="feed">
-              <div class="fl"><span class="ic ok">✓</span><span class="tx">Parsed <b>rent roll</b>, T-12</span><span class="rt">2 docs</span></div>
-              <div class="fl"><span class="ic ok">✓</span><span class="tx">Pulled <b>sale comps</b></span><span class="rt">live</span></div>
-              <div class="fl"><span class="ic work">→</span><span class="tx">Filling <b>your BOV model</b></span><span class="rt">96 cells</span></div>
-              <div class="fl"><span class="ic ok">✓</span><span class="tx">Cap rate checks out</span><span class="rt">6.00%</span></div>
-              <div class="fl"><span class="ic ok">✓</span><span class="tx">Pitch package ready</span><span class="rt">$14.5M</span></div>
+          <div class="imsg" aria-label="Text thread while the BOV gets built">
+            <div class="imsg-head"><div class="av">T</div><div class="nm">Teez</div><div class="sub">Text Message · (917) 555-0142</div></div>
+            <div class="imsg-body">
+              <div class="bub out">here's the rent roll, T-12, and last OM for Riverview</div>
+              <div class="imsg-file"><span class="ic">PDF</span><span class="nm2">3 files · rent roll, T-12, OM</span></div>
+              <div class="bub in">got it — pulling comps and running the numbers</div>
+              <div class="bub in">cap rate's checking out at 6.00%, cross-checking DSCR now</div>
+              <div class="bub in">BOV's ready — model + one-pager on the way</div>
+              <div class="imsg-meta">Delivered · 3m 48s</div>
             </div>
-            <div class="win-foot"><span>est. value $14.5M</span><span class="done">package ready · 3m 48s</span></div>
           </div>
         </div>
       </div>
@@ -134,12 +126,11 @@
     <!-- CTA -->
     <section class="sec cta" id="book">
       <div class="wrap">
-        <div class="range"><span class="tab">B24</span><span class="nm">See it on your next listing</span></div>
-        <h2>One pitch, in front of you, in <span class="g">20 minutes.</span></h2>
-        <p class="lede">Send us a rent roll and T-12 from a listing you're chasing. We'll turn it into a filled model in your own template, while you watch.</p>
-        <p class="terms"><b>20 minutes.</b> Bring a real listing. We build the pitch math in your template — you keep it either way.</p>
+        <h2>Bring a listing.<br>Leave with the <span class="g">model.</span></h2>
+        <p class="lede">Send Teez a rent roll and T-12 from a listing you're chasing. We'll turn it into a filled model in your own template, while you watch.</p>
+        <p class="terms"><b>20 minutes.</b> Bring a real listing. We build the pitch math in your template. You keep the model regardless.</p>
         <div class="entry">
-          <div class="entry-head"><span>A1</span><span style="flex:1">enter your details, press ⏎</span></div>
+          <div class="entry-head"><span style="flex:1">enter your details, press ⏎</span></div>
           <form class="bookform" id="book-form" data-source="brokers-cta" novalidate>
             <div class="row"><span class="k">email *</span><input type="email" id="book-email" name="email" placeholder="your@email.com" required autocomplete="email"></div>
             <div class="row"><span class="k">name</span><input type="text" id="book-name" name="name" placeholder="optional" autocomplete="name"></div>
@@ -157,16 +148,15 @@
 
 <!-- footer = sheet tabs (page nav) + status bar -->
 <div class="tabsbar">
-  <a class="tb" href="/">For Investors</a>
-  <a class="tb act" href="/brokers.html">For Brokers</a>
-  <a class="tb" href="/vision.html">Vision</a>
+  <a class="tb" href="/">Home</a>
+  <a class="tb" href="/sponsors.html">Sponsors &amp; GPs</a>
+  <a class="tb act" href="/brokers.html">Brokers</a>
+  <a class="tb" href="/analysts.html">Analysts</a>
   <a class="tb" href="/pricing.html">Pricing</a>
   <a class="tb" href="/support.html">Support</a>
   <a class="tb" href="/privacy.html">Privacy</a>
   <a class="tb" href="/terms.html">Terms</a>
   <a class="tb" href="https://app.teez.live/login">Log in</a>
-  <a class="tb" href="mailto:hello@teez.live">hello@teez.live</a>
-  <a class="tb" href="tel:+16464848207">(646) 484-8207</a>
   <span class="tb add">+</span>
 </div>
 <div class="statusbar">
