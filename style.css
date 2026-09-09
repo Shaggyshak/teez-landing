@@ -332,11 +332,11 @@ h3{font-size:18px;font-weight:700}
 .card3.link:hover{border-color:var(--green)}
 .card3.link.feat:hover{box-shadow:0 24px 50px -32px rgba(16,124,65,.6)}
 
-/* ---- orbit — real file/mail icons scatter, then sort into 3 deal-folder rows, files linked within each row, loop (home only) ----
-   Story per 18s loop: chaos/orbit (0-58%) -> sort into 3 rows + row lines connect (58-66% in, 66-84% hold, 84-92% out) -> finish the lap back to start (92-100%=0%) */
-.orbit-sec{padding:64px 0}
-.orbit-stage{position:relative;width:100%;max-width:460px;height:340px;margin:0 auto}
-.doc{position:absolute;top:170px;left:230px;margin:-40px 0 0 -59px;width:118px;z-index:2;
+/* ---- orbit — real file/mail icons scatter, then sort into 3 deal-card rows (dashboard-style), loop (home only) ----
+   Story per 10s loop: float/chaos (0-30%, 3s) -> sort into 3 deal-row cards (30-40% in, 40-80% hold, 80-100% out, seamless back to 0%) */
+.orbit-sec{padding:56px 0}
+.orbit-stage{position:relative;width:100%;max-width:480px;height:550px;margin:0 auto}
+.doc{position:absolute;top:275px;left:240px;margin:-40px 0 0 -59px;width:118px;z-index:2;
   display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
   filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}
 .doc-icon{width:52px;height:64px;background:#fff;border:1px solid var(--grid-2);border-radius:3px;position:relative;
@@ -357,150 +357,228 @@ h3{font-size:18px;font-weight:700}
   display:flex;align-items:center;justify-content:center}
 .txt-icon svg{width:24px;height:24px}
 .doc-cap{font-family:var(--sans);font-size:10.5px;color:var(--ink-2);line-height:1.3}
-.orbit-lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
-.oline{stroke:var(--green);stroke-width:2;stroke-linecap:round;opacity:0;animation:line-glow 18s linear infinite}
-.orbit-label{position:absolute;top:170px;left:230px;z-index:1;transform:translate(-50%,-50%);
-  font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--green);white-space:nowrap;
-  opacity:0;animation:line-glow 18s linear infinite}
-.lbl-1{margin:-101px 0 0 0} .lbl-2{margin:-26px 0 0 0} .lbl-3{margin:49px 0 0 0}
-.f1{animation:drift-f1 18s linear infinite,connect-glow 18s linear infinite}
-.f2{animation:drift-f2 18s linear infinite,connect-glow 18s linear infinite}
-.f3{animation:drift-f3 18s linear infinite,connect-glow 18s linear infinite}
-.f4{animation:drift-f4 18s linear infinite,connect-glow 18s linear infinite}
-.f5{animation:drift-f5 18s linear infinite,connect-glow 18s linear infinite}
-.f6{animation:drift-f6 18s linear infinite,connect-glow 18s linear infinite}
-.f7{animation:drift-f7 18s linear infinite,connect-glow 18s linear infinite}
-.f8{animation:drift-f8 18s linear infinite,connect-glow 18s linear infinite}
+.deal-card{position:absolute;left:30px;width:380px;height:150px;background:#fff;
+  border:1px solid var(--grid-2);border-radius:6px;z-index:1;
+  box-shadow:0 1px 0 var(--grid-2),0 20px 40px -28px rgba(31,35,41,.35);
+  opacity:0;animation:line-glow 10s linear infinite}
+.deal-card-head{position:absolute;top:0;left:0;right:0;height:30px;background:var(--gutter);
+  border-bottom:1px solid var(--gutter-line);border-radius:6px 6px 0 0;
+  display:flex;align-items:center;padding:0 12px;font-family:var(--mono);font-size:11px;
+  color:var(--hdr-tx);font-weight:600}
+.dc-1{top:25px} .dc-2{top:185px} .dc-3{top:345px}
+.connect-lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.connect-lines .cl{stroke:var(--green);stroke-width:1.5;opacity:0;animation:line-glow 10s linear infinite}
+.f1,.f2,.f3,.f4,.f5,.f6,.f7,.f8,.f9,.f10,.f11,.f12{animation-duration:10s;animation-timing-function:linear;animation-iteration-count:infinite}
+.f1{animation-name:drift-f1,connect-glow} .f2{animation-name:drift-f2,connect-glow}
+.f3{animation-name:drift-f3,connect-glow} .f4{animation-name:drift-f4,connect-glow}
+.f5{animation-name:drift-f5,connect-glow} .f6{animation-name:drift-f6,connect-glow}
+.f7{animation-name:drift-f7,connect-glow} .f8{animation-name:drift-f8,connect-glow}
+.f9{animation-name:drift-f9,connect-glow} .f10{animation-name:drift-f10,connect-glow}
+.f11{animation-name:drift-f11,connect-glow} .f12{animation-name:drift-f12,connect-glow}
 @keyframes connect-glow{
-  0%,58%{filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}
-  66%,84%{filter:drop-shadow(0 14px 18px rgba(31,35,41,.28)) drop-shadow(0 0 10px rgba(16,124,65,.45))}
-  92%,100%{filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}}
-@keyframes line-glow{0%,58%{opacity:0}66%,84%{opacity:1}92%,100%{opacity:0}}
+  0%,30%{filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}
+  40%,80%{filter:drop-shadow(0 14px 18px rgba(31,35,41,.28)) drop-shadow(0 0 10px rgba(16,124,65,.45))}
+  100%{filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}}
+@keyframes line-glow{0%,30%{opacity:0}40%,80%{opacity:1}100%{opacity:0}}
 @keyframes drift-f1{
-  0%{transform:translate(118px,0px) rotate(0deg)}
-  5.8%{transform:translate(102.2px,59px) rotate(0deg)}
-  11.6%{transform:translate(59px,102.2px) rotate(0deg)}
-  17.4%{transform:translate(0px,118px) rotate(0deg)}
-  23.2%{transform:translate(-59px,102.2px) rotate(0deg)}
-  29%{transform:translate(-102.2px,59px) rotate(0deg)}
-  34.8%{transform:translate(-118px,0px) rotate(0deg)}
-  40.6%{transform:translate(-102.2px,-59px) rotate(0deg)}
-  46.4%{transform:translate(-59px,-102.2px) rotate(0deg)}
-  52.2%{transform:translate(0px,-118px) rotate(0deg)}
-  58%{transform:translate(59px,-102.2px) rotate(0deg)}
-  66%,84%{transform:translate(-140px,-75px) rotate(0deg)}
-  92%{transform:translate(59px,-102.2px) rotate(0deg)}
-  100%{transform:translate(118px,0px) rotate(0deg)}}
+  0%{transform:translate(128.0px,0.0px)}
+  3%{transform:translate(126.6px,18.9px)}
+  6%{transform:translate(122.4px,37.4px)}
+  9%{transform:translate(115.5px,55.1px)}
+  12%{transform:translate(106.1px,71.6px)}
+  15%{transform:translate(94.4px,86.5px)}
+  18%{transform:translate(80.6px,99.5px)}
+  21%{transform:translate(65.0px,110.3px)}
+  24%{transform:translate(47.9px,118.7px)}
+  27%{transform:translate(29.9px,124.5px)}
+  30%{transform:translate(11.2px,127.5px)}
+  40%{transform:translate(-150.0px,-160.0px)}
+  80%{transform:translate(-150.0px,-160.0px)}
+  100%{transform:translate(128.0px,0.0px)}
+}
 @keyframes drift-f2{
-  0%{transform:translate(-59px,102.2px) rotate(0deg)}
-  5.8%{transform:translate(-102.2px,59px) rotate(0deg)}
-  11.6%{transform:translate(-118px,0px) rotate(0deg)}
-  17.4%{transform:translate(-102.2px,-59px) rotate(0deg)}
-  23.2%{transform:translate(-59px,-102.2px) rotate(0deg)}
-  29%{transform:translate(0px,-118px) rotate(0deg)}
-  34.8%{transform:translate(59px,-102.2px) rotate(0deg)}
-  40.6%{transform:translate(102.2px,-59px) rotate(0deg)}
-  46.4%{transform:translate(118px,0px) rotate(0deg)}
-  52.2%{transform:translate(102.2px,59px) rotate(0deg)}
-  58%{transform:translate(59px,102.2px) rotate(0deg)}
-  66%,84%{transform:translate(0px,-75px) rotate(0deg)}
-  92%{transform:translate(59px,102.2px) rotate(0deg)}
-  100%{transform:translate(-59px,102.2px) rotate(0deg)}}
+  0%{transform:translate(130.8px,75.5px)}
+  3%{transform:translate(118.2px,94.0px)}
+  6%{transform:translate(103.0px,110.4px)}
+  9%{transform:translate(85.5px,124.4px)}
+  12%{transform:translate(66.2px,135.7px)}
+  15%{transform:translate(45.4px,144.0px)}
+  18%{transform:translate(23.6px,149.1px)}
+  21%{transform:translate(1.3px,151.0px)}
+  24%{transform:translate(-21.0px,149.5px)}
+  27%{transform:translate(-42.9px,144.8px)}
+  30%{transform:translate(-63.8px,136.9px)}
+  40%{transform:translate(-50.0px,-160.0px)}
+  80%{transform:translate(-50.0px,-160.0px)}
+  100%{transform:translate(130.8px,75.5px)}
+}
 @keyframes drift-f3{
-  0%{transform:translate(-59px,-102.2px) rotate(0deg)}
-  5.8%{transform:translate(0px,-118px) rotate(0deg)}
-  11.6%{transform:translate(59px,-102.2px) rotate(0deg)}
-  17.4%{transform:translate(102.2px,-59px) rotate(0deg)}
-  23.2%{transform:translate(118px,0px) rotate(0deg)}
-  29%{transform:translate(102.2px,59px) rotate(0deg)}
-  34.8%{transform:translate(59px,102.2px) rotate(0deg)}
-  40.6%{transform:translate(0px,118px) rotate(0deg)}
-  46.4%{transform:translate(-59px,102.2px) rotate(0deg)}
-  52.2%{transform:translate(-102.2px,59px) rotate(0deg)}
-  58%{transform:translate(-118px,0px) rotate(0deg)}
-  66%,84%{transform:translate(140px,-75px) rotate(0deg)}
-  92%{transform:translate(-118px,0px) rotate(0deg)}
-  100%{transform:translate(-59px,-102.2px) rotate(0deg)}}
+  0%{transform:translate(87.0px,150.7px)}
+  3%{transform:translate(63.8px,161.9px)}
+  6%{transform:translate(39.1px,169.5px)}
+  9%{transform:translate(13.7px,173.5px)}
+  12%{transform:translate(-12.1px,173.6px)}
+  15%{transform:translate(-37.7px,169.9px)}
+  18%{transform:translate(-62.4px,162.4px)}
+  21%{transform:translate(-85.7px,151.4px)}
+  24%{transform:translate(-107.1px,137.1px)}
+  27%{transform:translate(-126.2px,119.8px)}
+  30%{transform:translate(-142.5px,99.8px)}
+  40%{transform:translate(50.0px,-160.0px)}
+  80%{transform:translate(50.0px,-160.0px)}
+  100%{transform:translate(87.0px,150.7px)}
+}
 @keyframes drift-f4{
-  0%{transform:translate(168px,0px) rotate(0deg)}
-  5.8%{transform:translate(145.5px,-84px) rotate(0deg)}
-  11.6%{transform:translate(84px,-145.5px) rotate(0deg)}
-  17.4%{transform:translate(0px,-168px) rotate(0deg)}
-  23.2%{transform:translate(-84px,-145.5px) rotate(0deg)}
-  29%{transform:translate(-145.5px,-84px) rotate(0deg)}
-  34.8%{transform:translate(-168px,0px) rotate(0deg)}
-  40.6%{transform:translate(-145.5px,84px) rotate(0deg)}
-  46.4%{transform:translate(-84px,145.5px) rotate(0deg)}
-  52.2%{transform:translate(0px,168px) rotate(0deg)}
-  58%{transform:translate(84px,145.5px) rotate(0deg)}
-  66%,84%{transform:translate(-75px,0px) rotate(0deg)}
-  92%{transform:translate(84px,145.5px) rotate(0deg)}
-  100%{transform:translate(168px,0px) rotate(0deg)}}
+  0%{transform:translate(0.0px,137.0px)}
+  3%{transform:translate(-20.2px,135.5px)}
+  6%{transform:translate(-40.1px,131.0px)}
+  9%{transform:translate(-59.0px,123.7px)}
+  12%{transform:translate(-76.6px,113.6px)}
+  15%{transform:translate(-92.6px,101.0px)}
+  18%{transform:translate(-106.5px,86.2px)}
+  21%{transform:translate(-118.0px,69.5px)}
+  24%{transform:translate(-127.0px,51.3px)}
+  27%{transform:translate(-133.2px,32.0px)}
+  30%{transform:translate(-136.5px,11.9px)}
+  40%{transform:translate(150.0px,-160.0px)}
+  80%{transform:translate(150.0px,-160.0px)}
+  100%{transform:translate(0.0px,137.0px)}
+}
 @keyframes drift-f5{
-  0%{transform:translate(51.9px,159.8px) rotate(0deg)}
-  5.8%{transform:translate(124.8px,112.4px) rotate(0deg)}
-  11.6%{transform:translate(164.3px,34.9px) rotate(0deg)}
-  17.4%{transform:translate(159.8px,-51.9px) rotate(0deg)}
-  23.2%{transform:translate(112.4px,-124.8px) rotate(0deg)}
-  29%{transform:translate(34.9px,-164.3px) rotate(0deg)}
-  34.8%{transform:translate(-51.9px,-159.8px) rotate(0deg)}
-  40.6%{transform:translate(-124.8px,-112.4px) rotate(0deg)}
-  46.4%{transform:translate(-164.3px,-34.9px) rotate(0deg)}
-  52.2%{transform:translate(-159.8px,51.9px) rotate(0deg)}
-  58%{transform:translate(-112.4px,124.8px) rotate(0deg)}
-  66%,84%{transform:translate(75px,0px) rotate(0deg)}
-  92%{transform:translate(-112.4px,124.8px) rotate(0deg)}
-  100%{transform:translate(51.9px,159.8px) rotate(0deg)}}
+  0%{transform:translate(-80.0px,138.6px)}
+  3%{transform:translate(-99.6px,125.2px)}
+  6%{transform:translate(-117.0px,109.1px)}
+  9%{transform:translate(-131.9px,90.6px)}
+  12%{transform:translate(-143.8px,70.1px)}
+  15%{transform:translate(-152.6px,48.1px)}
+  18%{transform:translate(-158.0px,25.0px)}
+  21%{transform:translate(-160.0px,1.4px)}
+  24%{transform:translate(-158.4px,-22.3px)}
+  27%{transform:translate(-153.4px,-45.4px)}
+  30%{transform:translate(-145.0px,-67.6px)}
+  40%{transform:translate(-150.0px,0.0px)}
+  80%{transform:translate(-150.0px,0.0px)}
+  100%{transform:translate(-80.0px,138.6px)}
+}
 @keyframes drift-f6{
-  0%{transform:translate(-135.9px,98.7px) rotate(0deg)}
-  5.8%{transform:translate(-68.3px,153.5px) rotate(0deg)}
-  11.6%{transform:translate(17.6px,167.1px) rotate(0deg)}
-  17.4%{transform:translate(98.7px,135.9px) rotate(0deg)}
-  23.2%{transform:translate(153.5px,68.3px) rotate(0deg)}
-  29%{transform:translate(167.1px,-17.6px) rotate(0deg)}
-  34.8%{transform:translate(135.9px,-98.7px) rotate(0deg)}
-  40.6%{transform:translate(68.3px,-153.5px) rotate(0deg)}
-  46.4%{transform:translate(-17.6px,-167.1px) rotate(0deg)}
-  52.2%{transform:translate(-98.7px,-135.9px) rotate(0deg)}
-  58%{transform:translate(-153.5px,-68.3px) rotate(0deg)}
-  66%,84%{transform:translate(-140px,75px) rotate(0deg)}
-  92%{transform:translate(-153.5px,-68.3px) rotate(0deg)}
-  100%{transform:translate(-135.9px,98.7px) rotate(0deg)}}
+  0%{transform:translate(-158.5px,91.5px)}
+  3%{transform:translate(-170.3px,67.1px)}
+  6%{transform:translate(-178.3px,41.2px)}
+  9%{transform:translate(-182.4px,14.4px)}
+  12%{transform:translate(-182.6px,-12.8px)}
+  15%{transform:translate(-178.7px,-39.6px)}
+  18%{transform:translate(-170.8px,-65.6px)}
+  21%{transform:translate(-159.3px,-90.1px)}
+  24%{transform:translate(-144.2px,-112.7px)}
+  27%{transform:translate(-126.0px,-132.7px)}
+  30%{transform:translate(-105.0px,-149.9px)}
+  40%{transform:translate(-50.0px,0.0px)}
+  80%{transform:translate(-50.0px,0.0px)}
+  100%{transform:translate(-158.5px,91.5px)}
+}
 @keyframes drift-f7{
-  0%{transform:translate(-135.9px,-98.7px) rotate(0deg)}
-  5.8%{transform:translate(-167.1px,-17.6px) rotate(0deg)}
-  11.6%{transform:translate(-153.5px,68.3px) rotate(0deg)}
-  17.4%{transform:translate(-98.7px,135.9px) rotate(0deg)}
-  23.2%{transform:translate(-17.6px,167.1px) rotate(0deg)}
-  29%{transform:translate(68.3px,153.5px) rotate(0deg)}
-  34.8%{transform:translate(135.9px,98.7px) rotate(0deg)}
-  40.6%{transform:translate(167.1px,17.6px) rotate(0deg)}
-  46.4%{transform:translate(153.5px,-68.3px) rotate(0deg)}
-  52.2%{transform:translate(98.7px,-135.9px) rotate(0deg)}
-  58%{transform:translate(17.6px,-167.1px) rotate(0deg)}
-  66%,84%{transform:translate(0px,75px) rotate(0deg)}
-  92%{transform:translate(17.6px,-167.1px) rotate(0deg)}
-  100%{transform:translate(-135.9px,-98.7px) rotate(0deg)}}
+  0%{transform:translate(-142.0px,0.0px)}
+  3%{transform:translate(-140.4px,-21.0px)}
+  6%{transform:translate(-135.8px,-41.5px)}
+  9%{transform:translate(-128.2px,-61.1px)}
+  12%{transform:translate(-117.7px,-79.4px)}
+  15%{transform:translate(-104.7px,-95.9px)}
+  18%{transform:translate(-89.4px,-110.4px)}
+  21%{transform:translate(-72.1px,-122.4px)}
+  24%{transform:translate(-53.2px,-131.7px)}
+  27%{transform:translate(-33.1px,-138.1px)}
+  30%{transform:translate(-12.4px,-141.5px)}
+  40%{transform:translate(50.0px,0.0px)}
+  80%{transform:translate(50.0px,0.0px)}
+  100%{transform:translate(-142.0px,0.0px)}
+}
 @keyframes drift-f8{
-  0%{transform:translate(51.9px,-159.8px) rotate(0deg)}
-  5.8%{transform:translate(-34.9px,-164.3px) rotate(0deg)}
-  11.6%{transform:translate(-112.4px,-124.8px) rotate(0deg)}
-  17.4%{transform:translate(-159.8px,-51.9px) rotate(0deg)}
-  23.2%{transform:translate(-164.3px,34.9px) rotate(0deg)}
-  29%{transform:translate(-124.8px,112.4px) rotate(0deg)}
-  34.8%{transform:translate(-51.9px,159.8px) rotate(0deg)}
-  40.6%{transform:translate(34.9px,164.3px) rotate(0deg)}
-  46.4%{transform:translate(112.4px,124.8px) rotate(0deg)}
-  52.2%{transform:translate(159.8px,51.9px) rotate(0deg)}
-  58%{transform:translate(164.3px,-34.9px) rotate(0deg)}
-  66%,84%{transform:translate(140px,75px) rotate(0deg)}
-  92%{transform:translate(164.3px,-34.9px) rotate(0deg)}
-  100%{transform:translate(51.9px,-159.8px) rotate(0deg)}}
-@media(max-width:640px){.orbit-stage{transform:scale(.6);transform-origin:top center;margin-bottom:-140px}
+  0%{transform:translate(-142.9px,-82.5px)}
+  3%{transform:translate(-129.1px,-102.7px)}
+  6%{transform:translate(-112.5px,-120.7px)}
+  9%{transform:translate(-93.5px,-136.0px)}
+  12%{transform:translate(-72.3px,-148.3px)}
+  15%{transform:translate(-49.6px,-157.4px)}
+  18%{transform:translate(-25.8px,-163.0px)}
+  21%{transform:translate(-1.4px,-165.0px)}
+  24%{transform:translate(23.0px,-163.4px)}
+  27%{transform:translate(46.9px,-158.2px)}
+  30%{transform:translate(69.7px,-149.5px)}
+  40%{transform:translate(150.0px,0.0px)}
+  80%{transform:translate(150.0px,0.0px)}
+  100%{transform:translate(-142.9px,-82.5px)}
+}
+@keyframes drift-f9{
+  0%{transform:translate(-94.0px,-162.8px)}
+  3%{transform:translate(-68.9px,-174.9px)}
+  6%{transform:translate(-42.3px,-183.2px)}
+  9%{transform:translate(-14.8px,-187.4px)}
+  12%{transform:translate(13.1px,-187.5px)}
+  15%{transform:translate(40.7px,-183.5px)}
+  18%{transform:translate(67.4px,-175.5px)}
+  21%{transform:translate(92.6px,-163.6px)}
+  24%{transform:translate(115.7px,-148.1px)}
+  27%{transform:translate(136.4px,-129.4px)}
+  30%{transform:translate(154.0px,-107.8px)}
+  40%{transform:translate(-150.0px,160.0px)}
+  80%{transform:translate(-150.0px,160.0px)}
+  100%{transform:translate(-94.0px,-162.8px)}
+}
+@keyframes drift-f10{
+  0%{transform:translate(-0.0px,-147.0px)}
+  3%{transform:translate(21.7px,-145.4px)}
+  6%{transform:translate(43.0px,-140.6px)}
+  9%{transform:translate(63.3px,-132.7px)}
+  12%{transform:translate(82.2px,-121.9px)}
+  15%{transform:translate(99.3px,-108.4px)}
+  18%{transform:translate(114.2px,-92.5px)}
+  21%{transform:translate(126.7px,-74.6px)}
+  24%{transform:translate(136.3px,-55.1px)}
+  27%{transform:translate(142.9px,-34.3px)}
+  30%{transform:translate(146.4px,-12.8px)}
+  40%{transform:translate(-50.0px,160.0px)}
+  80%{transform:translate(-50.0px,160.0px)}
+  100%{transform:translate(-0.0px,-147.0px)}
+}
+@keyframes drift-f11{
+  0%{transform:translate(85.0px,-147.2px)}
+  3%{transform:translate(105.8px,-133.0px)}
+  6%{transform:translate(124.3px,-115.9px)}
+  9%{transform:translate(140.1px,-96.3px)}
+  12%{transform:translate(152.8px,-74.5px)}
+  15%{transform:translate(162.1px,-51.1px)}
+  18%{transform:translate(167.9px,-26.6px)}
+  21%{transform:translate(170.0px,-1.5px)}
+  24%{transform:translate(168.3px,23.7px)}
+  27%{transform:translate(163.0px,48.3px)}
+  30%{transform:translate(154.1px,71.8px)}
+  40%{transform:translate(50.0px,160.0px)}
+  80%{transform:translate(50.0px,160.0px)}
+  100%{transform:translate(85.0px,-147.2px)}
+}
+@keyframes drift-f12{
+  0%{transform:translate(167.1px,-96.5px)}
+  3%{transform:translate(179.6px,-70.7px)}
+  6%{transform:translate(188.1px,-43.4px)}
+  9%{transform:translate(192.4px,-15.1px)}
+  12%{transform:translate(192.5px,13.5px)}
+  15%{transform:translate(188.4px,41.8px)}
+  18%{transform:translate(180.2px,69.2px)}
+  21%{transform:translate(168.0px,95.0px)}
+  24%{transform:translate(152.1px,118.8px)}
+  27%{transform:translate(132.9px,140.0px)}
+  30%{transform:translate(110.7px,158.1px)}
+  40%{transform:translate(150.0px,160.0px)}
+  80%{transform:translate(150.0px,160.0px)}
+  100%{transform:translate(167.1px,-96.5px)}
+}
+@media(max-width:640px){.orbit-stage{transform:scale(.58);transform-origin:top center;margin-bottom:-231px}
   .orbit-sec{padding-bottom:20px}}
-@media(prefers-reduced-motion:reduce){.doc,.oline,.orbit-label{animation:none}
-  .oline,.orbit-label{opacity:1}
-  .f1{transform:translate(-140px,-75px) rotate(0deg)} .f2{transform:translate(0px,-75px) rotate(0deg)}
-  .f3{transform:translate(140px,-75px) rotate(0deg)}  .f4{transform:translate(-75px,0px) rotate(0deg)}
-  .f5{transform:translate(75px,0px) rotate(0deg)}     .f6{transform:translate(-140px,75px) rotate(0deg)}
-  .f7{transform:translate(0px,75px) rotate(0deg)}     .f8{transform:translate(140px,75px) rotate(0deg)}}
+@media(prefers-reduced-motion:reduce){.doc,.deal-card{animation:none}
+  .deal-card{opacity:1}
+  .f1{transform:translate(-150px,-160px)}  .f2{transform:translate(-50px,-160px)}
+  .f3{transform:translate(50px,-160px)}    .f4{transform:translate(150px,-160px)}
+  .f5{transform:translate(-150px,0px)}     .f6{transform:translate(-50px,0px)}
+  .f7{transform:translate(50px,0px)}       .f8{transform:translate(150px,0px)}
+  .f9{transform:translate(-150px,160px)}   .f10{transform:translate(-50px,160px)}
+  .f11{transform:translate(50px,160px)}    .f12{transform:translate(150px,160px)}}
