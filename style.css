@@ -335,7 +335,7 @@ h3{font-size:18px;font-weight:700}
 /* ---- orbit — real file/mail icons scatter, then sort into 3 deal-card rows (dashboard-style), loop (home only) ----
    Story per 10s loop: float/chaos (0-30%, 3s) -> sort into 3 deal-row cards (30-40% in, 40-80% hold, 80-100% out, seamless back to 0%) */
 .orbit-sec{padding:56px 0}
-.orbit-stage{position:relative;width:100%;max-width:480px;height:550px;margin:0 auto}
+.orbit-stage{position:relative;width:480px;height:550px;margin:0 auto}
 .doc{position:absolute;top:275px;left:240px;margin:-40px 0 0 -46px;width:92px;z-index:2;
   display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
   filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}
