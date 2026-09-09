@@ -335,8 +335,8 @@ h3{font-size:18px;font-weight:700}
 /* ---- orbit — real file/mail icons scatter, then sort into 3 deal-card rows (dashboard-style), loop (home only) ----
    Story per 10s loop: float/chaos (0-30%, 3s) -> sort into 3 deal-row cards (30-40% in, 40-80% hold, 80-100% out, seamless back to 0%) */
 .orbit-sec{padding:56px 0}
-.orbit-stage{position:relative;width:100%;max-width:480px;height:550px;margin:0 auto}
-.doc{position:absolute;top:275px;left:240px;margin:-40px 0 0 -59px;width:118px;z-index:2;
+.orbit-stage{position:relative;width:480px;height:550px;margin:0 auto}
+.doc{position:absolute;top:275px;left:240px;margin:-40px 0 0 -46px;width:92px;z-index:2;
   display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;
   filter:drop-shadow(0 14px 18px rgba(31,35,41,.28))}
 .doc-icon{width:52px;height:64px;background:#fff;border:1px solid var(--grid-2);border-radius:3px;position:relative;
@@ -356,8 +356,9 @@ h3{font-size:18px;font-weight:700}
 .txt-icon{width:52px;height:52px;border-radius:12px;background:var(--blue);
   display:flex;align-items:center;justify-content:center}
 .txt-icon svg{width:24px;height:24px}
-.doc-cap{font-family:var(--sans);font-size:10.5px;color:var(--ink-2);line-height:1.3}
-.deal-card{position:absolute;left:30px;width:380px;height:150px;background:#fff;
+.doc-cap{font-family:var(--sans);font-size:9.5px;color:var(--ink-2);line-height:1.25;
+  width:100%;overflow-wrap:break-word;word-break:break-word}
+.deal-card{position:absolute;left:30px;width:420px;height:150px;background:#fff;
   border:1px solid var(--grid-2);border-radius:6px;z-index:1;
   box-shadow:0 1px 0 var(--grid-2),0 20px 40px -28px rgba(31,35,41,.35);
   opacity:0;animation:line-glow 10s linear infinite}
