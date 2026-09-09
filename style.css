@@ -331,3 +331,35 @@ h3{font-size:18px;font-weight:700}
 .card3.link{transition:border-color .15s,box-shadow .15s;cursor:pointer}
 .card3.link:hover{border-color:var(--green)}
 .card3.link.feat:hover{box-shadow:0 24px 50px -32px rgba(16,124,65,.6)}
+
+/* ---- orbit — abstract: your deal files, circling teez (home only) ---- */
+.orbit-sec{padding:10px 0 56px}
+.orbit-stage{position:relative;width:100%;max-width:460px;height:340px;margin:0 auto}
+.orbit-core{position:absolute;top:170px;left:230px;width:56px;height:56px;margin:-28px 0 0 -28px;
+  border-radius:50%;background:var(--chrome);display:flex;align-items:center;justify-content:center;
+  z-index:3;box-shadow:0 0 0 10px var(--green-soft),0 14px 30px -12px rgba(16,124,65,.45)}
+.orbit-core::after{content:"";position:absolute;inset:-11px;border-radius:50%;
+  border:1px solid rgba(16,124,65,.35);animation:orbit-pulse 3.2s ease-out infinite}
+.orbit-core img{width:26px;height:26px;object-fit:contain}
+.orbit-file{position:absolute;display:flex;align-items:center;gap:6px;padding:6px 10px 6px 6px;
+  background:#fff;border:1px solid var(--grid-2);border-radius:8px;
+  box-shadow:0 10px 22px -14px rgba(31,35,41,.4);font-family:var(--mono);font-size:10.5px;
+  color:var(--ink-2);white-space:nowrap;offset-rotate:0deg;animation:orbit-move linear infinite}
+.orbit-file .ic{width:20px;height:20px;border-radius:4px;display:flex;align-items:center;justify-content:center;
+  font-size:7px;font-weight:700;color:#fff;flex:none}
+.orbit-file .ic.pdf{background:var(--red)}
+.orbit-file .ic.xls{background:var(--green)}
+.ring-a .orbit-file{offset-path:circle(118px at 230px 170px);animation-duration:22s}
+.ring-b .orbit-file{offset-path:circle(168px at 230px 170px);animation-duration:32s;animation-direction:reverse}
+.ring-a .f1{animation-delay:0s}    .ring-a .f2{animation-delay:-7.3s}  .ring-a .f3{animation-delay:-14.6s}
+.ring-b .f4{animation-delay:0s}    .ring-b .f5{animation-delay:-8s}   .ring-b .f6{animation-delay:-16s} .ring-b .f7{animation-delay:-24s}
+@keyframes orbit-move{from{offset-distance:0%}to{offset-distance:100%}}
+@keyframes orbit-pulse{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+@media(max-width:640px){.orbit-stage{max-width:320px;height:260px}
+  .orbit-core{top:130px;left:160px}
+  .ring-a .orbit-file{offset-path:circle(80px at 160px 130px)}
+  .ring-b .orbit-file{offset-path:circle(118px at 160px 130px)}
+  .orbit-file{font-size:9px;padding:5px 8px 5px 5px}.orbit-file .ic{width:17px;height:17px;font-size:6px}}
+@media(prefers-reduced-motion:reduce){.orbit-file,.orbit-core::after{animation:none}
+  .ring-a .f1{offset-distance:0%}.ring-a .f2{offset-distance:33%}.ring-a .f3{offset-distance:66%}
+  .ring-b .f4{offset-distance:0%}.ring-b .f5{offset-distance:25%}.ring-b .f6{offset-distance:50%}.ring-b .f7{offset-distance:75%}}
