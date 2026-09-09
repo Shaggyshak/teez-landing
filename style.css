@@ -638,7 +638,8 @@ h3{font-size:18px;font-weight:700}
   80%{transform:translate(150.0px,160.0px)}
   100%{transform:translate(167.1px,-96.5px)}
 }
-@media(max-width:640px){.orbit-stage{transform:scale(.58);transform-origin:top center;margin-bottom:-231px}
+@media(max-width:640px){.orbit-stage{transform:scale(.58);transform-origin:top center;margin-bottom:-231px;
+  margin-left:calc(50% - 240px);margin-right:0}
   .orbit-sec{padding-bottom:20px;overflow:hidden}}
 @media(prefers-reduced-motion:reduce){.doc,.deal-card,.connect-lines .cl,.connect-lines .pulse{animation:none}
   .deal-card{opacity:1}
