@@ -7,7 +7,7 @@
   --grid:#E7E9EC; --grid-2:#D8DBDF; --gutter:#F6F7F8; --gutter-line:#DADDE1;
   --hdr-tx:#6A7178; --ink:#1F2329; --ink-2:#5B6168; --ink-3:#9AA0A6;
   --green:#107C41; --green-2:#0E6B38; --green-soft:rgba(16,124,65,.10); --green-flash:rgba(16,124,65,.22);
-  --amber:#B7791F; --red:#B3261E; --sel:#107C41;
+  --amber:#B7791F; --red:#B3261E; --sel:#107C41; --teal:#0E7490; --blue:#0B84FF;
   --sans:Calibri,'Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',monospace;
   --appH:96px;
@@ -349,10 +349,13 @@ h3{font-size:18px;font-weight:700}
   font-size:7px;font-weight:700;color:#fff;flex:none}
 .orbit-file .ic.pdf{background:var(--red)}
 .orbit-file .ic.xls{background:var(--green)}
+.orbit-file .ic.eml{background:var(--teal)}
+.orbit-file .ic.txt{background:var(--blue)}
 .ring-a .orbit-file{offset-path:circle(118px at 230px 170px);animation-duration:22s}
 .ring-b .orbit-file{offset-path:circle(168px at 230px 170px);animation-duration:32s;animation-direction:reverse}
 .ring-a .f1{animation-delay:0s}    .ring-a .f2{animation-delay:-7.3s}  .ring-a .f3{animation-delay:-14.6s}
-.ring-b .f4{animation-delay:0s}    .ring-b .f5{animation-delay:-8s}   .ring-b .f6{animation-delay:-16s} .ring-b .f7{animation-delay:-24s}
+.ring-b .f4{animation-delay:0s}    .ring-b .f5{animation-delay:-6.4s}  .ring-b .f6{animation-delay:-12.8s}
+.ring-b .f7{animation-delay:-19.2s} .ring-b .f8{animation-delay:-25.6s}
 @keyframes orbit-move{from{offset-distance:0%}to{offset-distance:100%}}
 @keyframes orbit-pulse{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.6);opacity:0}}
 @media(max-width:640px){.orbit-stage{max-width:320px;height:260px}
@@ -362,4 +365,5 @@ h3{font-size:18px;font-weight:700}
   .orbit-file{font-size:9px;padding:5px 8px 5px 5px}.orbit-file .ic{width:17px;height:17px;font-size:6px}}
 @media(prefers-reduced-motion:reduce){.orbit-file,.orbit-core::after{animation:none}
   .ring-a .f1{offset-distance:0%}.ring-a .f2{offset-distance:33%}.ring-a .f3{offset-distance:66%}
-  .ring-b .f4{offset-distance:0%}.ring-b .f5{offset-distance:25%}.ring-b .f6{offset-distance:50%}.ring-b .f7{offset-distance:75%}}
+  .ring-b .f4{offset-distance:0%}.ring-b .f5{offset-distance:20%}.ring-b .f6{offset-distance:40%}
+  .ring-b .f7{offset-distance:60%}.ring-b .f8{offset-distance:80%}}
