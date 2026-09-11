@@ -1,0 +1,506 @@
+<!doctype html>
+<title>Sequence Content Gaps</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #efeae0;
+    --surface: #faf8f2;
+    --ink: #1e2420;
+    --muted: #66685e;
+    --line: #d8d2c2;
+    --line-strong: #b9b19a;
+    --accent: #2a4d6e;
+    --accent-ink: #ffffff;
+    --brass: #a06f2c;
+    --brass-bg: #f1e3c8;
+    --done: #3f6b4a;
+    --done-bg: #dde7de;
+    --shadow: rgba(30, 36, 32, 0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #14181c;
+      --surface: #1c2126;
+      --ink: #e9e6dd;
+      --muted: #9a9c90;
+      --line: #333a34;
+      --line-strong: #454e46;
+      --accent: #7ba3c9;
+      --accent-ink: #0d1620;
+      --brass: #d9a85c;
+      --brass-bg: #3a2f1a;
+      --done: #7bd1a2;
+      --done-bg: #1a2f22;
+      --shadow: rgba(0, 0, 0, 0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #14181c;
+    --surface: #1c2126;
+    --ink: #e9e6dd;
+    --muted: #9a9c90;
+    --line: #333a34;
+    --line-strong: #454e46;
+    --accent: #7ba3c9;
+    --accent-ink: #0d1620;
+    --brass: #d9a85c;
+    --brass-bg: #3a2f1a;
+    --done: #7bd1a2;
+    --done-bg: #1a2f22;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding-inline: 20px;
+    padding-block: 28px 80px;
+  }
+  main { max-width: 720px; margin: 0 auto; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  h1 {
+    font-family: "Big Shoulders Display", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 42px);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin: 2px 0 6px;
+    text-wrap: balance;
+  }
+  .lede { color: var(--muted); font-size: 14.5px; max-width: 58ch; line-height: 1.5; }
+
+  .progress-wrap {
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--surface);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .progress-count {
+    font-family: "IBM Plex Mono", monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .progress-track {
+    flex: 1;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--done);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+  .save-state {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  section.seq {
+    margin-top: 40px;
+    border-top: 1px solid var(--line-strong);
+    padding-top: 20px;
+  }
+  .seq-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  h2 {
+    font-family: "Big Shoulders Display", system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin: 0;
+  }
+  .seq-sub { font-size: 12.5px; color: var(--muted); margin: 0 0 14px; }
+
+  .timeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 10px 0 18px;
+    font-family: "IBM Plex Mono", monospace;
+  }
+  .tl-node { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .tl-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--brass);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--line-strong);
+  }
+  .tl-day { font-size: 10px; color: var(--muted); margin-top: 5px; white-space: nowrap; }
+  .tl-chan { font-size: 9.5px; color: var(--ink); margin-top: 1px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .tl-line { flex: 1; height: 1px; background: var(--line-strong); margin: 0 -1px; align-self: flex-start; margin-top: 4px; min-width: 14px; }
+
+  .field {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: var(--surface);
+    padding: 14px 16px 16px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s ease;
+  }
+  .field.filled { border-color: var(--done); }
+  .field-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .field-label { font-weight: 600; font-size: 14px; }
+  .status-pill {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--brass-bg);
+    color: var(--brass);
+    white-space: nowrap;
+  }
+  .field.filled .status-pill { background: var(--done-bg); color: var(--done); }
+
+  .field-context {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .draft-chip {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11.5px;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 8px 10px;
+    margin-top: 6px;
+    white-space: pre-wrap;
+    line-height: 1.45;
+  }
+  .field textarea, .field input[type="text"] {
+    width: 100%;
+    font: inherit;
+    font-size: 14px;
+    font-family: "IBM Plex Sans", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    padding: 9px 11px;
+    resize: vertical;
+  }
+  .field textarea { min-height: 64px; line-height: 1.5; }
+  .field textarea:focus, .field input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+
+  .confirm-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .confirm-row input[type="checkbox"] {
+    width: 18px; height: 18px; margin-top: 2px; accent-color: var(--done); flex-shrink: 0;
+  }
+  .confirm-row label { font-size: 13.5px; line-height: 1.5; }
+
+  footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-strong);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+</style>
+
+<main>
+  <div class="eyebrow">CRE broker outreach — Apollo sequences</div>
+  <h1>Sequence content gaps</h1>
+  <p class="lede">Everything below is a real placeholder currently sitting live in one of the four Apollo sequences. Fill in what you've got — it saves automatically, and I'll pull it straight into the sequence steps.</p>
+
+  <div class="progress-wrap">
+    <span class="progress-count" id="progressCount">0 / 14</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="save-state" id="saveState">not connected</span>
+  </div>
+
+  <!-- SECTION A: shared scripts -->
+  <section class="seq">
+    <div class="seq-head"><h2>Shared touches</h2></div>
+    <p class="seq-sub">Used as-is in Sep 2026 Refresh, Apollo Personalized, and Already Emailed Bump. Listing Trigger has its own deal-aware versions further down.</p>
+
+    <div class="field" data-field="call1_script">
+      <div class="field-top"><span class="field-label">Call 1 script — Day +1, right after the email</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Currently live as the step's note (call steps are manual tasks — Apollo doesn't dial for you):
+        <span class="draft-chip">Reference yesterday's email. Opener: "Hi [Name], this is Shay — sent you a note yesterday about underwriting deals in Excel under 5 minutes, got a sec?" Pitch in one sentence (who you help + problem + result), then one discovery question. No pickup: leave a 15-second voicemail pointing to the email.</span>
+      </div>
+      <textarea placeholder="Leave blank to keep the draft above, or write your own version"></textarea>
+    </div>
+
+    <div class="field" data-field="call2_script">
+      <div class="field-top"><span class="field-label">Call 2 script — second attempt, after the LinkedIn DM</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Currently live:
+        <span class="draft-chip">Second attempt — reference the email, first call, and LinkedIn note already sent. Under 45 seconds if they don't pick up; leave voicemail #2, then let it close with the breakup email.</span>
+      </div>
+      <textarea placeholder="Leave blank to keep the draft above, or write your own version"></textarea>
+    </div>
+
+    <div class="field" data-field="linkedin_dm_generic">
+      <div class="field-top"><span class="field-label">LinkedIn DM — generic version</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Currently a bracket placeholder:
+        <span class="draft-chip">[LinkedIn DM — reference the email + call already sent. 3-layer icebreaker: (1) their recent post if any, (2) a comment they left, (3) fallback to company/deal news. One line on the pain you solve, then one question. Keep under 90 seconds to read.]</span>
+      </div>
+      <textarea placeholder="The actual DM text"></textarea>
+    </div>
+
+    <div class="field" data-field="breakup_close">
+      <div class="field-top"><span class="field-label">Breakup email — the close line</span><span class="status-pill">needed</span></div>
+      <div class="field-context">This fills one bracket inside the already-live Day-14 email:
+        <span class="draft-chip">{{first_name}}, if now's not the right time, totally fine — [ <b>this part</b> ]. I'll leave it here.</span>
+      </div>
+      <input type="text" placeholder="e.g. \"here's the free tool if it's ever useful, no pitch attached\"">
+    </div>
+  </section>
+
+  <!-- SECTION B: subject lines -->
+  <section class="seq">
+    <div class="seq-head"><h2>Subject lines</h2></div>
+    <p class="seq-sub">Per the guide: write these last, referencing the body's own hook. 3–6 words, lowercase reads best.</p>
+
+    <div class="field" data-field="subject_seq1">
+      <div class="field-top"><span class="field-label">Sep 2026 Refresh (mass template)</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Body opens: "If we could help you get a fully underwritten model in excel under 5 minutes…"</div>
+      <input type="text" placeholder="Subject line">
+    </div>
+
+    <div class="field" data-field="subject_seq2">
+      <div class="field-top"><span class="field-label">Apollo Personalized</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Body opens with the personalization nugget, then: "…do you find your backoffice or offshore analysts slow moving…"</div>
+      <input type="text" placeholder="Subject line">
+    </div>
+
+    <div class="field" data-field="subject_seq3">
+      <div class="field-top"><span class="field-label">Listing Trigger</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Body opens: "I found your deal [listing] online…"</div>
+      <input type="text" placeholder="Subject line">
+    </div>
+
+    <div class="field" data-field="subject_seq4">
+      <div class="field-top"><span class="field-label">Already Emailed Bump</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Goes to the 72 people already emailed in August — this is a follow-up subject, not a cold open.</div>
+      <input type="text" placeholder="Subject line">
+    </div>
+  </section>
+
+  <!-- SECTION C: Listing Trigger deal-aware -->
+  <section class="seq">
+    <div class="seq-head"><h2>Listing Trigger — deal-aware versions</h2></div>
+    <p class="seq-sub">These reference the specific listing found per broker, so they differ from the shared scripts above.</p>
+
+    <div class="field" data-field="call1_script_seq3">
+      <div class="field-top"><span class="field-label">Call 1 script</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Currently live:
+        <span class="draft-chip">Reference yesterday's email and the specific deal mentioned. Opener: "Hi [Name], this is Shay — sent you a note yesterday about [deal], got a sec?" Pitch in one sentence, then one discovery question. No pickup: leave a 15-second voicemail pointing to the email.</span>
+      </div>
+      <textarea placeholder="Leave blank to keep the draft above, or write your own version"></textarea>
+    </div>
+
+    <div class="field" data-field="linkedin_dm_seq3">
+      <div class="field-top"><span class="field-label">LinkedIn DM</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Currently a bracket placeholder:
+        <span class="draft-chip">[LinkedIn DM — reference the email + call + the specific deal already mentioned. One line on the pain you solve, then one question. Keep under 90 seconds to read.]</span>
+      </div>
+      <textarea placeholder="The actual DM text"></textarea>
+    </div>
+  </section>
+
+  <!-- SECTION D: bump body -->
+  <section class="seq">
+    <div class="seq-head"><h2>Already Emailed Bump — the follow-up line</h2></div>
+    <p class="seq-sub">Goes only to the 72 people from the August broker batch. This replaces the Day-1 cold open with a reference to that original email.</p>
+
+    <div class="field" data-field="bump_body">
+      <div class="field-top"><span class="field-label">Bump line</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Currently a bracket placeholder:
+        <span class="draft-chip">[Bump referencing the note sent a few weeks back — new angle, per the guide's soft-bump pattern. e.g. "Quick follow-up on my note a few weeks ago about underwriting deals in Excel under 5 minutes — still worth a 2-minute look?"]</span>
+      </div>
+      <textarea placeholder="The actual bump line"></textarea>
+    </div>
+  </section>
+
+  <!-- SECTION E: generator confirmations -->
+  <section class="seq">
+    <div class="seq-head"><h2>Per-contact generators</h2></div>
+    <p class="seq-sub">These two aren't single answers — they vary per person and need a small build before they can fill in automatically.</p>
+
+    <div class="field" data-field="apollo_personal_confirm">
+      <div class="field-top"><span class="field-label">Apollo Personalized — employment-history nugget</span><span class="status-pill">needed</span></div>
+      <div class="field-context">Would pull each contact's prior company/title from Apollo and generate a line like the old template's: "Since you did investment sales at Chozick and then spent five years at Rosewood before RPR…"</div>
+      <div class="confirm-row">
+        <input type="checkbox" id="cb_apollo">
+        <label for="cb_apollo">Yes — build this generator and run it against the Apollo Personalized list</label>
+      </div>
+      <textarea placeholder="Optional: a tone/example line to calibrate the generator"></textarea>
+    </div>
+
+    <div class="field" data-field="listing_scrape_confirm">
+      <div class="field-top"><span class="field-label">Listing Trigger — the deal/listing scrape</span><span class="status-pill">needed</span></div>
+      <div class="field-context">You mentioned this is coming soon and should be easy. Holding the {{'{{'}}deal{{'}}'}} slot until it's ready.</div>
+      <div class="confirm-row">
+        <input type="checkbox" id="cb_listing">
+        <label for="cb_listing">Still coming — leave the placeholder in place for now</label>
+      </div>
+      <textarea placeholder="Optional: status note or example of what the scrape will return"></textarea>
+    </div>
+  </section>
+
+  <footer>
+    Saves automatically as you type (shared store — safe to close and come back). Nothing here touches the live Apollo sequences until it's pulled in on request.
+  </footer>
+</main>
+
+<script>
+(function () {
+  const FIELD_IDS = [
+    "call1_script","call2_script","linkedin_dm_generic","breakup_close",
+    "subject_seq1","subject_seq2","subject_seq3","subject_seq4",
+    "call1_script_seq3","linkedin_dm_seq3",
+    "bump_body",
+    "apollo_personal_confirm","listing_scrape_confirm"
+  ];
+  const TOTAL = 14; // 13 text fields + counts as one extra for the two checkboxes together being meaningful; kept simple below
+
+  const els = {};
+  document.querySelectorAll("[data-field]").forEach((card) => {
+    const key = card.getAttribute("data-field");
+    const input = card.querySelector("textarea, input[type=text]");
+    const checkbox = card.querySelector("input[type=checkbox]");
+    els[key] = { card, input, checkbox };
+  });
+
+  let state = {};
+  let saveTimer = null;
+  let db = null;
+
+  function isFilled(key) {
+    const e = els[key];
+    if (!e) return false;
+    const textVal = e.input ? e.input.value.trim() : "";
+    const boxVal = e.checkbox ? e.checkbox.checked : true;
+    if (e.checkbox) return boxVal && (textVal.length > 0 || boxVal);
+    return textVal.length > 0;
+  }
+
+  function updateProgress() {
+    let filled = 0;
+    Object.keys(els).forEach((key) => {
+      const e = els[key];
+      const done = e.checkbox ? e.checkbox.checked : (e.input && e.input.value.trim().length > 0);
+      e.card.classList.toggle("filled", !!done);
+      const pill = e.card.querySelector(".status-pill");
+      if (pill) pill.textContent = done ? "filled" : "needed";
+      if (done) filled++;
+    });
+    document.getElementById("progressCount").textContent = filled + " / " + Object.keys(els).length;
+    document.getElementById("progressFill").style.width = (100 * filled / Object.keys(els).length) + "%";
+  }
+
+  function renderFromState() {
+    Object.keys(els).forEach((key) => {
+      const e = els[key];
+      const v = state[key];
+      if (!v) return;
+      if (e.input && typeof v.text === "string") e.input.value = v.text;
+      if (e.checkbox && typeof v.checked === "boolean") e.checkbox.checked = v.checked;
+    });
+    updateProgress();
+  }
+
+  function scheduleSave() {
+    const saveState = document.getElementById("saveState");
+    if (saveState) saveState.textContent = "saving…";
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(doSave, 500);
+  }
+
+  async function doSave() {
+    const saveState = document.getElementById("saveState");
+    Object.keys(els).forEach((key) => {
+      const e = els[key];
+      state[key] = {
+        text: e.input ? e.input.value : "",
+        checked: e.checkbox ? e.checkbox.checked : undefined,
+      };
+    });
+    if (!db) { if (saveState) saveState.textContent = "not connected"; return; }
+    try {
+      await db.doc("gaps/fields").set(state);
+      if (saveState) saveState.textContent = "saved";
+    } catch (err) {
+      if (saveState) saveState.textContent = "save failed";
+    }
+  }
+
+  Object.values(els).forEach((e) => {
+    if (e.input) e.input.addEventListener("input", () => { updateProgress(); scheduleSave(); });
+    if (e.checkbox) e.checkbox.addEventListener("change", () => { updateProgress(); scheduleSave(); });
+  });
+
+  async function boot() {
+    try {
+      db = window.claude && window.claude.use ? await window.claude.use("db") : null;
+    } catch (e) { db = null; }
+    const saveState = document.getElementById("saveState");
+    if (!db) { if (saveState) saveState.textContent = "not connected"; updateProgress(); return; }
+    try {
+      const snap = await db.doc("gaps/fields").get();
+      if (snap.exists) { state = snap.data() || {}; renderFromState(); }
+      if (saveState) saveState.textContent = "loaded";
+      db.doc("gaps/fields").onSnapshot((s) => {
+        if (!s.metadata.hasPendingWrites && s.exists) {
+          state = s.data() || {};
+          renderFromState();
+        }
+      });
+    } catch (e) {
+      if (saveState) saveState.textContent = "not connected";
+    }
+    updateProgress();
+  }
+
+  boot();
+})();
+</script>
