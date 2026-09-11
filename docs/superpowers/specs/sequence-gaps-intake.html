@@ -237,24 +237,50 @@
   .confirm-row label { font-size: 13.5px; line-height: 1.5; }
 
   footer {
-    margin-top: 40px;
+    margin-top: 24px;
     padding-top: 18px;
     border-top: 1px solid var(--line-strong);
     font-size: 12px;
     color: var(--muted);
     line-height: 1.6;
   }
+
+  .copy-wrap {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .copy-btn {
+    font: inherit;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-ink);
+    background: var(--accent);
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+  .copy-btn:hover { filter: brightness(1.08); }
+  .copy-btn:active { filter: brightness(0.95); }
+  .copy-status {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
 </style>
 
 <main>
   <div class="eyebrow">CRE broker outreach — Apollo sequences</div>
   <h1>Sequence content gaps</h1>
-  <p class="lede">Everything below is a real placeholder currently sitting live in one of the four Apollo sequences. Fill in what you've got — it saves automatically, and I'll pull it straight into the sequence steps.</p>
+  <p class="lede">Everything below is a real placeholder currently sitting live in one of the four Apollo sequences. Fill in what you've got, then hit copy at the bottom and paste it back to me — nothing here autosaves or syncs while you type.</p>
 
   <div class="progress-wrap">
     <span class="progress-count" id="progressCount">0 / 14</span>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <span class="save-state" id="saveState">not connected</span>
   </div>
 
   <!-- SECTION A: shared scripts -->
@@ -387,21 +413,33 @@
     </div>
   </section>
 
+  <div class="copy-wrap">
+    <button type="button" id="copyBtn" class="copy-btn">Copy all answers as text</button>
+    <span class="copy-status" id="copyStatus"></span>
+  </div>
+
   <footer>
-    Saves automatically as you type (shared store — safe to close and come back). Nothing here touches the live Apollo sequences until it's pulled in on request.
+    Nothing saves or syncs — it's plain form fields on the page. When you're done, hit copy above and paste the result back to me. Nothing here touches the live Apollo sequences until it's pulled in on request.
   </footer>
 </main>
 
 <script>
 (function () {
-  const FIELD_IDS = [
-    "call1_script","call2_script","linkedin_dm_generic","breakup_close",
-    "subject_seq1","subject_seq2","subject_seq3","subject_seq4",
-    "call1_script_seq3","linkedin_dm_seq3",
-    "bump_body",
-    "apollo_personal_confirm","listing_scrape_confirm"
-  ];
-  const TOTAL = 14; // 13 text fields + counts as one extra for the two checkboxes together being meaningful; kept simple below
+  const LABELS = {
+    call1_script: "Call 1 script (Day +1)",
+    call2_script: "Call 2 script (second attempt)",
+    linkedin_dm_generic: "LinkedIn DM — generic version",
+    breakup_close: "Breakup email — close line",
+    subject_seq1: "Subject — Sep 2026 Refresh",
+    subject_seq2: "Subject — Apollo Personalized",
+    subject_seq3: "Subject — Listing Trigger",
+    subject_seq4: "Subject — Already Emailed Bump",
+    call1_script_seq3: "Listing Trigger — Call 1 script",
+    linkedin_dm_seq3: "Listing Trigger — LinkedIn DM",
+    bump_body: "Already Emailed Bump — bump line",
+    apollo_personal_confirm: "Apollo Personalized generator",
+    listing_scrape_confirm: "Listing scrape status",
+  };
 
   const els = {};
   document.querySelectorAll("[data-field]").forEach((card) => {
@@ -410,19 +448,6 @@
     const checkbox = card.querySelector("input[type=checkbox]");
     els[key] = { card, input, checkbox };
   });
-
-  let state = {};
-  let saveTimer = null;
-  let db = null;
-
-  function isFilled(key) {
-    const e = els[key];
-    if (!e) return false;
-    const textVal = e.input ? e.input.value.trim() : "";
-    const boxVal = e.checkbox ? e.checkbox.checked : true;
-    if (e.checkbox) return boxVal && (textVal.length > 0 || boxVal);
-    return textVal.length > 0;
-  }
 
   function updateProgress() {
     let filled = 0;
@@ -438,69 +463,43 @@
     document.getElementById("progressFill").style.width = (100 * filled / Object.keys(els).length) + "%";
   }
 
-  function renderFromState() {
-    Object.keys(els).forEach((key) => {
-      const e = els[key];
-      const v = state[key];
-      if (!v) return;
-      if (e.input && typeof v.text === "string") e.input.value = v.text;
-      if (e.checkbox && typeof v.checked === "boolean") e.checkbox.checked = v.checked;
-    });
-    updateProgress();
-  }
-
-  function scheduleSave() {
-    const saveState = document.getElementById("saveState");
-    if (saveState) saveState.textContent = "saving…";
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(doSave, 500);
-  }
-
-  async function doSave() {
-    const saveState = document.getElementById("saveState");
-    Object.keys(els).forEach((key) => {
-      const e = els[key];
-      state[key] = {
-        text: e.input ? e.input.value : "",
-        checked: e.checkbox ? e.checkbox.checked : undefined,
-      };
-    });
-    if (!db) { if (saveState) saveState.textContent = "not connected"; return; }
-    try {
-      await db.doc("gaps/fields").set(state);
-      if (saveState) saveState.textContent = "saved";
-    } catch (err) {
-      if (saveState) saveState.textContent = "save failed";
-    }
-  }
-
   Object.values(els).forEach((e) => {
-    if (e.input) e.input.addEventListener("input", () => { updateProgress(); scheduleSave(); });
-    if (e.checkbox) e.checkbox.addEventListener("change", () => { updateProgress(); scheduleSave(); });
+    if (e.input) e.input.addEventListener("input", updateProgress);
+    if (e.checkbox) e.checkbox.addEventListener("change", updateProgress);
   });
 
-  async function boot() {
-    try {
-      db = window.claude && window.claude.use ? await window.claude.use("db") : null;
-    } catch (e) { db = null; }
-    const saveState = document.getElementById("saveState");
-    if (!db) { if (saveState) saveState.textContent = "not connected"; updateProgress(); return; }
-    try {
-      const snap = await db.doc("gaps/fields").get();
-      if (snap.exists) { state = snap.data() || {}; renderFromState(); }
-      if (saveState) saveState.textContent = "loaded";
-      db.doc("gaps/fields").onSnapshot((s) => {
-        if (!s.metadata.hasPendingWrites && s.exists) {
-          state = s.data() || {};
-          renderFromState();
-        }
-      });
-    } catch (e) {
-      if (saveState) saveState.textContent = "not connected";
-    }
-    updateProgress();
+  function buildText() {
+    const lines = [];
+    Object.keys(els).forEach((key) => {
+      const e = els[key];
+      const text = e.input ? e.input.value.trim() : "";
+      const checked = e.checkbox ? e.checkbox.checked : null;
+      if (!text && checked === null) return;
+      if (!text && checked === false) return;
+      lines.push(LABELS[key] || key + ":");
+      if (e.checkbox) lines.push(checked ? "[confirmed yes]" : "[not confirmed]");
+      if (text) lines.push(text);
+      lines.push("");
+    });
+    return lines.join("\n").trim();
   }
 
-  boot();
+  const copyBtn = document.getElementById("copyBtn");
+  const copyStatus = document.getElementById("copyStatus");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const text = buildText();
+      if (!text) { copyStatus.textContent = "nothing filled in yet"; return; }
+      try {
+        await navigator.clipboard.writeText(text);
+        copyStatus.textContent = "copied — paste it back to me";
+      } catch (err) {
+        copyStatus.textContent = "couldn't copy — select the text manually";
+      }
+      setTimeout(() => { copyStatus.textContent = ""; }, 4000);
+    });
+  }
+
+  updateProgress();
 })();
 </script>
