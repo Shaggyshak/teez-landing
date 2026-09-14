@@ -1,7 +1,8 @@
 /* ===================================================================
-   Teez — legal & support pages
-   Prose layout for privacy.html / terms.html / support.html. Loaded on
-   top of style.css, which supplies the app chrome and design tokens.
+   Teez — legal, support & research pages
+   Prose layout for privacy.html / terms.html / support.html, and the
+   research.html index + research/*.html posts. Loaded on top of
+   style.css, which supplies the app chrome and design tokens.
    =================================================================== */
 
 .legal{max-width:78ch;padding:64px 36px 88px}
@@ -46,3 +47,21 @@
   .legal h1{font-size:29px}
   .legal h2{font-size:19px;margin-top:36px}
 }
+
+/* research index: list of posts */
+.legal .postlist{display:flex;flex-direction:column}
+.legal .postcard{padding:28px 0;border-bottom:1px solid var(--grid-2)}
+.legal .postcard:first-child{padding-top:0}
+.legal .postcard:last-child{border-bottom:none}
+.legal .postcard h2{margin:0 0 8px;font-size:22px;letter-spacing:-.01em}
+.legal .postcard h2 a{color:var(--ink);text-decoration:none}
+.legal .postcard h2 a:hover{color:var(--green)}
+.legal .postcard .meta{margin-bottom:10px}
+.legal .postcard p{margin-bottom:10px}
+.legal .postcard .more{color:var(--green);font-weight:600;text-decoration:none;font-size:14.5px}
+.legal .postcard .more:hover{text-decoration:underline}
+
+/* research posts: chart figures */
+.legal figure{margin:24px 0 28px}
+.legal figure img{width:100%;border:1px solid var(--grid-2);border-radius:6px;display:block}
+.legal figcaption{font-size:13px;color:var(--hdr-tx);margin-top:8px;line-height:1.4}

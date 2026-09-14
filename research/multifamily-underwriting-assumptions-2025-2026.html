@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1ENM84PQE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F1ENM84PQE');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teez &mdash; How Fast Do Multifamily Underwriting Assumptions Go Stale?</title>
+  <meta name="description" content="How much did debt cost, rent-growth forecasts, and deal volume move in 2025–2026 — and what did that do to a representative $24M multifamily deal's levered IRR? A Teez research note." />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css?v=20260909p" />
+  <link rel="stylesheet" href="../legal.css?v=20260913a" />
+</head>
+<body>
+
+<!-- app chrome -->
+<div class="app">
+  <div class="app-top">
+    <a href="/" class="app-id">
+      <img src="../images/teez-icon.png" alt="Teez">
+      <span class="nm">Teez</span>
+      <span class="file">teez — underwriting-assumptions.xlsx</span>
+    </a>
+    <nav class="app-nav">
+      <a href="/sponsors.html">Sponsors &amp; GPs</a>
+      <a href="/brokers.html">Brokers</a>
+      <a href="/analysts.html">Analysts</a>
+      <a href="/pricing.html">Pricing</a>
+      <a href="/research.html" class="act">Research</a>
+    </nav>
+    <div class="app-right">
+      <button class="navtoggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      <a href="https://app.teez.live/login" class="login">Log in</a>
+    </div>
+  </div>
+  <div class="fxbar">
+    <div class="fx-name"><span class="nb">B2</span><span>fx</span></div>
+    <div class="fx-val"><span>=RESEARCH(underwriting_assumptions_2025_2026)</span></div>
+  </div>
+</div>
+
+<!-- column header -->
+<div class="colhead">
+  <div class="corner"><i></i></div>
+  <div class="cols"><span>A</span><span class="act">B</span><span>C</span><span>D</span><span>E</span><span>F</span><span>G</span></div>
+</div>
+
+<div class="sheet">
+  <div class="gutter" id="gutter" data-act="2"></div>
+  <div class="canvas">
+
+    <div class="wrap legal">
+      <div class="doc-head">
+        <div class="range"><span class="tab">A1</span><span class="nm">Research</span></div>
+        <h1>How Fast Do Multifamily Underwriting Assumptions Go Stale?</h1>
+        <p class="lead" style="margin-top:6px">Evidence from 2025&ndash;2026</p>
+        <div class="meta">
+          <span><b>By</b> Nik Shakeri</span>
+          <span><b>Published</b> 13 September 2026</span>
+        </div>
+      </div>
+
+      <div class="note">
+        <p><strong>Summary.</strong> A multifamily acquisition model rests on a small number of market inputs: the cost of debt, the trajectory of rents, the exit cap rate, and, implicitly, how many other buyers are pricing the same asset. Standard practice is to set these once at the start of underwriting and carry them through to close. Between LOI and closing that is typically 60&ndash;90 days; the underwriting phase itself runs roughly 1&ndash;4 weeks.</p>
+        <p>This note measures how much three of those inputs moved during 2025 and the first three quarters of 2026, using published, dated data, and then runs a representative deal through the observed changes to estimate the effect on levered returns. Findings:</p>
+        <ul>
+          <li>The 10-year Treasury rose from a 2026 low of 3.97% (Feb 27) to 4.95% (Sep 10), a move of 98 bps in about six months. Transaction cap rates were essentially flat over the same period.</li>
+          <li>CoStar revised its national rent-growth forecast for individual quarters by 40 to 160 bps per release, in both directions, across three releases between November 2025 and August 2026.</li>
+          <li>Property-level transaction counts rose 14% in 2025 while dollar volume rose 9%, average deal size fell to $23.8M, and single-asset sales grew to 85% of volume.</li>
+          <li>On a representative $24M acquisition at 65% LTV, applying only the observed rate move reduces the 5-year levered IRR by about 150 bps; adding the observed rent-forecast revision brings the reduction to roughly 270 bps.</li>
+        </ul>
+      </div>
+
+      <h2>1. Debt cost</h2>
+      <p>The 10-year Treasury drifted lower through 2025 (monthly averages: 4.63% in January, 4.06% in October) and reached a daily-close low of 3.97% on February 27, 2026. It then rose through the spring and summer, closing at 4.95% on September 10, 2026 (FRED series GS10 and DGS10).</p>
+      <p>The increase was not linear. Monthly averages moved from 4.13% (February) to 4.48% (May) to 4.68% (August), with the sharpest leg in early September alongside oil above $100 and market pricing of a possible Federal Reserve rate increase.</p>
+
+      <figure>
+        <img src="../images/research/10y-treasury-yield.png" alt="Line chart of the 10-year Treasury yield from January 2025 to September 2026, showing a low of 3.97% on Feb 27, 2026 and a rise to 4.95% by Sep 10, 2026">
+        <figcaption>10-Year Treasury Yield, Jan 2025 &ndash; Sep 2026. Monthly average (FRED GS10); *Sep 2026 = latest daily close (FRED DGS10).</figcaption>
+      </figure>
+
+      <p>Mapped onto a typical timeline, a floating-index loan quoted in the last week of February and closing at the end of May would have seen the index rise roughly 50 bps before closing, and a further ~50 bps over the following three months.</p>
+      <p>Cap rates did not absorb the move. Transaction cap rates averaged 5.57% in 2024, 5.65% in Q1 2025, and 5.55% in Q4 2025 (RealPage, citing MSCI Real Capital Analytics); MSCI reports the sector flat at 5.6&ndash;5.7% for eight consecutive quarters. Survey-based underwriting assumptions were similarly stable: CBRE's Q2 2025 survey put the core going-in cap rate at 4.75% and the exit cap at 4.96%, and its Q4 2025 survey showed 4.75% and 4.95%. In other words, the cost of leverage changed materially while the price of the asset did not.</p>
+
+      <h2>2. Rent growth forecasts</h2>
+      <p>CoStar publishes revisions to its national apartment rent-growth forecast with release dates, which allows the size and frequency of changes to be tracked. Between November 2025 and August 2026:</p>
+      <p>The forecast for Q4 2026 alone moved from +1.0% to +0.6% and then to +1.9% across two releases six months apart &mdash; a net swing of 170 bps within a single forecast horizon. The direction of revision was not consistent: the November 2025 release was a large cut, the two 2026 releases were net increases.</p>
+
+      <figure>
+        <img src="../images/research/costar-rent-forecast-revisions.png" alt="Bar chart of CoStar national apartment rent-growth forecast revisions from November 2025 to August 2026, ranging from -160 bps to +130 bps per release">
+        <figcaption>CoStar national apartment rent-growth forecast revisions, Nov 2025 &ndash; Aug 2026. Each bar is one published revision. Q4 2026 was cut in Feb, then raised 130 bps in Aug &mdash; a 170 bps net swing in six months.</figcaption>
+      </figure>
+
+      <p>For reference, the three-year rent-growth assumptions used in institutional underwriting have been comparatively steady: 2.8% for core and 3.3% for value-add in CBRE's Q2 2025 survey. The quarterly path those multi-year averages depend on has been revised by more than a full percentage point.</p>
+
+      <h2>3. Transaction activity and buyer composition</h2>
+      <p>Source: RealPage Analytics citing MSCI RCA. 2023 dollar volume is implied from RealPage's reported 22% growth to $146B in 2024.</p>
+
+      <figure>
+        <img src="../images/research/apartment-transactions-deal-size.png" alt="Two bar charts: U.S. apartment properties traded per year with dollar volume, 2019-TTM Q1'26, and average deal size over the same period, falling from $25.6M in 2024 to $23.8M in 2025">
+        <figcaption>U.S. apartment transactions: more properties trading, smaller checks. Source: RealPage Analytics citing MSCI Real Capital Analytics. TTM = trailing 12 months.</figcaption>
+      </figure>
+
+      <p>Two shifts in composition are relevant. First, growth in 2025 came through more, smaller transactions: property count rose 14% against 9% dollar growth, and average deal size fell from $25.6M to $23.8M. Second, the mix moved toward single assets. In Q3 2025, individual-property sales rose 21% year over year to $37B and accounted for 85% of volume, while portfolio sales fell 19%; entity-level transactions totaled $354M for the full year, down 96% from 2024 (MSCI via Multifamily Dive).</p>
+      <p>MSCI's own commentary on the 2025 data is that investors are underwriting acquisitions one property at a time, with no portfolio effects to offset underwriting errors on individual assets. The practical implication for timing is that a $24M single asset attracts a broader and less institutional buyer pool than a portfolio, and each of those buyers underwrites independently on the same marketing calendar.</p>
+
+      <h2>4. Effect on levered returns</h2>
+      <p>To translate the observed changes into return terms, we built a representative acquisition and varied only the inputs that moved.</p>
+      <p><strong>Deal assumptions.</strong> $24M purchase price (the 2025 average deal size); 5.55% going-in cap rate (Q4 2025 transaction average); 65% LTV; fixed-rate debt at the 10-year Treasury plus 200 bps, 30-year amortization; 5-year hold; 5.75% exit cap rate applied to forward NOI; 2% selling costs. The base case uses the February 27, 2026 10-year (3.97%) and 3.0% annual NOI growth, roughly the midpoint of the CBRE core and value-add assumptions.</p>
+
+      <figure>
+        <img src="../images/research/irr-sensitivity-2026.png" alt="Bar chart showing 5-year levered IRR falling from 11.8% as underwritten in Feb 2026 to 10.3% under today's 10-year Treasury rate, 10.6% under the Feb CoStar rent cut, 9.1% for both combined, and 7.1% with an additional 25 bp exit-cap widening">
+        <figcaption>Same deal, same price &mdash; IRR under the drift that actually happened in 2026. Illustrative $24M acquisition (2025 average deal size), 5.55% going-in cap, 65% LTV at 10Y + 200 bps, 30-yr amort, 5.75% exit cap, 5-year hold.</figcaption>
+      </figure>
+
+      <p>Purchase price is held constant in every scenario, consistent with the observation that transaction cap rates did not move. The rate change is the largest single factor at this leverage; the rent revision is of similar magnitude. The final row adds a 25 bp exit-cap widening, which is not an observed change but is a common adjustment when the risk-free rate approaches 5%.</p>
+      <p>The model is deliberately simple &mdash; no capex reserve, no interest-only period, no refinancing &mdash; so that the sensitivities are attributable to the inputs being tested. The script is available on request.</p>
+
+      <h2>5. Implications for process</h2>
+      <p>Taken together, the data suggest three things about underwriting timelines in the current environment.</p>
+      <p><strong>The half-life of an assumption set is short.</strong> A rate index and a rent forecast set in late February were each materially different by May. Models that take several weeks to build are, at completion, partly built on superseded inputs.</p>
+      <p><strong>Re-underwriting cost matters as much as initial underwriting quality.</strong> When a forecast provider moves a number by 130 bps, the relevant question is how expensive it is to rerun the deal. Teams for whom that cost is hours can update; teams for whom it is weeks tend to defend the original model.</p>
+      <p><strong>Cycle time affects deal access, not just accuracy.</strong> With roughly 7,000 properties trading annually, most of them single assets, the number of deals a sponsor can credibly bid on is bounded by underwriting throughput. Faster turnaround widens the funnel and shortens the time between first look and a lender-ready package &mdash; which, in the rate environment above, is also the time to a lock.</p>
+      <p>None of this argues for less rigor. It argues that rigor and speed are no longer a trade-off a deal team can afford to make, because the market is moving on a timescale shorter than the typical underwriting cycle.</p>
+
+      <p><em>Teez builds underwriting software for multifamily sponsors and emerging GPs &mdash; taking an OM, T-12, and rent roll to a full model in minutes and re-running it as inputs change. More at <a href="https://teez.live/">teez.live</a>.</em></p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li><strong>10-year Treasury:</strong> Federal Reserve Board via FRED. Monthly averages (GS10), Jan 2025&ndash;Aug 2026; daily closes (DGS10) for the Feb 27, 2026 low (3.97%) and Sep 10, 2026 close (4.95%). September market context: Trading Economics, Sep 11, 2026.</li>
+        <li><strong>Rent-growth revisions:</strong> CoStar Group press releases dated Nov 11, 2025; Feb 10, 2026; Aug 12, 2026.</li>
+        <li><strong>Transactions, deal counts, transaction cap rates:</strong> RealPage Analytics &mdash; "Apartment Transactions in Calendar 2024" (Feb 2025); "Apartment Transactions 1Q 2025"; "Largest Apartment Transactions 3Q 2025" and "4Q 2025" (Mar 2026); "U.S. Apartment Transactions 1st Quarter 2026" (May 2026) &mdash; all citing MSCI Real Capital Analytics.</li>
+        <li><strong>Single-asset vs. portfolio mix, entity-level volume, MSCI cap-rate series:</strong> MSCI Real Assets, reported by Multifamily Dive, Oct 24, 2025 and Jan 26, 2026.</li>
+        <li><strong>Survey underwriting assumptions:</strong> CBRE Research, "Multifamily Underwriting Metrics Improve in Q2" (Jul 2025); CBRE Q4 2025 multifamily underwriting survey as reported by CRE Daily, Mar 6, 2026.</li>
+        <li><strong>Return model:</strong> Teez, assumptions as stated in Section 4.</li>
+      </ul>
+
+      <h2>Related</h2>
+      <ul>
+        <li><a href="/research.html">← Back to Research</a></li>
+      </ul>
+    </div>
+
+  </div><!-- /canvas -->
+</div><!-- /sheet -->
+
+<!-- footer = sheet tabs (page nav) + status bar -->
+<div class="tabsbar">
+  <a class="tb" href="/">Home</a>
+  <a class="tb" href="/sponsors.html">Sponsors &amp; GPs</a>
+  <a class="tb" href="/brokers.html">Brokers</a>
+  <a class="tb" href="/analysts.html">Analysts</a>
+  <a class="tb" href="/pricing.html">Pricing</a>
+  <a class="tb act" href="/research.html">Research</a>
+  <a class="tb" href="/support.html">Support</a>
+  <a class="tb" href="/privacy.html">Privacy</a>
+  <a class="tb" href="/terms.html">Terms</a>
+  <a class="tb" href="https://app.teez.live/login">Log in</a>
+  <span class="tb add">+</span>
+</div>
+<div class="statusbar">
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — receipts, not vibes</span></div>
+  <div class="l"><span class="contact">1178 Broadway, 3rd Floor #1464, New York, NY 10001</span><a class="contact" href="tel:+16464848207">(646) 484-8207</a><span>© 2026 Teez, Inc.</span><span class="deskonly">100%</span></div>
+</div>
+
+<script src="../app.js?v=20260820a"></script>
+</body>
+</html>
