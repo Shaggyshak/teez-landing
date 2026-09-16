@@ -72,23 +72,3 @@
 .legal .share-btn{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);border:1px solid var(--grid-2);border-radius:4px;padding:5px 11px;background:#fff;text-decoration:none;cursor:pointer}
 .legal .share-btn:hover{border-color:var(--green);color:var(--green)}
 
-/* research posts: comments */
-.legal .comments{margin-top:56px;padding-top:8px;border-top:1px solid var(--grid-2)}
-.legal .comments h2{margin-top:0}
-.legal .comment-list{margin-bottom:28px}
-.legal .comment{padding:16px 0;border-bottom:1px solid var(--grid-2)}
-.legal .comment:last-child{border-bottom:none}
-.legal .comment-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:6px}
-.legal .comment-name{font-weight:600;color:var(--ink)}
-.legal .comment-date{font-family:var(--mono);font-size:12px;color:var(--hdr-tx)}
-.legal .comment-body{margin-bottom:0;white-space:pre-wrap}
-.legal .comment-empty{color:var(--hdr-tx);font-size:14.5px}
-
-.legal .comment-form{border:1px solid var(--grid-2);border-radius:8px;padding:22px 24px;background:#fff}
-.legal .cf-row{margin-bottom:14px}
-.legal .cf-row label{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--hdr-tx);margin-bottom:6px}
-.legal .cf-row input,.legal .cf-row textarea{width:100%;font:inherit;font-size:14.5px;color:var(--ink);border:1px solid var(--grid-2);border-radius:5px;padding:9px 11px;background:var(--gutter);resize:vertical}
-.legal .cf-row input:focus,.legal .cf-row textarea:focus{outline:none;border-color:var(--green)}
-.legal .cf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-.legal .comment-status{margin:12px 0 0;font-size:13.5px;color:var(--ink-2)}
-.legal .comment-status.error{color:#c0392b}

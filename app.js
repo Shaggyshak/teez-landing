@@ -86,7 +86,7 @@
     }, { threshold: 0.35 }).observe(feedWin);
   }
 
-  // ---- shared Supabase project (also backs comments below) ----
+  // ---- shared Supabase project ----
   // NB: the anon/publishable key is meant to be public — access is governed
   // by RLS policies on each table, not by keeping this secret.
   var SB = 'https://gclrtcheaojuoyvvhuuq.supabase.co';
@@ -150,58 +150,4 @@
     });
   });
 
-  // ---- research post comments -> Supabase (blog_comments table) ----
-  // New comments start unapproved (see the "approved = false" insert policy)
-  // and only show up here once approved:true is set from Supabase's table
-  // editor — so nothing posted by a visitor appears on the page unreviewed.
-  var comments = document.getElementById('comments');
-  if (comments) {
-    var slug = comments.dataset.slug;
-    var list = document.getElementById('comment-list');
-    var empty = document.getElementById('comment-empty');
-
-    var esc = function (s) {
-      return String(s).replace(/[&<>"']/g, function (c) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-      });
-    };
-
-    fetch(SB + '/rest/v1/blog_comments?select=name,body,created_at&post_slug=eq.' + encodeURIComponent(slug) + '&approved=eq.true&order=created_at.asc', {
-      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY }
-    }).then(function (r) { return r.ok ? r.json() : []; })
-      .then(function (rows) {
-        if (!rows || !rows.length) return;
-        if (empty) empty.remove();
-        list.innerHTML = rows.map(function (c) {
-          var when = new Date(c.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-          return '<div class="comment"><div class="comment-head"><span class="comment-name">' + esc(c.name) +
-            '</span><span class="comment-date">' + when + '</span></div><p class="comment-body">' + esc(c.body) + '</p></div>';
-        }).join('');
-      })
-      .catch(function () { /* leave the "no comments yet" state in place */ });
-
-    var cf = document.getElementById('comment-form');
-    if (cf) {
-      var cst = document.getElementById('comment-status'), csub = document.getElementById('comment-submit');
-      var clabel = csub.innerHTML;
-      cf.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var hp = document.getElementById('comment-website');
-        if (hp && hp.value) return; // honeypot tripped — silently drop, no error shown
-        var name = document.getElementById('comment-name').value.trim();
-        var body = document.getElementById('comment-body').value.trim();
-        if (!name || !body) { cst.textContent = '#ERROR — name and comment are required.'; cst.className = 'comment-status error'; return; }
-        csub.disabled = true; csub.innerHTML = 'Posting…'; cst.textContent = ''; cst.className = 'comment-status';
-        fetch(SB + '/rest/v1/blog_comments', {
-          method: 'POST',
-          headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
-          body: JSON.stringify({ post_slug: slug, name: name, body: body })
-        }).then(function (r) {
-          if (r.ok) { cst.textContent = "✓ Thanks — your comment is awaiting approval and will appear here shortly."; cst.className = 'comment-status'; cf.reset(); }
-          else { cst.textContent = 'Something went wrong. Try again in a moment.'; cst.className = 'comment-status error'; }
-        }).catch(function () { cst.textContent = 'Network issue. Try again in a moment.'; cst.className = 'comment-status error'; })
-          .then(function () { csub.disabled = false; csub.innerHTML = clabel; });
-      });
-    }
-  }
 })();
