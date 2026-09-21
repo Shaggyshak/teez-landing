@@ -122,7 +122,7 @@
   }
 
   // ---- outreach click attribution (?r=<id> on a tracked link) ----
-  // Tracked links point straight at teez.live rather than through a redirect
+  // Tracked links point straight at teez.ai rather than through a redirect
   // host, so recipients never get Gmail's "are you sure" interstitial.
   var rid = (location.search.match(/[?&]r=([A-Za-z0-9_-]{8,64})/) || [])[1];
   if (rid) {
