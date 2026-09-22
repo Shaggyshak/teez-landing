@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /docs/
 
-Sitemap: https://teez.live/sitemap.xml
+Sitemap: https://teez.ai/sitemap.xml
