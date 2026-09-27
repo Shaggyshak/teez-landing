@@ -11,6 +11,7 @@
   --sans:Calibri,'Segoe UI',system-ui,-apple-system,sans-serif;
   --mono:'JetBrains Mono',ui-monospace,'Cascadia Mono',monospace;
   --appH:96px;
+  --annc-h:36px;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--appH) + 30px);overflow-x:hidden}
@@ -18,6 +19,12 @@ body{font-family:var(--sans);color:var(--ink);font-size:17px;line-height:1.55;ba
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 .tnum{font-variant-numeric:tabular-nums}
+
+/* ===== announcement bar (optional, opt in via body.has-annc) ===== */
+.annc-bar{position:fixed;top:0;left:0;right:0;z-index:65;height:var(--annc-h);background:#0F1214;color:#E8EAED;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:12.5px;padding:0 16px;text-align:center;border-bottom:1px solid var(--chrome-line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.annc-bar a{color:#fff;text-decoration:underline;text-underline-offset:2px;flex:none}
+body.has-annc .app{top:var(--annc-h)}
+body.has-annc{--appH:calc(96px + var(--annc-h))}
 
 /* ===== app chrome ===== */
 .app{position:fixed;top:0;left:0;right:0;z-index:60;background:var(--chrome);color:#E8EAED;border-bottom:1px solid var(--chrome-line)}
@@ -179,6 +186,7 @@ h3{font-size:18px;font-weight:700}
 
 /* ===== three-up cards (roadmap / market / advantage) ===== */
 .cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.cols3.cols2{grid-template-columns:repeat(2,1fr)}
 .card3{border:1px solid var(--grid-2);border-radius:8px;padding:26px 24px;background:#fff;display:flex;flex-direction:column}
 .card3.feat{border:2px solid var(--green);box-shadow:0 20px 44px -32px rgba(16,124,65,.5)}
 .card3 .ey{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hdr-tx);margin-bottom:12px}
@@ -263,12 +271,15 @@ h3{font-size:18px;font-weight:700}
   .colhead,.gutter,.colguides{display:none}
   .sheet{padding-top:calc(var(--appH) + 6px)}
   .navtoggle{display:block}
+  .annc-bar{font-size:11.5px;padding:0 12px}
   .app-nav{display:none;position:absolute;top:52px;left:0;right:0;margin:0;flex-direction:column;gap:0;background:var(--chrome-2);border-bottom:1px solid var(--chrome-line);padding:4px 0;z-index:70;box-shadow:0 16px 30px -16px rgba(0,0,0,.5)}
+  body.has-annc .app-nav{top:calc(52px + var(--annc-h))}
   .app-nav.open{display:flex}
   .app-nav a{padding:13px 18px;font-size:15px;border-bottom:1px solid var(--chrome-line)}
   .app-nav a:last-child{border-bottom:none}
   .hero-top,.two-grid,.pricing-grid,.cols3{grid-template-columns:1fr;gap:34px}
   .cols3{gap:16px}
+  .cols3.cols2{grid-template-columns:1fr}
   .walk{grid-template-columns:1fr;gap:14px;padding:28px 24px}
   .demo-embed{display:none}
   .demo-fallback{display:block;margin-top:24px}
