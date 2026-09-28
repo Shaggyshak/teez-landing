@@ -20,6 +20,15 @@
     --border: #E1E4E8;
     --cyan: #0E7490;
     --pink: #BE185D;
+    --blue: #0B84FF;
+    --red: #D93025;
+    --purple: #7E3FB8;
+    --mono: "SF Mono", Menlo, Consolas, monospace;
+    /* One 24s loop, three acts:
+       1. map the template   0%–41%   scan sheets, draw the workbook map, mark inputs, trace one formula
+       2. research and fill  41%–69%  read docs, check records and comps, fill inputs only
+       3. verify and report  69%–100% double-check, flag, report */
+    --loop: 24s;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,7 +70,7 @@
   .body {
     display: grid;
     grid-template-columns: 1fr 380px;
-    min-height: 540px;
+    min-height: 560px;
   }
 
   /* ── Spreadsheet (left) ── */
@@ -80,39 +89,52 @@
   }
   .tab {
     font-size: 11px; color: var(--text-muted);
-    padding: 6px 14px; border-radius: 6px 6px 0 0;
+    padding: 6px 12px; border-radius: 6px 6px 0 0;
     border-bottom: 2px solid transparent;
-    transition: all 0.3s;
+    white-space: nowrap;
+    animation: tabScan var(--loop) infinite;
   }
   .tab.active {
     color: var(--green); background: var(--bg-card);
     border-bottom-color: var(--green);
   }
+  /* each sheet lights up in turn while the workbook is scanned */
+  .tab:nth-child(1) { animation-delay: 0s; }
+  .tab:nth-child(2) { animation-delay: 0.28s; }
+  .tab:nth-child(3) { animation-delay: 0.56s; }
+  .tab:nth-child(4) { animation-delay: 0.84s; }
+  .tab:nth-child(5) { animation-delay: 1.12s; }
+  .tab:nth-child(6) { animation-delay: 1.40s; }
+  .tab:nth-child(7) { animation-delay: 1.68s; }
+  @keyframes tabScan {
+    0%, 6.6% { box-shadow: none; }
+    7.2%, 8.4% { box-shadow: inset 0 0 0 1.5px var(--blue), inset 0 0 0 40px rgba(11, 132, 255, 0.10); }
+    9%, 100% { box-shadow: none; }
+  }
 
   .formula-bar {
-    display: flex; align-items: center; gap: 8px;
+    display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 8px;
     padding: 6px 10px;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 4px;
-    font-family: "SF Mono", Menlo, monospace;
+    font-family: var(--mono);
     font-size: 11px;
     color: var(--text-dim);
     min-height: 28px;
   }
   .formula-bar .fx { color: var(--text-muted); font-style: italic; }
-  .formula-bar .formula-text {
-    color: var(--green);
-    opacity: 0;
-    animation: fbReveal 12s infinite;
-  }
-  @keyframes fbReveal {
-    0%, 50% { opacity: 0; }
-    55%, 95% { opacity: 1; }
-    100% { opacity: 0; }
-  }
+  .formula-bar .ft-wrap { display: grid; }
+  .formula-bar .ft { grid-area: 1 / 1; opacity: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .formula-bar .ft1 { color: var(--text); animation: trace var(--loop) infinite; }
+  .formula-bar .ft2 { color: var(--green); animation: resolved var(--loop) infinite; }
+  .ft1 .p1 { color: var(--blue); font-weight: 700; }
+  .ft1 .p2 { color: var(--red); font-weight: 700; }
+  .ft1 .p3 { color: var(--purple); font-weight: 700; }
+  @keyframes trace { 0%, 34.5% { opacity: 0; } 36%, 40.5% { opacity: 1; } 42%, 100% { opacity: 0; } }
+  @keyframes resolved { 0%, 65% { opacity: 0; } 67%, 97% { opacity: 1; } 100% { opacity: 0; } }
 
-  /* Subtle scan sweeps — read as "looking at your sheet" rather than engineering */
+  /* Scan sweeps */
   .scan-overlay, .qa-overlay {
     position: absolute;
     top: 90px; left: 16px; right: 16px; bottom: 16px;
@@ -121,42 +143,84 @@
     background-repeat: no-repeat;
     background-position: 0 -100%;
     border-radius: 6px;
+    opacity: 0;
   }
   .scan-overlay {
-    background: linear-gradient(180deg,
+    background-image: linear-gradient(180deg,
       transparent 0%,
-      rgba(16, 124, 65, 0.08) 48%,
-      rgba(16, 124, 65, 0.22) 50%,
-      rgba(16, 124, 65, 0.08) 52%,
+      rgba(11, 132, 255, 0.08) 48%,
+      rgba(11, 132, 255, 0.24) 50%,
+      rgba(11, 132, 255, 0.08) 52%,
       transparent 100%);
-    animation: scanSweep 12s infinite;
+    animation: scanSweep var(--loop) infinite;
   }
   @keyframes scanSweep {
-    0%, 8% { background-position: 0 -10%; opacity: 0; }
-    10% { opacity: 1; }
-    18% { background-position: 0 110%; opacity: 1; }
-    22%, 100% { opacity: 0; }
+    0%, 6.2% { background-position: 0 -10%; opacity: 0; }
+    7% { opacity: 1; }
+    15% { background-position: 0 110%; opacity: 1; }
+    16.5%, 100% { opacity: 0; }
   }
-
   .qa-overlay {
-    background: linear-gradient(180deg,
+    background-image: linear-gradient(180deg,
       transparent 0%,
       rgba(244, 114, 182, 0.08) 48%,
       rgba(244, 114, 182, 0.20) 50%,
       rgba(244, 114, 182, 0.08) 52%,
       transparent 100%);
-    animation: qaSweep 12s infinite;
+    animation: qaSweep var(--loop) infinite;
   }
   @keyframes qaSweep {
-    0%, 70% { background-position: 0 -10%; opacity: 0; }
-    72% { opacity: 1; }
-    80% { background-position: 0 110%; opacity: 1; }
-    84%, 100% { opacity: 0; }
+    0%, 69.5% { background-position: 0 -10%; opacity: 0; }
+    70.5% { opacity: 1; }
+    76% { background-position: 0 110%; opacity: 1; }
+    77.5%, 100% { opacity: 0; }
   }
 
+  /* ── Workbook map: which sheets feed which ── */
+  .map {
+    position: absolute;
+    top: 84px; left: 16px; right: 16px; bottom: 16px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 18px 40px -24px rgba(31, 35, 41, 0.35);
+    display: flex; flex-direction: column;
+    padding: 12px 14px 10px;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 3;
+    animation: mapIn var(--loop) infinite;
+  }
+  @keyframes mapIn {
+    0%, 17% { opacity: 0; transform: scale(0.985); }
+    18.5%, 33% { opacity: 1; transform: none; }
+    35%, 100% { opacity: 0; transform: none; }
+  }
+  .map-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .map-head b { font-size: 12.5px; color: var(--text); }
+  .map-head span { font-family: var(--mono); font-size: 10.5px; color: var(--text-muted); white-space: nowrap; }
+  .map svg { flex: 1; width: 100%; min-height: 0; margin-top: 6px; }
+  .map .node rect { fill: #fff; stroke: var(--border); stroke-width: 1.5; }
+  .map .node.in rect { stroke: var(--blue); stroke-dasharray: 5 4; fill: rgba(11, 132, 255, 0.05); }
+  .map .node.calc rect { stroke: var(--green); fill: rgba(16, 124, 65, 0.06); }
+  .map .node.hub rect { stroke: var(--green); stroke-width: 2.5; fill: rgba(16, 124, 65, 0.10); }
+  .map .node text.n { font-size: 14px; font-weight: 700; fill: var(--text); }
+  .map .node text.s { font-family: var(--mono); font-size: 9.5px; fill: var(--text-dim); }
+  .map .node { opacity: 0; animation: nodeIn var(--loop) infinite; }
+  .map .edge { fill: none; stroke: #9AA0A6; stroke-width: 1.6; opacity: 0; animation: edgeIn var(--loop) infinite; }
+  @keyframes nodeIn { 0%, 18% { opacity: 0; } 19.5%, 100% { opacity: 1; } }
+  @keyframes edgeIn { 0%, 21.5% { opacity: 0; } 23.5%, 100% { opacity: 1; } }
+  .map .d1 { animation-delay: 0.15s; } .map .d2 { animation-delay: 0.30s; } .map .d3 { animation-delay: 0.45s; }
+  .map .d4 { animation-delay: 0.70s; } .map .d5 { animation-delay: 0.95s; } .map .d6 { animation-delay: 1.10s; }
+  .map-legend { display: flex; gap: 16px; font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-top: 4px; }
+  .map-legend i { display: inline-block; width: 12px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .map-legend .li { border: 1.5px dashed var(--blue); background: rgba(11, 132, 255, 0.05); }
+  .map-legend .lf { border: 1.5px solid var(--green); background: rgba(16, 124, 65, 0.08); }
+
+  /* ── Grid ── */
   .grid {
     display: grid;
-    grid-template-columns: 32px repeat(7, 1fr);
+    grid-template-columns: 32px 1.15fr repeat(6, 1fr);
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
@@ -170,24 +234,21 @@
     font-size: 10.5px;
     color: var(--text-dim);
     min-height: 28px;
-    display: flex; align-items: center;
+    display: grid; align-items: center;
+    min-width: 0;
   }
+  .cell > span { grid-area: 1 / 1; white-space: nowrap; overflow: hidden; text-overflow: clip; }
   .cell.col-header, .cell.row-header {
     background: var(--bg-card);
     color: var(--text-muted);
     font-weight: 600;
-    justify-content: center;
+    justify-items: center;
     font-size: 10px;
   }
   .cell.label { background: var(--bg-card); color: var(--text); font-weight: 500; }
 
-  /* Pre-existing template formulas — left intact */
-  .cell.locked {
-    background: var(--bg-section-alt);
-    color: var(--green);
-    opacity: 0.55;
-    position: relative;
-  }
+  /* Template formulas: shown as formulas until the inputs land, then as values. Never written to. */
+  .cell.locked { color: var(--green); position: relative; }
   .cell.locked::after {
     content: "ƒ";
     position: absolute;
@@ -196,48 +257,58 @@
     color: var(--green);
     opacity: 0.6;
   }
+  .cell.locked .f { font-family: var(--mono); font-size: 9px; opacity: 0.6; animation: fOut var(--loop) infinite; }
+  .cell.locked .v { opacity: 0; animation: vIn var(--loop) infinite; }
+  @keyframes fOut { 0%, 63.5% { opacity: 0.6; } 65%, 97% { opacity: 0; } 100% { opacity: 0.6; } }
+  @keyframes vIn { 0%, 64.5% { opacity: 0; } 66.5%, 97% { opacity: 1; } 100% { opacity: 0; } }
 
-  /* Filled-in inputs */
-  .cell.value {
-    color: var(--text);
-    opacity: 0;
-    animation: fillCell 12s infinite;
+  /* Inputs: marked during the map step, filled during the fill step */
+  .cell.value { color: var(--text); outline: 1.5px dashed transparent; outline-offset: -2px; animation: inputCell var(--loop) infinite; }
+  .cell.value .v { opacity: 0; animation: inputVal var(--loop) infinite; }
+  .cell.value.market { animation-name: marketCell; }
+  .cell.value.market .v { animation-name: marketVal; color: var(--cyan); }
+  @keyframes inputCell {
+    0%, 17% { outline-color: transparent; background: var(--bg-section-alt); }
+    18.5%, 60% { outline-color: var(--blue); background: rgba(11, 132, 255, 0.06); }
+    61.5% { outline-color: transparent; background: var(--green-glow); }
+    67%, 100% { outline-color: transparent; background: var(--bg-section-alt); }
   }
-  .cell.value.formula { color: var(--green); }
-  .cell.value.market { animation: fillCellMarket 12s infinite; }
-
-  @keyframes fillCell {
-    0%, 50% { opacity: 0; background: var(--bg-section-alt); }
-    52% { opacity: 1; background: var(--green-glow); }
-    60%, 100% { opacity: 1; background: var(--bg-section-alt); }
+  @keyframes inputVal { 0%, 60.2% { opacity: 0; } 61.5%, 97% { opacity: 1; } 100% { opacity: 0; } }
+  @keyframes marketCell {
+    0%, 17% { outline-color: transparent; background: var(--bg-section-alt); }
+    18.5%, 53.5% { outline-color: var(--blue); background: rgba(11, 132, 255, 0.06); }
+    55% { outline-color: transparent; background: rgba(34, 211, 238, 0.25); }
+    60%, 100% { outline-color: transparent; background: rgba(34, 211, 238, 0.06); }
   }
-  @keyframes fillCellMarket {
-    0%, 42% { opacity: 0; background: var(--bg-section-alt); }
-    44% { opacity: 1; background: rgba(34, 211, 238, 0.25); }
-    52%, 100% { opacity: 1; background: rgba(34, 211, 238, 0.06); color: var(--cyan); }
+  @keyframes marketVal { 0%, 53.7% { opacity: 0; } 55%, 97% { opacity: 1; } 100% { opacity: 0; } }
+  .cell.value.dash { animation: none; outline: none; }
+  .cell.value.dash .v { animation: none; opacity: 0.5; }
+
+  /* Tracing one formula back to the cells it depends on */
+  .cell.t1, .cell.t2, .cell.t3, .cell.tA { position: relative; }
+  .cell.t1::before, .cell.t2::before, .cell.t3::before, .cell.tA::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    box-shadow: inset 0 0 0 2px var(--c); opacity: 0;
+    animation: trace var(--loop) infinite;
   }
+  .cell.t1 { --c: var(--blue); } .cell.t2 { --c: var(--red); } .cell.t3 { --c: var(--purple); } .cell.tA { --c: var(--green); }
 
-  /* Stagger fill across rows */
-  .row-1 .value { animation-delay: 0.0s; }
-  .row-2 .value { animation-delay: 0.15s; }
-  .row-3 .value { animation-delay: 0.3s; }
-  .row-4 .value { animation-delay: 0.45s; }
-  .row-5 .value { animation-delay: 0.6s; }
-  .row-6 .value { animation-delay: 0.75s; }
-  .row-7 .value { animation-delay: 0.9s; }
+  .summary { color: var(--green); font-weight: 700; grid-column: span 6; }
+  .summary .v { opacity: 0; animation: vIn var(--loop) infinite; }
 
-  /* QA flag dot — appears during verification phase */
-  .cell .flag {
-    width: 7px; height: 7px; border-radius: 50%;
+  /* QA flag dot */
+  .flag {
+    position: absolute; right: 14px; top: 50%;
+    width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%;
     background: var(--pink);
     box-shadow: 0 0 8px var(--pink);
-    margin-left: 6px;
     opacity: 0;
-    animation: flagOn 12s infinite;
+    animation: flagOn var(--loop) infinite;
   }
   @keyframes flagOn {
     0%, 76% { opacity: 0; transform: scale(0.5); }
-    80%, 100% { opacity: 1; transform: scale(1); }
+    78%, 97% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; }
   }
 
   /* ── Chat (right) ── */
@@ -246,8 +317,8 @@
     border-left: 1px solid var(--border);
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
-
   .chat-header {
     padding: 12px 16px;
     border-bottom: 1px solid var(--border);
@@ -262,11 +333,7 @@
     font-size: 12px; font-weight: 700; color: #ffffff;
     box-shadow: 0 0 16px var(--green-glow);
   }
-  .header-name {
-    font-size: 13px;
-    color: var(--text);
-    font-weight: 600;
-  }
+  .header-name { font-size: 13px; color: var(--text); font-weight: 600; }
   .header-sub {
     display: flex; align-items: center; gap: 5px;
     font-size: 10.5px;
@@ -289,9 +356,9 @@
     padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     overflow: hidden;
   }
+  .messages > * { margin-bottom: 10px; }
 
   .msg {
     padding: 10px 13px;
@@ -300,23 +367,20 @@
     line-height: 1.5;
     max-width: 92%;
     opacity: 0;
-    animation: msgIn 12s infinite;
   }
-  @keyframes msgIn {
-    0%, 4% { opacity: 0; transform: translateY(6px); }
-    6%, 96% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; }
-  }
-
   .msg.user {
     background: var(--green);
     color: #ffffff;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
     font-weight: 500;
-    animation-delay: 0.4s;
+    animation: userIn var(--loop) infinite;
   }
-
+  @keyframes userIn {
+    0%, 1% { opacity: 0; transform: translateY(6px); }
+    3%, 97% { opacity: 1; transform: none; }
+    100% { opacity: 0; }
+  }
   .msg.agent {
     background: var(--bg-section-alt);
     color: var(--text);
@@ -324,6 +388,23 @@
     border: 1px solid var(--border);
     border-bottom-left-radius: 4px;
   }
+
+  /* "Mapped your template" — closes act 1 */
+  .msg.mapmsg { overflow: hidden; animation: mapMsg var(--loop) infinite; }
+  @keyframes mapMsg {
+    0%, 31% { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; margin-bottom: 0; transform: translateY(6px); }
+    32% { opacity: 0; max-height: 150px; padding-top: 10px; padding-bottom: 10px; border-width: 1px; margin-bottom: 10px; transform: translateY(6px); }
+    33.5%, 97% { opacity: 1; max-height: 150px; padding-top: 10px; padding-bottom: 10px; border-width: 1px; margin-bottom: 10px; transform: none; }
+    100% { opacity: 0; max-height: 150px; padding-top: 10px; padding-bottom: 10px; border-width: 1px; margin-bottom: 10px; }
+  }
+  .mapstats { display: flex; gap: 6px; margin: 7px 0 8px; }
+  .mapstats span {
+    flex: 1; text-align: center; padding: 6px 4px;
+    background: var(--bg-deeper); border: 1px solid var(--border); border-radius: 8px;
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted);
+  }
+  .mapstats b { display: block; font-size: 14px; letter-spacing: 0; color: var(--text); line-height: 1.15; }
+  .mapnote { font-size: 12px; color: var(--text-dim); }
 
   /* Thinking pill — single rotating status line */
   .thinking {
@@ -340,22 +421,18 @@
     color: var(--text-dim);
     opacity: 0;
     overflow: hidden;
-    animation: thinkVisible 12s infinite;
-    width: 260px;
+    animation: thinkVisible var(--loop) infinite;
+    width: 290px;
     max-width: 100%;
   }
   @keyframes thinkVisible {
-    0%, 8% { opacity: 0; transform: translateY(6px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
-    10% { opacity: 0; max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
-    12%, 73% { opacity: 1; transform: translateY(0); max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
-    76% { opacity: 0; transform: translateY(-4px); max-height: 40px; }
-    80%, 100% { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+    0%, 4.5% { opacity: 0; transform: translateY(6px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; margin-bottom: 0; }
+    5.5% { opacity: 0; max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; margin-bottom: 10px; }
+    6.5%, 76.5% { opacity: 1; transform: none; max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; margin-bottom: 10px; }
+    78% { opacity: 0; transform: translateY(-4px); max-height: 40px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; margin-bottom: 10px; }
+    79%, 100% { opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; margin-bottom: 0; }
   }
-
-  .typing {
-    display: inline-flex; gap: 3px;
-    flex-shrink: 0;
-  }
+  .typing { display: inline-flex; gap: 3px; flex-shrink: 0; }
   .typing span {
     width: 5px; height: 5px;
     border-radius: 50%;
@@ -368,13 +445,7 @@
     0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
     30% { opacity: 1; transform: translateY(-2px); }
   }
-
-  .status-stack {
-    position: relative;
-    flex: 1;
-    height: 18px;
-    overflow: hidden;
-  }
+  .status-stack { position: relative; flex: 1; height: 18px; overflow: hidden; }
   .status-stack span {
     position: absolute;
     inset: 0;
@@ -384,42 +455,38 @@
     overflow: hidden;
     text-overflow: ellipsis;
     opacity: 0;
-    animation: statusCycle 12s infinite;
-  }
-  @keyframes statusCycle {
-    0%, 100% { opacity: 0; }
-    /* Each status gets a window — defined per nth-child via delays */
+    animation: var(--loop) infinite;
   }
   .status-stack span:nth-child(1) { animation-name: s1; }
   .status-stack span:nth-child(2) { animation-name: s2; }
   .status-stack span:nth-child(3) { animation-name: s3; }
   .status-stack span:nth-child(4) { animation-name: s4; }
   .status-stack span:nth-child(5) { animation-name: s5; }
-
-  @keyframes s1 { 0%, 9% { opacity: 0; } 11%, 22% { opacity: 1; } 24%, 100% { opacity: 0; } }
-  @keyframes s2 { 0%, 23% { opacity: 0; } 25%, 38% { opacity: 1; } 40%, 100% { opacity: 0; } }
-  @keyframes s3 { 0%, 39% { opacity: 0; } 41%, 52% { opacity: 1; } 54%, 100% { opacity: 0; } }
-  @keyframes s4 { 0%, 53% { opacity: 0; } 55%, 66% { opacity: 1; } 68%, 100% { opacity: 0; } }
-  @keyframes s5 { 0%, 67% { opacity: 0; } 69%, 74% { opacity: 1; } 76%, 100% { opacity: 0; } }
+  .status-stack span:nth-child(6) { animation-name: s6; }
+  @keyframes s1 { 0%, 6% { opacity: 0; } 7%, 15.5% { opacity: 1; } 16.5%, 100% { opacity: 0; } }
+  @keyframes s2 { 0%, 16.5% { opacity: 0; } 17.5%, 40% { opacity: 1; } 41%, 100% { opacity: 0; } }
+  @keyframes s3 { 0%, 41% { opacity: 0; } 42%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+  @keyframes s4 { 0%, 50% { opacity: 0; } 51%, 57.5% { opacity: 1; } 58.5%, 100% { opacity: 0; } }
+  @keyframes s5 { 0%, 58.5% { opacity: 0; } 59.5%, 68% { opacity: 1; } 69%, 100% { opacity: 0; } }
+  @keyframes s6 { 0%, 69% { opacity: 0; } 70%, 76% { opacity: 1; } 77%, 100% { opacity: 0; } }
 
   /* Agent response */
-  .msg.agent.response { animation-delay: 9.0s; }
-  .response-greeting { color: var(--text); margin-bottom: 8px; }
+  .msg.agent.response { animation: respIn var(--loop) infinite; }
+  @keyframes respIn {
+    0%, 78.5% { opacity: 0; transform: translateY(6px); }
+    80.5%, 97% { opacity: 1; transform: none; }
+    100% { opacity: 0; }
+  }
+  .response-greeting { color: var(--text); font-weight: 600; }
+  .msg.response .response-greeting { margin-bottom: 8px; font-weight: 400; }
   .response-flag {
     margin-top: 10px; padding-top: 10px;
     border-top: 1px dashed var(--border);
     color: var(--text-dim);
     font-size: 12px;
   }
-  .response-flag .pink {
-    color: var(--pink);
-    font-weight: 500;
-  }
-
-  .metric-row {
-    display: flex; gap: 8px;
-    margin-top: 4px;
-  }
+  .response-flag .pink { color: var(--pink); font-weight: 500; }
+  .metric-row { display: flex; gap: 8px; margin-top: 4px; }
   .metric-pill {
     flex: 1;
     padding: 8px 6px;
@@ -443,28 +510,27 @@
     border-radius: 100px;
     font-size: 11.5px;
     color: var(--green);
-    cursor: pointer;
     opacity: 0;
-    animation: suggestIn 12s infinite;
-    animation-delay: 10.0s;
-    transition: all 0.2s;
-  }
-  .suggestion:hover {
-    background: var(--green-glow);
-    border-color: var(--green);
+    animation: suggestIn var(--loop) infinite;
   }
   .suggestion .arrow { font-size: 13px; }
   @keyframes suggestIn {
-    0%, 4% { opacity: 0; transform: translateY(4px); }
-    6%, 96% { opacity: 1; transform: translateY(0); }
+    0%, 83% { opacity: 0; transform: translateY(4px); }
+    85%, 97% { opacity: 1; transform: none; }
     100% { opacity: 0; }
   }
 
   @media (max-width: 860px) {
     .body { grid-template-columns: 1fr; }
     .chat { border-left: none; border-top: 1px solid var(--border); }
-    .grid { grid-template-columns: 28px repeat(4, 1fr); font-size: 9.5px; }
-    .grid .col-5, .grid .col-6, .grid .col-7 { display: none; }
+    .tab { padding: 6px 8px; font-size: 10px; }
+  }
+
+  /* Reduced motion: show the finished state, no map overlay */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; }
+    .msg, .suggestion, .cell.locked .v, .cell.value .v, .summary .v, .flag, .formula-bar .ft2 { opacity: 1; }
+    .cell.locked .f, .thinking, .map, .scan-overlay, .qa-overlay { display: none; }
   }
 </style>
 </head>
@@ -472,12 +538,12 @@
 
 <div style="width: 100%; max-width: 1140px;">
 
-<div class="frame">
+<div class="frame" role="img" aria-label="Teez working inside an Excel underwriting template for Maple Court. First it scans all seven sheets and draws a map of which sheets feed which, counting 1,284 formulas and 142 inputs. Then it reads the deal documents, checks records and comps, and fills the input cells only. Finally it double-checks the numbers, flags a vacancy discrepancy, and reports a 15.0% IRR.">
 
   <!-- Window chrome -->
   <div class="chrome">
     <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
-    <div class="chrome-title">Phoenix MF Acquisition — Firm Template.xlsx</div>
+    <div class="chrome-title">Maple Court — Firm Acquisition Template.xlsx</div>
   </div>
 
   <div class="body">
@@ -487,9 +553,41 @@
       <div class="scan-overlay"></div>
       <div class="qa-overlay"></div>
 
+      <!-- Act 1: the workbook map -->
+      <div class="map">
+        <div class="map-head"><b>Workbook map</b><span>7 sheets &middot; 1,284 formulas &middot; 142 inputs</span></div>
+        <svg viewBox="0 0 700 330" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs>
+            <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="#9AA0A6"/>
+            </marker>
+          </defs>
+          <!-- edges: what feeds what -->
+          <path class="edge"    d="M172 38  C 225 38, 225 142, 276 148" marker-end="url(#arr)"/>
+          <path class="edge d1" d="M172 118 C 225 118, 228 158, 276 160" marker-end="url(#arr)"/>
+          <path class="edge d2" d="M172 198 C 225 198, 228 174, 276 172" marker-end="url(#arr)"/>
+          <path class="edge d3" d="M172 278 C 225 278, 225 190, 276 184" marker-end="url(#arr)"/>
+          <path class="edge d4" d="M428 160 C 475 160, 480 98, 528 98" marker-end="url(#arr)"/>
+          <path class="edge d5" d="M172 290 C 380 318, 470 300, 540 126" marker-end="url(#arr)"/>
+          <path class="edge d6" d="M604 126 L 604 218" marker-end="url(#arr)"/>
+          <!-- input sheets -->
+          <g class="node in">     <rect x="20" y="12"  width="152" height="52" rx="8"/><text class="n" x="34" y="34">Unit Mix</text><text class="s" x="34" y="52">84 inputs &middot; 96 formulas</text></g>
+          <g class="node in d1">  <rect x="20" y="92"  width="152" height="52" rx="8"/><text class="n" x="34" y="114">Assumptions</text><text class="s" x="34" y="132">38 inputs</text></g>
+          <g class="node in d2">  <rect x="20" y="172" width="152" height="52" rx="8"/><text class="n" x="34" y="194">OpEx</text><text class="s" x="34" y="212">14 inputs &middot; 120 formulas</text></g>
+          <g class="node in d3">  <rect x="20" y="252" width="152" height="52" rx="8"/><text class="n" x="34" y="274">Debt</text><text class="s" x="34" y="292">6 inputs &middot; 148 formulas</text></g>
+          <!-- calculation sheets -->
+          <g class="node hub d4"> <rect x="276" y="130" width="152" height="60" rx="8"/><text class="n" x="290" y="156">Pro Forma</text><text class="s" x="290" y="175">612 formulas</text></g>
+          <g class="node calc d5"><rect x="528" y="72"  width="152" height="52" rx="8"/><text class="n" x="542" y="94">Returns</text><text class="s" x="542" y="112">164 formulas</text></g>
+          <g class="node calc d6"><rect x="528" y="220" width="152" height="52" rx="8"/><text class="n" x="542" y="242">Sensitivity</text><text class="s" x="542" y="260">144 formulas</text></g>
+        </svg>
+        <div class="map-legend"><span><i class="li"></i>inputs Teez will fill</span><span><i class="lf"></i>your formulas, left untouched</span></div>
+      </div>
+
       <div class="sheet-tabs">
         <div class="tab">Unit Mix</div>
         <div class="tab">Assumptions</div>
+        <div class="tab">OpEx</div>
+        <div class="tab">Debt</div>
         <div class="tab active">Pro Forma</div>
         <div class="tab">Returns</div>
         <div class="tab">Sensitivity</div>
@@ -497,7 +595,10 @@
 
       <div class="formula-bar">
         <span class="fx">fx</span>
-        <span class="formula-text">='Unit Mix'!E22 * 12 * (1 - 'Assumptions'!C8)</span>
+        <span class="ft-wrap">
+          <span class="ft ft1">B5 &nbsp;=<span class="p1">B2</span>+<span class="p2">B3</span>+<span class="p3">B4</span></span>
+          <span class="ft ft2">B2 &nbsp;='Unit Mix'!E86*12+Assumptions!C14</span>
+        </span>
       </div>
 
       <div class="grid">
@@ -511,7 +612,7 @@
         <div class="cell col-header">F</div>
         <div class="cell col-header">G</div>
 
-        <!-- row 1 -->
+        <!-- 1 -->
         <div class="cell row-header">1</div>
         <div class="cell label">Year</div>
         <div class="cell label">Y1</div>
@@ -521,72 +622,80 @@
         <div class="cell label">Y5</div>
         <div class="cell label">Exit</div>
 
-        <!-- GPR -->
+        <!-- 2 Revenue: Y1 is an input, the rest are the template's own formulas -->
         <div class="cell row-header">2</div>
-        <div class="cell label">GPR</div>
-        <div class="cell value row-1">$2.4M</div>
-        <div class="cell locked">$2.5M</div>
-        <div class="cell locked">$2.6M</div>
-        <div class="cell locked">$2.7M</div>
-        <div class="cell locked">$2.8M</div>
-        <div class="cell locked">$2.9M</div>
+        <div class="cell label">Revenue</div>
+        <div class="cell value t1"><span class="v">$1.36M</span></div>
+        <div class="cell locked"><span class="f">=B2*(1+g)</span><span class="v">$1.43M</span></div>
+        <div class="cell locked"><span class="f">=C2*(1+g)</span><span class="v">$1.50M</span></div>
+        <div class="cell locked"><span class="f">=D2*(1+g)</span><span class="v">$1.57M</span></div>
+        <div class="cell locked"><span class="f">=E2*(1+g)</span><span class="v">$1.64M</span></div>
+        <div class="cell locked"><span class="f">=F2*(1+g)</span><span class="v">$1.71M</span></div>
 
-        <!-- Vacancy (cyan = market sourced) -->
+        <!-- 3 Vacancy -->
         <div class="cell row-header">3</div>
         <div class="cell label">Vacancy</div>
-        <div class="cell value market row-2">7.0%</div>
-        <div class="cell locked">($122K)</div>
-        <div class="cell locked">($129K)</div>
-        <div class="cell locked">($135K)</div>
-        <div class="cell locked">($142K)</div>
-        <div class="cell locked">($146K)</div>
+        <div class="cell locked t2"><span class="f">=-B2*vac</span><span class="v">($59K)</span><i class="flag" title="T-12 shows 4.5% vacancy, the OM assumes 3%"></i></div>
+        <div class="cell locked"><span class="f">=-C2*vac</span><span class="v">($62K)</span></div>
+        <div class="cell locked"><span class="f">=-D2*vac</span><span class="v">($65K)</span></div>
+        <div class="cell locked"><span class="f">=-E2*vac</span><span class="v">($68K)</span></div>
+        <div class="cell locked"><span class="f">=-F2*vac</span><span class="v">($71K)</span></div>
+        <div class="cell locked"><span class="f">=-G2*vac</span><span class="v">($74K)</span></div>
 
-        <!-- NOI -->
+        <!-- 4 OpEx -->
         <div class="cell row-header">4</div>
-        <div class="cell label">NOI</div>
-        <div class="cell locked">$1.42M</div>
-        <div class="cell locked">$1.52M</div>
-        <div class="cell locked">$1.61M</div>
-        <div class="cell locked">$1.69M</div>
-        <div class="cell locked">$1.78M</div>
-        <div class="cell locked">$1.84M</div>
+        <div class="cell label">OpEx</div>
+        <div class="cell value t3"><span class="v">($444K)</span></div>
+        <div class="cell locked"><span class="f">=B4*(1+i)</span><span class="v">($458K)</span></div>
+        <div class="cell locked"><span class="f">=C4*(1+i)</span><span class="v">($471K)</span></div>
+        <div class="cell locked"><span class="f">=D4*(1+i)</span><span class="v">($486K)</span></div>
+        <div class="cell locked"><span class="f">=E4*(1+i)</span><span class="v">($500K)</span></div>
+        <div class="cell locked"><span class="f">=F4*(1+i)</span><span class="v">($515K)</span></div>
 
-        <!-- Cap Rate (cyan = market sourced) -->
+        <!-- 5 NOI -->
         <div class="cell row-header">5</div>
-        <div class="cell label">Cap Rate</div>
-        <div class="cell value market row-4">5.25%</div>
-        <div class="cell value row-4">—</div>
-        <div class="cell value row-4">—</div>
-        <div class="cell value row-4">—</div>
-        <div class="cell value row-4">—</div>
-        <div class="cell value market row-4">5.50%</div>
+        <div class="cell label">NOI</div>
+        <div class="cell locked tA"><span class="f">=B2+B3+B4</span><span class="v">$861K</span></div>
+        <div class="cell locked"><span class="f">=C2+C3+C4</span><span class="v">$910K</span></div>
+        <div class="cell locked"><span class="f">=D2+D3+D4</span><span class="v">$964K</span></div>
+        <div class="cell locked"><span class="f">=E2+E3+E4</span><span class="v">$1.02M</span></div>
+        <div class="cell locked"><span class="f">=F2+F3+F4</span><span class="v">$1.07M</span></div>
+        <div class="cell locked"><span class="f">=G2+G3+G4</span><span class="v">$1.12M</span></div>
 
-        <!-- Lev. CF -->
+        <!-- 6 Cap rate: inputs sourced from records and comps -->
         <div class="cell row-header">6</div>
-        <div class="cell label">Lev. CF</div>
-        <div class="cell locked">$420K</div>
-        <div class="cell locked">$510K</div>
-        <div class="cell locked">$595K</div>
-        <div class="cell locked">$675K</div>
-        <div class="cell locked">$760K</div>
-        <div class="cell locked">$33.4M</div>
+        <div class="cell label">Cap Rate</div>
+        <div class="cell value market"><span class="v">6.20%</span></div>
+        <div class="cell value dash"><span class="v">—</span></div>
+        <div class="cell value dash"><span class="v">—</span></div>
+        <div class="cell value dash"><span class="v">—</span></div>
+        <div class="cell value dash"><span class="v">—</span></div>
+        <div class="cell value market"><span class="v">6.50%</span></div>
 
-        <!-- Units (with QA flag dot) -->
+        <!-- 7 DSCR -->
         <div class="cell row-header">7</div>
-        <div class="cell label">Units</div>
-        <div class="cell value row-6">95<span class="flag" title="OM says 96, rent roll has 95"></span></div>
-        <div class="cell value row-6">95</div>
-        <div class="cell value row-6">95</div>
-        <div class="cell value row-6">95</div>
-        <div class="cell value row-6">95</div>
-        <div class="cell value row-6">95</div>
+        <div class="cell label">DSCR</div>
+        <div class="cell locked"><span class="f">=B5/ds</span><span class="v">1.22×</span></div>
+        <div class="cell locked"><span class="f">=C5/ds</span><span class="v">1.29×</span></div>
+        <div class="cell locked"><span class="f">=D5/ds</span><span class="v">1.37×</span></div>
+        <div class="cell locked"><span class="f">=E5/ds</span><span class="v">1.44×</span></div>
+        <div class="cell locked"><span class="f">=F5/ds</span><span class="v">1.51×</span></div>
+        <div class="cell value dash"><span class="v">—</span></div>
 
-        <!-- IRR row -->
+        <!-- 8 Levered cash flow -->
         <div class="cell row-header">8</div>
-        <div class="cell label">IRR</div>
-        <div class="cell value formula row-7" style="grid-column: span 6; color: var(--green); font-weight: 700;">
-          18.4%   |   2.1x EM   |   8.6% avg CoC
-        </div>
+        <div class="cell label">Lev. CF</div>
+        <div class="cell locked"><span class="f">=B5-ds</span><span class="v">$155K</span></div>
+        <div class="cell locked"><span class="f">=C5-ds</span><span class="v">$204K</span></div>
+        <div class="cell locked"><span class="f">=D5-ds</span><span class="v">$258K</span></div>
+        <div class="cell locked"><span class="f">=E5-ds</span><span class="v">$310K</span></div>
+        <div class="cell locked"><span class="f">=F5-ds</span><span class="v">$363K</span></div>
+        <div class="cell locked"><span class="f">=sale-payoff</span><span class="v">$8.6M</span></div>
+
+        <!-- 9 Returns -->
+        <div class="cell row-header">9</div>
+        <div class="cell label">Returns</div>
+        <div class="cell locked summary"><span class="f">=Returns!C4:E4</span><span class="v">15.0% IRR &nbsp;|&nbsp; 1.9x EM &nbsp;|&nbsp; 1.22× min DSCR</span></div>
       </div>
     </div>
 
@@ -603,37 +712,43 @@
 
       <div class="messages">
 
-        <!-- User -->
         <div class="msg user">
-          Build a pro forma for the Phoenix deal — 5-year hold, 65% LTV.
+          Underwrite Maple Court in our template. 5-year hold, 65% LTV.
         </div>
 
-        <!-- Thinking with rotating status -->
+        <!-- Act 1 result -->
+        <div class="msg agent mapmsg">
+          <div class="response-greeting">Mapped your template.</div>
+          <div class="mapstats"><span><b>7</b>sheets</span><span><b>1,284</b>formulas</span><span><b>142</b>inputs</span></div>
+          <div class="mapnote">I'll write to the inputs only. Your formulas stay untouched.</div>
+        </div>
+
+        <!-- Rotating status -->
         <div class="thinking">
           <div class="typing"><span></span><span></span><span></span></div>
           <div class="status-stack">
-            <span>Looking at your template…</span>
-            <span>Reading the rent roll, T-12, and OM…</span>
-            <span>Checking the Phoenix submarket…</span>
-            <span>Building the model…</span>
-            <span>Double-checking the numbers…</span>
+            <span>Reading workbook…</span>
+            <span>Tracing formulas…</span>
+            <span>Reading the rent roll, T-12 and OM…</span>
+            <span>Checking records and comps…</span>
+            <span>Writing cells + citations…</span>
+            <span>Checking output metrics…</span>
           </div>
         </div>
 
-        <!-- Agent response -->
+        <!-- Act 3 result -->
         <div class="msg agent response">
-          <div class="response-greeting">Done — pro forma's live in your sheet.</div>
+          <div class="response-greeting">Done. Maple Court is live in your sheet.</div>
           <div class="metric-row">
-            <div class="metric-pill"><span class="v">18.4%</span><span class="l">IRR</span></div>
-            <div class="metric-pill"><span class="v">2.1x</span><span class="l">EM</span></div>
-            <div class="metric-pill"><span class="v">8.6%</span><span class="l">CoC</span></div>
+            <div class="metric-pill"><span class="v">15.0%</span><span class="l">IRR</span></div>
+            <div class="metric-pill"><span class="v">1.9x</span><span class="l">EM</span></div>
+            <div class="metric-pill"><span class="v">1.22×</span><span class="l">Min DSCR</span></div>
           </div>
           <div class="response-flag">
-            <span class="pink">⚑</span> Heads-up — your OM lists <strong>96 units</strong>, the rent roll shows <strong>95</strong>. Worth confirming before IC.
+            <span class="pink">⚑</span> Heads-up: the T-12 shows <strong>4.5% vacancy</strong>, the OM assumes <strong>3%</strong>. I used the T-12.
           </div>
         </div>
 
-        <!-- Follow-up suggestion -->
         <div class="suggestion">
           Run a sensitivity on exit cap <span class="arrow">→</span>
         </div>

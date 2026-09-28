@@ -74,7 +74,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260928p" />
+  <link rel="stylesheet" href="style.css?v=20260928q" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -110,7 +110,7 @@
       "name": "What does it cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The subscription covers 10 deals a month. Teams that run more are priced to their deal volume. Current prices are on the pricing page."
+        "text": "Your first three deals are free. After that the subscription covers 10 deals a month, and teams that run more are priced to their deal volume. Details are on the pricing page."
       }
     },
     {
@@ -187,22 +187,22 @@
     <section class="sec" id="how">
       <div class="wrap">
         <h2>Drop in the docs.<br>Your template <span class="g">fills itself.</span></h2>
-        <p class="lead" style="margin:14px 0 0;max-width:60ch">Teez runs inside the Excel workbook your team already uses. It researches the asset before it writes a number, and it never touches a formula.</p>
-        <iframe class="demo-embed" src="mockups/excel-pane-demo.html" title="Teez filling a pro forma inside your Excel workbook" height="640" loading="lazy"></iframe>
+        <p class="lead" style="margin:14px 0 0;max-width:60ch">Teez runs inside the Excel workbook your team already uses. It maps the model first, researches the asset second, and only then writes a number. It never touches a formula.</p>
+        <iframe class="demo-embed" src="mockups/excel-pane-demo.html" title="Teez mapping, researching and filling an Excel underwriting template" height="660" loading="lazy"></iframe>
         <div class="win demo-fallback" id="feedwin" aria-label="Teez at work in the Excel task pane">
           <div class="win-bar"><i></i><i></i><i></i><span class="t">teez &middot; task pane &mdash; Maple Court</span></div>
           <div class="feed" id="feed">
+            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Mapped <b>your template</b></span><span class="rt">1,284 formulas</span></div>
             <div class="fl"><span class="ic ok">&check;</span><span class="tx">Parsed <b>OM</b>, rent roll, T-12</span><span class="rt">3 docs</span></div>
-            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Checked <b>county records</b></span><span class="rt">matched</span></div>
-            <div class="fl"><span class="ic work">&rarr;</span><span class="tx">Filling <b>your template</b></span><span class="rt">142 cells</span></div>
-            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Pulled <b>rent and sale comps</b></span><span class="rt">14 comps</span></div>
+            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Checked <b>records and comps</b></span><span class="rt">14 comps</span></div>
+            <div class="fl"><span class="ic work">&rarr;</span><span class="tx">Writing <b>inputs only</b></span><span class="rt">142 cells</span></div>
             <div class="fl"><span class="ic ok">&check;</span><span class="tx">Model ready, in sync</span><span class="rt">sourced</span></div>
           </div>
           <div class="win-foot"><span>Cap 6.20% &middot; DSCR 1.22&times;</span><span class="done">model ready &middot; 4m 12s</span></div>
         </div>
         <div class="cols3" style="margin-top:30px">
-          <div class="card3"><span class="ey">Step 1</span><h3>Drop in the docs</h3><p>Open the template your team already works from and drop the OM, rent roll and T-12 into the Teez pane.</p></div>
-          <div class="card3"><span class="ey">Step 2</span><h3>Teez researches the asset</h3><p>It looks the building up in our records, pulls sale and rent comps, and checks the broker's numbers against them.</p></div>
+          <div class="card3"><span class="ey">Step 1</span><h3>Teez maps your template</h3><p>It reads the whole workbook and traces how every sheet, cell and formula depends on the others, so it knows which cells are inputs and which are yours to keep.</p></div>
+          <div class="card3"><span class="ey">Step 2</span><h3>It researches the asset</h3><p>Drop in the OM, rent roll and T-12. Teez looks the building up in our records, pulls sale and rent comps, and checks the broker's numbers against them.</p></div>
           <div class="card3"><span class="ey">Step 3</span><h3>Your template fills itself</h3><p>Values go into the right input cells, each cited to its source. The workbook and the deal's dashboard stay in sync as assumptions change.</p></div>
         </div>
       </div>
@@ -232,7 +232,7 @@
           <details class="faq-item"><summary>How is this different from an AI assistant in Excel?</summary><div class="faq-a"><p>A general AI assistant can do the math once you hand it the inputs. Teez finds and checks the inputs: it looks the building up in our property records, pulls sale and rent comps, flags rent regulation and tax abatements, and cites every number it writes.</p></div></details>
           <details class="faq-item"><summary>Will it work with our template?</summary><div class="faq-a"><p>Yes. The add-in scans the open workbook, maps the inputs it extracted to the right cells, and writes only to input cells, so a model it has never seen is safe to fill.</p></div></details>
           <details class="faq-item"><summary>How are numbers sourced?</summary><div class="faq-a"><p>Every value written into the sheet carries a citation to the page or cell it came from. The activity view in the task pane shows the trail for any figure.</p></div></details>
-          <details class="faq-item"><summary>What does it cost?</summary><div class="faq-a"><p>The subscription covers 10 deals a month. Teams that run more are priced to their deal volume. Current prices are on the <a href="/pricing.html">pricing page</a>.</p></div></details>
+          <details class="faq-item"><summary>What does it cost?</summary><div class="faq-a"><p>Your first three deals are free. After that the subscription covers 10 deals a month, and teams that run more are priced to their deal volume. Details are on the <a href="/pricing.html">pricing page</a>.</p></div></details>
           <details class="faq-item"><summary>Who sees my deal documents?</summary><div class="faq-a"><p>You and the people you invite. Documents and workbook content are processed to return a result to you and are never shared with other customers or used to train models. Details are in the <a href="/privacy.html">Privacy Policy</a>.</p></div></details>
         </div>
       </div>

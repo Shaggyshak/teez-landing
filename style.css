@@ -455,7 +455,7 @@ h3{font-size:18px;font-weight:700}
 .pricing-grid.two{grid-template-columns:repeat(2,1fr);max-width:860px}
 .ptrack .pp s{font-size:20px;color:var(--ink-3);text-decoration-thickness:2px;margin-right:4px}
 .pservice{margin-top:30px;border:1px solid var(--grid-2);border-radius:10px;background:#fff;padding:28px;
-  display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:center;max-width:860px}
+  display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:center}
 .pservice .plist{margin:0}
 .pservice-cta{display:flex;flex-direction:column;border-left:1px solid var(--grid);padding-left:32px}
 .pservice-cta .pp{font-family:var(--mono);margin:0 0 4px}
