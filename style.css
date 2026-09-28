@@ -451,6 +451,22 @@ h3{font-size:18px;font-weight:700}
   .smsg,.tk,.dm .v,.dash-sum .s3,.dash-sum .s4,.dash-files{opacity:1;transform:none}
 }
 
+/* ---- pricing page: two plans + separate service block ---- */
+.pricing-grid.two{grid-template-columns:repeat(2,1fr);max-width:860px}
+.ptrack .pp s{font-size:20px;color:var(--ink-3);text-decoration-thickness:2px;margin-right:4px}
+.pservice{margin-top:30px;border:1px solid var(--grid-2);border-radius:10px;background:#fff;padding:28px;
+  display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:center;max-width:860px}
+.pservice .plist{margin:0}
+.pservice-cta{display:flex;flex-direction:column;border-left:1px solid var(--grid);padding-left:32px}
+.pservice-cta .pp{font-family:var(--mono);margin:0 0 4px}
+.pservice-cta .pp b{font-size:22px;color:var(--ink);font-weight:700}
+.pservice-cta .ph{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-bottom:18px}
+@media(max-width:880px){
+  .pricing-grid.two{grid-template-columns:1fr}
+  .pservice{grid-template-columns:1fr;gap:22px;padding:24px 22px}
+  .pservice-cta{border-left:none;padding-left:0;border-top:1px solid var(--grid);padding-top:20px}
+}
+
 /* ---- persona pages: shared layout + text thread / email reply (sponsors, section 3) ---- */
 .hero.solo.flush .hero-top{max-width:1180px}
 .hero.solo.flush .hero-top>div{max-width:760px}
