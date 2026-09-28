@@ -130,7 +130,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260916a" />
+  <link rel="stylesheet" href="style.css?v=20260928b" />
 </head>
 <body>
 
@@ -179,25 +179,51 @@
       </div>
     </header>
 
-    <!-- DEMO — before/after: source docs on the left, the actual filled model on the right -->
-    <section class="sec demo-sec">
+    <!-- FLOW — texts, emails and files in; status queue + dashboard in sync; texts, emails and files out -->
+    <section class="sec flow-sec">
       <div class="wrap">
-        <div class="demo-stage">
-          <div class="demo-before" aria-hidden="true">
-            <div class="ddoc pdf"><div class="doc-icon"><span class="tag">PDF</span></div><div class="doc-cap">Offering Memo</div></div>
-            <div class="ddoc xls"><div class="doc-icon"><span class="tag">XLS</span></div><div class="doc-cap">Rent Roll</div></div>
-            <div class="ddoc xls"><div class="doc-icon"><span class="tag">XLS</span></div><div class="doc-cap">T-12</div></div>
+        <div class="flow" role="img" aria-label="Texts, emails and files go into Teez. A live status queue steps through files received, building the pro forma, stress-testing against comps, and summary sent, while a deal dashboard for Maple Court fills in NOI, cap rate, DSCR and IRR, a written summary, and downloadable files. Texts, emails and files come back out.">
+          <div class="flow-side flow-in">
+            <span class="flow-lbl">In<br>text &middot; email &middot; files</span>
+            <div class="sicon txt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+            <div class="sicon mail s2"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="sicon file s3"><span>T-12</span></div>
           </div>
-          <div class="demo-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div class="mini demo-after">
-            <div class="mini-bar"><span>Maple Court &mdash; Pro Forma</span><span>auto-calc on</span></div>
-            <div class="mini-grid">
-              <div class="mc ch"></div><div class="mc ch">Line</div><div class="mc ch">T-12</div><div class="mc ch">Year 1</div>
-              <div class="mc rh">4</div><div class="mc lbl">Gross rent</div><div class="mc num">1,242,000</div><div class="mc num df df-a">1,311,300</div>
-              <div class="mc rh">5</div><div class="mc lbl">Vacancy</div><div class="mc num neg">(62,100)</div><div class="mc num neg df df-b">(59,008)</div>
-              <div class="mc rh">8</div><div class="mc lbl sum">NOI</div><div class="mc num sum">796,800</div><div class="mc num sum sel df df-c">860,747</div>
+          <div class="flow-core">
+            <div class="ticker">
+              <div class="ticker-head"><span>teez &middot; status</span><span class="live">working</span></div>
+              <div class="ticker-view">
+                <div class="ticker-list">
+                  <div class="tk a4">Model updated, summary sent</div>
+                  <div class="tk a1">Files received: OM, rent roll, T-12</div>
+                  <div class="tk a2">Building the pro forma</div>
+                  <div class="tk a3">Pulling comps, stress-testing</div>
+                  <div class="tk a4">Model updated, summary sent</div>
+                  <div class="tk a1">Files received: OM, rent roll, T-12</div>
+                  <div class="tk a2">Building the pro forma</div>
+                </div>
+              </div>
             </div>
-            <div class="mini-foot"><span>Cap 6.20% &middot; DSCR 1.41&times;</span><span class="live">sourced &amp; live</span></div>
+            <div class="dash">
+              <div class="dash-top">
+                <div class="dash-thumb"><svg viewBox="0 0 24 24" fill="none"><path d="M5 21V4h10v17M15 9h4v12M3 21h18M8 8h1m3 0h1M8 12h1m3 0h1M8 16h1m3 0h1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div class="dash-id"><span class="flow-lbl">Multifamily &middot; 84 units</span><b>Maple Court</b></div>
+              </div>
+              <div class="dash-metrics">
+                <div class="dm m1"><span>NOI</span><b>$860,747</b></div>
+                <div class="dm m2"><span>Cap rate</span><b>6.20%</b></div>
+                <div class="dm m3"><span>DSCR</span><b>1.22&times;</b></div>
+                <div class="dm m4"><span>Levered IRR</span><b>15.0%</b></div>
+              </div>
+              <div class="dash-sum"><span class="flow-lbl">Summary</span><p><b>Debt coverage is tight.</b> Minimum DSCR is 1.22&times; in year 1. Confirm lender sizing before submitting an offer.</p></div>
+              <div class="dash-files"><span class="dfile"><i>XLS</i>Underwriting model</span><span class="dfile img"><i>IMG</i>Property photos</span></div>
+            </div>
+          </div>
+          <div class="flow-side flow-out">
+            <span class="flow-lbl">Out<br>text &middot; email &middot; files</span>
+            <div class="sicon txt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+            <div class="sicon mail s2"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="sicon file s3"><span>XLS</span></div>
           </div>
         </div>
       </div>

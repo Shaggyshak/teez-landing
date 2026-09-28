@@ -346,43 +346,88 @@ h3{font-size:18px;font-weight:700}
 .card3.link:hover{border-color:var(--green)}
 .card3.link.feat:hover{box-shadow:0 24px 50px -32px rgba(16,124,65,.6)}
 
-/* ---- demo: before/after — source docs on the left, the actual filled model on the right (home only) ---- */
-.demo-sec{padding:64px 0}
-.demo-stage{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap}
-.demo-before{display:flex;flex-direction:column;gap:16px}
-.ddoc{display:flex;align-items:center;gap:13px;animation:demo-bob 4s ease-in-out infinite;
-  filter:drop-shadow(0 10px 14px rgba(31,35,41,.20))}
-.ddoc:nth-child(2){animation-delay:.3s}
-.ddoc:nth-child(3){animation-delay:.6s}
-.ddoc .doc-icon{width:44px;height:54px;background:#fff;border:1px solid var(--grid-2);border-radius:3px;position:relative;
-  flex:none;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px}
-.ddoc .doc-icon::before{content:"";position:absolute;top:-1px;right:-1px;width:0;height:0;
-  border-style:solid;border-width:0 9px 9px 0;border-color:transparent var(--grid-2) transparent transparent}
-.ddoc .doc-icon .tag{color:#fff;font-family:var(--mono);font-weight:700;font-size:9px;
-  padding:2px 6px;border-radius:2px;letter-spacing:.02em}
-.ddoc.pdf .doc-icon .tag{background:var(--red)}
-.ddoc.xls .doc-icon .tag{background:var(--green)}
-.ddoc .doc-cap{font-family:var(--sans);width:auto;text-align:left;font-size:14px;color:var(--ink);font-weight:600}
-@keyframes demo-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.demo-arrow{color:var(--green);width:32px;height:32px;flex:none;animation:demo-arrow-pulse 3s ease-in-out infinite}
-@keyframes demo-arrow-pulse{0%,100%{opacity:.45;transform:translateX(0)}50%{opacity:1;transform:translateX(5px)}}
-.demo-after{width:320px;flex:none}
-.demo-after .df{opacity:0;filter:blur(2px);transition:none}
-.demo-after .df-a{animation:demo-fill 6s ease-in-out infinite;animation-delay:.4s}
-.demo-after .df-b{animation:demo-fill 6s ease-in-out infinite;animation-delay:.8s}
-.demo-after .df-c{animation:demo-fill 6s ease-in-out infinite;animation-delay:1.2s}
-@keyframes demo-fill{
-  0%,6%{opacity:0;filter:blur(2px);background:transparent}
-  11%{opacity:1;filter:blur(0);background:var(--green-flash)}
-  22%,100%{opacity:1;filter:blur(0);background:transparent}
-}
-@media(max-width:640px){
-  .demo-stage{flex-direction:column;gap:22px}
-  .demo-arrow{transform:rotate(90deg)}
+/* ---- flow: in -> status queue + dashboard -> out (home only) ----
+   One 12s loop, four 3s steps. The status queue and the dashboard share the same clock,
+   so each status that scrolls into focus fills the matching metric below it. */
+.flow-sec{padding:64px 0}
+.flow{display:grid;grid-template-columns:150px minmax(0,500px) 150px;gap:24px;justify-content:center;align-items:center;--dx:64px;--dy:0px}
+.flow-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hdr-tx)}
+.flow-side{display:flex;flex-direction:column;gap:18px;align-items:center}
+.flow-side .flow-lbl{text-align:center;line-height:1.4;white-space:nowrap;font-size:11px}
+.sicon{width:50px;height:50px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 16px -8px rgba(31,35,41,.35);animation:3s linear infinite}
+.sicon svg{width:25px;height:25px}
+.sicon.txt{background:var(--blue)}
+.sicon.mail{background:var(--red)}
+.sicon.file{width:40px;height:50px;border-radius:4px;background:#fff;border:1px solid var(--grid-2);align-items:flex-end;padding-bottom:6px}
+.sicon.file span{background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;font-size:9px;padding:2px 5px;border-radius:2px}
+.flow-in .sicon{animation-name:flow-in}
+.flow-out .sicon{animation-name:flow-out}
+.sicon.s2{animation-delay:-1s}
+.sicon.s3{animation-delay:-2s}
+@keyframes flow-in{
+  0%{transform:translate(calc(var(--dx)*-.4),calc(var(--dy)*-.4));opacity:0}
+  20%,70%{opacity:1}
+  100%{transform:translate(var(--dx),var(--dy)) scale(.7);opacity:0}}
+@keyframes flow-out{
+  0%{transform:translate(calc(var(--dx)*-1),calc(var(--dy)*-1)) scale(.7);opacity:0}
+  30%,80%{opacity:1}
+  100%{transform:translate(calc(var(--dx)*.4),calc(var(--dy)*.4));opacity:0}}
+.flow-core{display:flex;flex-direction:column;gap:12px;min-width:0}
+.ticker{background:var(--chrome);color:#E8EAED;border-radius:8px;padding:10px 14px 12px;
+  box-shadow:0 26px 50px -30px rgba(31,35,41,.55)}
+.ticker-head{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:#9AA0A6;margin-bottom:4px}
+.ticker-head .live{color:#5BD18B;display:inline-flex;align-items:center;gap:6px}
+.ticker-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#5BD18B;animation:pulse 2.2s infinite}
+.ticker-view{height:132px;overflow:hidden}
+.ticker-list{animation:tick 12s cubic-bezier(.6,0,.3,1) infinite}
+.tk{height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:15px;
+  white-space:nowrap;opacity:.3;transform:scale(.84);animation:12s linear infinite}
+.tk.a1{animation-name:tk1} .tk.a2{animation-name:tk2} .tk.a3{animation-name:tk3} .tk.a4{animation-name:tk4}
+@keyframes tick{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-44px)}50%,70%{transform:translateY(-88px)}
+  75%,95%{transform:translateY(-132px)}100%{transform:translateY(-176px)}}
+@keyframes tk1{0%,20%{opacity:1;transform:scale(1)}25%,95%{opacity:.3;transform:scale(.84)}100%{opacity:1;transform:scale(1)}}
+@keyframes tk2{0%,20%{opacity:.3;transform:scale(.84)}25%,45%{opacity:1;transform:scale(1)}50%,100%{opacity:.3;transform:scale(.84)}}
+@keyframes tk3{0%,45%{opacity:.3;transform:scale(.84)}50%,70%{opacity:1;transform:scale(1)}75%,100%{opacity:.3;transform:scale(.84)}}
+@keyframes tk4{0%,70%{opacity:.3;transform:scale(.84)}75%,95%{opacity:1;transform:scale(1)}100%{opacity:.3;transform:scale(.84)}}
+.dash{background:#fff;border:1px solid var(--grid-2);border-radius:8px;padding:16px;
+  box-shadow:0 1px 0 var(--grid-2),0 26px 50px -30px rgba(31,35,41,.30)}
+.dash-top{display:flex;align-items:center;gap:14px}
+.dash-thumb{width:60px;height:60px;flex:none;border-radius:6px;background:var(--green-soft);color:var(--green);
+  display:flex;align-items:center;justify-content:center}
+.dash-thumb svg{width:34px;height:34px}
+.dash-id b{display:block;font-size:20px;line-height:1.2;color:var(--ink)}
+.dash-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.dm{border:1px solid var(--grid);border-radius:5px;padding:8px 9px;min-width:0}
+.dm span{display:block;font-family:var(--mono);font-size:11px;color:var(--hdr-tx);white-space:nowrap}
+.dm b{display:block;font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:3px;white-space:nowrap;
+  font-variant-numeric:tabular-nums;opacity:0;animation:12s linear infinite}
+.dm.m1 b{animation-name:on1} .dm.m2 b{animation-name:on2} .dm.m3 b{animation-name:on3} .dm.m4 b{animation-name:on4}
+.dash-sum{margin-top:12px;background:var(--gutter);border-radius:5px;padding:10px 12px;font-size:14.5px;line-height:1.45;
+  color:var(--ink-2);min-height:78px}
+.dash-sum .flow-lbl{display:block;margin-bottom:4px}
+.dash-sum p{opacity:0;animation:on4 12s linear infinite}
+.dash-sum p b{color:var(--ink)}
+.dash-files{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;opacity:.3;animation:ready4 12s linear infinite}
+.dfile{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--grid-2);border-radius:5px;padding:6px 10px;
+  font-family:var(--mono);font-size:12.5px;color:var(--ink)}
+.dfile i{font-style:normal;font-weight:700;font-size:9px;color:#fff;background:var(--green);border-radius:2px;padding:2px 4px}
+.dfile.img i{background:var(--teal)}
+@keyframes on1{0%,4%{opacity:0}8%,96%{opacity:1}100%{opacity:0}}
+@keyframes on2{0%,29%{opacity:0}33%,96%{opacity:1}100%{opacity:0}}
+@keyframes on3{0%,54%{opacity:0}58%,96%{opacity:1}100%{opacity:0}}
+@keyframes on4{0%,79%{opacity:0}83%,96%{opacity:1}100%{opacity:0}}
+@keyframes ready4{0%,79%{opacity:.3}83%,96%{opacity:1}100%{opacity:.3}}
+@media(max-width:720px){
+  .flow{grid-template-columns:minmax(0,1fr);gap:26px;--dx:0px;--dy:22px}
+  .flow-side{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px}
+  .flow-side .flow-lbl{flex-basis:100%}
+  .tk{font-size:12.5px}
+  .dash-metrics{grid-template-columns:repeat(2,1fr)}
 }
 @media(prefers-reduced-motion:reduce){
-  .ddoc,.demo-arrow{animation:none}
-  .demo-after .df{opacity:1;filter:none}
+  .sicon,.ticker-list,.tk,.dm b,.dash-sum p,.dash-files,.ticker-head .live::before{animation:none}
+  .sicon,.tk,.dm b,.dash-sum p,.dash-files{opacity:1;transform:none}
 }
 
 /* ===== FAQ (details/summary) ===== */
