@@ -191,6 +191,7 @@ h3{font-size:18px;font-weight:700}
 .card3{border:1px solid var(--grid-2);border-radius:8px;padding:26px 24px;background:#fff;display:flex;flex-direction:column}
 .card3.feat{border:2px solid var(--green);box-shadow:0 20px 44px -32px rgba(16,124,65,.5)}
 .card3 .ey{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hdr-tx);margin-bottom:12px}
+#choose .card3 .ey{font-size:16px;font-weight:700;letter-spacing:0;color:var(--ink);text-transform:none}
 .card3.feat .ey{color:var(--green)}
 .card3 h3{font-size:19px;margin-bottom:8px}
 .card3 p{font-size:15px;color:var(--ink-2)}
