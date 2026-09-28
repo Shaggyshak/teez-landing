@@ -347,7 +347,7 @@ h3{font-size:18px;font-weight:700}
 .card3.link.feat:hover{box-shadow:0 24px 50px -32px rgba(16,124,65,.6)}
 
 /* ---- flow: in -> status queue + dashboard -> out (home only) ----
-   One 12s loop, four 3s steps. The status queue and the dashboard share the same clock,
+   One 18s loop: four 3s steps, then a 6s hold on the finished dashboard. The status queue and the dashboard share the same clock,
    so each status that scrolls into focus fills the matching metric below it. */
 .flow-sec{padding:64px 0}
 .flow{display:grid;grid-template-columns:minmax(0,220px) minmax(0,540px) minmax(0,220px);gap:22px;justify-content:center;
@@ -385,16 +385,16 @@ h3{font-size:18px;font-weight:700}
 .ticker-head .live{color:#5BD18B;display:inline-flex;align-items:center;gap:6px}
 .ticker-head .live::before{content:"";width:6px;height:6px;border-radius:50%;background:#5BD18B;animation:pulse 2.2s infinite}
 .ticker-view{height:132px;overflow:hidden}
-.ticker-list{animation:tick 12s cubic-bezier(.6,0,.3,1) infinite}
+.ticker-list{animation:tick 18s cubic-bezier(.6,0,.3,1) infinite}
 .tk{height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:15px;
-  white-space:nowrap;opacity:.3;transform:scale(.84);animation:12s linear infinite}
+  white-space:nowrap;opacity:.3;transform:scale(.84);animation:18s linear infinite}
 .tk.a1{animation-name:tk1} .tk.a2{animation-name:tk2} .tk.a3{animation-name:tk3} .tk.a4{animation-name:tk4}
-@keyframes tick{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-44px)}50%,70%{transform:translateY(-88px)}
-  75%,95%{transform:translateY(-132px)}100%{transform:translateY(-176px)}}
-@keyframes tk1{0%,20%{opacity:1;transform:scale(1)}25%,95%{opacity:.3;transform:scale(.84)}100%{opacity:1;transform:scale(1)}}
-@keyframes tk2{0%,20%{opacity:.3;transform:scale(.84)}25%,45%{opacity:1;transform:scale(1)}50%,100%{opacity:.3;transform:scale(.84)}}
-@keyframes tk3{0%,45%{opacity:.3;transform:scale(.84)}50%,70%{opacity:1;transform:scale(1)}75%,100%{opacity:.3;transform:scale(.84)}}
-@keyframes tk4{0%,70%{opacity:.3;transform:scale(.84)}75%,95%{opacity:1;transform:scale(1)}100%{opacity:.3;transform:scale(.84)}}
+@keyframes tick{0%,13.33%{transform:translateY(0)}16.67%,30%{transform:translateY(-44px)}33.33%,46.67%{transform:translateY(-88px)}
+  50%,96.67%{transform:translateY(-132px)}100%{transform:translateY(-176px)}}
+@keyframes tk1{0%,13.33%{opacity:1;transform:scale(1)}16.67%,96.67%{opacity:.3;transform:scale(.84)}100%{opacity:1;transform:scale(1)}}
+@keyframes tk2{0%,13.33%{opacity:.3;transform:scale(.84)}16.67%,30%{opacity:1;transform:scale(1)}33.33%,100%{opacity:.3;transform:scale(.84)}}
+@keyframes tk3{0%,30%{opacity:.3;transform:scale(.84)}33.33%,46.67%{opacity:1;transform:scale(1)}50%,100%{opacity:.3;transform:scale(.84)}}
+@keyframes tk4{0%,46.67%{opacity:.3;transform:scale(.84)}50%,96.67%{opacity:1;transform:scale(1)}100%{opacity:.3;transform:scale(.84)}}
 .dash{background:#fff;border:1px solid var(--grid-2);border-radius:8px;padding:16px;
   box-shadow:0 1px 0 var(--grid-2),0 26px 50px -30px rgba(31,35,41,.30)}
 .dash-top{display:flex;align-items:center;gap:14px}
@@ -407,7 +407,7 @@ h3{font-size:18px;font-weight:700}
 .dash-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
 .dm{border:1px solid var(--grid);border-radius:5px;padding:8px 9px;min-width:0}
 .dm span{display:block;font-family:var(--mono);font-size:11px;color:var(--hdr-tx);white-space:nowrap}
-.dm .v{opacity:0;animation:12s linear infinite}
+.dm .v{opacity:0;animation:18s linear infinite}
 .dm b{display:block;font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:3px;white-space:nowrap;
   font-variant-numeric:tabular-nums}
 .dm em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--hdr-tx);margin-top:2px;white-space:nowrap}
@@ -417,10 +417,10 @@ h3{font-size:18px;font-weight:700}
   color:var(--ink-2)}
 .dash-sum .flow-lbl{display:block;margin-bottom:4px}
 .dash-sum p{margin:0}
-.dash-sum .s3{opacity:0;animation:on3 12s linear infinite}
-.dash-sum .s4{opacity:0;animation:on4 12s linear infinite}
+.dash-sum .s3{opacity:0;animation:on3 18s linear infinite}
+.dash-sum .s4{opacity:0;animation:on4 18s linear infinite}
 .dash-sum p b{color:var(--ink)}
-.dash-files{display:flex;flex-direction:column;gap:6px;margin-top:12px;opacity:.3;animation:ready4 12s linear infinite}
+.dash-files{display:flex;flex-direction:column;gap:6px;margin-top:12px;opacity:.3;animation:ready4 18s linear infinite}
 .dfile{display:flex;align-items:center;gap:9px;border:1px solid var(--grid-2);border-radius:5px;padding:7px 10px;min-width:0}
 .dfile i{font-style:normal;font-family:var(--mono);font-weight:700;font-size:9px;color:#fff;background:var(--green);
   border-radius:2px;padding:2px 4px;flex:none;min-width:30px;text-align:center}
@@ -428,11 +428,11 @@ h3{font-size:18px;font-weight:700}
 .dfile .fn{font-family:var(--mono);font-size:12.5px;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dfile .fs{font-family:var(--mono);font-size:11px;color:var(--hdr-tx);margin-left:auto;flex:none}
 .dfile .dl{width:16px;height:16px;flex:none;color:var(--green)}
-@keyframes on1{0%,4%{opacity:0}8%,96%{opacity:1}100%{opacity:0}}
-@keyframes on2{0%,29%{opacity:0}33%,96%{opacity:1}100%{opacity:0}}
-@keyframes on3{0%,54%{opacity:0}58%,96%{opacity:1}100%{opacity:0}}
-@keyframes on4{0%,79%{opacity:0}83%,96%{opacity:1}100%{opacity:0}}
-@keyframes ready4{0%,79%{opacity:.3}83%,96%{opacity:1}100%{opacity:.3}}
+@keyframes on1{0%,2.67%{opacity:0}5.33%,97%{opacity:1}100%{opacity:0}}
+@keyframes on2{0%,19.33%{opacity:0}22%,97%{opacity:1}100%{opacity:0}}
+@keyframes on3{0%,36%{opacity:0}38.67%,97%{opacity:1}100%{opacity:0}}
+@keyframes on4{0%,52.67%{opacity:0}55.33%,97%{opacity:1}100%{opacity:0}}
+@keyframes ready4{0%,52.67%{opacity:.3}55.33%,97%{opacity:1}100%{opacity:.3}}
 @media(max-width:1080px){
   .flow{grid-template-columns:minmax(0,540px);gap:26px;--dx:0px;--dy:10px}
   .flow-side{width:100%;max-width:340px;margin:0 auto;gap:18px}
