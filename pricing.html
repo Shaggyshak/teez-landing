@@ -11,20 +11,20 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Teez Pricing: Excel Add-in Free Trial & Deep Underwriting</title>
-  <meta name="description" content="Three ways to run Teez AI underwriting: the Excel add-in with a free trial, the operating system connecting your Excel, text and email, or done-for-you Deep Underwriting priced per deal." />
+  <title>Teez Pricing: First Three Deals Free | AI Underwriting</title>
+  <meta name="description" content="Run your first three deals on Teez free. After that, one subscription covers 10 deals a month, with a 25% early release discount. Higher volume and Deep Underwriting are priced on request." />
   <link rel="canonical" href="https://teez.ai/pricing.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Teez" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="https://teez.ai/pricing.html" />
-  <meta property="og:title" content="Teez Pricing: Excel Add-in Free Trial & Deep Underwriting" />
-  <meta property="og:description" content="Three ways to run Teez AI underwriting: the Excel add-in with a free trial, the operating system connecting your Excel, text and email, or done-for-you Deep Underwriting priced per deal." />
+  <meta property="og:title" content="Teez Pricing: First Three Deals Free | AI Underwriting" />
+  <meta property="og:description" content="Run your first three deals on Teez free. After that, one subscription covers 10 deals a month, with a 25% early release discount. Higher volume and Deep Underwriting are priced on request." />
   <meta property="og:image" content="https://teez.ai/images/og/teez-og.png" />
-  <meta property="og:image:alt" content="Teez: the AI back office for every CRE shop. AI underwriting inside the Excel templates you already use." />
+  <meta property="og:image:alt" content="Teez: professional underwriting, without the overhead." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Teez Pricing: Excel Add-in Free Trial & Deep Underwriting" />
-  <meta name="twitter:description" content="Three ways to run Teez AI underwriting: the Excel add-in with a free trial, the operating system connecting your Excel, text and email, or done-for-you Deep Underwriting priced per deal." />
+  <meta name="twitter:title" content="Teez Pricing: First Three Deals Free | AI Underwriting" />
+  <meta name="twitter:description" content="Run your first three deals on Teez free. After that, one subscription covers 10 deals a month, with a 25% early release discount. Higher volume and Deep Underwriting are priced on request." />
   <meta name="twitter:image" content="https://teez.ai/images/og/teez-og.png" />
   <meta name="theme-color" content="#1b1f23" />
   <script type="application/ld+json">
@@ -36,7 +36,7 @@
       "@id": "https://teez.ai/pricing.html#webpage",
       "url": "https://teez.ai/pricing.html",
       "name": "Teez Pricing",
-      "description": "Excel add-in free trial, operating system, and Deep Underwriting per deal.",
+      "description": "First three deals free, then a subscription with a 25% early release discount. Higher volume and Deep Underwriting priced on request.",
       "isPartOf": {
         "@id": "https://teez.ai/#website"
       },
@@ -74,7 +74,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260916a" />
+  <link rel="stylesheet" href="style.css?v=20260928q" />
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -86,15 +86,23 @@
       "name": "Is there a free trial?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The Excel add-in starts free so you can run it on a real file before paying. After the trial it bills as a subscription per seat."
+        "text": "Yes. Your first three deals are free, with everything in the subscription included."
       }
     },
     {
       "@type": "Question",
-      "name": "What is the difference between the add-in and the operating system?",
+      "name": "What is the early release discount?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The add-in is the underwriting agent inside Excel, on its own. The operating system connects that same engine to your inbox and your phone, so deals can be sent in by email or text and results come back the same way, without a dashboard. It is priced to your stack rather than per seat."
+        "text": "25% off the subscription while Teez is in early release."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I run more than 10 deals a month?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contact us and we'll price a plan to your deal volume. Everything in the subscription is included."
       }
     },
     {
@@ -102,7 +110,7 @@
       "name": "How is Deep Underwriting priced?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Per deal, not per seat. We collect the real numbers from the broker, property manager, lender, insurance and tax sources, re-underwrite against your return hurdle and deliver a before-and-after model or a full IC memo."
+        "text": "Per deal, separately from the subscription. We collect the real numbers from the broker, property manager, lender, insurance and tax sources, re-underwrite against your return hurdle and deliver a before-and-after model or a full IC memo."
       }
     },
     {
@@ -110,7 +118,7 @@
       "name": "Can I cancel?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. Cancel the add-in subscription any time and you keep every model it filled. To change your plan or close your account, email support@teez.live."
+        "text": "Yes. Cancel any time and you keep every model Teez built. To change your plan or close your account, email support@teez.live."
       }
     }
   ]
@@ -137,7 +145,7 @@
     </div>
   </div>
   <div class="fxbar">
-    <div class="fx-val"><span id="fx" data-formula='=PRICING(addin, operating_system)'></span><span class="caret" id="caret"></span></div>
+    <div class="fx-val"><span id="fx" data-formula='=PRICING(deals_per_month)'></span><span class="caret" id="caret"></span></div>
   </div>
 </div>
 
@@ -152,53 +160,73 @@
   <div class="canvas">
     <div class="colguides" aria-hidden="true"><div class="inner"><span></span><span class="act"></span><span></span><span></span><span></span><span></span><span></span></div></div>
 
-    <!-- PRICING -->
+    <!-- PLANS -->
     <section class="sec" id="pricing">
       <div class="wrap">
-        <h1>Teez pricing: three ways to<br>run <span class="g">AI underwriting.</span></h1>
-        <p class="lead" style="margin:14px 0 4px;max-width:60ch">Buy the add-in on its own if that's all you need. Bring us in to connect your whole stack. Or hand us the deals worth going deeper on — we'll price the last two with you directly.</p>
+        <h1>Teez pricing: start free,<br>then priced by <span class="g">deal volume.</span></h1>
+        <p class="lead" style="margin:14px 0 4px;max-width:60ch">Your first three deals are free. After that, one subscription covers 10 deals a month. If you run more, we'll price it to your volume.</p>
         <div class="pricing-grid">
           <div class="ptrack">
-            <span class="ptag">The add-in · self-serve</span>
-            <h3>teez, the add-in</h3>
-            <p class="psub">For analysts and modeling teams — your template, or your client's, filled and sourced.</p>
-            <p class="pp"><b>Start free</b></p>
-            <p class="ph">then a subscription per seat</p>
+            <span class="ptag">Free trial &middot; first 3 deals</span>
+            <h3>Try Teez</h3>
+            <p class="psub">Run your first three deals and see the work before you pay.</p>
+            <p class="pp"><b>Free</b></p>
+            <p class="ph">your first three deals</p>
             <ul class="plist">
-              <li>The teez add-in in Excel</li>
-              <li>Fills your template — or your client's, unchanged</li>
-              <li>Every number sourced &amp; verified</li>
-              <li>No platform, no login your clients ever see</li>
+              <li>3 deals, fully underwritten</li>
+              <li>Everything in the subscription</li>
+              <li>You keep every model Teez builds</li>
             </ul>
             <a href="https://app.teez.live/login" class="pbtn">Start free</a>
           </div>
-          <div class="ptrack">
-            <span class="ptag">Deep Underwriting · done-for-you</span>
-            <h3>We finish the deal</h3>
-            <p class="psub">On the deals worth it, hand it to us — we collect the real numbers from broker, PM, lender, insurance &amp; tax and re-underwrite against your hurdle.</p>
-            <p class="pp"><b>Talk to us</b></p>
-            <p class="ph">priced per deal, not a seat</p>
-            <ul class="plist">
-              <li>Real numbers from broker, PM, lender, insurance &amp; tax</li>
-              <li>Re-underwritten against your return hurdle</li>
-              <li>Before / after vs. your first pass</li>
-              <li>A model — or a full IC memo</li>
-            </ul>
-            <a href="/sponsors.html#book" class="pbtn fill">Talk to us →</a>
-          </div>
           <div class="ptrack feat">
-            <span class="ptag">The operating system · Sponsors, GPs &amp; Brokers</span>
-            <h3>teez, the operating system</h3>
-            <p class="psub">Connects your Excel, your inbox, and your phone — one engine behind however you already work.</p>
-            <p class="pp"><b>Talk to us</b></p>
-            <p class="ph">priced to your stack, not a seat</p>
+            <span class="ptag">Subscription &middot; 10 deals a month</span>
+            <h3>Teez</h3>
+            <p class="psub">Everything Teez does, for sponsors, analysts and acquisitions teams.</p>
+            <p class="pp"><b>25% off</b></p>
+            <p class="ph">early release discount</p>
             <ul class="plist">
-              <li>Everything in the add-in, plus—</li>
-              <li>Reach it by text or email, no dashboard needed</li>
-              <li>Built on the tech stack you already have</li>
-              <li>For sponsors, GPs, and the brokers you work with</li>
+              <li>10 deals a month</li>
+              <li>Model and pro forma in Excel, yours to edit</li>
+              <li>Checked against our property records and comps</li>
+              <li>Results by text, email and web dashboard</li>
+              <li>Every number sourced</li>
             </ul>
-            <a href="/sponsors.html#book" class="pbtn fill">Talk to us →</a>
+            <a href="https://app.teez.live/login" class="pbtn fill">Get started</a>
+          </div>
+          <div class="ptrack">
+            <span class="ptag">Higher volume &middot; 10+ deals a month</span>
+            <h3>Teez for teams</h3>
+            <p class="psub">For shops that run more than 10 deals a month.</p>
+            <p class="pp"><b>Contact us</b></p>
+            <p class="ph">priced to your deal volume</p>
+            <ul class="plist">
+              <li>Everything in the subscription</li>
+              <li>As many deals a month as you run</li>
+              <li>Set up on your team's own templates</li>
+            </ul>
+            <a href="/analysts.html#book" class="pbtn">Contact us &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICE — separate from the subscription -->
+    <section class="sec" id="service">
+      <div class="wrap">
+        <h2>Deep Underwriting:<br>we finish <span class="g">the deal.</span></h2>
+        <p class="lead" style="margin:14px 0 0;max-width:62ch">A done-for-you service, separate from the subscription. On the deals worth it, hand it to us.</p>
+        <div class="pservice">
+          <ul class="plist">
+            <li>Real numbers collected from the broker, property manager, lender, insurance and tax sources</li>
+            <li>Re-underwritten against your return hurdle</li>
+            <li>Before and after, compared with your first pass</li>
+            <li>Delivered as a model or a full IC memo</li>
+          </ul>
+          <div class="pservice-cta">
+            <p class="pp"><b>Priced per deal</b></p>
+            <p class="ph">not part of the subscription</p>
+            <a href="/sponsors.html#book" class="pbtn">Talk to us &rarr;</a>
           </div>
         </div>
       </div>
@@ -208,12 +236,12 @@
     <section class="sec faq" id="faq">
       <div class="wrap">
         <h2>Pricing <span class="g">questions.</span></h2>
-        <p class="lead" style="margin-top:14px;max-width:60ch">What to know before you pick a tier.</p>
         <div class="faq-list">
-          <details class="faq-item"><summary>Is there a free trial?</summary><div class="faq-a"><p>Yes. The Excel add-in starts free so you can run it on a real file before paying. After the trial it bills as a subscription per seat.</p></div></details>
-          <details class="faq-item"><summary>What is the difference between the add-in and the operating system?</summary><div class="faq-a"><p>The add-in is the underwriting agent inside Excel, on its own. The operating system connects that same engine to your inbox and your phone, so deals can be sent in by email or text and results come back the same way, without a dashboard. It is priced to your stack rather than per seat.</p></div></details>
-          <details class="faq-item"><summary>How is Deep Underwriting priced?</summary><div class="faq-a"><p>Per deal, not per seat. We collect the real numbers from the broker, property manager, lender, insurance and tax sources, re-underwrite against your return hurdle and deliver a before-and-after model or a full IC memo.</p></div></details>
-          <details class="faq-item"><summary>Can I cancel?</summary><div class="faq-a"><p>Yes. Cancel the add-in subscription any time and you keep every model it filled. To change your plan or close your account, email <a href="mailto:support@teez.live">support@teez.live</a>.</p></div></details>
+          <details class="faq-item"><summary>Is there a free trial?</summary><div class="faq-a"><p>Yes. Your first three deals are free, with everything in the subscription included.</p></div></details>
+          <details class="faq-item"><summary>What is the early release discount?</summary><div class="faq-a"><p>25% off the subscription while Teez is in early release.</p></div></details>
+          <details class="faq-item"><summary>What if I run more than 10 deals a month?</summary><div class="faq-a"><p>Contact us and we'll price a plan to your deal volume. Everything in the subscription is included.</p></div></details>
+          <details class="faq-item"><summary>How is Deep Underwriting priced?</summary><div class="faq-a"><p>Per deal, separately from the subscription. We collect the real numbers from the broker, property manager, lender, insurance and tax sources, re-underwrite against your return hurdle and deliver a before-and-after model or a full IC memo.</p></div></details>
+          <details class="faq-item"><summary>Can I cancel?</summary><div class="faq-a"><p>Yes. Cancel any time and you keep every model Teez built. To change your plan or close your account, email <a href="mailto:support@teez.live">support@teez.live</a>.</p></div></details>
         </div>
       </div>
     </section>
@@ -235,7 +263,7 @@
   <span class="tb add">+</span>
 </div>
 <div class="statusbar">
-  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — the add-in, or the whole operating system</span></div>
+  <div class="l"><span class="ready">● Ready</span><span class="deskonly">teez — professional underwriting, without the overhead</span></div>
   <div class="l"><span class="contact">1178 Broadway, 3rd Floor #1464, New York, NY 10001</span><a class="contact" href="tel:+16464848207">(646) 484-8207</a><span>© 2026 Teez, Inc.</span><span class="deskonly">100%</span></div>
 </div>
 
