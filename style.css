@@ -242,6 +242,8 @@ h3{font-size:18px;font-weight:700}
 .cta .lede{font-size:18px;color:var(--ink-2);margin:18px 0 4px;max-width:46ch}
 .cta .terms{font-family:var(--mono);font-size:13px;color:var(--ink-3);line-height:1.7;margin:18px 0 26px}
 .cta .terms b{color:var(--ink)}
+.router-note{font-size:14.5px;color:var(--ink-2);margin-top:4px}
+.router-note a{color:var(--green);text-decoration:underline;text-underline-offset:2px}
 .entry{max-width:520px;border:1px solid var(--grid-2);border-radius:6px;overflow:hidden;background:#fff;box-shadow:0 18px 40px -30px rgba(31,35,41,.4)}
 .entry-head{display:flex;background:var(--gutter);border-bottom:1px solid var(--gutter-line);font-family:var(--mono);font-size:11px;color:var(--hdr-tx)}
 .entry-head span{padding:6px 12px;border-right:1px solid var(--gutter-line)}
