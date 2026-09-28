@@ -350,30 +350,35 @@ h3{font-size:18px;font-weight:700}
    One 12s loop, four 3s steps. The status queue and the dashboard share the same clock,
    so each status that scrolls into focus fills the matching metric below it. */
 .flow-sec{padding:64px 0}
-.flow{display:grid;grid-template-columns:150px minmax(0,500px) 150px;gap:24px;justify-content:center;align-items:center;--dx:64px;--dy:0px}
+.flow{display:grid;grid-template-columns:minmax(0,220px) minmax(0,540px) minmax(0,220px);gap:22px;justify-content:center;
+  align-items:center;--dx:34px;--dy:0px}
 .flow-lbl{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--hdr-tx)}
-.flow-side{display:flex;flex-direction:column;gap:18px;align-items:center}
-.flow-side .flow-lbl{text-align:center;line-height:1.4;white-space:nowrap;font-size:11px}
-.sicon{width:50px;height:50px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 16px -8px rgba(31,35,41,.35);animation:3s linear infinite}
-.sicon svg{width:25px;height:25px}
-.sicon.txt{background:var(--blue)}
-.sicon.mail{background:var(--red)}
-.sicon.file{width:40px;height:50px;border-radius:4px;background:#fff;border:1px solid var(--grid-2);align-items:flex-end;padding-bottom:6px}
-.sicon.file span{background:var(--green);color:#fff;font-family:var(--mono);font-weight:700;font-size:9px;padding:2px 5px;border-radius:2px}
-.flow-in .sicon{animation-name:flow-in}
-.flow-out .sicon{animation-name:flow-out}
-.sicon.s2{animation-delay:-1s}
-.sicon.s3{animation-delay:-2s}
+.flow-side{display:flex;flex-direction:column;gap:14px;min-width:0}
+.smsg{display:flex;align-items:flex-start;gap:9px;background:#fff;border:1px solid var(--grid-2);border-radius:9px;
+  padding:9px 11px 10px 9px;box-shadow:0 12px 20px -14px rgba(31,35,41,.4);animation:3s linear infinite}
+.sm-ic{width:28px;height:28px;flex:none;border-radius:7px;display:flex;align-items:center;justify-content:center;background:var(--blue)}
+.sm-ic svg{width:16px;height:16px}
+.smsg.mail .sm-ic{background:var(--amber)}
+.smsg.pdf .sm-ic{background:var(--red)}
+.smsg.xls .sm-ic{background:var(--green)}
+.sm-b{min-width:0;display:block}
+.sm-b i{display:block;font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--hdr-tx);line-height:1.3;white-space:nowrap}
+.sm-b b{display:block;font-weight:500;font-size:12.5px;line-height:1.35;color:var(--ink);margin-top:2px}
+.sm-b b.fn{font-family:var(--mono);font-size:11.5px;overflow-wrap:anywhere}
+.flow-in .smsg{animation-name:flow-in}
+.flow-out .smsg{animation-name:flow-out}
+.smsg.s2{animation-delay:-1s}
+.smsg.s3{animation-delay:-2s}
 @keyframes flow-in{
-  0%{transform:translate(calc(var(--dx)*-.4),calc(var(--dy)*-.4));opacity:0}
-  20%,70%{opacity:1}
-  100%{transform:translate(var(--dx),var(--dy)) scale(.7);opacity:0}}
+  0%{transform:translate(calc(var(--dx)*-.5),calc(var(--dy)*-.5));opacity:0}
+  18%,68%{opacity:1}
+  100%{transform:translate(var(--dx),var(--dy)) scale(.92);opacity:0}}
 @keyframes flow-out{
-  0%{transform:translate(calc(var(--dx)*-1),calc(var(--dy)*-1)) scale(.7);opacity:0}
-  30%,80%{opacity:1}
-  100%{transform:translate(calc(var(--dx)*.4),calc(var(--dy)*.4));opacity:0}}
-.flow-core{display:flex;flex-direction:column;gap:12px;min-width:0}
+  0%{transform:translate(calc(var(--dx)*-1),calc(var(--dy)*-1)) scale(.92);opacity:0}
+  32%,82%{opacity:1}
+  100%{transform:translate(calc(var(--dx)*.5),calc(var(--dy)*.5));opacity:0}}
+.flow-core{display:flex;flex-direction:column;gap:12px;min-width:0;position:relative;z-index:1}
 .ticker{background:var(--chrome);color:#E8EAED;border-radius:8px;padding:10px 14px 12px;
   box-shadow:0 26px 50px -30px rgba(31,35,41,.55)}
 .ticker-head{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:#9AA0A6;margin-bottom:4px}
@@ -396,38 +401,53 @@ h3{font-size:18px;font-weight:700}
 .dash-thumb{width:96px;height:72px;flex:none;border-radius:6px;background:var(--green-soft);overflow:hidden;
   border:1px solid var(--grid-2)}
 .dash-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.dash-id{min-width:0}
 .dash-id b{display:block;font-size:20px;line-height:1.2;color:var(--ink)}
+.dash-addr{display:block;font-size:13px;line-height:1.35;color:var(--hdr-tx);margin-top:2px}
 .dash-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
 .dm{border:1px solid var(--grid);border-radius:5px;padding:8px 9px;min-width:0}
 .dm span{display:block;font-family:var(--mono);font-size:11px;color:var(--hdr-tx);white-space:nowrap}
+.dm .v{opacity:0;animation:12s linear infinite}
 .dm b{display:block;font-family:var(--mono);font-size:15px;color:var(--ink);margin-top:3px;white-space:nowrap;
-  font-variant-numeric:tabular-nums;opacity:0;animation:12s linear infinite}
-.dm.m1 b{animation-name:on1} .dm.m2 b{animation-name:on2} .dm.m3 b{animation-name:on3} .dm.m4 b{animation-name:on4}
-.dash-sum{margin-top:12px;background:var(--gutter);border-radius:5px;padding:10px 12px;font-size:14.5px;line-height:1.45;
-  color:var(--ink-2);min-height:78px}
+  font-variant-numeric:tabular-nums}
+.dm em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;color:var(--hdr-tx);margin-top:2px;white-space:nowrap}
+.dm em.up{color:var(--green);font-weight:700}
+.dm.m1 .v{animation-name:on1} .dm.m2 .v{animation-name:on2} .dm.m3 .v{animation-name:on3} .dm.m4 .v{animation-name:on4}
+.dash-sum{margin-top:12px;background:var(--gutter);border-radius:5px;padding:10px 12px;font-size:14px;line-height:1.45;
+  color:var(--ink-2)}
 .dash-sum .flow-lbl{display:block;margin-bottom:4px}
-.dash-sum p{opacity:0;animation:on4 12s linear infinite}
+.dash-sum p{margin:0}
+.dash-sum .s3{opacity:0;animation:on3 12s linear infinite}
+.dash-sum .s4{opacity:0;animation:on4 12s linear infinite}
 .dash-sum p b{color:var(--ink)}
-.dash-files{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;opacity:.3;animation:ready4 12s linear infinite}
-.dfile{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--grid-2);border-radius:5px;padding:6px 10px;
-  font-family:var(--mono);font-size:12.5px;color:var(--ink)}
-.dfile i{font-style:normal;font-weight:700;font-size:9px;color:#fff;background:var(--green);border-radius:2px;padding:2px 4px}
-.dfile.img i{background:var(--teal)}
+.dash-files{display:flex;flex-direction:column;gap:6px;margin-top:12px;opacity:.3;animation:ready4 12s linear infinite}
+.dfile{display:flex;align-items:center;gap:9px;border:1px solid var(--grid-2);border-radius:5px;padding:7px 10px;min-width:0}
+.dfile i{font-style:normal;font-family:var(--mono);font-weight:700;font-size:9px;color:#fff;background:var(--green);
+  border-radius:2px;padding:2px 4px;flex:none;min-width:30px;text-align:center}
+.dfile.zip i{background:var(--teal)}
+.dfile .fn{font-family:var(--mono);font-size:12.5px;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dfile .fs{font-family:var(--mono);font-size:11px;color:var(--hdr-tx);margin-left:auto;flex:none}
+.dfile .dl{width:16px;height:16px;flex:none;color:var(--green)}
 @keyframes on1{0%,4%{opacity:0}8%,96%{opacity:1}100%{opacity:0}}
 @keyframes on2{0%,29%{opacity:0}33%,96%{opacity:1}100%{opacity:0}}
 @keyframes on3{0%,54%{opacity:0}58%,96%{opacity:1}100%{opacity:0}}
 @keyframes on4{0%,79%{opacity:0}83%,96%{opacity:1}100%{opacity:0}}
 @keyframes ready4{0%,79%{opacity:.3}83%,96%{opacity:1}100%{opacity:.3}}
+@media(max-width:1080px){
+  .flow{grid-template-columns:minmax(0,540px);gap:26px;--dx:0px;--dy:10px}
+  .flow-side{width:100%;max-width:340px;margin:0 auto;gap:18px}
+}
 @media(max-width:720px){
-  .flow{grid-template-columns:minmax(0,1fr);gap:26px;--dx:0px;--dy:22px}
-  .flow-side{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px}
-  .flow-side .flow-lbl{flex-basis:100%}
   .tk{font-size:12.5px}
   .dash-metrics{grid-template-columns:repeat(2,1fr)}
+  .dash-thumb{width:80px;height:60px}
+  .dfile .fs{display:none}
+  .dfile .dl{margin-left:auto}
+  .dfile .fn{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){
-  .sicon,.ticker-list,.tk,.dm b,.dash-sum p,.dash-files,.ticker-head .live::before{animation:none}
-  .sicon,.tk,.dm b,.dash-sum p,.dash-files{opacity:1;transform:none}
+  .smsg,.ticker-list,.tk,.dm .v,.dash-sum .s3,.dash-sum .s4,.dash-files,.ticker-head .live::before{animation:none}
+  .smsg,.tk,.dm .v,.dash-sum .s3,.dash-sum .s4,.dash-files{opacity:1;transform:none}
 }
 
 /* ===== FAQ (details/summary) ===== */
