@@ -183,6 +183,7 @@
     <!-- FLOW — texts, emails and files in; status queue + dashboard in sync; texts, emails and files out -->
     <section class="sec flow-sec">
       <div class="wrap">
+        <div class="flow-acts" aria-hidden="true"><span class="on" data-act="1">1 &middot; A new deal arrives</span><span data-act="2">2 &middot; Then the update arrives</span></div>
         <div class="flow" role="img" aria-label="A text, an email and a T-12 file for Maple Court go into Teez. A live status queue steps through files received, building the pro forma, pulling comps, and summary sent, while the deal dashboard fills in NOI, DSCR, cap rate against the neighborhood average, and IRR, then a written summary comparing the deal to sale and rent comps, and downloadable files. A text, an email and the finished Excel model come back out.">
           <div class="flow-side flow-in">
             <div class="smsg txt"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Text</i><b>Can you run this one? 84 units, asking $13.9M</b></span></div>
@@ -228,7 +229,51 @@
             <div class="smsg xls s3"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3zm8 0v4h4" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>File &middot; XLSX</i><b class="fn">Maple_Court_<wbr>Underwriting.xlsx</b></span></div>
           </div>
         </div>
-      </div>
+        <div class="flow act2" id="flow2" hidden role="img" aria-label="An update to the same deal. A text, an email and a refreshed rent roll for Maple Court go into Teez. The status queue steps through files received, comparing to the first pass, three inputs changed, and changes ready for review, while the dashboard shows NOI, DSCR, cap rate and IRR against the first pass, a written summary of what moved, and a change log. A text, an email and the updated Excel model come back out.">
+          <div class="flow-side flow-in">
+            <div class="smsg txt"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Text</i><b>Rent roll is refreshed. Can you rerun Maple Court?</b></span></div>
+            <div class="smsg mail s2"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Email &middot; 2 attachments</i><b>Fwd: Maple Court insurance quote and lender terms</b></span></div>
+            <div class="smsg xls s3"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3zm8 0v4h4" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>File &middot; XLSX</i><b class="fn">Maple_Court_<wbr>RentRoll_Oct-2026.xlsx</b></span></div>
+          </div>
+          <div class="flow-core">
+            <div class="ticker">
+              <div class="ticker-head"><span>teez &middot; update</span><span class="live">working</span></div>
+              <div class="ticker-view">
+                <div class="ticker-list">
+                  <div class="tk a4">Changes ready for your review</div>
+                  <div class="tk a1">Files received: rent roll, quote, terms</div>
+                  <div class="tk a2">Comparing to your first pass</div>
+                  <div class="tk a3">3 inputs changed, NOI re-run</div>
+                  <div class="tk a4">Changes ready for your review</div>
+                  <div class="tk a1">Files received: rent roll, quote, terms</div>
+                  <div class="tk a2">Comparing to your first pass</div>
+                </div>
+              </div>
+            </div>
+            <div class="dash">
+              <div class="dash-top">
+                <div class="dash-thumb"><img src="/images/flow-property.webp" alt="" width="96" height="72" loading="lazy"></div>
+                <div class="dash-id"><span class="flow-lbl">Update 1 &middot; 3 changes</span><b>Maple Court</b><span class="dash-addr">4410 Maple Ct, Kansas City, MO 64111</span></div>
+              </div>
+              <div class="dash-metrics">
+                <div class="dm m1"><span>NOI</span><div class="v"><b>$819,400</b><em>&minus;$41K</em></div></div>
+                <div class="dm m2"><span>DSCR</span><div class="v"><b>1.16&times;</b><em>was 1.22&times;</em></div></div>
+                <div class="dm m3"><span>Cap rate</span><div class="v"><b>5.90%</b><em>&minus;30 bps</em></div></div>
+                <div class="dm m4"><span>Levered IRR</span><div class="v"><b>13.4%</b><em>was 15.0%</em></div></div>
+              </div>
+              <div class="dash-sum"><span class="flow-lbl">What changed</span><p><span class="s3"><b>Two things moved NOI.</b> The refreshed rent roll shows 3 more vacant units (&minus;$22K), and the insurance quote is above the broker's figure (&minus;$19K).</span> <span class="s4"><b>Debt coverage is thinner.</b> DSCR drops to 1.16&times; at the same price. Review the 3 changes, then decide whether to re-bid.</span></p></div>
+              <div class="dash-files">
+                <span class="dfile"><i>XLSX</i><span class="fn">Maple_Court_Underwriting_v2.xlsx</span><span class="fs">1.4 MB</span><svg class="dl" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="dfile pdf"><i>PDF</i><span class="fn">Maple_Court_Change_Log.pdf</span><span class="fs">0.2 MB</span><svg class="dl" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </div>
+          </div>
+          <div class="flow-side flow-out">
+            <div class="smsg txt"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Text</i><b>Maple Court update: NOI &minus;$41K, DSCR 1.16&times;, IRR 13.4%. 3 changes to review.</b></span></div>
+            <div class="smsg mail s2"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Email &middot; 2 attachments</i><b>Re: Maple Court, what changed since the first pass</b></span></div>
+            <div class="smsg xls s3"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3zm8 0v4h4" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>File &middot; XLSX</i><b class="fn">Maple_Court_<wbr>Underwriting_v2.xlsx</b></span></div>
+          </div>
+        </div></div>
     </section>
 
     <!-- WHAT IT IS — brief hub teaser, depth lives on the two persona pages -->
@@ -300,6 +345,20 @@
     },st.hold);
   }
   show();
+})();
+</script>
+<script>
+/* Homepage flow: Act 1 (new deal) and Act 2 (update to the same deal) alternate. Each act is a pure CSS 18s loop;
+   un-hiding an act restarts its animations. Without JS or with reduced motion, Act 1 stays on screen. */
+(function(){
+  var f1=document.querySelector('.flow:not(.act2)'),f2=document.getElementById('flow2'),tabs=document.querySelectorAll('.flow-acts span');
+  if(!f1||!f2||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var act=1;
+  setInterval(function(){
+    act=act===1?2:1;
+    f1.hidden=act!==1;f2.hidden=act!==2;
+    for(var i=0;i<tabs.length;i++)tabs[i].classList.toggle('on',Number(tabs[i].getAttribute('data-act'))===act);
+  },18000);
 })();
 </script>
 </body>
