@@ -25,7 +25,11 @@ Full research (228 tasks, 49 sources, written by ChatGPT, 2026-10-07): [`docs/re
 
 Used on the analysts page: problem section ("The model you bid on isn't the model you close on"), the conflicts card, the closing "From first screen to the next deal" roadmap card (stage snapshots, what moved between them, actual versus underwritten), and the capex wording in the FAQ.
 
-## Roadmap language lives on the analysts page only
+## Analysts page now describes the product direction, not the shipped MVP (decision 2026-10-07)
+
+The founder directed that the analysts page lead with where the product is going: one connected record from source document to approved assumption to actual result, on the customer's own Excel models. Copy is written in present tense with no per-line "building toward" hedges. **Lines that describe capability the 2026-10-07 code review did not find built:** "Approved cases ... saved separately from the live forecast" with a bridge between them; "Underwritten vs actual" comparison of operating results; "Your history, in the next deal" calibration; step 2's "reconciles them to what you already believed"; step 3 as a whole; the "Can Teez use our own deal history and capex data?" answer. Each must be true, or reworded, before this ships to customers or outreach links to it. Live today per the review: template mapping and input-only writes, citations, change ledger with review/revert, conflict flagging, past-deal search.
+
+## Roadmap language lives on the analysts page only (superseded for the analysts page by the section above; still true for homepage, sponsors, Data and pricing)
 
 All "we're building toward" copy (deal-history card and the FAQ's capex/operating-data answer) is on `analysts.html`. Do not add it to the homepage, sponsors, Data or pricing pages.
 
