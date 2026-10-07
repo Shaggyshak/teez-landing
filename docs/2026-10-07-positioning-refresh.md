@@ -12,6 +12,17 @@ Source: the ChatGPT positioning handoff and the Teez website/product review (Cod
 - **Data page:** the "your deals make it sharper / checked against what your deals did" claims were removed. It now says only what is live (your deals stay yours, searchable for precedent).
 - **Footer status bar** and the 404 description use the new tagline.
 
+## What the underlying research (Real estate analyst underwriting workflow.md) says, and how it is used
+
+- The analyst's work changes as evidence improves: screen, preliminary, bid/LOI, PSA, diligence, financing/closing, handoff. Assumptions get replaced with verified facts (sections 1, 8). Analysts "update underwriting continuously" (task 148) and must explain "why the economics changed" (section 12).
+- Snapshots at screen, pre-LOI, pre-PSA, pre-hard-money and closing, and a bid-to-current bridge (tasks 123, 192).
+- Handoff: actual-versus-underwritten reporting, and "preserve learning from the acquisition" so future screens and templates change (tasks 214, 215). This is the data flywheel.
+- Completeness test: someone else can trace a conclusion from source evidence through the model to a decision and a named next action.
+- First-pass market research (section 2.2) is one stage of a long process, not the whole job. The analysts page no longer leads with it.
+- Automation limits it states: it does not establish a lease's legal meaning, an engineer's conclusion, the credibility of a rent premium, or permission to commit capital.
+
+Used on the analysts page: problem section ("The model you bid on isn't the model you close on"), the conflicts card, the closing "From first screen to the next deal" roadmap card (stage snapshots, what moved between them, actual versus underwritten), and the capex wording in the FAQ.
+
 ## Roadmap language lives on the analysts page only
 
 All "we're building toward" copy (deal-history card and the FAQ's capex/operating-data answer) is on `analysts.html`. Do not add it to the homepage, sponsors, Data or pricing pages.
