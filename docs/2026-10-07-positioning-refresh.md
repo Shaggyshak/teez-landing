@@ -48,3 +48,7 @@ All "we're building toward" copy (deal-history card and the FAQ's capex/operatin
 - `images/og/teez-og.png` still carries the old tagline.
 - The Excel pane demo (`mockups/excel-pane-demo.html`) still shows only first-pass filling. An update scene (new rent roll, insurance quote and lender terms) is the next demo to build, once the product does it.
 - Pricing "Teez for teams" is unchanged. Do not imply shared review or access until team ownership exists in the product.
+
+## Next PR: homepage animation (not in this PR)
+
+The current homepage animation only shows a first-pass fill. Direction from the founder (2026-10-07): the new animation should show a deal moving **from first pass all the way to close**, picking up updates along the way (refreshed rent roll, insurance quote, lender terms, diligence findings), and **streaming text and email updates to the people who work on the deal** (director of acquisitions, analyst, capital markets, counsel). Stage vocabulary from the research (`docs/research/2026-10-07-analyst-underwriting-workflow.md`): screen, bid/LOI, PSA, diligence, financing and closing, handoff. A prototype of a simpler two-act version (first pass, then one update) is on branch `animation-update-act-wip`; it was judged not good enough and is superseded by this brief. All numbers in any animation are illustrative.
