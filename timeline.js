@@ -39,8 +39,7 @@
     out:[['txt','Director of Acquisitions','','Maple Court is screened: 6.19% cap, DSCR 1.22×, IRR 15.0% at $13.9M. 2 conflicts flagged for review.'],
          ['mail','Analyst','Maple Court: model and sources','Model filled, every input cited. T-12 vacancy is 4.5% vs the OM’s 3%.']]},
    {n:'Underwrite',
-    inn:[['data','County records','Public data','Tax bill, recorded sales, open violations'],['data','Public listings','Rent comps','8 comparable buildings, matched by bedroom'],
-         ['mail','Lender','Indication','65–68% LTV, 6.4%, 30-year amortization'],['mail','Insurance broker','Indication','$109.5K a year vs $104K in the OM'],['mail','Broker','Email','Answers on capex history, concessions, vacancy']],
+    inn:[['data','County records','Public data','Tax bill and recorded sales'],['mail','Lender','Indication','65–68% LTV, 6.4%, 30-year amortization'],['mail','Insurance broker','Indication','$109.5K a year vs $104K in the OM']],
     steps:[{sheet:'assump',cells:[['tax',1,'+9,000','Source: County tax bill 2026, reassessment after sale','County records'],
                                   ['ins',1,'109,500','Source: insurance broker indication','Insurance indication'],
                                   ['exit',1,'5.85%','Source: 6 recorded sales, same vintage','Sale comps']]},
@@ -165,7 +164,7 @@
     rails(i);stageName.textContent=S[i].n;inEl.innerHTML='';S[i].inn.forEach(function(m){addIn(m,false)});
     var last=S[i].steps[S[i].steps.length-1].sheet;showSheet(last);idx=i;note(i);
   }
-  var CELL=220,SWITCH=450,IN_STEP=350,OUT_GAP=1300,PAD=3200;
+  var CELL=320,SWITCH=700,IN_STEP=1300,OUT_GAP=2000,PAD=5500;
   function play(i){
     clearTimers();var g=++gen;
     feed.innerHTML='';
@@ -174,14 +173,14 @@
     var t=200;
     flow('fin',true);
     s.inn.forEach(function(m){later(function(){addIn(m,true)},t);t+=IN_STEP});
-    t+=200;later(function(){consume();flow('fin',false)},t);t+=150;
+    t+=900;later(function(){consume();flow('fin',false)},t);t+=500;
     s.steps.forEach(function(st){
       if(st.fill){later(function(){fillAll(true);fxName.innerHTML='&nbsp;';fxVal.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';
-        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=1100;return}
+        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=2200;return}
       (function(st,t0){later(function(){showSheet(st.sheet);pulse(st.sheet)},t0)})(st,t);t+=SWITCH;
       st.cells.forEach(function(c){(function(c,tt){later(function(){applyCell(st.sheet,c,true)},tt)})(c,t);t+=CELL});
       if(st.cases)(function(ids,tt){later(function(){ids.forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('cases')},tt)})(st.cases,t);
-      t+=700;
+      t+=1600;
     });
     t+=150;later(function(){flow('fout',true);addOut(s.out[0],true)},t);
     t+=OUT_GAP;later(function(){addOut(s.out[1],true)},t);t+=700;later(function(){flow('fout',false)},t);t-=700;
