@@ -8,8 +8,12 @@ Source: the ChatGPT positioning handoff and the Teez website/product review (Cod
 - **Homepage body:** the "what it is" block now covers re-underwriting on new information. "One underwriter. Scales however you work." became "Built for how you work." The analyst card is "Keep your template" (the old "Skip the new platform" contradicted the headline).
 - **Analysts page:** hero says the underwriting works the way the team already does, not "the underwriter". Step 3 mentions the change log, review/revert, and updates on new documents. The "How is this different from an AI assistant" answer was sharpened to lead with the research and link to Data.
 - **Sponsors page:** new FAQ "Why not just use ChatGPT or Claude?". The "re-running takes about the same" claim now says what the page already shows (text back a new price and the model updates).
-- **Data page:** "your deals make it sharper" claims are now written as "we're building toward", not as shipped.
+- **Data page:** the "your deals make it sharper / checked against what your deals did" claims were removed. It now says only what is live (your deals stay yours, searchable for precedent).
 - **Footer status bar** and the 404 description use the new tagline.
+
+## Roadmap language lives on the analysts page only
+
+All "we're building toward" copy (deal-history card and the FAQ's capex/operating-data answer) is on `analysts.html`. Do not add it to the homepage, sponsors, Data or pricing pages.
 
 ## Claims that need product verification before this ships
 
