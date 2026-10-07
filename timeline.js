@@ -165,7 +165,7 @@
     rails(i);stageName.textContent=S[i].n;inEl.innerHTML='';S[i].inn.forEach(function(m){addIn(m,false)});
     var last=S[i].steps[S[i].steps.length-1].sheet;showSheet(last);idx=i;note(i);
   }
-  var CELL=150,SWITCH=280,IN_STEP=230,OUT_GAP=900,PAD=2000;
+  var CELL=220,SWITCH=450,IN_STEP=350,OUT_GAP=1300,PAD=3200;
   function play(i){
     clearTimers();var g=++gen;
     feed.innerHTML='';
@@ -177,11 +177,11 @@
     t+=200;later(function(){consume();flow('fin',false)},t);t+=150;
     s.steps.forEach(function(st){
       if(st.fill){later(function(){fillAll(true);fxName.innerHTML='&nbsp;';fxVal.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';
-        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=650;return}
+        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=1100;return}
       (function(st,t0){later(function(){showSheet(st.sheet);pulse(st.sheet)},t0)})(st,t);t+=SWITCH;
       st.cells.forEach(function(c){(function(c,tt){later(function(){applyCell(st.sheet,c,true)},tt)})(c,t);t+=CELL});
       if(st.cases)(function(ids,tt){later(function(){ids.forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('cases')},tt)})(st.cases,t);
-      t+=180;
+      t+=700;
     });
     t+=150;later(function(){flow('fout',true);addOut(s.out[0],true)},t);
     t+=OUT_GAP;later(function(){addOut(s.out[1],true)},t);t+=700;later(function(){flow('fout',false)},t);t-=700;
