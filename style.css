@@ -539,3 +539,17 @@ h3{font-size:18px;font-weight:700}
 .fact li{font-size:15.5px;color:var(--ink-2);padding-left:22px;position:relative;line-height:1.45}
 .fact li::before{content:"\203A";position:absolute;left:4px;top:-1px;color:var(--green);font-weight:700}
 @media(max-width:880px){.facts{grid-template-columns:1fr}.faq-item summary{font-size:16.5px;padding:16px 0}.faq-a{padding-right:0}}
+
+/* Hero headline rotator: "Turn your Excel models [and texts] into your deal platform." */
+.hero.solo.deal .hero-top{max-width:1180px}
+.hero.solo.deal h1{font-size:clamp(20px,calc((min(100vw,1180px) - 48px)/24),48px);line-height:1.12;text-wrap:nowrap}
+.hero.solo.deal h1 .l1,.hero.solo.deal h1 .l2{display:block}
+.hero.solo.deal h1 .l1{white-space:nowrap}
+.hero.solo.deal .hero-sub{max-width:62ch}
+.rot{display:inline-block;overflow:hidden;vertical-align:bottom;white-space:nowrap;width:0;opacity:0;color:var(--green);transition:width .55s cubic-bezier(.4,0,.2,1),opacity .4s ease}
+.rot.on{opacity:1}
+@media(max-width:760px){
+  .hero.solo.deal h1{font-size:30px;text-wrap:balance}
+  .hero.solo.deal h1 .l1{white-space:normal;min-height:2.3em}
+}
+@media(prefers-reduced-motion:reduce){.rot{transition:none}}
