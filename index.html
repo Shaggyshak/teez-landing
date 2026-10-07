@@ -310,27 +310,28 @@
   var UPD=[['837,047','860,747'],['1.19×','1.22×'],['6.02%','6.19%'],['14.5%','15.0%']],SRC=['T-12','Debt service','Price','cash flows'];
   var tok=0,timers=[];
   function sleep(ms){return new Promise(function(r){timers.push(setTimeout(r,ms))})}
+  function wipe(){[].forEach.call(outEl.children,function(el){el.classList.add('gone')});setTimeout(function(){outEl.innerHTML=''},400)}
   function stop(){tok++;timers.forEach(clearTimeout);timers=[];hub.classList.remove('fin','fout')}
   function reset(){
     inEl.innerHTML='';outEl.innerHTML='';fxN.innerHTML='&nbsp;';fxV.innerHTML='&nbsp;';
     [AS,RE].forEach(function(d,k){var t=k?tRe:tAs;rows(t).forEach(function(tr,i){tr.classList.add('hid');[].forEach.call(tr.children,function(td,c){td.textContent=d[i][c];td.classList.remove('chd','flash')})})});
     [].forEach.call(tabs,function(b){b.classList.remove('has')});view('re');steps[0].className='on';steps[1].className=''}
   async function run(t){
-    reset();await sleep(500);if(t!==tok)return;
+    reset();await sleep(800);if(t!==tok)return;
     /* beat 1: first pass */
-    hub.classList.add('fin');var a1=addIn(M1,true);await sleep(1300);if(t!==tok)return;a1.classList.add('used');hub.classList.remove('fin');
-    var all=tablesEl.querySelectorAll('tr.hid');for(var i=0;i<all.length;i++){all[i].classList.remove('hid');await sleep(100);if(t!==tok)return}
-    fxN.textContent='Returns!B2';fxV.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';await sleep(450);if(t!==tok)return;
-    hub.classList.add('fout');var o1=addOut(O1,true);await sleep(1900);if(t!==tok)return;hub.classList.remove('fout');
+    hub.classList.add('fin');var a1=addIn(M1,true);await sleep(2200);if(t!==tok)return;a1.classList.add('used');hub.classList.remove('fin');
+    var all=tablesEl.querySelectorAll('tr.hid');for(var i=0;i<all.length;i++){all[i].classList.remove('hid');await sleep(140);if(t!==tok)return}
+    fxN.textContent='Returns!B2';fxV.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';await sleep(900);if(t!==tok)return;
+    hub.classList.add('fout');addOut(O1,true);await sleep(4500);if(t!==tok)return;hub.classList.remove('fout');wipe();await sleep(450);if(t!==tok)return;
     /* beat 2: every update after */
     steps[0].className='';steps[1].className='on';inEl.innerHTML='';
-    hub.classList.add('fin');var a2=addIn(M2,true);await sleep(1200);if(t!==tok)return;a2.classList.add('used');hub.classList.remove('fin');
-    view('as');await sleep(450);if(t!==tok)return;
+    hub.classList.add('fin');var a2=addIn(M2,true);await sleep(2200);if(t!==tok)return;a2.classList.add('used');hub.classList.remove('fin');
+    view('as');await sleep(800);if(t!==tok)return;
     var ins=cell(tAs,1,1);set(ins,'127,700','104,000',true);cell(tAs,1,2).textContent='Quote p.2';mark('as');
-    fxN.textContent='Assumptions!B3';fxV.innerHTML='<span class="src">Source: Insurance_Quote.pdf, p.2</span>';await sleep(1200);if(t!==tok)return;
-    view('re');mark('re');await sleep(400);if(t!==tok)return;
-    for(var j=0;j<4;j++){set(cell(tRe,j,1),UPD[j][0],UPD[j][1],true);fxN.textContent='Returns!B'+(j+2);fxV.textContent='=NOI / '+SRC[j];await sleep(280);if(t!==tok)return}
-    o1.classList.add('used');hub.classList.add('fout');addOut(O2,true);await sleep(2600);if(t!==tok)return;hub.classList.remove('fout');
+    fxN.textContent='Assumptions!B3';fxV.innerHTML='<span class="src">Source: Insurance_Quote.pdf, p.2</span>';await sleep(2200);if(t!==tok)return;
+    view('re');mark('re');await sleep(800);if(t!==tok)return;
+    for(var j=0;j<4;j++){set(cell(tRe,j,1),UPD[j][0],UPD[j][1],true);fxN.textContent='Returns!B'+(j+2);fxV.textContent='=NOI / '+SRC[j];await sleep(450);if(t!==tok)return}
+    hub.classList.add('fout');addOut(O2,true);await sleep(5500);if(t!==tok)return;hub.classList.remove('fout');wipe();await sleep(450);if(t!==tok)return;
     if(t===tok)run(t);
   }
   function finish(){
@@ -339,7 +340,7 @@
     set(cell(tAs,1,1),'127,700','',false);cell(tAs,1,2).textContent='Quote p.2';mark('as');
     UPD.forEach(function(u,j){set(cell(tRe,j,1),u[0],'',false)});mark('re');
     fxN.textContent='Returns!B5';fxV.innerHTML='<span class="src">Source: Insurance_Quote.pdf, p.2</span>';
-    addIn(M2,false);addOut(O1,false).classList.add('used');addOut(O2,false)}
+    addIn(M2,false);addOut(O2,false)}
   [].forEach.call(tabs,function(b){b.addEventListener('click',function(){view(b.getAttribute('data-s'))})});
   if(reduce){finish();return}
   reset();
