@@ -187,7 +187,7 @@
           <ol class="life-rail" id="lifeRail"><li class="on"><button type="button" data-i="0"><span class="dot">1</span><span class="nm">Screen</span><span class="sh">Screen</span></button></li><li><button type="button" data-i="1"><span class="dot">2</span><span class="nm">Underwrite</span><span class="sh">Price</span></button></li><li><button type="button" data-i="2"><span class="dot">3</span><span class="nm">Bid / LOI</span><span class="sh">LOI</span></button></li><li><button type="button" data-i="3"><span class="dot">4</span><span class="nm">PSA</span><span class="sh">PSA</span></button></li><li><button type="button" data-i="4"><span class="dot">5</span><span class="nm">Diligence</span><span class="sh">DD</span></button></li><li><button type="button" data-i="5"><span class="dot">6</span><span class="nm">Financing</span><span class="sh">Debt</span></button></li><li><button type="button" data-i="6"><span class="dot">7</span><span class="nm">Close</span><span class="sh">Close</span></button></li></ol>
           <div class="life-body">
             <div class="life-col life-in">
-              <div class="life-col-head"><span class="dir in">In</span><span class="ttl">Coming in</span><span class="sub" id="lifeStageName">Screen</span></div>
+              <span class="sr" id="lifeStageName" aria-live="polite">Screen</span>
               <ul id="lifeIn"><li class="imsg"><span class="sm-ic txt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>From Director of Acquisitions &middot; Text</i><b>Can you run this one? 84 units, asking $13.9M</b></span></li><li class="imsg"><span class="sm-ic mail"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>From Broker &middot; Email, 3 attachments</i><b>Fwd: Maple Court OM, rent roll, T-12</b></span></li></ul>
             </div>
             <div class="life-main">
@@ -199,7 +199,6 @@
               </div>
             </div>
             <div class="life-col life-out">
-              <div class="life-col-head"><span class="dir out">Out</span><span class="ttl">Going out</span><span class="sub">Updates to your team</span></div>
               <ul id="lifeFeed"><li class="fmsg mail"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Email &middot; To Analyst</i><b class="subj">Maple Court: model and sources</b><b class="body">Model filled, every input cited. T-12 vacancy is 4.5% vs the OM’s 3%.</b></span></li><li class="fmsg txt"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Text &middot; To Director of Acquisitions</i><b class="body">Maple Court is screened: 6.19% cap, DSCR 1.22×, IRR 15.0% at $13.9M. 2 conflicts flagged for review.</b></span></li></ul>
             </div>
           </div>
@@ -387,8 +386,10 @@
     b.addEventListener('click',function(){showSheet(k)});
     tabsEl.appendChild(b);tabBtn[k]=b;badge[k]=b.querySelector('.bd');changes[k]=0;
   });
+  function flow(cls,on){root.classList.toggle(cls,on)}
+  function consume(){var k=inEl.children;for(var q=0;q<k.length;q++)(function(el,d){later(function(){el.classList.add('used')},d)})(k[q],q*140)}
   function later(fn,ms){timers.push(setTimeout(fn,ms))}
-  function clearTimers(){timers.forEach(clearTimeout);timers=[]}
+  function clearTimers(){timers.forEach(clearTimeout);timers=[];flow('fin',false);flow('fout',false)}
   function showSheet(k){ORDER.forEach(function(s){document.getElementById('t_'+s).className='sheet'+(s===k?' show':'');tabBtn[s].className='tab'+(s===k?' act':'')+(changes[s]?' has':'')})}
   function pulse(k){tabBtn[k].classList.remove('pulse');void tabBtn[k].offsetWidth;tabBtn[k].classList.add('pulse')}
   function rails(i){for(var r=0;r<rail.length;r++){rail[r].className=r<i?'done':(r===i?'on':'');rail[r].querySelector('.dot').textContent=r<i?'✓':String(r+1)}}
@@ -445,24 +446,25 @@
     rails(i);stageName.textContent=S[i].n;inEl.innerHTML='';S[i].inn.forEach(function(m){addIn(m,false)});
     var last=S[i].steps[S[i].steps.length-1].sheet;showSheet(last);idx=i;note(i);
   }
-  var CELL=270,SWITCH=500,IN_STEP=450,OUT_GAP=1100,PAD=1300;
+  var CELL=150,SWITCH=280,IN_STEP=230,OUT_GAP=650,PAD=550;
   function play(i){
     clearTimers();var g=++gen;
     if(i===0){baseline();feed.innerHTML='';showSheet('ret')}
     var s=S[i];idx=i;rails(i);stageName.textContent=s.n;inEl.innerHTML='';note(i);
-    var t=300;
+    var t=200;
+    flow('fin',true);
     s.inn.forEach(function(m){later(function(){addIn(m,true)},t);t+=IN_STEP});
-    t+=300;
+    t+=200;later(function(){consume();flow('fin',false)},t);t+=150;
     s.steps.forEach(function(st){
       if(st.fill){later(function(){fillAll(true);fxName.innerHTML='&nbsp;';fxVal.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';
-        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=900;return}
+        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=650;return}
       (function(st,t0){later(function(){showSheet(st.sheet);pulse(st.sheet)},t0)})(st,t);t+=SWITCH;
       st.cells.forEach(function(c){(function(c,tt){later(function(){applyCell(st.sheet,c,true)},tt)})(c,t);t+=CELL});
       if(st.cases)(function(ids,tt){later(function(){ids.forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('cases')},tt)})(st.cases,t);
-      t+=350;
+      t+=180;
     });
-    t+=250;later(function(){addOut(s.out[0],true)},t);
-    t+=OUT_GAP;later(function(){addOut(s.out[1],true)},t);
+    t+=150;later(function(){flow('fout',true);addOut(s.out[0],true)},t);
+    t+=OUT_GAP;later(function(){addOut(s.out[1],true)},t);t+=700;later(function(){flow('fout',false)},t);t-=700;
     t+=PAD;
     later(function(){if(i<S.length-1)play(i+1);else later(function(){play(0)},PAD)},t);
   }

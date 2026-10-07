@@ -568,9 +568,9 @@ h3{font-size:18px;font-weight:700}
 .life-rail li.done button,.life-rail li.on button{color:var(--ink)}
 .life-rail .sh{display:none}
 .life-rail button:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:4px}
-.life-body{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.7fr) minmax(0,.8fr);gap:16px;align-items:start}
-.life-col{background:var(--gutter);border:1px solid var(--gutter-line);border-radius:8px;padding:12px 12px 6px;min-width:0;height:470px;overflow:hidden;position:relative}
-.life-col::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,var(--gutter));pointer-events:none}
+.life-body{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.7fr) minmax(0,.8fr);gap:36px;align-items:start}
+.life-col{padding:2px 0 0;min-width:0;height:470px;overflow:hidden;position:relative}
+.life-col::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(rgba(255,255,255,0),#fff);pointer-events:none}
 .life-col-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hdr-tx)}
 .life-col-head .ttl{color:var(--ink);font-weight:600}
 .life-col-head .sub{margin-left:auto;text-transform:none;letter-spacing:0;color:var(--ink-3)}
@@ -587,8 +587,8 @@ h3{font-size:18px;font-weight:700}
 .imsg .sm-ic.data{background:var(--teal)}
 .imsg.in{animation:lifeInL .55s cubic-bezier(.2,.8,.2,1)}
 .fmsg.in{animation:lifeInR .55s cubic-bezier(.2,.8,.2,1)}
-@keyframes lifeInL{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
-@keyframes lifeInR{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+@keyframes lifeInL{from{opacity:0;transform:translateX(-56px)}to{opacity:1;transform:none}}
+@keyframes lifeInR{from{opacity:0;transform:translateX(-56px) scale(.95)}to{opacity:1;transform:none}}
 .fmsg .subj{font-weight:700}
 .fmsg .body{font-weight:400;color:var(--ink-2)}
 .imsg .sm-b b{color:var(--ink);font-weight:500}
@@ -642,3 +642,16 @@ table.sheet.show{display:table}
 .life-out .life-col-head .sub{display:none}
 .wbk-tabs .bd{width:7px;height:7px;padding:0;font-size:0;border-radius:50%;margin-left:7px;vertical-align:middle}
 .wbk-tabs .tab.has .bd{display:inline-block}
+/* direction by motion: inbound items slide in from the left and are consumed by the workbook; outbound messages leave it to the right */
+.life .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.imsg{transition:opacity .7s,transform .7s}
+.imsg.used{opacity:.4;transform:translateX(18px) scale(.97)}
+.life-main{position:relative}
+.life-main::before,.life-main::after{content:"\203A\203A\203A";position:absolute;top:45%;font-family:var(--mono);font-size:24px;font-weight:700;letter-spacing:-4px;opacity:.16;transition:opacity .3s}
+.life-main::before{left:-30px;color:var(--blue)}
+.life-main::after{right:-30px;color:var(--green)}
+.life.fin .life-main::before{animation:chev 1s ease-in-out infinite}
+.life.fout .life-main::after{animation:chev 1s ease-in-out infinite}
+@keyframes chev{0%,100%{opacity:.25;transform:translateX(-5px)}50%{opacity:1;transform:translateX(5px)}}
+@media(max-width:1100px){.life-body{gap:16px}.life-main::before,.life-main::after{display:none}}
+@media(prefers-reduced-motion:reduce){.imsg{transition:none}.life.fin .life-main::before,.life.fout .life-main::after{animation:none}}
