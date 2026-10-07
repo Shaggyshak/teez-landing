@@ -12,7 +12,9 @@ Source: the ChatGPT positioning handoff and the Teez website/product review (Cod
 - **Data page:** the "your deals make it sharper / checked against what your deals did" claims were removed. It now says only what is live (your deals stay yours, searchable for precedent).
 - **Footer status bar** and the 404 description use the new tagline.
 
-## What the underlying research (Real estate analyst underwriting workflow.md) says, and how it is used
+## What the underlying research says, and how it is used
+
+Full research (228 tasks, 49 sources, written by ChatGPT, 2026-10-07): [`docs/research/2026-10-07-analyst-underwriting-workflow.md`](research/2026-10-07-analyst-underwriting-workflow.md) (also `.html`). Read it before changing analyst-facing copy. Its forum sources are anecdotes, and its dollar figures are illustrations, not market benchmarks.
 
 - The analyst's work changes as evidence improves: screen, preliminary, bid/LOI, PSA, diligence, financing/closing, handoff. Assumptions get replaced with verified facts (sections 1, 8). Analysts "update underwriting continuously" (task 148) and must explain "why the economics changed" (section 12).
 - Snapshots at screen, pre-LOI, pre-PSA, pre-hard-money and closing, and a bid-to-current bridge (tasks 123, 192).
