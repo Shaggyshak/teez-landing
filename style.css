@@ -656,3 +656,10 @@ table.sheet.show{display:table}
 @media(max-width:1100px){.life-body{gap:16px}.life-main::before,.life-main::after{display:none}}
 @media(prefers-reduced-motion:reduce){.imsg{transition:none}.life.fin .life-main::before,.life.fout .life-main::after{animation:none}}
 .life-foot{justify-content:flex-end}
+/* Hub animation (two beats) reuses the timeline components */
+.hubv .life-col{height:290px}
+.hubv .wbk-tables{min-height:206px}
+.hub-steps{display:flex;justify-content:center;gap:10px;margin-bottom:22px;font-family:var(--mono);font-size:12px}
+.hub-steps span{padding:6px 14px;border:1px solid var(--grid-2);border-radius:20px;color:var(--ink-3);background:#fff;transition:.3s}
+.hub-steps span.on{color:var(--green);border-color:rgba(16,124,65,.4);background:var(--green-soft)}
+@media(max-width:1100px){.hubv .life-col{height:auto}}

@@ -183,26 +183,20 @@
     <!-- FLOW — texts, emails and files in; status queue + dashboard in sync; texts, emails and files out -->
     <section class="sec flow-sec" id="lifecycle">
       <div class="wrap">
-        <div class="life" id="life" role="group" aria-label="One deal, Maple Court, from first screen to close. On the left, what comes in at each stage: broker emails, county records, comps, lender and insurance indications, the PSA, diligence files, term sheets. In the middle, the Excel workbook with Rent Roll, T-12, Assumptions, Debt, Returns and Cases sheets, where the affected cells change as each document arrives. On the right, the texts and emails that go out to the director of acquisitions, analyst, counsel, capital markets and asset manager. Example numbers.">
-          <ol class="life-rail" id="lifeRail"><li class="on"><button type="button" data-i="0"><span class="dot">1</span><span class="nm">Screen</span><span class="sh">Screen</span></button></li><li><button type="button" data-i="1"><span class="dot">2</span><span class="nm">Underwrite</span><span class="sh">Price</span></button></li><li><button type="button" data-i="2"><span class="dot">3</span><span class="nm">Bid / LOI</span><span class="sh">LOI</span></button></li><li><button type="button" data-i="3"><span class="dot">4</span><span class="nm">PSA</span><span class="sh">PSA</span></button></li><li><button type="button" data-i="4"><span class="dot">5</span><span class="nm">Diligence</span><span class="sh">DD</span></button></li><li><button type="button" data-i="5"><span class="dot">6</span><span class="nm">Financing</span><span class="sh">Debt</span></button></li><li><button type="button" data-i="6"><span class="dot">7</span><span class="nm">Close</span><span class="sh">Close</span></button></li></ol>
+        <div class="life hubv" id="hub" role="group" aria-label="First pass: a broker email goes into Teez, the Excel workbook fills in, and a text with the numbers goes out. Every update after: an insurance quote goes in, one cell in the workbook changes, the change reaches the Returns sheet, and a text goes out saying what changed. Example numbers.">
+          <div class="hub-steps" id="hubSteps"><span class="on">1 &middot; First pass</span><span>2 &middot; Every update after</span></div>
           <div class="life-body">
-            <div class="life-col life-in">
-              <span class="sr" id="lifeStageName" aria-live="polite">Screen</span>
-              <ul id="lifeIn"><li class="imsg"><span class="sm-ic txt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>From Director of Acquisitions &middot; Text</i><b>Can you run this one? 84 units, asking $13.9M</b></span></li><li class="imsg"><span class="sm-ic mail"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>From Broker &middot; Email, 3 attachments</i><b>Fwd: Maple Court OM, rent roll, T-12</b></span></li></ul>
-            </div>
+            <div class="life-col life-in"><ul id="hubIn"></ul></div>
             <div class="life-main">
               <div class="wbk">
                 <div class="wbk-bar"><i></i><i></i><i></i><span class="f">Maple_Court_Underwriting.xlsx</span><span class="pill">teez &middot; connected</span></div>
-                <div class="wbk-fx"><span class="nm" id="fxName">Returns!B2</span><span class="val" id="fxVal">Filled from the broker package, every input cited</span></div>
-                <div class="wbk-tables" id="wbkTables"><table class="sheet show"><tr><th>Metric</th><th>Value</th><th>Hurdle</th></tr><tr><td>NOI</td><td class="n">860,747</td><td></td></tr><tr><td>DSCR</td><td class="n">1.22&times;</td><td>1.20&times;</td></tr><tr><td>Cap rate</td><td class="n">6.19%</td><td></td></tr><tr><td>Levered IRR</td><td class="n">15.0%</td><td>14.0%</td></tr><tr><td>Equity required</td><td class="n">$4.9M</td><td></td></tr></table></div>
-                <div class="wbk-tabs" id="wbkTabs"></div>
+                <div class="wbk-fx"><span class="nm" id="hubFxN">&nbsp;</span><span class="val" id="hubFxV">&nbsp;</span></div>
+                <div class="wbk-tables" id="hubTables"></div>
+                <div class="wbk-tabs" id="hubTabs"><button type="button" class="tab" data-s="as">Assumptions<span class="bd">0</span></button><button type="button" class="tab act" data-s="re">Returns<span class="bd">0</span></button></div>
               </div>
             </div>
-            <div class="life-col life-out">
-              <ul id="lifeFeed"><li class="fmsg mail"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Email &middot; To Analyst</i><b class="subj">Maple Court: model and sources</b><b class="body">Model filled, every input cited. T-12 vacancy is 4.5% vs the OM’s 3%.</b></span></li><li class="fmsg txt"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Text &middot; To Director of Acquisitions</i><b class="body">Maple Court is screened: 6.19% cap, DSCR 1.22×, IRR 15.0% at $13.9M. 2 conflicts flagged for review.</b></span></li></ul>
-            </div>
+            <div class="life-col life-out"><ul id="hubOut"></ul></div>
           </div>
-          <div class="life-foot"><button type="button" class="life-replay" id="lifeReplay" hidden>Replay</button></div>
         </div>
       </div>
     </section>
@@ -279,206 +273,79 @@
 })();
 </script>
 <script>
-/* Homepage deal timeline: one deal, first screen to close. Left: what comes in at each stage. Middle: the Excel workbook, where the
-   affected cells change and ripple to Returns. Right: texts and emails going out to the team. Autoplays when visible; click a stage
-   to step manually (the only mode under prefers-reduced-motion). */
+/* Homepage hub animation, two beats: (1) a first pass, (2) every update after. Reuses the timeline's visual components.
+   Autoplays when visible. Under prefers-reduced-motion it shows the finished state. The full seven-stage version lives on the Analysts page. */
 (function(){
-  var root=document.getElementById('life');if(!root)return;
+  var hub=document.getElementById('hub');if(!hub)return;
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var ICON={txt:'<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>',mail:'<svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',pdf:'<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3zm8 0v4h4" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>',xls:'<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3zm8 0v4h4" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>',data:'<svg viewBox="0 0 24 24" fill="none"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'};
-  /* ---- workbook ---- */
-  var SH={
-    rent:{name:'Rent Roll',cols:['Unit','Type','Status','Rent'],num:[3],rows:[
-      ['u101',['101','1BR','Occupied','1,450']],['u102',['102','1BR','Occupied','1,475']],['u103',['103','2BR','Occupied','1,820']],
-      ['u104',['104','2BR','Vacant','—']],['u105',['105','1BR','Occupied','1,460']],['u106',['106','2BR','Occupied','1,790']],
-      ['occ',['6 of 84 units','','Occupancy','95.2%'],1]]},
-    t12:{name:'T-12',cols:['Line','T-12','Adjusted','Source'],num:[1,2],rows:[
-      ['gpr',['Gross rent','1,412,000','1,412,000','Rent roll']],['vac',['Vacancy','(68,000)','(63,540)','Assumptions']],
-      ['tax',['Taxes','(132,000)','(132,000)','OM']],['ins',['Insurance','(104,000)','(104,000)','Assumptions']],
-      ['rep',['Repairs','(91,000)','(91,000)','T-12']],['oth',['Other opex','(160,713)','(160,713)','T-12']],
-      ['noi',['NOI','','860,747',''],1]]},
-    assump:{name:'Assumptions',cols:['Input','Value','Source'],num:[1],rows:[
-      ['price',['Purchase price','13,900,000','Ask']],['vac',['Vacancy','4.5%','T-12']],['ins',['Insurance','104,000','OM']],
-      ['tax',['Tax reset','—','OM']],['capex',['Capex reserve','—','OM']],['rate',['Interest rate','6.4%','Lender indication']],
-      ['exit',['Exit cap','5.75%','Sale comps']],['dd',['Diligence ends','—','PSA']]]},
-    debt:{name:'Debt',cols:['Item','Value','Source'],num:[1],rows:[
-      ['loan',['Loan amount','9,400,000','Lender indication']],['rate',['Rate','6.4%','Assumptions']],
-      ['amort',['Amortization','30 yr','Lender indication']],['dscr',['Min DSCR','1.20×','Lender indication']]]},
-    ret:{name:'Returns',cols:['Metric','Value','Hurdle'],num:[1],rows:[
-      ['noi',['NOI','860,747','']],['dscr',['DSCR','1.22×','1.20×']],['cap',['Cap rate','6.19%','']],
-      ['irr',['Levered IRR','15.0%','14.0%']],['eq',['Equity required','$4.9M','']]]},
-    cases:{name:'Cases',cols:['Case','Levered IRR','Status'],num:[1],rows:[
-      ['c1',['Screen case','15.0%','Saved'],0,1],['c2',['Pricing case','14.2%','Saved'],0,1],['c3',['Bid case v1','15.6%','Approved'],0,1],
-      ['c4',['Diligence case','14.3%','Pending review'],0,1],['c5',['Financing case','13.8%','Below hurdle'],0,1],['c6',['Closing case','14.1%','Approved'],0,1]]}
-  };
-  var ORDER=['rent','t12','assump','debt','ret','cases'];
-  /* ---- the story: inn = coming in, steps = workbook edits (sheet, cells), out = going out ---- */
-  var S=[
-   {n:'Screen',
-    inn:[['txt','Director of Acquisitions','Text','Can you run this one? 84 units, asking $13.9M'],['mail','Broker','Email, 3 attachments','Fwd: Maple Court OM, rent roll, T-12']],
-    steps:[{fill:1,cases:['c1'],sheet:'ret'}],
-    out:[['txt','Director of Acquisitions','','Maple Court is screened: 6.19% cap, DSCR 1.22×, IRR 15.0% at $13.9M. 2 conflicts flagged for review.'],
-         ['mail','Analyst','Maple Court: model and sources','Model filled, every input cited. T-12 vacancy is 4.5% vs the OM’s 3%.']]},
-   {n:'Underwrite',
-    inn:[['data','County records','Public data','Tax bill, recorded sales, open violations'],['data','Public listings','Rent comps','8 comparable buildings, matched by bedroom'],
-         ['mail','Lender','Indication','65–68% LTV, 6.4%, 30-year amortization'],['mail','Insurance broker','Indication','$109.5K a year vs $104K in the OM'],['mail','Broker','Email','Answers on capex history, concessions, vacancy']],
-    steps:[{sheet:'assump',cells:[['tax',1,'+9,000','Source: County tax bill 2026, reassessment after sale','County records'],
-                                  ['ins',1,'109,500','Source: insurance broker indication','Insurance indication'],
-                                  ['exit',1,'5.85%','Source: 6 recorded sales, same vintage','Sale comps']]},
-           {sheet:'t12',cells:[['tax',2,'(141,000)','=-Assumptions!B5'],['ins',2,'(109,500)','=-Assumptions!B4'],['noi',2,'846,247','=SUM(C2:C7)']]},
-           {sheet:'ret',cells:[['noi',1,'846,247','=T-12!C8'],['dscr',1,'1.20×','=NOI / Debt service'],['cap',1,'6.09%','=NOI / Price'],['irr',1,'14.2%','=IRR(cash flows)']],cases:['c2']}],
-    out:[['mail','Analyst','Assumptions updated','Tax reset −$9.0K, insurance −$5.5K. NOI now $846K, every change cited.'],
-         ['txt','Director of Acquisitions','','Pricing case: IRR 14.2% at $13.9M. A bid near $13.4M gets you back to 15.6%.']]},
-   {n:'Bid / LOI',
-    inn:[['txt','Director of Acquisitions','Text','Bid it at $13.4M.'],['pdf','Seller’s broker','PDF','Call for offers: due Oct 21']],
-    steps:[{sheet:'assump',cells:[['price',1,'13,400,000','Source: Director of Acquisitions, approved bid','Approved bid']]},
-           {sheet:'debt',cells:[['loan',1,'9,100,000','=MIN(lender max, 68% × Price)','68% LTV cap']]},
-           {sheet:'ret',cells:[['dscr',1,'1.24×','=NOI / Debt service'],['cap',1,'6.31%','=NOI / Price'],['irr',1,'15.6%','=IRR(cash flows)'],['eq',1,'$4.7M','=Price + costs - Debt!B2']],cases:['c3']}],
-    out:[['txt','Director of Acquisitions','','Bid case saved at $13.4M: 6.31% cap, DSCR 1.24×, IRR 15.6%.'],
-         ['mail','Counsel','Maple Court: LOI economics','Approved terms and bid case v1 attached.']]},
-   {n:'PSA',
-    inn:[['pdf','Seller’s counsel','PDF','Maple_Court_PSA_draft.pdf'],['mail','Counsel','Email','Redline: deposit and diligence terms']],
-    steps:[{sheet:'assump',cells:[['dd',1,'Nov 20, 5pm ET','Source: Maple_Court_PSA_draft.pdf, §4.2','PSA §4.2']]}],
-    out:[['mail','Counsel','PSA vs approved terms','2 differences from the LOI. Review before signing.'],
-         ['txt','Analyst','','Deadline calendar built: diligence ends Nov 20, 5pm ET. Owners assigned.']]},
-   {n:'Diligence',
-    inn:[['xls','Seller','XLSX','Rent roll, refreshed'],['mail','Insurance broker','Bound quote','$127.7K a year'],['pdf','Engineer','PDF','Property condition report: roof, 2 boilers']],
-    steps:[{sheet:'rent',cells:[['u102',2,'Vacant','Source: Rent_Roll_Oct-2026.xlsx, row 2'],['u105',2,'Vacant','Source: Rent_Roll_Oct-2026.xlsx, row 5'],['u106',2,'Vacant','Source: Rent_Roll_Oct-2026.xlsx, row 6'],['occ',3,'91.7%','=Occupied units / 84']]},
-           {sheet:'assump',cells:[['vac',1,'7.0%','=1 - Rent Roll occupancy, rounded','Rent roll'],['ins',1,'127,700','Source: Insurance_Quote.pdf, p.2','Bound quote p.2'],['capex',1,'310,000','Source: Engineer report, p.14','Engineer p.14']]},
-           {sheet:'t12',cells:[['vac',2,'(98,840)','=-GrossRent*Assumptions!B3'],['ins',2,'(127,700)','=-Assumptions!B4'],['noi',2,'792,747','=SUM(C2:C7)']]},
-           {sheet:'ret',cells:[['noi',1,'792,747','=T-12!C8'],['dscr',1,'1.16×','=NOI / Debt service'],['cap',1,'5.92%','=NOI / Price'],['irr',1,'14.3%','=IRR(cash flows)'],['eq',1,'$5.0M','=Price + costs + capex - Debt!B2']],cases:['c4']}],
-    out:[['txt','Director of Acquisitions','','Diligence moved Maple Court: IRR 15.6% to 14.3%. Rent roll −$35.3K, insurance −$18.2K, capex +$310K.'],
-         ['mail','Analyst','Bid-to-current bridge','3 changes to review. Nothing applied to the approved case yet.']]},
-   {n:'Financing',
-    inn:[['mail','Lender','Term sheet','$8.6M at 6.6%, 1.20× DSCR'],['pdf','Appraiser','PDF','Appraisal: $13.0M']],
-    steps:[{sheet:'debt',cells:[['loan',1,'8,600,000','Source: Term sheet p.1, appraisal p.3 (66% of $13.0M)','Term sheet'],['rate',1,'6.6%','Source: Term_Sheet.pdf, p.1','Term sheet']]},
-           {sheet:'assump',cells:[['rate',1,'6.6%','=Debt!B3','Term sheet']]},
-           {sheet:'ret',cells:[['dscr',1,'1.20×','=NOI / Debt service'],['irr',1,'13.8%','=IRR(cash flows)  ·  below the 14.0% hurdle',0,1],['eq',1,'$5.5M','=Price + costs + capex - Debt!B2']],cases:['c5']}],
-    out:[['mail','Capital Markets','Lender terms vs model','Proceeds $8.6M vs $9.1M modeled. Equity need +$0.5M.'],
-         ['txt','Director of Acquisitions','','IRR is 13.8%, under your 14% hurdle. Credit and price options attached.']]},
-   {n:'Close',
-    inn:[['pdf','Seller’s counsel','PDF','Amendment: $250K seller credit'],['pdf','Title company','PDF','Settlement statement']],
-    steps:[{sheet:'assump',cells:[['price',1,'13,150,000','Source: Amendment 2, $250,000 seller credit','Amendment 2']]},
-           {sheet:'ret',cells:[['cap',1,'6.03%','=NOI / Price'],['irr',1,'14.1%','=IRR(cash flows)  ·  clears the 14.0% hurdle',0,0],['eq',1,'$5.3M','=Price + costs + capex - Debt!B2']]},
-           {sheet:'cases',cells:[['c4',2,'Superseded','Source: reviewed by Director of Acquisitions'],['c5',2,'Superseded','Source: seller credit negotiated']],cases:['c6']}],
-    out:[['txt','Director of Acquisitions','','Closed with a $250K seller credit: IRR 14.1% vs 15.6% at bid. Settlement ties to sources and uses.'],
-         ['mail','Asset Manager','Maple Court handoff','Approved case, budget and open items attached. Actual vs underwritten tracking starts.']]}
-  ];
-  var NOTES=['First pass \u00b7 $13.9M ask','Pricing case \u00b7 assumptions updated','Bid case saved \u00b7 v1','PSA checked against the bid case','3 changes to review \u00b7 bid case untouched','Below the 14% hurdle \u00b7 reapproval needed','Closed \u00b7 $250K credit \u00b7 ties to sources and uses'];
-  function note(i){fxName.textContent='Maple Court';fxVal.innerHTML='<span class="src">'+NOTES[i]+'</span>'}
-  var rail=root.querySelectorAll('.life-rail li'),inEl=document.getElementById('lifeIn'),feed=document.getElementById('lifeFeed'),
-      stageName=document.getElementById('lifeStageName'),replay=document.getElementById('lifeReplay'),
-      tablesEl=document.getElementById('wbkTables'),tabsEl=document.getElementById('wbkTabs'),
-      fxName=document.getElementById('fxName'),fxVal=document.getElementById('fxVal');
-  var cells={},tabBtn={},badge={},changes={},timers=[],idx=0,stopped=false,visible=false,gen=0;
+  var IC={txt:'<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>',
+    mail:'<svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    doc:'<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3zm8 0v4h4" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>'};
+  var ICON={txt:IC.txt,mail:IC.mail,pdf:IC.doc};
+  var tablesEl=document.getElementById('hubTables'),tabsEl=document.getElementById('hubTabs'),inEl=document.getElementById('hubIn'),outEl=document.getElementById('hubOut'),
+      fxN=document.getElementById('hubFxN'),fxV=document.getElementById('hubFxV'),steps=document.querySelectorAll('#hubSteps span'),tabs=tabsEl.querySelectorAll('.tab');
   function mk(t,c,h){var e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e}
-  /* build the workbook */
-  tablesEl.innerHTML='';
-  ORDER.forEach(function(k,i){
-    var s=SH[k],t=mk('table','sheet'+(i===4?' show':''));t.id='t_'+k;
-    t.innerHTML='<tr>'+s.cols.map(function(c){return '<th>'+c+'</th>'}).join('')+'</tr>';
-    s.rows.forEach(function(r){
-      var tr=mk('tr',(r[2]?'foot ':'')+(r[3]?'hid':''));tr.id='r_'+k+'_'+r[0];
-      r[1].forEach(function(v,ci){var td=mk('td',s.num.indexOf(ci)>-1?'n':'',v);tr.appendChild(td);cells[k+'.'+r[0]+'.'+ci]=td});
-      t.appendChild(tr)});
-    tablesEl.appendChild(t);
-    var b=mk('button','tab'+(i===4?' act':''),s.name+'<span class="bd">0</span>');b.type='button';
-    b.addEventListener('click',function(){showSheet(k)});
-    tabsEl.appendChild(b);tabBtn[k]=b;badge[k]=b.querySelector('.bd');changes[k]=0;
-  });
-  function flow(cls,on){root.classList.toggle(cls,on)}
-  function consume(){var k=inEl.children;for(var q=0;q<k.length;q++)(function(el,d){later(function(){el.classList.add('used')},d)})(k[q],q*140)}
-  function later(fn,ms){timers.push(setTimeout(fn,ms))}
-  function clearTimers(){timers.forEach(clearTimeout);timers=[];flow('fin',false);flow('fout',false)}
-  function showSheet(k){ORDER.forEach(function(s){document.getElementById('t_'+s).className='sheet'+(s===k?' show':'');tabBtn[s].className='tab'+(s===k?' act':'')+(changes[s]?' has':'')})}
-  function pulse(k){tabBtn[k].classList.remove('pulse');void tabBtn[k].offsetWidth;tabBtn[k].classList.add('pulse')}
-  function rails(i){for(var r=0;r<rail.length;r++){rail[r].className=r<i?'done':(r===i?'on':'');rail[r].querySelector('.dot').textContent=r<i?'✓':String(r+1)}}
-  function baseline(){
-    Object.keys(SH).forEach(function(k){SH[k].rows.forEach(function(r){r[1].forEach(function(v,ci){var td=cells[k+'.'+r[0]+'.'+ci];td.textContent=v;td.removeAttribute('data-v');td.className=td.className.replace(/\b(chd|flash|warn|sel)\b/g,'').trim()});
-      document.getElementById('r_'+k+'_'+r[0]).classList.toggle('hid',!!r[3])})});
-    ORDER.forEach(function(k){changes[k]=0;badge[k].textContent='0'});
-    fxName.innerHTML='&nbsp;';fxVal.innerHTML='&nbsp;';
+  var AS=[['Vacancy','4.5%','T-12'],['Insurance','104,000','OM'],['Tax reset','+9,000','County records'],['Exit cap','5.75%','Sale comps']];
+  var RE=[['NOI','860,747',''],['DSCR','1.22×','1.20×'],['Cap rate','6.19%',''],['Levered IRR','15.0%','14.0%']];
+  function table(id,cols,rows,show){
+    var t=mk('table','sheet'+(show?' show':''));t.id=id;t.innerHTML='<tr>'+cols.map(function(c){return '<th>'+c+'</th>'}).join('')+'</tr>';
+    rows.forEach(function(r){var tr=mk('tr','hid');r.forEach(function(v,i){tr.appendChild(mk('td',i===1?'n':'',v))});t.appendChild(tr)});
+    tablesEl.appendChild(t);return t}
+  var tAs=table('hubAs',['Input','Value','Source'],AS,false),tRe=table('hubRe',['Metric','Value','Hurdle'],RE,true);
+  function rows(t){return t.querySelectorAll('tr:not(:first-child)')}
+  function cell(t,r,c){return rows(t)[r].children[c]}
+  function view(k){tAs.className='sheet'+(k==='as'?' show':'');tRe.className='sheet'+(k==='re'?' show':'');
+    [].forEach.call(tabs,function(b){var on=b.getAttribute('data-s')===k;b.classList.toggle('act',on)})}
+  function set(td,val,old,animate){td.innerHTML=(old&&animate?'<span class="old">'+old+'</span>':'')+val;td.classList.add('chd');
+    if(animate){td.classList.remove('flash');void td.offsetWidth;td.classList.add('flash')}}
+  function mark(sheet){tabs[sheet==='as'?0:1].classList.add('has')}
+  function addIn(m,animate){var li=mk('li','imsg'+(animate?' in':''),'<span class="sm-ic '+m[0]+'">'+ICON[m[0]]+'</span><span class="sm-b"><i></i><b></b></span>');
+    li.querySelector('i').textContent=m[1];li.querySelector('b').textContent=m[2];inEl.appendChild(li);return li}
+  function addOut(m,animate){var li=mk('li','fmsg '+m[0]+(animate?' in':''),'<span class="sm-ic">'+ICON[m[0]]+'</span><span class="sm-b"><i></i><b class="body"></b></span>');
+    li.querySelector('i').textContent=m[1];li.querySelector('.body').textContent=m[2];outEl.insertBefore(li,outEl.firstChild);return li}
+  var M1=['mail','From Broker · Email, 3 attachments','Fwd: Maple Court OM, rent roll, T-12'],
+      O1=['txt','Text · To Director of Acquisitions','Maple Court: 6.19% cap, DSCR 1.22×, IRR 15.0% at $13.9M.'],
+      M2=['pdf','From Insurance broker · Quote','Insurance_Quote.pdf: $127.7K a year'],
+      O2=['txt','Text · To Director of Acquisitions','Insurance quote moved IRR 15.0% to 14.5%. 1 change to review.'];
+  var UPD=[['837,047','860,747'],['1.19×','1.22×'],['6.02%','6.19%'],['14.5%','15.0%']],SRC=['T-12','Debt service','Price','cash flows'];
+  var tok=0,timers=[];
+  function sleep(ms){return new Promise(function(r){timers.push(setTimeout(r,ms))})}
+  function stop(){tok++;timers.forEach(clearTimeout);timers=[];hub.classList.remove('fin','fout')}
+  function reset(){
+    inEl.innerHTML='';outEl.innerHTML='';fxN.innerHTML='&nbsp;';fxV.innerHTML='&nbsp;';
+    [AS,RE].forEach(function(d,k){var t=k?tRe:tAs;rows(t).forEach(function(tr,i){tr.classList.add('hid');[].forEach.call(tr.children,function(td,c){td.textContent=d[i][c];td.classList.remove('chd','flash')})})});
+    [].forEach.call(tabs,function(b){b.classList.remove('has')});view('re');steps[0].className='on';steps[1].className=''}
+  async function run(t){
+    reset();await sleep(500);if(t!==tok)return;
+    /* beat 1: first pass */
+    hub.classList.add('fin');var a1=addIn(M1,true);await sleep(1300);if(t!==tok)return;a1.classList.add('used');hub.classList.remove('fin');
+    var all=tablesEl.querySelectorAll('tr.hid');for(var i=0;i<all.length;i++){all[i].classList.remove('hid');await sleep(100);if(t!==tok)return}
+    fxN.textContent='Returns!B2';fxV.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';await sleep(450);if(t!==tok)return;
+    hub.classList.add('fout');var o1=addOut(O1,true);await sleep(1900);if(t!==tok)return;hub.classList.remove('fout');
+    /* beat 2: every update after */
+    steps[0].className='';steps[1].className='on';inEl.innerHTML='';
+    hub.classList.add('fin');var a2=addIn(M2,true);await sleep(1200);if(t!==tok)return;a2.classList.add('used');hub.classList.remove('fin');
+    view('as');await sleep(450);if(t!==tok)return;
+    var ins=cell(tAs,1,1);set(ins,'127,700','104,000',true);cell(tAs,1,2).textContent='Quote p.2';mark('as');
+    fxN.textContent='Assumptions!B3';fxV.innerHTML='<span class="src">Source: Insurance_Quote.pdf, p.2</span>';await sleep(1200);if(t!==tok)return;
+    view('re');mark('re');await sleep(400);if(t!==tok)return;
+    for(var j=0;j<4;j++){set(cell(tRe,j,1),UPD[j][0],UPD[j][1],true);fxN.textContent='Returns!B'+(j+2);fxV.textContent='=NOI / '+SRC[j];await sleep(280);if(t!==tok)return}
+    o1.classList.add('used');hub.classList.add('fout');addOut(O2,true);await sleep(2600);if(t!==tok)return;hub.classList.remove('fout');
+    if(t===tok)run(t);
   }
-  function colTo(k,col){return cells[k+'.'+col]}
-  function applyCell(k,c,animate){
-    var td=cells[k+'.'+c[0]+'.'+c[1]],old=td.getAttribute('data-v');if(old===null)old=td.textContent;td.setAttribute('data-v',c[2]);
-    td.innerHTML=(animate?'<span class="old">'+old+'</span>':'')+c[2];
-    td.classList.add('chd');
-    if(c[5]!==undefined)td.classList.toggle('warn',!!c[5]);
-    if(c[4]){var last=SH[k].cols.length-1;cells[k+'.'+c[0]+'.'+last].textContent=c[4]}
-    if(animate){td.classList.remove('flash');void td.offsetWidth;td.classList.add('flash');
-      document.querySelectorAll('td.sel').forEach(function(x){x.classList.remove('sel')});td.classList.add('sel');
-      var col=String.fromCharCode(65+c[1]),row=SH[k].rows.map(function(r){return r[0]}).indexOf(c[0])+2;
-      fxName.textContent=SH[k].name+'!'+col+row;fxVal.innerHTML=(c[3].charAt(0)==='='?c[3]:'<span class="src">'+c[3]+'</span>');
-      changes[k]++;badge[k].textContent=changes[k];tabBtn[k].classList.add('has');
-      (function(t){later(function(){var o=t.querySelector('.old');if(o)o.style.opacity='0'},3600)})(td)}
-    else{changes[k]++;badge[k].textContent=changes[k];tabBtn[k].classList.add('has')}
-  }
-  function revealRows(ids,animate,cb){
-    var i=0;(function nxt(){if(i>=ids.length){if(cb)cb();return}var r=document.getElementById(ids[i++]);if(r)r.classList.remove('hid');if(animate)later(nxt,60);else nxt()})();
-  }
-  function fillAll(animate,cb){
-    var ids=[];ORDER.forEach(function(k){SH[k].rows.forEach(function(r){if(!r[3])ids.push('r_'+k+'_'+r[0])})});
-    document.querySelectorAll('tr.hid').forEach(function(r){});
-    revealRows(ids,false,cb);
-  }
-  function addIn(m,animate){
-    var li=mk('li','imsg'+(animate?' in':''),'<span class="sm-ic '+m[0]+'">'+ICON[m[0]]+'</span><span class="sm-b"><i></i><b></b></span>');
-    li.querySelector('i').textContent='From '+m[1]+' · '+m[2];li.querySelector('b').textContent=m[3];inEl.appendChild(li);
-  }
-  function addOut(m,animate){
-    var li=mk('li','fmsg '+m[0]+(animate?' in':''),'<span class="sm-ic">'+ICON[m[0]]+'</span><span class="sm-b"><i></i>'+(m[2]?'<b class="subj"></b>':'')+'<b class="body"></b></span>');
-    li.querySelector('i').textContent=(m[0]==='txt'?'Text':'Email')+' · To '+m[1];
-    if(m[2])li.querySelector('.subj').textContent=m[2];li.querySelector('.body').textContent=m[3];
-    feed.insertBefore(li,feed.firstChild);while(feed.children.length>5)feed.removeChild(feed.lastChild);
-  }
-  /* static view of stage i: everything up to and including it, no delays */
-  function showStatic(i){
-    clearTimers();gen++;baseline();feed.innerHTML='';
-    for(var j=0;j<=i;j++){
-      S[j].out.forEach(function(m){addOut(m,false)});
-      S[j].steps.forEach(function(st){
-        if(st.fill)fillAll(false);
-        (st.cells||[]).forEach(function(c){applyCell(st.sheet,c,false)});
-        (st.cases||[]).forEach(function(id){var r=document.getElementById('r_cases_'+id);if(r)r.classList.remove('hid')});
-      });
-    }
-    rails(i);stageName.textContent=S[i].n;inEl.innerHTML='';S[i].inn.forEach(function(m){addIn(m,false)});
-    var last=S[i].steps[S[i].steps.length-1].sheet;showSheet(last);idx=i;note(i);
-  }
-  var CELL=150,SWITCH=280,IN_STEP=230,OUT_GAP=650,PAD=550;
-  function play(i){
-    clearTimers();var g=++gen;
-    if(i===0){baseline();feed.innerHTML='';showSheet('ret')}
-    var s=S[i];idx=i;rails(i);stageName.textContent=s.n;inEl.innerHTML='';note(i);
-    var t=200;
-    flow('fin',true);
-    s.inn.forEach(function(m){later(function(){addIn(m,true)},t);t+=IN_STEP});
-    t+=200;later(function(){consume();flow('fin',false)},t);t+=150;
-    s.steps.forEach(function(st){
-      if(st.fill){later(function(){fillAll(true);fxName.innerHTML='&nbsp;';fxVal.innerHTML='<span class="src">Filled from the broker package, every input cited</span>';
-        (st.cases||[]).forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('ret')},t);t+=650;return}
-      (function(st,t0){later(function(){showSheet(st.sheet);pulse(st.sheet)},t0)})(st,t);t+=SWITCH;
-      st.cells.forEach(function(c){(function(c,tt){later(function(){applyCell(st.sheet,c,true)},tt)})(c,t);t+=CELL});
-      if(st.cases)(function(ids,tt){later(function(){ids.forEach(function(id){document.getElementById('r_cases_'+id).classList.remove('hid')});pulse('cases')},tt)})(st.cases,t);
-      t+=180;
-    });
-    t+=150;later(function(){flow('fout',true);addOut(s.out[0],true)},t);
-    t+=OUT_GAP;later(function(){addOut(s.out[1],true)},t);t+=700;later(function(){flow('fout',false)},t);t-=700;
-    t+=PAD;
-    later(function(){if(i<S.length-1)play(i+1);else later(function(){play(0)},PAD)},t);
-  }
-  rail.forEach(function(li,i){li.querySelector('button').addEventListener('click',function(){stopped=true;replay.hidden=false;showStatic(i)})});
-  replay.addEventListener('click',function(){stopped=false;replay.hidden=true;if(visible)play(0)});
-  showStatic(0);
-  if(reduce){replay.hidden=true;return}
+  function finish(){
+    reset();[].forEach.call(tablesEl.querySelectorAll('tr.hid'),function(r){r.classList.remove('hid')});
+    steps[0].className='';steps[1].className='on';
+    set(cell(tAs,1,1),'127,700','',false);cell(tAs,1,2).textContent='Quote p.2';mark('as');
+    UPD.forEach(function(u,j){set(cell(tRe,j,1),u[0],'',false)});mark('re');
+    fxN.textContent='Returns!B5';fxV.innerHTML='<span class="src">Source: Insurance_Quote.pdf, p.2</span>';
+    addIn(M2,false);addOut(O1,false).classList.add('used');addOut(O2,false)}
+  [].forEach.call(tabs,function(b){b.addEventListener('click',function(){view(b.getAttribute('data-s'))})});
+  if(reduce){finish();return}
+  reset();
   if('IntersectionObserver' in window){
-    new IntersectionObserver(function(es){
-      visible=es[0].isIntersecting;
-      if(stopped)return;
-      if(visible)play(idx);else clearTimers();
-    },{threshold:0.3}).observe(root);
-  }else{visible=true;play(0)}
+    new IntersectionObserver(function(es){stop();if(es[0].isIntersecting)run(tok)},{threshold:0.3}).observe(hub);
+  }else run(tok);
 })();
 </script>
 </body>

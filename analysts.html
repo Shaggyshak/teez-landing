@@ -205,17 +205,28 @@
       <div class="wrap">
         <h2>Your model stays.<br>The platform builds <span class="g">around it.</span></h2>
         <p class="lead" style="margin:14px 0 0;max-width:62ch">Teez runs inside the Excel workbook your team already uses. Below, it maps a template and fills the first pass. The same record then carries every update, approval and result that follows. It never touches a formula.</p>
-        <iframe class="demo-embed" src="mockups/excel-pane-demo.html" title="Teez mapping, researching and filling an Excel underwriting template" height="660" loading="lazy"></iframe>
-        <div class="win demo-fallback" id="feedwin" aria-label="Teez at work in the Excel task pane">
-          <div class="win-bar"><i></i><i></i><i></i><span class="t">teez &middot; task pane &mdash; Maple Court</span></div>
-          <div class="feed" id="feed">
-            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Mapped <b>your template</b></span><span class="rt">1,284 formulas</span></div>
-            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Parsed <b>OM</b>, rent roll, T-12</span><span class="rt">3 docs</span></div>
-            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Checked <b>records and comps</b></span><span class="rt">14 comps</span></div>
-            <div class="fl"><span class="ic work">&rarr;</span><span class="tx">Writing <b>inputs only</b></span><span class="rt">142 cells</span></div>
-            <div class="fl"><span class="ic ok">&check;</span><span class="tx">Model ready, in sync</span><span class="rt">sourced</span></div>
+        <div style="margin-top:30px">
+        <div class="life" id="life" role="group" aria-label="One deal, Maple Court, from first screen to close. On the left, what comes in at each stage: broker emails, county records, comps, lender and insurance indications, the PSA, diligence files, term sheets. In the middle, the Excel workbook with Rent Roll, T-12, Assumptions, Debt, Returns and Cases sheets, where the affected cells change as each document arrives. On the right, the texts and emails that go out to the director of acquisitions, analyst, counsel, capital markets and asset manager. Example numbers.">
+          <ol class="life-rail" id="lifeRail"><li class="on"><button type="button" data-i="0"><span class="dot">1</span><span class="nm">Screen</span><span class="sh">Screen</span></button></li><li><button type="button" data-i="1"><span class="dot">2</span><span class="nm">Underwrite</span><span class="sh">Price</span></button></li><li><button type="button" data-i="2"><span class="dot">3</span><span class="nm">Bid / LOI</span><span class="sh">LOI</span></button></li><li><button type="button" data-i="3"><span class="dot">4</span><span class="nm">PSA</span><span class="sh">PSA</span></button></li><li><button type="button" data-i="4"><span class="dot">5</span><span class="nm">Diligence</span><span class="sh">DD</span></button></li><li><button type="button" data-i="5"><span class="dot">6</span><span class="nm">Financing</span><span class="sh">Debt</span></button></li><li><button type="button" data-i="6"><span class="dot">7</span><span class="nm">Close</span><span class="sh">Close</span></button></li></ol>
+          <div class="life-body">
+            <div class="life-col life-in">
+              <span class="sr" id="lifeStageName" aria-live="polite">Screen</span>
+              <ul id="lifeIn"><li class="imsg"><span class="sm-ic txt"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>From Director of Acquisitions &middot; Text</i><b>Can you run this one? 84 units, asking $13.9M</b></span></li><li class="imsg"><span class="sm-ic mail"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>From Broker &middot; Email, 3 attachments</i><b>Fwd: Maple Court OM, rent roll, T-12</b></span></li></ul>
+            </div>
+            <div class="life-main">
+              <div class="wbk">
+                <div class="wbk-bar"><i></i><i></i><i></i><span class="f">Maple_Court_Underwriting.xlsx</span><span class="pill">teez &middot; connected</span></div>
+                <div class="wbk-fx"><span class="nm" id="fxName">Returns!B2</span><span class="val" id="fxVal">Filled from the broker package, every input cited</span></div>
+                <div class="wbk-tables" id="wbkTables"><table class="sheet show"><tr><th>Metric</th><th>Value</th><th>Hurdle</th></tr><tr><td>NOI</td><td class="n">860,747</td><td></td></tr><tr><td>DSCR</td><td class="n">1.22&times;</td><td>1.20&times;</td></tr><tr><td>Cap rate</td><td class="n">6.19%</td><td></td></tr><tr><td>Levered IRR</td><td class="n">15.0%</td><td>14.0%</td></tr><tr><td>Equity required</td><td class="n">$4.9M</td><td></td></tr></table></div>
+                <div class="wbk-tabs" id="wbkTabs"></div>
+              </div>
+            </div>
+            <div class="life-col life-out">
+              <ul id="lifeFeed"><li class="fmsg mail"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6zm0 0 9 6 9-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Email &middot; To Analyst</i><b class="subj">Maple Court: model and sources</b><b class="body">Model filled, every input cited. T-12 vacancy is 4.5% vs the OM’s 3%.</b></span></li><li class="fmsg txt"><span class="sm-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v12H8l-4 4V4z" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></span><span class="sm-b"><i>Text &middot; To Director of Acquisitions</i><b class="body">Maple Court is screened: 6.19% cap, DSCR 1.22×, IRR 15.0% at $13.9M. 2 conflicts flagged for review.</b></span></li></ul>
+            </div>
           </div>
-          <div class="win-foot"><span>Cap 6.20% &middot; DSCR 1.22&times;</span><span class="done">model ready &middot; 4m 12s</span></div>
+          <div class="life-foot"><button type="button" class="life-replay" id="lifeReplay" hidden>Replay</button></div>
+        </div>
         </div>
         <div class="cols3" style="margin-top:30px">
           <div class="card3"><span class="ey">Step 1</span><h3>Connect</h3><p>Teez maps your template and ties documents to inputs. Every value is cited to the page or cell it came from, so each assumption starts with its evidence.</p></div>
@@ -300,5 +311,6 @@
 </div>
 
 <script src="app.js?v=20260914a"></script>
+<script src="timeline.js?v=20261007a" defer></script>
 </body>
 </html>
