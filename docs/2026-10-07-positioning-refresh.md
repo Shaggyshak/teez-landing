@@ -19,6 +19,8 @@ Source: the ChatGPT positioning handoff and the Teez website/product review (Cod
 - **"Our property records" coverage** (building facts for "every multifamily building in the market"): not verified in either doc.
 - **Timing:** the homepage "in just a few minutes, not hours or days" line was removed. The analysts demo still shows 4m 12s and the sponsors FAQ still says "Minutes, not days"; keep both bounded as typical examples.
 
+- **Analysts FAQ "How is this different..."**: the "Where it's going" paragraph (capex and operating data connected to underwriting, approved case compared with actuals) is roadmap, labeled as such. Do not move it into present tense until operating-actuals import and approved cases ship. "Search your past deals for precedent" is live (deal-library tool).
+
 ## Not done
 
 - `images/og/teez-og.png` still carries the old tagline.
