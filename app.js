@@ -121,6 +121,44 @@
     });
   }
 
+  // ---- newsletter signup -> edge function (double opt-in; confirm link goes out by email) ----
+  var nl = document.getElementById('nl-form');
+  if (nl) {
+    var nst = document.getElementById('nl-status'), nsub = document.getElementById('nl-submit');
+    var nlabel = nsub.innerHTML;
+    nl.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nem = document.getElementById('nl-email');
+      if (!nem.value.trim() || !nem.checkValidity()) { nst.textContent = '#ERROR — enter a valid email.'; nst.className = 'status error'; return; }
+      nsub.disabled = true; nsub.innerHTML = 'Subscribing…'; nst.textContent = ''; nst.className = 'status';
+      fetch(SB + '/functions/v1/newsletter-subscribe', {
+        method: 'POST',
+        headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: nem.value.trim(),
+          website: document.getElementById('nl-website').value,
+          source: nl.dataset.source || 'site'
+        })
+      }).then(function (r) {
+        if (r.ok) { nst.textContent = '✓ Check your inbox for a confirmation link.'; nst.className = 'status'; nl.reset(); }
+        else { nst.textContent = 'Something went wrong. Email hello@teez.live.'; nst.className = 'status error'; }
+      }).catch(function () { nst.textContent = 'Network issue. Email hello@teez.live.'; nst.className = 'status error'; })
+        .then(function () { nsub.disabled = false; nsub.innerHTML = nlabel; });
+    });
+  }
+
+  // ---- newsletter confirm landing (?status=... set by the newsletter-confirm redirect) ----
+  var nres = document.getElementById('nl-result');
+  if (nres) {
+    var ns = (location.search.match(/[?&]status=([a-z]+)/) || [])[1];
+    var msgs = {
+      confirmed: ['✓ You’re subscribed. The next issue lands in your inbox.', false],
+      invalid: ['That confirmation link isn’t valid or has already been used. Subscribe again below.', true],
+      error: ['We couldn’t finish your signup. Click the link again in a minute, or email hello@teez.live.', true]
+    };
+    if (ns && msgs[ns]) { nres.textContent = msgs[ns][0]; nres.className = 'status' + (msgs[ns][1] ? ' error' : ''); nres.hidden = false; }
+  }
+
   // ---- outreach click attribution (?r=<id> on a tracked link) ----
   // Tracked links point straight at teez.ai rather than through a redirect
   // host, so recipients never get Gmail's "are you sure" interstitial.
