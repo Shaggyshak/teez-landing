@@ -1,4 +1,4 @@
-/* Homepage deal timeline: one deal, first screen to close. Left: what comes in at each stage. Middle: the Excel workbook, where the
+/* Analysts-page deal timeline: one deal, first screen to close, then year-1 actuals that loop back into the next deal. Left: what comes in at each stage. Middle: the Excel workbook, where the
    affected cells change and ripple to Returns. Right: texts and emails going out to the team. Autoplays when visible; click a stage
    to step manually (the only mode under prefers-reduced-motion). */
 (function(){
@@ -28,9 +28,13 @@
       ['irr',['Levered IRR','15.0%','14.0%']],['eq',['Equity required','$4.9M','']]]},
     cases:{name:'Cases',cols:['Case','Levered IRR','Status'],num:[1],rows:[
       ['c1',['Screen case','15.0%','Saved'],0,1],['c2',['Pricing case','14.2%','Saved'],0,1],['c3',['Bid case v1','15.6%','Approved'],0,1],
-      ['c4',['Diligence case','14.3%','Pending review'],0,1],['c5',['Financing case','13.8%','Below hurdle'],0,1],['c6',['Closing case','14.1%','Approved'],0,1]]}
+      ['c4',['Diligence case','14.3%','Pending review'],0,1],['c5',['Financing case','13.8%','Below hurdle'],0,1],['c6',['Closing case','14.1%','Approved'],0,1],
+      ['c7',['Actual, year 1','12.9%','Behind closing case'],0,1]]},
+    act:{name:'Actuals',cols:['Line','Underwritten','Actual','Variance'],num:[1,2,3],rows:[
+      ['gpr',['Rent collected','1,412,000','—','']],['ins',['Insurance','127,700','—','']],
+      ['rep',['Repairs','91,000','—','']],['noi',['NOI','792,747','—',''],1]]}
   };
-  var ORDER=['rent','t12','assump','debt','ret','cases'];
+  var ORDER=['rent','t12','assump','debt','ret','cases','act'];
   /* ---- the story: inn = coming in, steps = workbook edits (sheet, cells), out = going out ---- */
   var S=[
    {n:'Screen',
@@ -80,9 +84,18 @@
            {sheet:'ret',cells:[['cap',1,'6.03%','=NOI / Price'],['irr',1,'14.1%','=IRR(cash flows)  ·  clears the 14.0% hurdle',0,0],['eq',1,'$5.3M','=Price + costs + capex - Debt!B2']]},
            {sheet:'cases',cells:[['c4',2,'Superseded','Source: reviewed by Director of Acquisitions'],['c5',2,'Superseded','Source: seller credit negotiated']],cases:['c6']}],
     out:[['txt','Director of Acquisitions','','Closed with a $250K seller credit: IRR 14.1% vs 15.6% at bid. Settlement ties to sources and uses.'],
-         ['mail','Asset Manager','Maple Court handoff','Approved case, budget and open items attached. Actual vs underwritten tracking starts.']]}
+         ['mail','Asset Manager','Maple Court handoff','Approved case, budget and open items attached. Actual vs underwritten tracking starts.']]},
+   {n:'Own',
+    inn:[['xls','Property manager','XLSX','Year 1 operating report'],['mail','Insurance broker','Renewal','$139.0K a year at renewal']],
+    steps:[{sheet:'cases',cells:[],cases:['c7']},
+           {sheet:'act',cells:[['gpr',2,'1,371,000','Source: PM_Year1_Report.xlsx, collections'],['gpr',3,'−2.9%','=Actual / Underwritten − 1',0,1],
+                               ['ins',2,'139,000','Source: Insurance renewal, p.1'],['ins',3,'+8.8%','=Actual / Underwritten − 1',0,1],
+                               ['rep',2,'104,500','Source: PM_Year1_Report.xlsx, repairs & maintenance'],['rep',3,'+14.8%','=Actual / Underwritten − 1',0,1],
+                               ['noi',2,'726,947','=Rent collected − actual opex'],['noi',3,'−8.3%','=Actual / Underwritten − 1',0,1]]}],
+    out:[['txt','Director of Acquisitions','','Maple Court year 1: NOI $727K vs $793K underwritten. Rents −2.9%, insurance +8.8%, repairs +14.8%.'],
+         ['mail','Analyst','Next deal starts from Maple Court actuals','Insurance $1,655/unit and repairs $1,244/unit now back your assumptions, cited to year 1.']]}
   ];
-  var NOTES=['First pass \u00b7 $13.9M ask','Pricing case \u00b7 assumptions updated','Bid case saved \u00b7 v1','PSA checked against the bid case','3 changes to review \u00b7 bid case untouched','Below the 14% hurdle \u00b7 reapproval needed','Closed \u00b7 $250K credit \u00b7 ties to sources and uses'];
+  var NOTES=['First pass \u00b7 $13.9M ask','Pricing case \u00b7 assumptions updated','Bid case saved \u00b7 v1','PSA checked against the bid case','3 changes to review \u00b7 bid case untouched','Below the 14% hurdle \u00b7 reapproval needed','Closed \u00b7 $250K credit \u00b7 ties to sources and uses','Year 1 actuals \u00b7 3 variances \u00b7 next deal updated'];
   function note(i){fxName.textContent='Maple Court';fxVal.innerHTML='<span class="src">'+NOTES[i]+'</span>'}
   var rail=root.querySelectorAll('.life-rail li'),inEl=document.getElementById('lifeIn'),feed=document.getElementById('lifeFeed'),
       stageName=document.getElementById('lifeStageName'),replay=document.getElementById('lifeReplay'),
@@ -110,7 +123,7 @@
   function clearTimers(){timers.forEach(clearTimeout);timers=[];flow('fin',false);flow('fout',false)}
   function showSheet(k){ORDER.forEach(function(s){document.getElementById('t_'+s).className='sheet'+(s===k?' show':'');tabBtn[s].className='tab'+(s===k?' act':'')+(changes[s]?' has':'')})}
   function pulse(k){tabBtn[k].classList.remove('pulse');void tabBtn[k].offsetWidth;tabBtn[k].classList.add('pulse')}
-  function rails(i){for(var r=0;r<rail.length;r++){rail[r].className=r<i?'done':(r===i?'on':'');rail[r].querySelector('.dot').textContent=r<i?'✓':String(r+1)}}
+  function rails(i){root.classList.toggle('own',i===S.length-1);for(var r=0;r<rail.length;r++){rail[r].className=r<i?'done':(r===i?'on':'');rail[r].querySelector('.dot').textContent=r<i?'✓':String(r+1)}}
   function baseline(){
     Object.keys(SH).forEach(function(k){SH[k].rows.forEach(function(r){r[1].forEach(function(v,ci){var td=cells[k+'.'+r[0]+'.'+ci];td.textContent=v;td.removeAttribute('data-v');td.className=td.className.replace(/\b(chd|flash|warn|sel)\b/g,'').trim()});
       document.getElementById('r_'+k+'_'+r[0]).classList.toggle('hid',!!r[3])})});

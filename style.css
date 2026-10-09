@@ -664,3 +664,37 @@ table.sheet.show{display:table}
 .hub-steps span.on{color:var(--green);border-color:rgba(16,124,65,.4);background:var(--green-soft)}
 @media(max-width:1100px){.hubv .life-col{height:auto}}
 .fmsg.gone{opacity:0;transform:translateX(28px);transition:opacity .35s,transform .35s}
+
+/* Agent map: which agent does what at each deal stage (analysts + sponsors "how" section) */
+.amap-head{margin-top:44px}
+.amap-head h3{font-size:24px;margin-bottom:6px}
+.amap-head p{font-size:16px;color:var(--ink-2);max-width:64ch}
+.amap-agents{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.amap-agents li{list-style:none;font-size:14px;color:var(--ink-2);border:1px solid var(--grid-2);border-radius:6px;padding:7px 10px;background:#fff}
+.amap-agents b{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green-2);margin-right:6px}
+.amap{width:100%;border-collapse:collapse;margin-top:18px;background:#fff;border:1px solid var(--grid-2);font-size:15px}
+.amap th{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--hdr-tx);background:var(--gutter);text-align:left;padding:9px 14px;border-bottom:1px solid var(--grid-2)}
+.amap td{padding:11px 14px;border-top:1px solid var(--grid);vertical-align:top;color:var(--ink-2);line-height:1.5}
+.amap tr.amap-row td{border-top:1px solid var(--grid-2)}
+.amap td.amap-st{width:150px;font-weight:700;color:var(--ink);white-space:nowrap}
+.amap td.amap-st span{display:block;font-family:var(--mono);font-size:11px;font-weight:500;color:var(--hdr-tx)}
+.amap td.amap-ag{width:120px;font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--green-2);white-space:nowrap}
+.amap tr.amap-post td.amap-st{color:var(--green)}
+.src-note{font-size:13px;color:var(--ink-3);margin-top:14px}
+.src-note a{color:var(--ink-3)}
+@media(max-width:720px){
+  .amap,.amap tbody,.amap tr,.amap td{display:block;width:100%}
+  .amap thead{display:none}
+  .amap tr{padding:10px 14px;border-top:1px solid var(--grid)}
+  .amap td,.amap tr.amap-row td{padding:2px 0;border:0}
+  .amap td.amap-st{padding-top:6px}
+}
+
+/* Loop from the last timeline stop (Own) back to Screen: actuals feed the next deal */
+.life-loop{position:relative;height:16px;margin:-20px 6.25% 26px;border:2px dashed var(--grid-2);border-top:0;border-radius:0 0 14px 14px;transition:border-color .4s}
+.life-loop::before{content:"";position:absolute;left:-7px;top:-9px;border:6px solid transparent;border-bottom:8px solid var(--grid-2);border-top:0;transition:border-color .4s}
+.life-loop span{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);background:#fff;padding:0 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap;transition:color .4s}
+.life.own .life-loop{border-color:var(--green)}
+.life.own .life-loop::before{border-bottom-color:var(--green)}
+.life.own .life-loop span{color:var(--green)}
+@media(max-width:720px){.life-loop span{font-size:10px}}
