@@ -664,3 +664,20 @@ table.sheet.show{display:table}
 .hub-steps span.on{color:var(--green);border-color:rgba(16,124,65,.4);background:var(--green-soft)}
 @media(max-width:1100px){.hubv .life-col{height:auto}}
 .fmsg.gone{opacity:0;transform:translateX(28px);transition:opacity .35s,transform .35s}
+
+/* Agent map: which agent does what at each deal stage (analysts + sponsors "how" section) */
+.amap-head{margin-top:44px}
+.amap-head h3{font-size:24px;margin-bottom:6px}
+.amap-head p{font-size:16px;color:var(--ink-2);max-width:64ch}
+.amap-agents{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+.amap-agents li{list-style:none;font-size:14px;color:var(--ink-2);border:1px solid var(--grid-2);border-radius:6px;padding:7px 10px;background:#fff}
+.amap-agents b{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--green-2);margin-right:6px}
+
+/* Loop from the last timeline stop (Own) back to Screen: actuals feed the next deal */
+.life-loop{position:relative;height:16px;margin:-20px 6.25% 26px;border:2px dashed var(--grid-2);border-top:0;border-radius:0 0 14px 14px;transition:border-color .4s}
+.life-loop::before{content:"";position:absolute;left:-7px;top:-9px;border:6px solid transparent;border-bottom:8px solid var(--grid-2);border-top:0;transition:border-color .4s}
+.life-loop span{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);background:#fff;padding:0 10px;font-family:var(--mono);font-size:11px;color:var(--ink-3);white-space:nowrap;transition:color .4s}
+.life.own .life-loop{border-color:var(--green)}
+.life.own .life-loop::before{border-bottom-color:var(--green)}
+.life.own .life-loop span{color:var(--green)}
+@media(max-width:720px){.life-loop span{font-size:10px}}
