@@ -14,20 +14,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Property Tax Reassessment After a Multifamily Sale | Teez Research</title>
-  <meta name="description" content="The property tax line on a T-12 is the seller's bill. After a sale the buyer pays on a reassessed value, by a rule that varies by state. On a $21.6M multifamily deal the step-up runs from 13% to 155%, enough to turn a 10.1% IRR into 5.1% in an average-rate city. How reassessment works, what it does to a deal, and how Teez gets the check done before the bid." />
+  <meta name="description" content="The property tax line on a T-12 is the seller's bill. After a sale the buyer pays on a value the county sets, under a rule that differs in Texas, Georgia, Kansas, Missouri, Delaware and New York City. The method, the rule in each county, what it does to a $21.6M deal, and how Teez computes the buyer's bill from the county record." />
   <link rel="canonical" href="https://teez.ai/research/multifamily-property-tax-reassessment-after-sale.html" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Teez" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="https://teez.ai/research/multifamily-property-tax-reassessment-after-sale.html" />
   <meta property="og:title" content="Property Tax Reassessment After a Multifamily Sale | Teez Research" />
-  <meta property="og:description" content="The property tax line on a T-12 is the seller's bill. After a sale the buyer pays on a reassessed value, by a rule that varies by state. On a $21.6M multifamily deal the step-up runs from 13% to 155%, enough to turn a 10.1% IRR into 5.1% in an average-rate city. How reassessment works, what it does to a deal, and how Teez gets the check done before the bid." />
-  <meta property="og:image" content="https://teez.ai/images/research/tax-reassessment-tax-line-by-regime.png" />
-  <meta property="og:image:alt" content="Bar chart of annual property tax on a $21.6M multifamily building under five reassessment regimes against the $229K tax line on the seller's T-12" />
+  <meta property="og:description" content="The property tax line on a T-12 is the seller's bill. After a sale the buyer pays on a value the county sets, under a rule that differs in Texas, Georgia, Kansas, Missouri, Delaware and New York City. The method, the rule in each county, what it does to a $21.6M deal, and how Teez computes the buyer's bill from the county record." />
+  <meta property="og:image" content="https://teez.ai/images/research/tax-reassessment-tax-path-by-county.png" />
+  <meta property="og:image:alt" content="Line chart of a buyer's annual property tax by year of the hold on the same multifamily purchase under six county reassessment rules, against the seller's tax line grown 3%" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Property Tax Reassessment After a Multifamily Sale | Teez Research" />
-  <meta name="twitter:description" content="The property tax line on a T-12 is the seller's bill. After a sale the buyer pays on a reassessed value, by a rule that varies by state. On a $21.6M multifamily deal the step-up runs from 13% to 155%, enough to turn a 10.1% IRR into 5.1% in an average-rate city. How reassessment works, what it does to a deal, and how Teez gets the check done before the bid." />
-  <meta name="twitter:image" content="https://teez.ai/images/research/tax-reassessment-tax-line-by-regime.png" />
+  <meta name="twitter:description" content="The property tax line on a T-12 is the seller's bill. After a sale the buyer pays on a value the county sets, under a rule that differs in Texas, Georgia, Kansas, Missouri, Delaware and New York City. The method, the rule in each county, what it does to a $21.6M deal, and how Teez computes the buyer's bill from the county record." />
+  <meta name="twitter:image" content="https://teez.ai/images/research/tax-reassessment-tax-path-by-county.png" />
   <meta name="theme-color" content="#1b1f23" />
   <script type="application/ld+json">
 {
@@ -37,9 +37,9 @@
       "@type": "Article",
       "@id": "https://teez.ai/research/multifamily-property-tax-reassessment-after-sale.html#article",
       "headline": "The Tax Line on the T-12 Is the Seller's: Property Tax Reassessment After a Multifamily Sale",
-      "description": "After a multifamily sale the buyer pays property tax on a reassessed value, by a rule that varies by state. What the step-up does to NOI, loan proceeds and IRR on a representative deal, and how to get the check done before the bid.",
+      "description": "How property tax reassessment works after a multifamily sale, county by county: the method that turns a county record and a T-12 into the buyer's bill, the rule in six markets, and the effect on coverage and returns.",
       "image": [
-        "https://teez.ai/images/research/tax-reassessment-tax-line-by-regime.png"
+        "https://teez.ai/images/research/tax-reassessment-tax-path-by-county.png"
       ],
       "datePublished": "2026-11-09",
       "dateModified": "2026-11-09",
@@ -184,7 +184,7 @@
     <div class="wrap legal">
       <div class="doc-head">
         <h1>The Tax Line on the T-12 Is the Seller's</h1>
-        <p class="lead" style="margin-top:6px">Property Tax Reassessment After a Multifamily Sale, and What It Does to the Deal</p>
+        <p class="lead" style="margin-top:6px">How Property Tax Reassessment Works After a Multifamily Sale, County by County</p>
         <div class="meta">
           <span><b>By</b> Nik Shakeri</span>
           <span><b>Published</b> <time datetime="2026-11-09">9 November 2026</time></span>
@@ -199,119 +199,152 @@
       </div>
 
       <div class="note">
-        <p><strong>Summary.</strong> The property tax line on a trailing-twelve statement is the tax on the seller's assessed value. The buyer will pay tax on a different value, set after the sale, by a rule that depends on the state and often the county. In California the assessment resets to the purchase price at closing. In Florida it resets to full market value the following January 1. In Texas every property is reappraised each January whether it sold or not. In Cook County nothing happens until the next triennial cycle. Property tax is about a quarter of operating expenses and eleven cents of every rent dollar, so the difference between the two bills is one of the largest errors a model can carry, and it is knowable before the bid.</p>
-        <p>We take the <a href="/research/multifamily-rent-growth-underwritten-vs-delivered-2021-2026.html">representative building</a> from this series, priced at $21.6M with $1.24M of NOI and a $229K tax line on the seller's T-12, and apply five reassessment regimes. Findings:</p>
+        <p><strong>Summary.</strong> The property tax line on a trailing-twelve statement is the tax on the seller's assessed value. The buyer pays on a value the county sets after the sale, under a rule that changes at the state line and sometimes at the county line. It is also the line most underwriting models handle worst: the seller's bill is carried forward at 3% a year, and the correction arrives at lender sizing, after the price is agreed.</p>
+        <p>This note goes through the mechanics county by county for the markets Teez covers, sets out the method that turns a county record and a T-12 into the buyer's bill, and runs one building through six rules. Findings:</p>
         <ul>
-          <li>The buyer's tax bill is $259K to $583K, against the $229K the model carries. In an average-rate large city it is about $350K, a 53% step-up that removes 9.8% of NOI.</li>
-          <li>Every dollar of added tax removes $17 of value at a 5.75% cap and $10 of loan proceeds at a 1.25x DSCR. The average-city step-up is $2.1M of value and $1.2M of loan.</li>
-          <li>The model that carried the seller's bill showed a 10.1% IRR and 1.33x coverage. With the buyer's bill from year two, the same deal returns 5.1% and covers at 1.21x, below the agency minimum. To earn the modeled return the price has to be 9% lower.</li>
-          <li>The check is per-deal research across the T-12, the offering memo, the county's rule and the rate. It takes an analyst hours, which is why it is done after the LOI, at lender sizing, when the price is already set.</li>
+          <li>Three numbers produce the buyer's bill, and none of them is on the T-12: the county's current value for the building, the effective tax rate that value implies, and the rule that decides how much of the purchase price the county will reach and when. The rate needs no lookup. It is the T-12 tax line divided by the county's value.</li>
+          <li>On a $21.6M purchase of a building the county carries at $12.7M, the first-year bill is $235K on the seller's line, $339K in Harris County and $379K in Fulton or Johnson County. In Jackson County it ramps 15% a cycle. In New Castle County it does not move until the next county-wide reassessment. In New York City it follows income, not price.</li>
+          <li>The damage to the return is similar wherever the step lands. A modeled 9.9% IRR becomes 3.3% to 5.5% in five of the six counties. Counties that defer the step pass the year-one coverage test and lose the return at exit, when the next buyer capitalizes the reassessed bill.</li>
+          <li>Teez computes it. From the address it pulls the county record, derives the rate from the T-12, applies the county's rule, and writes the tax line year by year into the model, in minutes.</li>
         </ul>
       </div>
 
       <figure>
-        <img src="../images/research/tax-reassessment-tax-line-by-regime.png" alt="Bar chart of annual property tax on the representative building at a $21.6M purchase price: $229K on the seller's T-12, against $259K (California-style, 1.2% on 100% of price, +13%), $349K (Florida-style, 1.9% on 85%, +53%), $350K (average large city, 1.8% on 90%, +53%), $386K (Texas-style, 2.1% on 85%, +69%) and $583K (high-rate city, 3.0% on 90%, +155%)">
-        <figcaption>Annual property tax on the representative building at a $21.6M purchase price, under five illustrative reassessment regimes, against the tax line on the seller's T-12. Each regime is an effective rate applied to a share of the purchase price.</figcaption>
+        <img src="../images/research/tax-reassessment-tax-path-by-county.png" alt="Line chart of the buyer's annual property tax by year of the hold on the same $21.6M purchase under six county rules: the seller's line grown 3% runs from $235K to $273K; Fulton County, Georgia and Johnson County, Kansas step to $379K in year one; Harris County, Texas steps to $339K in year one; Jackson County, Missouri ramps 15% each odd-year cycle to $403K by year five; New Castle County, Delaware holds the seller's line until a step to $404K in year five; New York City grows about 7% a year">
+        <figcaption>Same building, same price, six counties: the buyer's tax bill by year of the hold. $21.6M purchase of a building the county carries at $12.7M; seller's T-12 tax $229K, an effective 1.79% of county value; levies grow 3% a year. Shares of price and cycle timing are stated assumptions per county rule (Section 3).</figcaption>
       </figure>
 
-      <h2>1. How reassessment works: five regimes</h2>
-      <p>There is no national rule. The buyer's assessed value depends on whether a sale triggers reassessment, whether annual increases are capped, and how much of the purchase price the assessor is expected to reach.</p>
+      <h2>1. The method: three numbers that are not on the T-12</h2>
+      <p>A T-12 gives one number for property tax: what the seller paid. The buyer's bill is built from three others.</p>
+      <p><strong>The county's current value for the building.</strong> Every assessor publishes it: appraised value in Texas, fair market value in Georgia, market value in New York City. Alongside it sit the prior year's value, the last deed date, and any exemption or abatement on file. This is public record, by parcel, and it is the starting point because it says how far the roll is from the price being paid.</p>
+      <p><strong>The effective rate that value implies.</strong> Property tax is a stack of levies: county, city, school district, hospital, community college, special districts. Looking up each rate is slow and error-prone, and unnecessary. Divide the T-12 tax line by the county's current value and the result is the building's own effective rate, with every levy and every exemption already in it. A $229K tax line on a $12.74M value is 1.79%.</p>
+      <p><strong>The rule.</strong> How much of the purchase price the county will reach, in which year, and under what cap. This is the part that varies by county, and it is Section 2.</p>
+      <p>The buyer's bill in any year is then the purchase price, times the share of it the county has reached by that year, times the effective rate, grown for levy increases. Two checks sit alongside. If the implied rate is far outside the county's normal range, the T-12 is carrying an abatement, an exemption or a partial year, and the seller's bill is wrong in a second way. And special assessments belong on their own line, because they do not reassess.</p>
+
+      <h2>2. County by county: what a sale does</h2>
+      <p>These are the rules for the markets Teez has county records loaded for. Each was current as of this note's date; several changed within the last two years.</p>
 
       <div class="tbl-scroll">
       <table>
         <thead>
-          <tr><th>Regime</th><th>Where</th><th>What a sale does</th><th>What the buyer should expect</th></tr>
+          <tr><th>Market</th><th>Cycle</th><th>What a sale does</th><th>Caps and quirks</th></tr>
         </thead>
         <tbody>
-          <tr><td>Reset to price at closing</td><td>California (Proposition 13)</td><td>A change of ownership, including a transfer of more than 50% control of an entity, resets the base to acquisition value. Growth is then capped at 2% a year.</td><td>Tax on roughly 100% of price at 1.1% to 1.25%, with a supplemental bill for the stub period.</td></tr>
-          <tr><td>Reset to market next January 1</td><td>Florida</td><td>A change of ownership or control removes the non-homestead cap; the property is assessed at just value the following January 1. The cap never applied to school levies.</td><td>Practitioners use 80% to 85% of price in South Florida. The seller's capped assessment can be far below it.</td></tr>
-          <tr><td>Annual reappraisal, no sale trigger</td><td>Texas</td><td>Nothing directly: every property is reappraised to market each January 1. Sale prices are not publicly disclosed, but appraisal districts obtain many of them.</td><td>Market value, less whatever a protest wins. The 20% circuit-breaker cap applies only below about $5.3M of value and expires after the 2026 tax year.</td></tr>
-          <tr><td>Fixed cycle, no sale trigger</td><td>Cook County, Illinois; Maryland; much of Pennsylvania</td><td>Nothing until the next scheduled reassessment: triennial by township in Cook County, every three years in Maryland, irregular in Pennsylvania.</td><td>The seller's bill, then a step at the next cycle that uses the sale as evidence. Timing matters as much as size.</td></tr>
-          <tr><td>Annual, sale-informed, paid in arrears</td><td>Minnesota (Twin Cities)</td><td>The assessor picks up the sale in the next assessment; taxes are payable a year later.</td><td>90% to 95% of price, arriving in year three of the hold.</td></tr>
+          <tr><td>Texas<br>Harris County</td><td>Reappraised to market value every January 1.</td><td>Nothing by statute. Texas does not disclose sale prices, so the appraisal district gathers what it can from brokers, buyers and sellers, and can ask for the closing statement in a protest.</td><td>The 20% circuit-breaker cap covers only property under about $5.32M and expires December 31, 2026. Protests are due May 15 or 30 days after the notice; unequal appraisal is a ground that needs no sale price.</td></tr>
+          <tr><td>Georgia<br>Fulton, DeKalb, Cobb, Gwinnett</td><td>Annual, as of January 1. Assessed at 40% of fair market value.</td><td>Until 2024 the sale price was the maximum value for the following tax year. House Bill 581 removed that for tax years from 2025. A sale is now evidence of value, not a ceiling on it.</td><td>The income approach must be considered for income property. Appeals are due 45 days from the notice.</td></tr>
+          <tr><td>Kansas<br>Johnson County</td><td>Annual, as of January 1. Multifamily assessed at 11.5%.</td><td>The price is reported. A deed cannot be recorded without a sales validation questionnaire stating the total sale price, and the appraiser is held to 90% to 110% of sale prices in ratio studies.</td><td>Apartments rose about 11% in the county's 2026 revaluation, against about 6% for other residential property.</td></tr>
+          <tr><td>Missouri<br>Jackson County</td><td>Reassessed every odd-numbered year. Multifamily assessed at 19%.</td><td>Nothing until the next odd year. Missouri does not disclose sale prices.</td><td>State Tax Commission orders limited the 2023 and 2025 increases to 15% each from a 2022 baseline. The county treats multifamily as within the order.</td></tr>
+          <tr><td>Delaware<br>New Castle, Kent, Sussex</td><td>County-wide reassessments, now required at least every five years.</td><td>Nothing until the next county-wide reassessment.</td><td>The 2024&ndash;2025 reassessments were the first since 1983, 1987 and 1974. Values are fresh now and will drift until the next cycle.</td></tr>
+          <tr><td>New York City<br>Class 2, 11+ units</td><td>Annual. Assessed at 45% of market value.</td><td>Nothing. The Department of Finance values rental buildings by capitalizing income from the owner's annual filing, not from sales.</td><td>Changes phase in at 20% a year over five years, and the bill uses the lower of actual and transitional value. The tentative 2026/27 roll raised Class 2 market value 6.9%.</td></tr>
         </tbody>
       </table>
       </div>
 
-      <p><strong>Two of these changed this month and next.</strong> Florida voters approved Amendment 3 on November 3 with about 62% of the vote. From January 1, 2027 the non-homestead cap on non-school levies falls from 10% a year to 5%, and reassessment on a change of ownership stays. A tighter cap widens the gap between a long-held seller's assessment and the buyer's reset value every year it runs. In Texas, the three-year circuit-breaker pilot under Tax Code section 23.231 ends on December 31, 2026; the 2025 session did not extend it.</p>
-      <p><strong>Lenders already underwrite the buyer's bill.</strong> Fannie Mae's Multifamily Guide, as of the September 28, 2026 edition, sets underwritten real estate taxes at the greatest of the actual future tax bill for a full year, the prior full year's taxes times 103%, or assessed taxes, and says that where a property is subject to a scheduled reassessment or an abatement phase-in, "tax expense should be adjusted appropriately." The lender's NOI is therefore built on the reassessed number. A sponsor who carried the seller's line finds out at sizing.</p>
+      <p><strong>Four of these six changed recently.</strong> Georgia removed its sale-price ceiling for 2025. Delaware reassessed for the first time in forty years. Jackson County's increases are under state order. Texas's cap lapses at the end of this year. Outside these markets the pattern is the same: Florida voters cut the non-homestead cap from 10% to 5% on November 3, while keeping the reset to market value on a change of ownership; California still resets to the purchase price at closing; Cook County waits for its triennial cycle. A reassessment assumption written once and reused is out of date within a year or two.</p>
+      <p><strong>Lenders already underwrite the buyer's bill.</strong> Fannie Mae's Multifamily Guide, as of the September 28, 2026 edition, sets underwritten real estate taxes at the greatest of the actual future tax bill for a full year, the prior full year's taxes times 103%, or assessed taxes, and says that where a property is subject to a scheduled reassessment or an abatement phase-in, "tax expense should be adjusted appropriately." A sponsor who carried the seller's line finds out at sizing.</p>
 
-      <h2>2. How big the tax line is, and how much rates vary</h2>
-      <p><strong>A quarter of expenses.</strong> The National Apartment Association's 2023 survey put property taxes at 26.3% of operating expenses, up 9.7% that year after 5.3% the year before. Its rent-dollar study puts taxes at eleven cents of every dollar of rent. On the representative building, with $869K of operating expenses, that is a $229K tax line: 10.8% of revenue and 1.06% of the $21.6M price.</p>
-      <p><strong>Rates differ by a factor of eleven.</strong> The Lincoln Institute's 50-state study, as summarized by NMHC, puts the effective tax rate on an apartment property in each state's largest city between 0.33% in Honolulu and 3.70% in Detroit. Apartments paid an effective rate 46% higher than the median owner-occupied home in 2025, the widest gap since 2008. For commercial property generally the largest-city average is a little above 1.8%, with Chicago and Detroit near 4%, Houston about 2.1%, and California between 1.1% and 1.25%.</p>
-      <p><strong>What a 1.06% tax line means.</strong> A building paying 1.06% of today's price in a 1.8% jurisdiction is assessed at about 59% of that price. That is ordinary for an asset held through a period of capped or lagging assessments. It is also exactly the gap a sale closes.</p>
-      <p><strong>Assessments are rising without sales too.</strong> New York City's tentative 2026/27 roll raised the market value of Class 2 multifamily property 6.9%, and rental buildings 6.4%. The tax line is not a fixed cost that grows at 3%.</p>
-
-      <h2>3. What the step-up does to the deal</h2>
-      <p>The building: $21.6M at a 5.75% cap, $1.24M of NOI on the seller's T-12, 58% leverage at a 7.0% coupon sized to a 1.25x DSCR, five-year hold, 3% growth on every line, exit at 6.00%. We apply each regime's tax bill from year two.</p>
+      <h2>3. The same building under six rules</h2>
+      <p>The building is the one used throughout this series: $21.6M at a 5.75% cap, $1.24M of NOI, with a $229K tax line on the seller's T-12. Suppose the county carries it at $12.74M, 59% of the price, which is ordinary for an asset held eleven years. The effective rate is 1.79% of county value. We apply each county's rule to that one building, with levies growing 3% a year.</p>
 
       <div class="tbl-scroll">
       <table>
         <thead>
-          <tr><th>Regime (illustrative)</th><th>Buyer's tax</th><th>Step-up</th><th>NOI</th><th>Value at 5.75%</th><th>Loan at 1.25x</th></tr>
+          <tr><th>County rule</th><th>Share of price</th><th>When</th><th>Tax, year 1</th><th>Year 3</th><th>Year 5</th></tr>
         </thead>
         <tbody>
-          <tr><td>Seller's T-12, carried forward</td><td>$229K</td><td></td><td>$1.24M</td><td>$21.6M</td><td>$12.4M</td></tr>
-          <tr><td>California-style: 1.2% on 100%</td><td>$259K</td><td>+$31K (+13%)</td><td>&minus;2.5%</td><td>&minus;$0.5M</td><td>&minus;$0.3M</td></tr>
-          <tr><td>Florida-style: 1.9% on 85%</td><td>$349K</td><td>+$120K (+53%)</td><td>&minus;9.7%</td><td>&minus;$2.1M</td><td>&minus;$1.2M</td></tr>
-          <tr><td><strong>Average large city: 1.8% on 90%</strong></td><td><strong>$350K</strong></td><td><strong>+$121K (+53%)</strong></td><td><strong>&minus;9.8%</strong></td><td><strong>&minus;$2.1M</strong></td><td><strong>&minus;$1.2M</strong></td></tr>
-          <tr><td>Texas-style: 2.1% on 85%</td><td>$386K</td><td>+$157K (+69%)</td><td>&minus;12.7%</td><td>&minus;$2.7M</td><td>&minus;$1.6M</td></tr>
-          <tr><td>High-rate city: 3.0% on 90%</td><td>$583K</td><td>+$355K (+155%)</td><td>&minus;28.6%</td><td>&minus;$6.2M</td><td>&minus;$3.6M</td></tr>
+          <tr><td>Seller's line, grown 3%</td><td>59%</td><td>never</td><td>$235K</td><td>$250K</td><td>$265K</td></tr>
+          <tr><td>Harris County, Texas</td><td>85%</td><td>first January 1</td><td>$339K</td><td>$360K</td><td>$382K</td></tr>
+          <tr><td>Fulton County, Georgia</td><td>95%</td><td>first tax year</td><td>$379K</td><td>$402K</td><td>$427K</td></tr>
+          <tr><td>Johnson County, Kansas</td><td>95%</td><td>first January 1</td><td>$379K</td><td>$402K</td><td>$427K</td></tr>
+          <tr><td>Jackson County, Missouri</td><td>+15% per cycle</td><td>each odd year</td><td>$271K</td><td>$330K</td><td>$403K</td></tr>
+          <tr><td>New Castle County, Delaware</td><td>90%</td><td>next county-wide reassessment, year 5</td><td>$235K</td><td>$250K</td><td>$404K</td></tr>
+          <tr><td>New York City</td><td>not tied to price</td><td>every year, with income</td><td>$244K</td><td>$279K</td><td>$319K</td></tr>
         </tbody>
       </table>
       </div>
 
-      <p>And what the buyer who carried the seller's line, and borrowed against it, actually gets:</p>
+      <p><strong>The shares are assumptions, and they are the judgment in the estimate.</strong> We use 85% of price in Harris County because the district does not see every sale and protests succeed; 95% in Fulton and Johnson because the price is known to the assessor; 15% a cycle in Jackson County because that is what the state has allowed twice; and 90% at Delaware's next reassessment. A sponsor with local knowledge should change them. What should not be an assumption is the county's current value, the rate, or the rule.</p>
+      <p><strong>The first-year step is 44% in Texas and 61% in Georgia and Kansas.</strong> Against a model carrying $235K, the Harris County bill is $339K and the Fulton and Johnson County bills are $379K. That is $104K to $144K of NOI the model has and the building does not.</p>
+      <p><strong>Deferral is not relief.</strong> Jackson County's capped increases reach $403K by year five. New Castle County's bill is the seller's until the next reassessment, then $404K. Both end the hold at about the same tax as the counties that stepped in year one, and the exit is priced on it.</p>
+
+      <h2>4. What it does to the deal</h2>
+      <p>59% leverage at a 7.0% coupon, sized to a 1.25x DSCR on the seller's NOI, five-year hold, 3% growth on every other line, exit at 6.00% on forward NOI.</p>
 
       <div class="tbl-scroll">
       <table>
         <thead>
-          <tr><th>Regime (illustrative)</th><th>Year-2 DSCR</th><th>5-yr levered IRR</th><th>Price that earns the modeled IRR</th></tr>
+          <tr><th>County rule</th><th>Year-1 DSCR</th><th>Lender's loan vs the model's</th><th>Exit value</th><th>5-yr levered IRR</th></tr>
         </thead>
         <tbody>
-          <tr><td>Seller's T-12, carried forward</td><td>1.33x</td><td>10.1%</td><td>$21.6M</td></tr>
-          <tr><td>California-style: 1.2% on 100%</td><td>1.30x</td><td>8.9%</td><td>$21.1M (&minus;2.3%)</td></tr>
-          <tr><td>Florida-style: 1.9% on 85%</td><td>1.21x</td><td>5.2%</td><td>$19.7M (&minus;8.9%)</td></tr>
-          <tr><td><strong>Average large city: 1.8% on 90%</strong></td><td><strong>1.21x</strong></td><td><strong>5.1%</strong></td><td><strong>$19.7M (&minus;9.0%)</strong></td></tr>
-          <tr><td>Texas-style: 2.1% on 85%</td><td>1.17x</td><td>3.5%</td><td>$19.1M (&minus;11.6%)</td></tr>
-          <tr><td>High-rate city: 3.0% on 90%</td><td>0.96x</td><td>&minus;7.7%</td><td>$15.9M (&minus;26.2%)</td></tr>
+          <tr><td>Seller's line, grown 3%</td><td>1.25x</td><td>$12.8M</td><td>$24.7M</td><td>9.9%</td></tr>
+          <tr><td>Harris County, Texas</td><td>1.15x</td><td>&minus;$1.0M</td><td>$22.7M</td><td>5.3%</td></tr>
+          <tr><td><strong>Fulton County, Georgia</strong></td><td><strong>1.11x</strong></td><td><strong>&minus;$1.4M</strong></td><td><strong>$21.9M</strong></td><td><strong>3.3%</strong></td></tr>
+          <tr><td><strong>Johnson County, Kansas</strong></td><td><strong>1.11x</strong></td><td><strong>&minus;$1.4M</strong></td><td><strong>$21.9M</strong></td><td><strong>3.3%</strong></td></tr>
+          <tr><td>Jackson County, Missouri</td><td>1.22x</td><td>&minus;$0.4M</td><td>$22.3M</td><td>5.0%</td></tr>
+          <tr><td>New Castle County, Delaware</td><td>1.25x</td><td>unchanged</td><td>$22.3M</td><td>5.5%</td></tr>
+          <tr><td>New York City</td><td>1.24x</td><td>&minus;$0.1M</td><td>$23.5M</td><td>7.7%</td></tr>
         </tbody>
       </table>
       </div>
 
       <figure>
-        <img src="../images/research/tax-reassessment-irr-modeled-vs-real.png" alt="Bar chart of the five-year levered IRR on the same $21.6M purchase with property tax stepping to the reassessed level in year two: 8.9% California-style, 5.2% Florida-style, 5.1% average large city, 3.5% Texas-style, −7.7% high-rate city, against a dashed line at the 10.1% the model showed when it carried the seller's tax line">
-        <figcaption>Five-year levered IRR on the same $21.6M purchase and the same loan, with property tax stepping to the reassessed level in year two. The dashed line is the return the model showed when it carried the seller's tax line forward at 3% growth.</figcaption>
+        <img src="../images/research/tax-reassessment-irr-by-county.png" alt="Bar chart of the five-year levered IRR on the same $21.6M purchase and loan with the tax line following each county's rule: 5.3% in Harris County, 3.3% in Fulton County, 3.3% in Johnson County, 5.0% in Jackson County, 5.5% in New Castle County and 7.7% in New York City, against a dashed line at the 9.9% the model showed on the seller's tax line">
+        <figcaption>Five-year levered IRR on the same $21.6M purchase and the same $12.8M loan, with the tax line following each county's reassessment rule. The dashed line is the return the model showed when it carried the seller's tax line forward at 3%.</figcaption>
       </figure>
 
-      <p><strong>One dollar of tax is seventeen dollars of value.</strong> At a 5.75% cap, each dollar of annual tax capitalizes to $17.40. At a 1.25x DSCR and a 7.0% coupon, it removes $10 of loan proceeds. No other line on the T-12 changes by half on the day of closing, and no other line is as certain to.</p>
-      <p><strong>The average case is a failed coverage test.</strong> In a 1.8% city, the buyer's bill is $121K higher. The deal that modeled at 1.33x coverage runs at 1.21x from year two, under the agency floor. An agency lender sizing to the reassessed bill offers $1.2M less, which the sponsor learns after the price is agreed. The modeled 10.1% return is 5.1%.</p>
-      <p><strong>California is the mild case, not the severe one.</strong> A reset to 100% of price sounds like the worst regime. At a 1.2% rate on a building already paying 1.06% of price, it is a 13% step. The severity is the rate times the gap, and the gap is largest where caps have held the seller's assessment down longest.</p>
-      <p><strong>The price adjustment is the size of the whole negotiation.</strong> To earn the modeled return with the buyer's tax bill, the price has to fall 9% in the average case and 12% in the Texas-style case. That is more than the spread between the cap rates buyers and sellers have been arguing over all year.</p>
+      <p><strong>One dollar of tax is seventeen dollars of value.</strong> At a 5.75% cap each dollar of annual tax capitalizes to $17.40, and at a 1.25x DSCR and a 7.0% coupon it removes $10 of loan proceeds. No other line on the T-12 moves by half on a known date.</p>
+      <p><strong>Where the step lands in year one, the loan is the first casualty.</strong> In Harris, Fulton and Johnson Counties, year-one coverage is 1.11x to 1.15x on a loan sized to the seller's NOI. A lender sizing to the reassessed bill offers $1.0M to $1.4M less. The sponsor meets that number after the LOI, as a larger equity check or a retrade.</p>
+      <p><strong>Where the step is deferred, the exit is.</strong> Jackson and New Castle Counties pass the coverage test and lose four and a half points of IRR anyway. The next buyer underwrites the bill the county is about to send, and the exit value falls from $24.7M to $22.3M. A model that looks only at year-one coverage calls these deals clean.</p>
+      <p><strong>The price adjustment is larger than this year's cap rate argument.</strong> To earn the modeled 9.9% with the county's rule applied, the price has to fall 6.4% in Harris County and 8.7% in Fulton County.</p>
 
-      <h2>4. Why it gets missed</h2>
-      <p>Nothing in Section 1 is obscure. Every acquisitions analyst knows taxes reassess. The reason the seller's line still ends up in first-pass models is the work.</p>
-      <p><strong>The check has five parts, in four places.</strong> Find the tax line on the T-12 and separate it from special assessments. Read the offering memo for what the broker says about reassessment, abatements and appeals, which is usually a sentence in the financial notes. Establish the jurisdiction's rule and its calendar. Find the effective rate, including the levies a cap does not cover. Then decide what share of the price the assessor will reach and in which year it lands. None of it is in the rent roll or the statement the model is built from.</p>
-      <p><strong>At screening pace, it is skipped.</strong> An analyst screening ten to fifteen offering memos a week spends twenty to thirty minutes a deal on data entry alone to reach a kill decision, as our <a href="/research/multifamily-syndication-back-office-costs.html">back-office note</a> documented. A full underwrite is eight to sixteen hours. A reassessment check that needs a county website and a rate table does not fit in the first number and is deferred to the second, which happens for the deals that survive a bid built on the wrong NOI.</p>
-      <p><strong>So the error is found at the worst moment.</strong> The lender underwrites the buyer's bill by rule. The gap surfaces at sizing, after the LOI, as a smaller loan and a larger equity check, or as a retrade. A sponsor who runs the check before bidding avoids both. The obstacle is not knowledge. It is hours per deal.</p>
+      <h2>5. Why most models get this wrong</h2>
+      <p>Nothing in Section 2 is secret. The reason the seller's line survives into first-pass models is structural.</p>
+      <p><strong>The inputs are not in the deal documents.</strong> The county's value is on the county's website, by parcel. The rule is in a statute, a state order or an assessor's manual. The calendar is somewhere else again. A tool that reads the offering memo, the T-12 and the rent roll has read everything it was given and still has none of the three numbers.</p>
+      <p><strong>A template can hold a tax line and a growth rate. It cannot know the county.</strong> Any spreadsheet can carry a reassessed figure once someone has worked it out. Working it out is the job: find the parcel, read the roll, establish the rule for this county this year, decide the share, place it in the right year. Tools that stop at parsing the T-12 carry the seller's number forward by default, with a growth rate that implies the county will never notice the sale.</p>
+      <p><strong>The rules move.</strong> Four of the six markets above changed their rule or their roll in the last two years. An assumption a sponsor learned on the last deal in a county may be wrong on the next one.</p>
+      <p><strong>It costs hours, so it happens late.</strong> An analyst screening ten to fifteen offering memos a week spends twenty to thirty minutes a deal on data entry to reach a kill decision, as our <a href="/research/multifamily-syndication-back-office-costs.html">back-office note</a> documented. A parcel lookup and a rule check per deal does not fit in that budget. It is done for the deals that survive, after a bid built on the wrong NOI.</p>
 
-      <h2>5. How Teez helps</h2>
-      <p>Teez does not predict the assessor. It does not look up a county's rate or compute the reassessed bill from the purchase price; that number is the sponsor's judgment, and in Texas it is partly a protest outcome. What Teez removes is the hours around that judgment, which is what gets the check done before the bid instead of after it.</p>
-      <p><strong>The tax line arrives as its own row, in minutes.</strong> Teez reads the T-12 into expense lines, so property tax sits on its own row with its own growth rate, separate from insurance and everything else, in the sponsor's own Excel template. The model is built from the OM, T-12 and rent roll in minutes, not the hours of data entry that consume the screening budget.</p>
-      <p><strong>It reads the memo for the reassessment language before the assumptions are set.</strong> Before it presents assumptions or builds a sheet, the Teez agent searches the offering memo for what it says about property taxes, insurance and any pending reassessment or premium change, and reports what the memo states for the sponsor to accept or override. The sentence in the financial notes that an analyst at screening pace does not reach is in front of the sponsor on the first pass.</p>
-      <p><strong>It flags abatements and their expiry from the address.</strong> From the property address, Teez looks the building up in public records where it has the market loaded and reports any tax exemption or abatement on file and its expiry date, with a warning when the expiry falls inside the hold. An abatement that lapses in year three is the same error as a reassessment, and it is usually not in the T-12 at all.</p>
-      <p><strong>Each reassessment case is one cell and a re-run.</strong> Because the tax line is its own input in a live model, testing the seller's bill, 85% of price and 95% of price is three edits and three results in minutes, in the template the sponsor already uses. The table in Section 3 is that exercise. Run on every deal at first look, it moves the tax question from lender sizing to the bid.</p>
-      <p>The arithmetic in this note is simple. What makes it expensive is doing it on every deal, in every county, before knowing which deals deserve it. That is the part Teez takes from hours to minutes.</p>
+      <h2>6. How Teez handles it</h2>
+      <p>Teez computes the buyer's tax bill as part of building the model, on every deal, at first look. It can because it joins two things other tools keep apart: the deal documents and the county's own record for the property.</p>
+      <p><strong>It pulls the county record from the address.</strong> When the documents are parsed, Teez looks the property up in its registry of county records and returns the county's current value, the prior year's value, the last deed date and how long the seller has held, and any exemption or abatement on file with its expiry. Today that covers Houston, four Atlanta counties, Delaware's three counties, Kansas City on both sides of the state line, and New York City.</p>
+      <p><strong>It derives the rate from the seller's own bill.</strong> Teez divides the T-12 tax line by the county's value to get the building's effective rate, with every levy in it, and flags the deal when that rate is outside the county's normal range, which is the signature of an abatement or a partial-year bill.</p>
+      <p><strong>It applies the county's rule and shows its work.</strong> For each market it holds the cycle, what a sale triggers, the cap and the share of price it expects the county to reach, each with its source and the date it was last checked. The sponsor sees the rule and can override the share or the year.</p>
+      <p><strong>It writes the tax line year by year.</strong> The model's property tax row stops being last year's bill times a growth rate. It becomes the estimate for each year of the hold, in the sponsor's own Excel template, and coverage, cash flow and the exit recompute from it.</p>
 
-      <p><em>Teez takes an OM, T-12 and rent roll to a full model in minutes, with the tax line on its own row and the memo's reassessment language surfaced, and re-runs it in minutes at each reassessment case, in the sponsor's own Excel template, so the buyer's tax bill is in the model before the bid instead of at lender sizing. More at <a href="https://teez.ai/">teez.ai</a>.</em></p>
+      <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th colspan="2">What Teez returns for the building in Section 3, in Harris County</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>County record</td><td>Appraised value $12,740,000 on the 2026 roll; $12,100,000 the year before (+5.3%). Last deed 2015; held 11 years. No exemption on file.</td></tr>
+          <tr><td>Seller's bill</td><td>$229,000 on the T-12, an effective 1.79% of the county's value.</td></tr>
+          <tr><td>Purchase price</td><td>$21,600,000, or 170% of the county's value.</td></tr>
+          <tr><td>Rule</td><td>Reappraised to market value each January 1. No sale trigger; sale prices are not disclosed. No cap above $5.32M of value.</td></tr>
+          <tr><td>Estimate</td><td>85% of price from the first January 1. Editable.</td></tr>
+          <tr><td>Tax line written to the model</td><td>Year 1 $339K, year 2 $349K, year 3 $360K, year 4 $371K, year 5 $382K. The seller's line grown 3% would have been $235K in year 1.</td></tr>
+          <tr><td>Effect</td><td>Year-1 DSCR 1.15x against 1.25x on the seller's line. Five-year IRR 5.3% against 9.9%.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <p><strong>Where the county is not loaded, the sponsor supplies one number.</strong> Enter the county's current value from the assessor's site and Teez does the same arithmetic, with the state's rule where it has one.</p>
+      <p><strong>It is an estimate, and it says so.</strong> Teez does not predict a protest outcome or an assessor's judgment. The share of price is a stated assumption the sponsor can change. What it removes is the parcel lookup, the rate arithmetic, the rule research and the year-by-year entry, which is the part that takes hours and is why the check gets deferred.</p>
+      <p>The reassessment question does not need a better opinion. It needs to be asked on every deal before the bid, which only happens if asking it takes minutes.</p>
+
+      <p><em>Teez takes an OM, T-12 and rent roll to a full model in minutes and, from the property's address, pulls the county record, derives the tax rate from the seller's own bill, applies the county's reassessment rule and writes the buyer's tax line year by year, in the sponsor's own Excel template, so the reassessed bill is in the model before the bid instead of at lender sizing. More at <a href="https://teez.ai/">teez.ai</a>.</em></p>
 
       <h2>Sources</h2>
       <ul>
-        <li><strong>Reassessment rules:</strong> MMCG Invest, "The Tax Line That Breaks the Deal: Property Taxes and Commercial Real Estate Feasibility" (June 18, 2026), citing the Lincoln Institute and state statutes; Florida Statutes sections 193.1554 and 193.1555 and the Department of Revenue FAQ on the 10% cap; Texas Tax Code section 23.231 and practitioner summaries of its December 31, 2026 expiry; Tactica RES, "A Guide to Underwriting Multifamily Property Tax" (Twin Cities and South Florida percent-of-price conventions); state-cycle summaries for Cook County, Maryland and Pennsylvania.</li>
-        <li><strong>Florida Amendment 3:</strong> Florida Realtors, "Florida voters approve Amendment 3" (November 2026); Kaufman Rossin, "Florida voters approved Amendment 3: What happens next for property owners"; ClickOrlando (November 4, 2026). Vote share is unofficial.</li>
-        <li><strong>Lender underwriting:</strong> Fannie Mae Multifamily Selling and Servicing Guide, effective September 28, 2026 (underwritten real estate taxes; scheduled reassessment and abatement phase-in).</li>
-        <li><strong>Size of the tax line and rates:</strong> National Apartment Association, 2023 Income and Expenses analysis ("No Relief From Expenses") and rent-dollar study, as reported; NMHC, "What Do Apartments Pay in Taxes?" (2026), citing the Lincoln Institute of Land Policy and Minnesota Center for Fiscal Excellence 50-State Property Tax Comparison Study; Rosenberg &amp; Estis, "NYC Property Tax Assessed Values for 2026/27."</li>
-        <li><strong>Analyst hours:</strong> as sourced in "What It Actually Costs to Run a Multifamily Syndication" (September 21, 2026).</li>
-        <li><strong>Model:</strong> Teez, assumptions as stated in Section 3. The five regimes are illustrative combinations of an effective rate and a share of purchase price, not estimates for any county.</li>
+        <li><strong>Texas:</strong> Texas Tax Code sections 23.01 (market value as of January 1), 23.231 (circuit-breaker limitation and its December 31, 2026 expiry) and 41.44 (protest deadline); Harris Central Appraisal District, 2026 protest deadline notice; Bell County appraisal district, "Common Misconceptions" (non-disclosure and how sale data is gathered).</li>
+        <li><strong>Georgia:</strong> O.C.G.A. section 48-5-2 and House Bill 581 (removal of the sale-price maximum for tax years beginning January 1, 2025), per the Georgia Department of Revenue's HB 581 presentation and Castellan, "Georgia Commercial Property Tax: Your Sale Price Is Evidence, Not an Automatic Assessment Cap" (August 31, 2026).</li>
+        <li><strong>Kansas:</strong> K.S.A. 79-1437c (sales validation questionnaire) and Department of Revenue Directive 19-041; Johnson County Appraiser, 2026 valuation notices and county newsroom.</li>
+        <li><strong>Missouri:</strong> State Tax Commission of Missouri, orders to Jackson County on the 2023 and 2025 assessments (April and May 2025); Missouri State Auditor, Jackson County Assessment Department report.</li>
+        <li><strong>Delaware:</strong> Tyler Technologies reassessment reports for New Castle, Kent and Sussex Counties; House Bill 62 (reassessment at least every five years); Spotlight Delaware timeline of the reassessment (October 2025).</li>
+        <li><strong>New York City:</strong> NYC Department of Finance, Class 2 guide; NYU Furman Center, "NYC's Property Tax System" (2025); Rosenberg &amp; Estis, "NYC Property Tax Assessed Values for 2026/27."</li>
+        <li><strong>Other states and lenders:</strong> MMCG Invest, "The Tax Line That Breaks the Deal" (June 18, 2026); Florida Realtors and Kaufman Rossin on Amendment 3 (November 2026); Fannie Mae Multifamily Selling and Servicing Guide, effective September 28, 2026.</li>
+        <li><strong>Size of the tax line:</strong> National Apartment Association, property taxes at 26.3% of operating expenses (2023 survey, as reported).</li>
+        <li><strong>Model:</strong> Teez, assumptions as stated in Sections 3 and 4. The county value, the shares of price and the timing are illustrative for one representative building, not estimates for any parcel.</li>
       </ul>
 
       <h2>Related</h2>
