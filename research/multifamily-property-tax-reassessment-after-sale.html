@@ -200,7 +200,7 @@
 
       <div class="note">
         <p><strong>Summary.</strong> The property tax line on a trailing-twelve statement is the tax on the seller's assessed value. The buyer pays on a value the county sets after the sale, under a rule that changes at the state line and sometimes at the county line. It is also the line most underwriting models handle worst: the seller's bill is carried forward at 3% a year, and the correction arrives at lender sizing, after the price is agreed.</p>
-        <p>This note goes through the mechanics county by county for the markets Teez covers, sets out the method that turns a county record and a T-12 into the buyer's bill, and runs one building through six rules. Findings:</p>
+        <p>This note goes through the mechanics county by county across six markets, sets out the method that turns a county record and a T-12 into the buyer's bill, and runs one building through six rules. Findings:</p>
         <ul>
           <li>Three numbers produce the buyer's bill, and none of them is on the T-12: the county's current value for the building, the effective tax rate that value implies, and the rule that decides how much of the purchase price the county will reach and when. The rate needs no lookup. It is the T-12 tax line divided by the county's value.</li>
           <li>On a $21.6M purchase of a building the county carries at $12.7M, the first-year bill is $235K on the seller's line, $339K in Harris County and $379K in Fulton or Johnson County. In Jackson County it ramps 15% a cycle. In New Castle County it does not move until the next county-wide reassessment. In New York City it follows income, not price.</li>
@@ -222,7 +222,7 @@
       <p>The buyer's bill in any year is then the purchase price, times the share of it the county has reached by that year, times the effective rate, grown for levy increases. Two checks sit alongside. If the implied rate is far outside the county's normal range, the T-12 is carrying an abatement, an exemption or a partial year, and the seller's bill is wrong in a second way. And special assessments belong on their own line, because they do not reassess.</p>
 
       <h2>2. County by county: what a sale does</h2>
-      <p>These are the rules for the markets Teez has county records loaded for. Each was current as of this note's date; several changed within the last two years.</p>
+      <p>These are the rules in six markets. Each was current as of this note's date; several changed within the last two years.</p>
 
       <div class="tbl-scroll">
       <table>
@@ -306,7 +306,7 @@
 
       <h2>6. How Teez handles it</h2>
       <p>Teez computes the buyer's tax bill as part of building the model, on every deal, at first look. It can because it joins two things other tools keep apart: the deal documents and the county's own record for the property.</p>
-      <p><strong>It pulls the county record from the address.</strong> When the documents are parsed, Teez looks the property up in its registry of county records and returns the county's current value, the prior year's value, the last deed date and how long the seller has held, and any exemption or abatement on file with its expiry. Today that covers Houston, four Atlanta counties, Delaware's three counties, Kansas City on both sides of the state line, and New York City.</p>
+      <p><strong>It pulls the county record from the address.</strong> When the documents are parsed, Teez looks the property up in its registry of county records and returns the county's current value, the prior year's value, the last deed date and how long the seller has held, and any exemption or abatement on file with its expiry. The registry covers most cities.</p>
       <p><strong>It derives the rate from the seller's own bill.</strong> Teez divides the T-12 tax line by the county's value to get the building's effective rate, with every levy in it, and flags the deal when that rate is outside the county's normal range, which is the signature of an abatement or a partial-year bill.</p>
       <p><strong>It applies the county's rule and shows its work.</strong> For each market it holds the cycle, what a sale triggers, the cap and the share of price it expects the county to reach, each with its source and the date it was last checked. The sponsor sees the rule and can override the share or the year.</p>
       <p><strong>It writes the tax line year by year.</strong> The model's property tax row stops being last year's bill times a growth rate. It becomes the estimate for each year of the hold, in the sponsor's own Excel template, and coverage, cash flow and the exit recompute from it.</p>
