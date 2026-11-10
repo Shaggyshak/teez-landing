@@ -24,6 +24,8 @@ img{max-width:100%}
 .annc-bar{position:fixed;top:0;left:0;right:0;z-index:65;height:var(--annc-h);background:#0F1214;color:#E8EAED;display:flex;align-items:center;justify-content:center;gap:8px;font-family:var(--mono);font-size:12.5px;padding:0 16px;text-align:center;border-bottom:1px solid var(--chrome-line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .annc-bar a{color:#fff;text-decoration:underline;text-underline-offset:2px;flex:none}
 body.has-annc .app{top:var(--annc-h)}
+.annc-bar .annc-go{text-decoration:none;color:#4ade80}
+.annc-bar a[href^=mailto]:not(.annc-go){color:#4ade80;font-weight:600}
 body.has-annc{--appH:calc(96px + var(--annc-h))}
 
 /* ===== app chrome ===== */
@@ -274,7 +276,9 @@ h3{font-size:18px;font-weight:700}
   .colhead,.gutter,.colguides{display:none}
   .sheet{padding-top:calc(var(--appH) + 6px)}
   .navtoggle{display:block}
-  .annc-bar{font-size:11.5px;padding:0 12px}
+  .annc-bar{font-size:11px;padding:0 10px;gap:5px}
+  .annc-bar .annc-go{display:none}
+  .annc-bar .annc-tail{display:none}
   .app-nav{display:none;position:absolute;top:52px;left:0;right:0;margin:0;flex-direction:column;gap:0;background:var(--chrome-2);border-bottom:1px solid var(--chrome-line);padding:4px 0;z-index:70;box-shadow:0 16px 30px -16px rgba(0,0,0,.5)}
   body.has-annc .app-nav{top:calc(52px + var(--annc-h))}
   .app-nav.open{display:flex}
